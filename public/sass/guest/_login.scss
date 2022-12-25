@@ -1,0 +1,190 @@
+.khoa-login{
+    background-image: url(../../image/login/4882066.jpg);
+    background-size: cover;
+    height: 100vh;
+    .login_nen{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .box_login{
+            margin-top: 40px;
+            // width: 420px;
+            height: 670px;
+            background: #eee;
+            border-radius: 20px;
+            padding: 50px 30px;
+            h1{
+                font-size: 30px;
+                color: $Color__E94560;
+                .logoB{
+                    font-size: 42px;
+                    color: $Color__E94560;
+                    font-weight: 600;
+                }
+                .logoC{
+                    font-size: 42px;
+                    color: $Color__0F3460;
+                    font-weight: 600;
+                }
+            } 
+            .form_login{
+                padding-top: 25px;
+                padding-left: 0;
+                padding-right: 0;
+                padding-bottom: 20px;
+                // border: 1px solid $Color__0F3460;
+                .form_group{
+                    position: relative;
+                    padding-bottom: 30px;
+                    .input_control{
+                        width: 400px;
+                        padding: 8px 0;
+                        border: 1px solid $Color__0F3460;
+                        outline: none;
+                        border-radius: 5px;
+                        padding-left: 45px;
+                        font-size: 1rem;
+                        &::placeholder{
+                            font-size: 1rem;
+                        }
+                        &:focus{
+                            border: 1px solid $Color__E94560;
+                            box-shadow: $box__shadow; 
+                        }
+                        // &:valid{
+                        //     color: blue;
+                        //     border-color: blue ;
+                        // }
+                        // &:invalid{
+                        //     color: red;
+                        //     // border-color: red ;
+                        // }
+                    }
+                    .icon_user, .icon_pass{
+                        position: absolute;
+                        top: 6px;
+                        left: 15px;
+                        font-size: 1.25rem;
+                        color: $Color__E94560;
+                    }
+                    .success_check, .error_check{
+                        position: absolute;
+                        top: 13%;
+                        right: 3%;
+                        i{
+                            font-size: 1rem;
+                        }
+                    }
+                    .success_check{
+                        color: #00FF00;
+                        visibility: hidden;
+                    }
+                    .error_check{
+                        color: red;
+                        visibility: hidden;
+                        
+                    }
+                    .errorMsg{
+                        position: absolute;
+                        left: 10px;
+                        bottom: 5px;
+                        font-size: 14px;
+                        font-style: italic;
+                        color: red;
+                        visibility: hidden;
+
+                    }    
+                }
+                .check_box{
+                    display: flex;
+                    justify-content: space-between;
+                    input[type="checkbox"]{
+                        width: 20px;
+                        height: 20px;
+                        margin-right: 10px;
+                    }
+                    label{
+                        
+                        color: $Color__0F3460;
+                    }
+                    a{
+                        text-decoration: none;
+                        &:hover{
+                            text-decoration: underline;
+                        }
+                    }
+                }
+                .btnLogin{
+                    width: 100%;
+                    height: 45px;
+                    padding:  0px auto;
+                    border: none;
+                    outline: none;
+                    background: $bg_first;
+                    border-radius: 100px;
+                    color: #fff;
+                    font-size: 1.25rem;
+                    font-weight: 600; 
+                    transition: all 0.5s ease-in;
+                    &:hover{
+                        background: $bg_third;
+                        transition: all 0.5s ease-in; 
+                        box-shadow: $box__shadow;  
+                    }                
+                }
+                
+            }  
+            .social_title{
+                width: 100%;
+                text-align: center;
+                color: #9a9797;
+            }
+            .login_socical{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 15px;
+                margin-bottom: 50px;
+                .social_facebook, .social_google{
+                   width: 190px;
+                   
+                   display: flex;
+                   justify-content: flex-start; 
+                   border: 1px solid $Color__E94560;
+                   padding: 10px 15px;
+                   align-items: center;
+                   border-radius: 100px;
+                   cursor: pointer;
+                   transition: all 0.5s ease-in;
+                   img{
+                     margin-right: 5px;
+                   }
+                   &:hover{
+                        border: 1px solid #fff;
+                        background: #fff;
+                        color: $Color__E94560;
+                        transition: all 0.5s ease-in;
+                        box-shadow: $box__shadow;
+                   }
+                }
+            }
+            .back_home, .signup{
+                width: 150px;
+                padding: 10px 0;
+                text-align: center;
+                background: $bg_third;
+                color: #fff;
+                text-decoration: none;
+                border-radius: 100px;
+                transition: all 0.5s ease-in;
+                &:hover{
+                    background: #fff;
+                    color: $Color__E94560;
+                    border: 1px solid $Color__E94560;
+                    transition: all 0.5s ease-in;
+                }
+            }
+    
+        }
+    }
+}

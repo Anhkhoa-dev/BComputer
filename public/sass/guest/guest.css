@@ -1,0 +1,610 @@
+@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+html, body {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background: #eee;
+}
+
+section {
+  margin-top: 3.125rem;
+}
+section .title {
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  color: #0F3460;
+  font-weight: 600;
+  margin-bottom: 40px;
+}
+section .title .fa-bolt {
+  font-size: 1.25rem;
+  color: #E94560;
+}
+
+.btnBox {
+  padding: 10px 20px;
+  border-radius: 5px;
+  background: #E94560;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.5s ease-in;
+}
+
+.btnBox:hover {
+  border: 1px solid #E94560;
+  background: #fff;
+  color: #E94560;
+  transition: all 0.5s ease-in;
+}
+
+.khoa-header__info {
+  padding: 10px 0;
+  background: #0F3460;
+}
+
+.khoa-navbar {
+  padding: 15px 0;
+  background: #fff;
+}
+.khoa-navbar .navbar {
+  display: flex;
+  justify-content: space-between;
+}
+.khoa-navbar .navbar .navbar__logo a {
+  color: #E94560;
+  font-size: 2rem;
+}
+.khoa-navbar .navbar .navbar__logo a .navbar__logo-b {
+  font-size: 2.625rem;
+  color: #E94560;
+  font-weight: 600;
+}
+.khoa-navbar .navbar .navbar__logo a .navbar__logo-c {
+  font-size: 2.625rem;
+  color: #0F3460;
+  font-weight: 600;
+}
+.khoa-navbar .navbar .navbar__search .form__search {
+  position: relative;
+  width: 600px;
+  height: 50px;
+}
+.khoa-navbar .navbar .navbar__search .form__search .search_label {
+  width: 65px;
+  height: 50px;
+  color: #E94560;
+  border: 1px solid #E94560;
+  border-top-left-radius: 100px;
+  border-bottom-left-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+}
+.khoa-navbar .navbar .navbar__search .form__search .search_input {
+  position: absolute;
+  width: 600px;
+  height: 50px;
+  padding-left: 70px;
+  border: 1px solid #E94560;
+  border-radius: 100px;
+  outline: none;
+  z-index: 150px;
+}
+.khoa-navbar .navbar .navbar__search .form__search .btnSearch {
+  width: 100px;
+  height: 50px;
+  border: 1px solid #E94560;
+  background: #E94560;
+  border-top-right-radius: 100px;
+  border-bottom-right-radius: 100px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+}
+.khoa-navbar .navbar .navbar__icon {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.khoa-navbar .navbar .navbar__icon .icon__cart {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgb(192, 192, 192);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.khoa-navbar .navbar .navbar__icon .icon__cart .cart__number {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #E94560;
+  color: #fff;
+  font-size: 0.75rem;
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.khoa-navbar .navbar .navbar__icon .icon__cart .cart__circle i {
+  color: #0F3460;
+  font-size: 1.25rem;
+}
+.khoa-navbar .navbar .navbar__icon .icon__cart:hover i {
+  color: #E94560;
+}
+.khoa-navbar .navbar .navbar__icon .icon__user {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: rgb(192, 192, 192);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.khoa-navbar .navbar .navbar__icon .icon__user:hover i {
+  color: #E94560;
+}
+.khoa-navbar .navbar .navbar__icon .icon__user i {
+  color: #0F3460;
+  font-size: 1.25rem;
+}
+
+.khoa-sidebar {
+  background: #fff;
+  box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
+}
+.khoa-sidebar .sidebar {
+  padding: 15px 25px;
+  cursor: pointer;
+}
+.khoa-sidebar .sidebar .category {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-items: center;
+  background: #E9ECEE;
+  padding: 10px 25px;
+  border-radius: 10px;
+}
+.khoa-sidebar .sidebar .category div {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.khoa-sidebar .box_service {
+  background: #E9ECEE;
+  border: 1px solid #0F3460;
+  border-radius: 10px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 15px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+.khoa-sidebar .box_service .service_title {
+  text-decoration: none;
+  color: #0F3460;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.khoa-sidebar .box_service:hover {
+  background-color: #E94560;
+  border: 1px solid #E94560;
+  transition: all 0.5s ease-in;
+}
+.khoa-sidebar .box_service:hover .service_title {
+  color: #fff;
+}
+
+.footer {
+  background: #0F3460;
+  padding: 50px 0;
+  margin-top: 30px;
+  color: #fff;
+}
+.footer .Logo {
+  color: #E94560;
+  font-size: 2rem;
+  margin-bottom: 25px;
+}
+.footer .Logo .logoB {
+  font-size: 2.625rem;
+  color: #E94560;
+  font-weight: 600;
+}
+.footer .Logo .logoC {
+  font-size: 2.625rem;
+  color: #fff;
+  font-weight: 600;
+}
+.footer .Support p {
+  font-size: 1rem;
+}
+.footer .Support p span {
+  font-weight: 600;
+}
+.footer .Policy {
+  list-style: none;
+  padding: 0;
+}
+.footer .Policy li {
+  padding: 5px 0;
+}
+.footer .Policy li a {
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.5s ease-in;
+}
+.footer .Policy li a:hover {
+  color: #E94560;
+  text-decoration: underline;
+  transition: all 0.5s ease-in;
+}
+.footer .Social {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.footer .Social .icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 1px solid #E94560;
+  color: #E94560;
+  margin-right: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s ease-in;
+  cursor: pointer;
+}
+.footer .Social .icon i {
+  font-size: 1rem;
+}
+.footer .Social .icon:hover {
+  background-color: #E94560;
+  border: 1px solid #E94560;
+  color: #fff;
+  transition: all 0.5s ease-in;
+}
+
+.khoa-banner {
+  background: #fff;
+  margin-top: 15px;
+  height: 490px;
+}
+.khoa-banner .card_side {
+  padding: 15px 0;
+  border-radius: 10px;
+  box-shadow: #C9C9C9 -2px 1px 13px 7px;
+}
+.khoa-banner .card_side .side-box {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 25px;
+  text-decoration: none;
+  color: rgba(17, 17, 17, 0.8);
+  transition: all 0.3s ease-in;
+}
+.khoa-banner .card_side .side-box:hover {
+  background-color: #E94560;
+  color: #fff;
+  transition: all 0.5s ease-in;
+}
+.khoa-banner .banner {
+  padding: 25px;
+}
+.khoa-banner .banner .banner-box {
+  padding: 20px 10px;
+}
+.khoa-banner .banner .banner-box .banner-title {
+  text-transform: uppercase;
+  font-size: 2.8125rem;
+  color: #E94560;
+  font-weight: 600;
+}
+.khoa-banner .banner .banner-box .banner-desc {
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-align: justify;
+}
+
+.flash-delas .home-card {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 25px;
+  box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-rows: 1fr 0.3fr;
+  gap: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: #C9C9C9 -2px 1px 13px 7px;
+}
+.flash-delas .home-card .card_image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  position: relative;
+}
+.flash-delas .home-card .card_image img {
+  width: 100%;
+}
+.flash-delas .home-card .card_image .sale_off {
+  width: 80px;
+  height: 30px;
+  border-radius: 100px;
+  background-color: #E94560;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  position: absolute;
+  top: -12px;
+  left: -10px;
+}
+.flash-delas .home-card .card_image .sale_off p {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+.flash-delas .home-card .card_image .p_like {
+  position: absolute;
+  top: -12px;
+  right: -10px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 5px;
+}
+.flash-delas .home-card .card_image .p_like .p_like_sosanh {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #E94560;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #E94560;
+}
+.flash-delas .home-card .card_image .p_like .p_like_heart {
+  text-decoration: none;
+  color: #E94560;
+}
+.flash-delas .home-card .card_image .p_like .p_like_heart i {
+  font-size: 30px;
+}
+.flash-delas .home-card .card_info {
+  width: 100%;
+}
+.flash-delas .home-card .card_info .product_name {
+  font-size: 1.125rem;
+  color: #0F3460;
+  font-weight: 600;
+  text-decoration: none;
+}
+.flash-delas .home-card .card_info .product_name:hover {
+  color: #E94560;
+}
+.flash-delas .home-card .card_info .product_rate {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.flash-delas .home-card .card_info .product_rate i {
+  margin-right: 5px;
+  color: darkorange;
+  font-size: 1rem;
+}
+.flash-delas .home-card .card_info .product_price {
+  color: #E94560;
+  font-size: 1.125rem;
+}
+
+.khoa-login {
+  background-image: url(../../image/login/4882066.jpg);
+  background-size: cover;
+  height: 100vh;
+}
+.khoa-login .login_nen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.khoa-login .login_nen .box_login {
+  margin-top: 40px;
+  height: 670px;
+  background: #eee;
+  border-radius: 20px;
+  padding: 50px 30px;
+}
+.khoa-login .login_nen .box_login h1 {
+  font-size: 30px;
+  color: #E94560;
+}
+.khoa-login .login_nen .box_login h1 .logoB {
+  font-size: 42px;
+  color: #E94560;
+  font-weight: 600;
+}
+.khoa-login .login_nen .box_login h1 .logoC {
+  font-size: 42px;
+  color: #0F3460;
+  font-weight: 600;
+}
+.khoa-login .login_nen .box_login .form_login {
+  padding-top: 25px;
+  padding-left: 0;
+  padding-right: 0;
+  padding-bottom: 20px;
+}
+.khoa-login .login_nen .box_login .form_login .form_group {
+  position: relative;
+  padding-bottom: 30px;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .input_control {
+  width: 400px;
+  padding: 8px 0;
+  border: 1px solid #0F3460;
+  outline: none;
+  border-radius: 5px;
+  padding-left: 45px;
+  font-size: 1rem;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .input_control::-moz-placeholder {
+  font-size: 1rem;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .input_control:-ms-input-placeholder {
+  font-size: 1rem;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .input_control::placeholder {
+  font-size: 1rem;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .input_control:focus {
+  border: 1px solid #E94560;
+  box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
+}
+.khoa-login .login_nen .box_login .form_login .form_group .icon_user, .khoa-login .login_nen .box_login .form_login .form_group .icon_pass {
+  position: absolute;
+  top: 6px;
+  left: 15px;
+  font-size: 1.25rem;
+  color: #E94560;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .success_check, .khoa-login .login_nen .box_login .form_login .form_group .error_check {
+  position: absolute;
+  top: 13%;
+  right: 3%;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .success_check i, .khoa-login .login_nen .box_login .form_login .form_group .error_check i {
+  font-size: 1rem;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .success_check {
+  color: #00FF00;
+  visibility: hidden;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .error_check {
+  color: red;
+  visibility: hidden;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .errorMsg {
+  position: absolute;
+  left: 10px;
+  bottom: 5px;
+  font-size: 14px;
+  font-style: italic;
+  color: red;
+  visibility: hidden;
+}
+.khoa-login .login_nen .box_login .form_login .check_box {
+  display: flex;
+  justify-content: space-between;
+}
+.khoa-login .login_nen .box_login .form_login .check_box input[type=checkbox] {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.khoa-login .login_nen .box_login .form_login .check_box label {
+  color: #0F3460;
+}
+.khoa-login .login_nen .box_login .form_login .check_box a {
+  text-decoration: none;
+}
+.khoa-login .login_nen .box_login .form_login .check_box a:hover {
+  text-decoration: underline;
+}
+.khoa-login .login_nen .box_login .form_login .btnLogin {
+  width: 100%;
+  height: 45px;
+  padding: 0px auto;
+  border: none;
+  outline: none;
+  background: #0F3460;
+  border-radius: 100px;
+  color: #fff;
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: all 0.5s ease-in;
+}
+.khoa-login .login_nen .box_login .form_login .btnLogin:hover {
+  background: #E94560;
+  transition: all 0.5s ease-in;
+  box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
+}
+.khoa-login .login_nen .box_login .social_title {
+  width: 100%;
+  text-align: center;
+  color: #9a9797;
+}
+.khoa-login .login_nen .box_login .login_socical {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 50px;
+}
+.khoa-login .login_nen .box_login .login_socical .social_facebook, .khoa-login .login_nen .box_login .login_socical .social_google {
+  width: 190px;
+  display: flex;
+  justify-content: flex-start;
+  border: 1px solid #E94560;
+  padding: 10px 15px;
+  align-items: center;
+  border-radius: 100px;
+  cursor: pointer;
+  transition: all 0.5s ease-in;
+}
+.khoa-login .login_nen .box_login .login_socical .social_facebook img, .khoa-login .login_nen .box_login .login_socical .social_google img {
+  margin-right: 5px;
+}
+.khoa-login .login_nen .box_login .login_socical .social_facebook:hover, .khoa-login .login_nen .box_login .login_socical .social_google:hover {
+  border: 1px solid #fff;
+  background: #fff;
+  color: #E94560;
+  transition: all 0.5s ease-in;
+  box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
+}
+.khoa-login .login_nen .box_login .back_home, .khoa-login .login_nen .box_login .signup {
+  width: 150px;
+  padding: 10px 0;
+  text-align: center;
+  background: #E94560;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 100px;
+  transition: all 0.5s ease-in;
+}
+.khoa-login .login_nen .box_login .back_home:hover, .khoa-login .login_nen .box_login .signup:hover {
+  background: #fff;
+  color: #E94560;
+  border: 1px solid #E94560;
+  transition: all 0.5s ease-in;
+}/*# sourceMappingURL=guest.css.map */

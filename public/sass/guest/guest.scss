@@ -1,0 +1,11 @@
+@import 'reset';
+
+@import 'variables'; // khia báo biến
+@import 'global'; //css toàn cục
+@import 'header'; //scss header
+@import 'footer'; // scss foooter
+@import 'banner';
+@import 'flashDelas';
+
+// css trang login
+@import 'login';

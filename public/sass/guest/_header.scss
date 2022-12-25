@@ -1,0 +1,192 @@
+.khoa-header__info{
+    padding: 10px 0;
+    background: $bg_first;
+}
+.khoa-navbar{
+    padding: 15px 0;
+    background: $bg_second;
+    .navbar{
+        display: flex;
+        justify-content: space-between;
+        .navbar__logo{
+            a{
+                color: $Color__E94560;
+                font-size: 2rem;
+                .navbar__logo-b{
+                    font-size: 2.625rem;
+                    color: $Color__E94560;
+                    font-weight: 600;
+                }
+                .navbar__logo-c{
+                    font-size: 2.625rem;
+                    color: $Color__0F3460;
+                    font-weight: 600;
+                }
+            }
+        }
+        .navbar__search{
+            .form__search{
+                position: relative;
+                width: 600px;
+                height: 50px;
+                .search_label{
+                    width: 65px;
+                    height: 50px;
+                    // background: $bg_primary;
+                    color: $Color__E94560;
+                    border: 1px solid $Color__E94560;
+                    border-top-left-radius: 100px;
+                    border-bottom-left-radius: 100px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-weight: 600;
+                }
+                .search_input{
+                    position: absolute;
+                    width: 600px ;
+                    height: 50px;
+                    padding-left: 70px;
+                    border: 1px solid $Color__E94560;
+                    border-radius: 100px;
+                    outline: none;
+                    z-index: 150px;
+                }
+                .btnSearch{
+                    width: 100px;
+                    height: 50px;
+                    border: 1px solid $Color__E94560;
+                    background: $bg_third;
+                    border-top-right-radius: 100px;
+                    border-bottom-right-radius: 100px;
+                    position: absolute;
+                    right: 0;
+                    top: 0;
+                    font-weight: 500;
+                    color: #fff;
+                    cursor: pointer;
+                }
+            }
+            
+        }
+        .navbar__icon {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+
+            .icon__cart{
+                position: relative;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: rgb(192, 192, 192);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .cart__number{
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background: $bg_third;
+                    color: #fff;
+                    font-size: 0.75rem;
+                    position: absolute;
+                    top: -5px;
+                    right: -5px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .cart__circle{
+                    i{
+                        color: $Color__0F3460;
+                        font-size: 1.25rem;
+                    }
+                    
+                }
+                
+            }
+            .icon__cart:hover{
+                // border: 1px solid $Color__E94560;
+                // background-color: #fff;
+                i{
+                
+                    color: $Color__E94560;
+                }
+            } 
+
+            .icon__user{
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: rgb(192, 192, 192);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                &:hover{
+                    i{
+                
+                        color: $Color__E94560;
+                    }
+                }
+                i{
+                    color: $Color__0F3460;
+                    font-size: 1.25rem;
+                }
+            }
+
+        }
+    }
+    
+}
+
+.khoa-sidebar{
+    background: $bg_second;
+    box-shadow: $box__shadow;
+    .sidebar{
+        padding: 15px 25px;
+        cursor: pointer;
+        .category{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            align-items: center;
+            background: $bg_fourth;
+            padding: 10px 25px;
+            border-radius: 10px;
+            div{
+                font-size: 1.25rem;
+                font-weight: 500;
+            }
+        }
+    }
+    .box_service{
+        background: $bg_fourth;
+        border: 1px solid $Color__0F3460;
+        border-radius: 10px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 15px;
+        padding: 10px 15px;
+        cursor: pointer;
+        .service_title{
+            text-decoration: none;
+            color: $Color__0F3460;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        &:hover{
+            background-color: $bg_third;
+            border: 1px solid $Color__E94560;
+            transition: all 0.5s ease-in;          
+            .service_title{
+                color: #fff;
+            }
+        }
+    }
+}

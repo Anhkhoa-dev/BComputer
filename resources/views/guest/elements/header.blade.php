@@ -1,0 +1,104 @@
+<header>
+    {{-- header info --}}
+    <div class="khoa-header__info">
+        <div class="container-md">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="#" class="text-decoration-none text-white"><i class="fa-solid fa-map-location-dot"></i>  590, CMT8, QUẬN 3, TP.HCM</a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="text-decoration-none text-white"><i class="fa-solid fa-phone "></i>  0865 677 010</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <a href="#" class="text-decoration-none text-white float-right" > <i class="fas fa-globe"></i> Ngôn ngữ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- navbar info --}}
+    <nav class="khoa-navbar">
+        <div class="container-md">
+            <div class="navbar">
+                <div class="navbar__logo">
+                    <a href="{{ route('user/index') }}" class="text-decoration-none">
+                        <span class="navbar__logo-b">B</span><span class="navbar__logo-c">C</span>omputer
+                    </a>
+                </div>
+                <div class="navbar__search">
+                    <form class="form__search">
+                      <input type="text" name="search" id="" class="search_input" placeholder="Search...">
+                      <label for="search" class="search_label"><i class="fas fa-search"></i></label>
+                      <button class="btnSearch">All Search</button>
+                    </form>
+
+                </div>
+
+                <div class="navbar__icon">
+
+                    {{-- nút giỏ hàng --}}
+                    <a href="#" class="cursor-pointer text-decoration-none text-dark">
+                        <div class="icon__cart">
+                            <p class="cart__number">2</p>
+                            <div class="cart__circle">
+                                <i class="fa-solid fa-bag-shopping"></i>
+                            </div>
+                        </div>
+                    </a>
+                     {{-- Nút đăng nhập --}}
+                    <a href="{{ route('user/login') }}" class="cursor-pointer text-decoration-none text-dark">
+                        <div class="icon__user">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    {{-- sideBar info --}}
+    <div class="khoa-sidebar">
+        <div class="container-md">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="sidebar">
+                        <div class="category">
+                            <img src="{{ asset('image/icon/001-menu.png') }}" width="25" alt="">
+                            <div>Categories</div>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-4 align-items-center">
+                                <div class="box_service">
+                                    <img src="{{ asset('image/icon/001-hand.png') }}" width="25" alt="">
+                                    <a href="#" class="service_title">HƯỚNG DẪN THANH TOÁN</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 align-items-center">
+                                <div class="box_service ">
+                                    <img src="{{ asset('image/icon/002-vehicle.png') }}" width="25" alt="">
+                                    <a href="#" class="service_title">CHÍNH SÁCH BẢO HÀNH</a>
+                                </div>
+                            </div>
+                            <div class="col-md-4 align-items-center">
+                                <div class="box_service">
+                                    <img src="{{ asset('image/icon/003-fast-delivery.png') }}" width="25" alt="">
+                                    <a href="#" class="service_title">CHÍNH SÁCH VẬN CHUYỂN</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

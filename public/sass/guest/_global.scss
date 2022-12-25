@@ -1,0 +1,29 @@
+section{
+    margin-top: 3.125rem;
+    .title{
+        text-transform: uppercase;
+        font-size: 1.5rem;
+        color: $Color__0F3460;
+        font-weight: 600;
+        margin-bottom: 40px;
+        .fa-bolt{
+            font-size: 1.25rem;
+            color: $Color__E94560;
+        }
+    }
+}
+
+.btnBox{
+    padding: 10px 20px;
+    border-radius: 5px;
+    background: $bg_third;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.5s ease-in;
+}
+.btnBox:hover{
+    border: 1px solid $Color__E94560;
+    background: $bg_second;
+    color: $Color__E94560;
+    transition: all 0.5s ease-in;
+}
