@@ -1,103 +1,21 @@
 .flash-delas{
-    .home-card{
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-top: 20px;
-        padding-bottom: 25px;
-        box-shadow: $box__shadow;
-        display: grid;
-        grid-template-rows: 1fr 0.3fr;
-        gap: 20px;
-        background: $bg_second  ;
-        // border: 1px solid $Color__0F3460;
-        border-radius: 10px;
-        box-shadow: #C9C9C9 -2px 1px 13px 7px;
-        .card_image{
-            width: 100%;
-            height: auto;
-            // border: 1px solid $Color__0F3460;
-            border-radius: 10px;
-            position: relative;
-            img{
-                width: 100%;
-            }
-            .sale_off{
-                width: 80px;
-                height: 30px;
-                border-radius: 100px;
-                background-color: $bg_third;
-                padding-top: 5px;
-                padding-bottom: 5px;
-                padding-left: 15px;
-
-                // display: flex;
-                // justify-content: center;
-                // align-items: center;
-                position: absolute;
-                top: -12px;
-                left: -10px;
-                p{
-                    font-size: 13px;
-                    font-weight: 600;
-                    color: #fff;
-                }
-            }
-            .p_like{
-                position: absolute;
-                top: -12px;
-                right: -10px;
-                display: grid;
-                grid-template-rows: 1fr 1fr;
-                gap: 5px;
-                .p_like_sosanh{
-                    width: 30px;
-                    height: 30px;
-                    border-radius: 50%;
-                    border: 1px solid $Color__E94560;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: $bg_second;
-                    color: $Color__E94560;
-                }
-                .p_like_heart{
-                    text-decoration: none;
-                    color: $Color__E94560;
-                    i{
-                        font-size: 30px;
-                    }
-                }
-            }
-        }
-        .card_info{
-            width: 100%;
-            .product_name{
-                font-size: 1.125rem;
-                color: $Color__0F3460;
-                font-weight: 600;
-                text-decoration: none;
-               // margin-bottom: 20px;
-                &:hover{
-                    color: $Color__E94560;
-                }
-
-            }
-            .product_rate{
-                margin-top: 15px;
-                margin-bottom: 10px;
-                display: flex;
-                justify-content: start;
-                align-items: center;
-                i{
-                    margin-right: 5px;
-                    color: darkorange;
-                    font-size: 1rem;
-                }
-            }
-            .product_price{
+    .on_sale{
+        background-color: $bg_second;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        .time_sale{
+           margin-left: 30px;
+           .box_time{
+             span{
                 color: $Color__E94560;
-                font-size: 1.125rem;
-            }
+             }
+           }
         }
     }
+
+
+    // code css product card
+    
 }

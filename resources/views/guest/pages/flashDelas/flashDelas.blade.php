@@ -10,10 +10,10 @@
                     <p>50% Off</p>
                 </div>
                 <div class="p_like">
-                    <a href="#" class="p_like_sosanh">
-                        +
+                    <a href="#" class="p_like_sosanh" title="so sánh sản phẩm">
+                        <i class="fa-solid fa-plus"></i>
                     </a>
-                    <a href="#" class="p_like_heart">
+                    <a href="#" class="p_like_heart" >
                         <i class="fa-regular fa-heart"></i>
                     </a>
                 </div>
@@ -44,8 +44,8 @@
                     <p>40% Off</p>
                 </div>
                 <div class="p_like">
-                    <a href="#" class="p_like_sosanh">
-                        +
+                    <a href="#" class="p_like_sosanh" title="so sánh sản phẩm">
+                        <i class="fa-solid fa-plus"></i>
                     </a>
                     <a href="#" class="p_like_heart">
                         <i class="fa-regular fa-heart"></i>
@@ -79,8 +79,8 @@
                     <p>45% Off</p>
                 </div>
                 <div class="p_like">
-                    <a href="#" class="p_like_sosanh">
-                        +
+                    <a href="#" class="p_like_sosanh" title="so sánh sản phẩm">
+                        <i class="fa-solid fa-plus"></i>
                     </a>
                     <a href="#" class="p_like_heart">
                         <i class="fa-regular fa-heart"></i>
@@ -111,8 +111,8 @@
                     <p>30% Off</p>
                 </div>
                 <div class="p_like">
-                    <a href="#" class="p_like_sosanh">
-                        +
+                    <a href="#" class="p_like_sosanh" title="so sánh sản phẩm">
+                        <i class="fa-solid fa-plus"></i>
                     </a>
                     <a href="#" class="p_like_heart">
                         <i class="fa-regular fa-heart"></i>

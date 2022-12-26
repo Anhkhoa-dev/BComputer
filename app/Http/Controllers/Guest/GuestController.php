@@ -18,4 +18,9 @@ class GuestController extends Controller
 
         return view($this->user.'login.login');
     }
+    public function register(){
+
+        return view($this->user.'login.dang-ky');
+    }
+
 }
