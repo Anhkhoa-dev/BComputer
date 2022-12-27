@@ -1,6 +1,8 @@
 @extends('guest.elements.master')
 
-@section('name')
+@section('title')
+    
 @endsection
 
-fvd
+@section('admin-main')
+@endsection
