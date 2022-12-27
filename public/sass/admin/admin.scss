@@ -1,0 +1,18 @@
+.modal__acount{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: 20;
+}
+
+.actived_status{
+    background: rgb(3, 237, 58);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.clocked_status{
+    background: rgb(107, 107, 107);
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+}

@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ACOUNT extends Model
 {
     use HasFactory;
-    protected $table = 'tbemployee';
-
-    protected $primaryKey = 'empId';
+    protected $table = 'tbuser';
+    // protected $timestamp = false;
+    public $timestamps = false;
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'empId',
+        'id',
         'fullname',
         'birthday',
         'email',
@@ -20,7 +21,8 @@ class ACOUNT extends Model
         'address',
         'image',
         'password',
-        'role',
-        'status'  
+        'level',
+        'status',
+        'dateRegister',  
     ];
 }

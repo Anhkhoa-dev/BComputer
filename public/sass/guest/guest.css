@@ -581,7 +581,6 @@ section .title i {
   font-size: 14px;
   font-style: italic;
   color: red;
-  visibility: hidden;
 }
 .khoa-login .login_nen .box_login .form_login .check_box {
   display: flex;

@@ -41,8 +41,8 @@
         <table class="table table-striped projects">
             <thead>
                 <tr>
-                    <th style="width: 1%"> STT</th>
-                    <th> Full name </th>
+                    <th style="width: 1%"> ID</th>
+                    <th style="width: 13%"> Full name </th>
                     <th> Birthday </th>
                     <th> Email</th>
                     <th> Phone</th>
@@ -55,16 +55,16 @@
             </thead>
             <tbody>
                 @foreach ($prods as $item)
-                <tr>
+                <tr class="align-items-center">
                     <td>{{$item->empId}}</td>
                     <td>{{$item->fullname}}</td>
-                    <td>{{$item->birthday}}</td>
-                    <td>{{$item->emmail}}</td>
+                    <td>{{date('d-m-Y', strtotime($item->birthday))}}</td>
+                    <td>{{$item->email}}</td>
                     <td>{{$item->phone ?? 'null'}}</td>
                     <td>{{$item->address ?? 'null'}}</td>
                     <td>{{$item->image}}</td>
-                    <td>{{$item->role}}</td>
-                    <td>{{$item->status == 1 ? 'Actived' : 'clocked'}}</td>
+                    <td>{{$item->role == 2 ? 'admin' : 'user'}}</td>
+                    <td><p class="btn {{$item->status == 1 ? 'btn-success' : 'btn-secondary'}} btn-sm">{{$item->status == 1 ? 'Actived' : 'Clocked'}}</p></td>
                     <td class="project-actions text-right">
                         <a class="btn btn-primary btn-sm" href="#">
                             <i class="fas fa-folder">
@@ -97,10 +97,10 @@
 
  {{-- modal thêm | sửa acount --}}
   <div class="modal fade" id="create_acount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Create acount</h1>
+          <h1 class="modal-title fs-5" id="title-modal-acount"></h1>
           {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
         </div>
         <div class="modal-body">
@@ -117,14 +117,14 @@
                         <span class="file-box"></span>
                         <span class="file-button">
                           <i class="fa fa-upload" aria-hidden="true"></i>
-                          Chọn hình
+                          Choose image
                         </span>
                       </label>
                 </div>
                 </center>
             <div class="d-flex justify-content-between">
                 {{-- // cột bên trái --}}
-                <div class="">
+                <div style="width: 48%">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Full name</label>
                         <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Full name">
@@ -148,7 +148,7 @@
                 </div>
 
                 {{-- cột bên phải  --}}
-                <div class="">
+                <div style="width: 48%">
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Phone</label>
                         <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="Phone">

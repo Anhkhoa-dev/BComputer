@@ -6,17 +6,18 @@ use App\Http\Controllers\Guest\GuestController;
 use App\Http\Controllers\Guest\IndexController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminsController;
+use App\Http\Controllers\LoginController;
 
 
-Route::get('login', [
-    GuestController::class, 'logIn'
-])->name('user/login');
+Route::controller(LoginController::class)->group(function () {
+    Route::get('login', 'index')->name('user/login');
+    Route::post('process', 'postLogin')->name('postLogin');
+    
+    Route::get('logout', 'logout')->name('user/logout');
 
-Route::get('register', [
-    GuestController::class, 'register'
-])->name('user/dang-ky');
-
-
+    Route::get('register', 'register')->name('user/dang-ky');
+    //Route::post('postRegister', 'dangky')->name('user/postDangky');
+});
 
 
 // Chuyển  trang tới đăng nhập
@@ -24,9 +25,6 @@ Route::group(["prefix" => "", "namespace" => "user"], function(){
     Route::get('/', [
         IndexController::class, 'getHome'  
     ])->name('user/index');
-    // Route::get('login', [
-    //     GuestController::class, 'logIn',
-    // ])->name('user/login');
 });
 
 
@@ -38,7 +36,7 @@ Route::group(["prefix" => "", "namespace" => "admin"], function(){
     // Route::get('product', [ProductController::class, 'index' ])->name('admin/product');
 
     // 
-    Route::get('acount', [ AcountConroller::class, 'index' ])->name('admin/acount');
+    Route::get('admin/acount', [ AcountConroller::class, 'index' ])->name('admin/acount');
 
 });
 

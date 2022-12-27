@@ -8,26 +8,41 @@
             <div class="login_nen">
                 <div class="box_login">
                     <h1 class="text-center mb-4"><span class="logoB">B</span><span class="logoC">C</span>omputer</h1>
-                     <form action="#" method="post" class="form_login">
+                     <form action="{{ URL('process') }}" method="post" class="form_login">
+                        @csrf
+                        {{-- @method('post') --}}
+                        @error('errorMsg')
+                                <span class="errorMsg">{{$message}}</span> 
+                        @enderror
                         <div class="form_group mb-1">
-                            <input type="text" name="userName" placeholder="Enter your email" class="input_control" autocomplete="on" />
+                            {{-- @error('email')
+                                is-invalid
+                            @enderror --}}
+                            <input type="text" name="email" placeholder="Enter your email" class="input_control" autocomplete="on" autofocus value="{{ old('email') }}" />
                             <label for="userName" class="icon_user"><i class="fa-solid fa-envelope"></i></label>
                             <label  class="success_check"><i class="fa-solid fa-circle-check"></i></label>
                             <label class="error_check"><i class="fa-solid fa-circle-exclamation"></i></label>
-                            <span class="errorMsg">User can be not blank!</span>
+                            @error('email')
+                                <span class="errorMsg">{{$message}}</span> 
+                            @enderror
                         </div>
                         <div class="form_group mb-2">
+                            {{-- @error('password')
+                                is-invalid
+                            @enderror --}}
                             <input type="password" name="password" placeholder="Password" class="input_control" autocomplete="on" />
                             <label for="password" class="icon_pass"><i class="fa-solid fa-lock"></i></label>
                             <label class="success_check"><i class="fa-solid fa-circle-check"></i></label>
                             <label class="error_check"><i class="fa-solid fa-circle-exclamation"></i></label>
-                            <span class="errorMsg">Password can be not blank!</span>
+                            @error('password')
+                                <span class="errorMsg">{{$message}}</span> 
+                            @enderror
                         </div>
                         <div class="check_box mb-3">
-                            <div>
+                            {{-- <div>
                                 <input type="checkbox" name="remember"><label for="remember">Remember login.</label>
-                            </div>
-                            <div>
+                            </div> --}}
+                            <div class="float-right">
                                 <a href="#">Forgot password?</a>
                             </div>
                         </div>
@@ -37,7 +52,7 @@
                      </form>
                      @include('guest.pages.login.hinh-thuc-dang-nhap-khac')
 
-                    <div class="d-flex justify-content-between position-fixed bottom-2">
+                    <div class="d-flex justify-content-between">
                         <a href="{{ route('user/index') }}" class="back_home"><i class="fa-solid fa-chevron-left"></i> Back to home
                         </a>
                         <a href="{{ route('user/dang-ky') }}" class="signup">Sign up  <i class="fa-solid fa-chevron-right"></i></a>

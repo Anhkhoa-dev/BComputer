@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GuestController extends Controller
 {
@@ -13,14 +14,6 @@ class GuestController extends Controller
         $this->user='guest/pages/';
         // $this->IndexController = new IndexController;
     }
-
-    public function logIn(){
-
-        return view($this->user.'login.login');
-    }
-    public function register(){
-
-        return view($this->user.'login.dang-ky');
-    }
+    
 
 }
