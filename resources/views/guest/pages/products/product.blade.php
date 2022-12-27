@@ -7,5 +7,5 @@
 
 
 @section('user-contents')
-    
+
 @endsection
