@@ -1,12 +1,11 @@
 <?php
 
 use App\Http\Controllers\Admin\AcountConroller;
-// use App\Http\Controllers\Admin\ProductController;
-// use App\Http\Controllers\Guest\GuestController;
 use App\Http\Controllers\Guest\IndexController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\LoginController;
+
 
 
 Route::controller(LoginController::class)->group(function () {
@@ -22,22 +21,23 @@ Route::controller(LoginController::class)->group(function () {
 
 // Chuyển  trang tới đăng nhập
 
-Route::group(['middleware' => ['Auth']], function () {
-
-    Route::group(["prefix" => "", "namespace" => "user"], function(){
-
-        Route::group(['middleware' => ['ckUserLogin:1']], function () {
-            Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
-        });
-    });
 
 
-    Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'ckUserLogin:2'], function(){
-        Route::get("/admin", [AdminsController::class, "getHome"])->name("admin/dashboard");
-        Route::get('admin/acount', [ AcountConroller::class, 'index' ])->name('admin/acount');
-    });
+Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'], function () {
+    Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
+
+    Route::group(['middleware' => 'ckUserLogin'], function () {
+        // hành động check thanh toán, thêm giỏ hàng, thêm sản phẩm yêu thích, comment
+    });        
+ });
+
+Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogin'], function(){
+
+    Route::get("/admin", [AdminsController::class, "getHome"])->name("admin/dashboard");
+    Route::get('admin/acount', [ AcountConroller::class, 'index' ])->name('admin/acount');
 
 });
+
 
 
     
