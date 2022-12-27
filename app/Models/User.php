@@ -17,10 +17,22 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    protected $table = 'tbuser';
+    // protected $timestamp = false;
+    public $timestamps = false;
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'name',
+        'id',
+        'fullname',
+        'birthday',
         'email',
+        'phone',
+        'address',
+        'image',
         'password',
+        'level',
+        'status',
+        'dateRegister',
     ];
 
     /**
@@ -28,17 +40,17 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    // protected $hidden = [
+    //     'password',
+    //     'remember_token',
+    // ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    // /**
+    //  * The attributes that should be cast.
+    //  *
+    //  * @var array<string, string>
+    //  */
+    // protected $casts = [
+    //     'email_verified_at' => 'datetime',
+    // ];
 }

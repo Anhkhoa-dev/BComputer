@@ -23,9 +23,8 @@ section .title {
   font-size: 1.5rem;
   color: #0F3460;
   font-weight: 600;
-  margin-bottom: 40px;
 }
-section .title .fa-bolt {
+section .title i {
   font-size: 1.25rem;
   color: #E94560;
 }
@@ -44,6 +43,118 @@ section .title .fa-bolt {
   background: #fff;
   color: #E94560;
   transition: all 0.5s ease-in;
+}
+
+.view_all {
+  font-size: 1.25rem;
+}
+.view_all a {
+  text-decoration: none;
+  color: #E94560;
+}
+.view_all a:hover {
+  color: #0F3460;
+  text-decoration: underline;
+}
+
+.home-card {
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 20px;
+  padding-bottom: 25px;
+  box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
+  display: grid;
+  grid-template-rows: 1fr 0.3fr;
+  gap: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: #C9C9C9 -2px 1px 13px 7px;
+}
+.home-card .card_image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  position: relative;
+}
+.home-card .card_image img {
+  width: 100%;
+}
+.home-card .card_image .sale_off {
+  width: 80px;
+  height: 30px;
+  border-radius: 100px;
+  background-color: #E94560;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  position: absolute;
+  top: -12px;
+  left: -10px;
+}
+.home-card .card_image .sale_off p {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+.home-card .card_image .p_like {
+  position: absolute;
+  top: -12px;
+  right: -10px;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 5px;
+}
+.home-card .card_image .p_like .p_like_sosanh {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid #E94560;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  color: #E94560;
+}
+.home-card .card_image .p_like .p_like_heart {
+  text-decoration: none;
+  color: #E94560;
+}
+.home-card .card_image .p_like .p_like_heart i {
+  font-size: 30px;
+}
+.home-card .card_info {
+  width: 100%;
+}
+.home-card .card_info .product_name {
+  font-size: 1.125rem;
+  color: #0F3460;
+  font-weight: 600;
+  text-decoration: none;
+}
+.home-card .card_info .product_name:hover {
+  color: #E94560;
+}
+.home-card .card_info .product_rate {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+}
+.home-card .card_info .product_rate i {
+  margin-right: 5px;
+  color: darkorange;
+  font-size: 1rem;
+}
+.home-card .card_info .product_price {
+  color: #E94560;
+  font-size: 1.125rem;
+}
+
+.img__full {
+  width: 100%;
+  height: auto;
 }
 
 .khoa-header__info {
@@ -334,98 +445,47 @@ section .title .fa-bolt {
   text-align: justify;
 }
 
-.flash-delas .home-card {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-  padding-bottom: 25px;
-  box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
-  display: grid;
-  grid-template-rows: 1fr 0.3fr;
-  gap: 20px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: #C9C9C9 -2px 1px 13px 7px;
-}
-.flash-delas .home-card .card_image {
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  position: relative;
-}
-.flash-delas .home-card .card_image img {
-  width: 100%;
-}
-.flash-delas .home-card .card_image .sale_off {
-  width: 80px;
-  height: 30px;
-  border-radius: 100px;
-  background-color: #E94560;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 15px;
-  position: absolute;
-  top: -12px;
-  left: -10px;
-}
-.flash-delas .home-card .card_image .sale_off p {
-  font-size: 13px;
-  font-weight: 600;
-  color: #fff;
-}
-.flash-delas .home-card .card_image .p_like {
-  position: absolute;
-  top: -12px;
-  right: -10px;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  gap: 5px;
-}
-.flash-delas .home-card .card_image .p_like .p_like_sosanh {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  border: 1px solid #E94560;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.flash-delas .on_sale {
   background-color: #fff;
-  color: #E94560;
-}
-.flash-delas .home-card .card_image .p_like .p_like_heart {
-  text-decoration: none;
-  color: #E94560;
-}
-.flash-delas .home-card .card_image .p_like .p_like_heart i {
-  font-size: 30px;
-}
-.flash-delas .home-card .card_info {
-  width: 100%;
-}
-.flash-delas .home-card .card_info .product_name {
-  font-size: 1.125rem;
-  color: #0F3460;
-  font-weight: 600;
-  text-decoration: none;
-}
-.flash-delas .home-card .card_info .product_name:hover {
-  color: #E94560;
-}
-.flash-delas .home-card .card_info .product_rate {
-  margin-top: 15px;
-  margin-bottom: 10px;
   display: flex;
-  justify-content: start;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px;
 }
-.flash-delas .home-card .card_info .product_rate i {
-  margin-right: 5px;
-  color: darkorange;
-  font-size: 1rem;
+.flash-delas .on_sale .time_sale {
+  margin-left: 30px;
 }
-.flash-delas .home-card .card_info .product_price {
+.flash-delas .on_sale .time_sale .box_time span {
   color: #E94560;
+}
+
+.new_arrivals {
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+.new_arrivals .card {
+  border: none;
+  border-radius: 0;
+  padding: 10px;
+}
+.new_arrivals .card:hover {
+  border: 1px solid #E94560;
+}
+.new_arrivals .card .card_info .name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #0F3460;
+  text-decoration: none;
+}
+.new_arrivals .card .card_info .name:hover {
+  color: #E94560;
+  text-decoration: underline;
+}
+.new_arrivals .card .card_info .price {
   font-size: 1.125rem;
+  color: #E94560;
+  font-weight: 400;
 }
 
 .khoa-login {
@@ -521,7 +581,6 @@ section .title .fa-bolt {
   font-size: 14px;
   font-style: italic;
   color: red;
-  visibility: hidden;
 }
 .khoa-login .login_nen .box_login .form_login .check_box {
   display: flex;
