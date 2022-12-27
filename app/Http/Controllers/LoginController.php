@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Facade;
+use Illuminate\Support\Facades\Cookie;
+use App\Events\sendNotification;
 
 class LoginController extends Controller
 {
@@ -15,12 +18,20 @@ class LoginController extends Controller
     }
     public function  index(){
         
-        if($user = Auth::user()){
-            if($user->level == '1'){
-                return redirect()->route('user/index');
-            }elseif($user->level == '2'){
-                return redirect()->route('admin/dashboard');
+        if(Auth::check() || session('user')){
+            return back()->with('toast_message', 'Bạn đã đăng nhập');
+        }
+        if(!session()->get('prev_url')){
+            $prev_url = '/';
+            if(session()->get('_previous')){
+                $url = session()->get('_previous')['url'];
+                $arrUrl = explode('/', $url);
+                $page = $arrUrl[count($arrUrl) - 1];
+                // if($page != 'dangky' && $page != 'khoiphuctaikhoan'){
+                //     $prev_url = $url;
+                // }
             }
+            session()->put('prev_url', $prev_url);
         }
 
         return view($this->user.'login.login');
@@ -38,20 +49,40 @@ class LoginController extends Controller
             ]
         );
 
-        $data = $request->only('email', 'password');
+        $data = [
+            'email' => $request->email,
+            'password' => $request->password,
+            'trangthai' => 1,
+        ];
         
         if(Auth::attempt($data)){
-            $request->session()->regenerate();
+            $request->session()->put('email', $data['email']);
             $user = Auth::user();
-            if($user->level == 1){
-                return redirect()->route('user/index');
-            }elseif($user->level == 2){
-                return redirect()->route('admin/dashboard');
+
+            if($user->loginStatus == 1) {
+                $notification = [
+                    'user' => $user,
+                    'type' => 'logout',
+                ];
+
+                //  event(new sendNotification($notification));
             }
-            return redirect()->intended('/');
+            // đăng nhập bình thường
+            // else {
+            //     $user->loginStatus = 1;
+            //     $user->update($user);
+            // }
+
+           // session(['email' => $data]);
+
+           $prev_url = session('prev_url');
+            if($prev_url){
+                session()->forget('prev_url');
+                return redirect($prev_url)->with('toast_message', 'Đăng nhập thành công');
+            }
+
+            return redirect('/')->with('toast_message', 'Đăng nhập thành công');
         }
-
-
         return back()->withErrors([
             'errorMsg' => 'Email or password không đúng!'
         ])->onlyInput('email');

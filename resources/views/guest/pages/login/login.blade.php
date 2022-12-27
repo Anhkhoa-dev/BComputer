@@ -12,7 +12,7 @@
                         @csrf
                         {{-- @method('post') --}}
                         @error('errorMsg')
-                                <span class="errorMsg">{{$message}}</span> 
+                            <span class="errorMsg">{{$message}}</span> 
                         @enderror
                         <div class="form_group mb-1">
                             {{-- @error('email')

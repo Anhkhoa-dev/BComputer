@@ -32,7 +32,10 @@ class User extends Authenticatable
         'password',
         'level',
         'status',
+        'remember_token',
         'dateRegister',
+        'loginStatus',
+        'device_token',
     ];
 
     /**
