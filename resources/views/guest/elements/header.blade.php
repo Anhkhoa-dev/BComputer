@@ -56,13 +56,32 @@
                     <a href="{{ route('user/login') }}" class="img__user">
 
                            @if (Auth::check() || session('user'))
+                           <?php $user = Auth::user() ?>
                                 <div class="icon__user">
-                                    <img src="{{ asset('image/'. (Auth::user()->image != null ? Auth::user()->image : 'user/avatar-default.png')) }}" alt="" class="img-user">
+                                    <img src="{{ asset('image/'. ($user->image != null ? $user->image : 'user/avatar-default.png')) }}" alt="" class="img-user">
                                  </div>
-                                 <div class="user_info">
-                                    <p>Xin chào!</p>
-                                    <p>{{Auth::user()->fullname}}</p>
+                                 <div class="user_info dropdown">
+                                    <div class="author">Xin chào!</div>
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        {{$user->fullname}}
+                                    </a>
+                                      <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user me-1"></i>View account</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bell me-1"></i> Notify</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-box me-1"></i>My Order</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="fa-solid fa-power-off me-1"></i>Logout</a></li>
+                                      </ul>
                                 </div>
+                                {{-- <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                      Dropdown button
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                      <li><a class="dropdown-item" href="#">Action</a></li>
+                                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>
+                                  </div> --}}
                            @else
                              <div class="icon__user">
                                 <i class="fa-solid fa-user"></i>

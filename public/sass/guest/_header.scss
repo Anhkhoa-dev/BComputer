@@ -151,6 +151,13 @@
                     flex-direction: column;
                     justify-content: flex-end;
                     // gap: 5px;
+                    .author{
+                        font-size: 0.9rem;
+                        color: $Color__0F3460;
+                        :hover{
+                            color: $Color__E94560;
+                        }
+                    }
                 }
             }
 

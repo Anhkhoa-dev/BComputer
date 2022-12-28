@@ -41,7 +41,7 @@
                             <span class="errorMsg">Password confirm can be not blank!</span>
                         </div>
                         <div class="mb-3">
-                            <button class="btnSignup">Đăng ký</button>
+                            <button class="btnLogin">Đăng ký</button>
                         </div>
                      </form>
                      <div class="text-center">

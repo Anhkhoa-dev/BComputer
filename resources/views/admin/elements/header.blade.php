@@ -4,12 +4,12 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="../../index3.html" class="nav-link">Home</a>
+      {{-- <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ route('user/index')}}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
-      </li>
+      </li> --}}
     </ul>
     <div class="form-inline">
       <div class="input-group" data-widget="sidebar-search">
@@ -141,5 +141,25 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+      <li>
+        
+      </li>
     </ul>
+    <div class="khoa-admin">
+      @if (Auth::check())
+        <div class="admin-image">
+          <img src="{{ asset('image/'. (Auth::user()->image != null ? Auth::user()->image : 'user/avatar-default.png')) }}" class="img_admin" alt="User Image">
+        </div>
+        <div class="info dropdown">
+          {{-- <h6 class="text-white">Welcom,</h6> --}}
+          <a href="#" class="d-block dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{Auth::user()->fullname}}</a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-home me-2"></i>Dashboard</a></li>
+            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user me-2"></i>View account</a></li>
+            <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="fa-solid fa-power-off me-2"></i>Logout</a></li>
+          </ul>
+        </div>
+      @endif
+      
+    </div>
   </nav>

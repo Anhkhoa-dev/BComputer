@@ -23,6 +23,9 @@ class ACOUNT extends Model
         'password',
         'level',
         'status',
-        'dateRegister',  
+        'remember_token',
+        'dateRegister',
+        'loginStatus',
+        'device_token',
     ];
 }

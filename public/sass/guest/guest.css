@@ -299,6 +299,13 @@ section .title i {
   flex-direction: column;
   justify-content: flex-end;
 }
+.khoa-navbar .navbar .navbar__icon .img__user .user_info .author {
+  font-size: 0.9rem;
+  color: #0F3460;
+}
+.khoa-navbar .navbar .navbar__icon .img__user .user_info .author :hover {
+  color: #E94560;
+}
 
 .khoa-sidebar {
   background: #fff;
