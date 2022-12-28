@@ -62,8 +62,5 @@
         </div>
     </div>
 
-
-
-
 </div>
 @include('guest.elements.footer-link')
