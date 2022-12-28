@@ -52,10 +52,23 @@
                         </div>
                     </a>
                      {{-- Nút đăng nhập --}}
-                    <a href="{{ route('user/login') }}" class="cursor-pointer text-decoration-none text-dark">
-                        <div class="icon__user">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
+
+                    <a href="{{ route('user/login') }}" class="img__user">
+
+                           @if (Auth::check() || session('user'))
+                                <div class="icon__user">
+                                    <img src="{{ asset('image/'. (Auth::user()->image != null ? Auth::user()->image : 'user/avatar-default.png')) }}" alt="" class="img-user">
+                                 </div>
+                                 <div class="user_info">
+                                    <p>Xin chào!</p>
+                                    <p>{{Auth::user()->fullname}}</p>
+                                </div>
+                           @else
+                             <div class="icon__user">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                           @endif                            
+     
                     </a>
                 </div>
             </div>

@@ -9,12 +9,12 @@ use App\Http\Controllers\LoginController;
 
 
 Route::controller(LoginController::class)->group(function () {
-    Route::get('login', 'index')->name('user/login');
+    Route::get('login', 'getLogin')->name('user/login');
     Route::post('process', 'postLogin')->name('postLogin');
 
     Route::get('logout', 'logout')->name('user/logout');
 
-    Route::get('register', 'register')->name('user/dang-ky');
+    Route::get('register', 'getRegister')->name('user/dang-ky');
     //Route::post('postRegister', 'dangky')->name('user/postDangky');
 });
 

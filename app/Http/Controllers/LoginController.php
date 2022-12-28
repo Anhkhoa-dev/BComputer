@@ -14,7 +14,7 @@ class LoginController extends Controller
         $this->user='guest/pages/';
         // $this->IndexController = new IndexController;
     }
-    public function  index(){
+    public function  getLogin(){
         
         if(Auth::check() || session('user')){
             return back()->with('toast_message', 'Bạn đã đăng nhập');
@@ -53,9 +53,12 @@ class LoginController extends Controller
         ];
         
         if(Auth::attempt($data)){
-            $request->session()->put('email', $data['email']);
+            // $request->session()->put('email', $data['email']);
             // $user = Auth::user();
-            $user = User::where('email', $data['email'])->first();
+             $user = User::where('email', $data['email'])->first();
+             Auth::login($user);
+            //  session()->put('user', $user);
+            // dd($user);
             if($user->level == 1) {
                 return redirect('/');
             }elseif ($user->level == 2){
@@ -75,7 +78,7 @@ class LoginController extends Controller
         return redirect('/');
     }
 
-    public function register(){
+    public function getRegister(){
 
         return view($this->user . 'login.dang-ky');
     }

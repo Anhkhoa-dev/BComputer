@@ -10,6 +10,8 @@
                 <div class="box_login">
                     <h1 class="text-center mb-4">Register Acount</h1>
                      <form action="#" method="post" class="form_login">
+                        @csrf
+                        @method('put')
                         <div class="form_group">
                             <input type="text" name="email" placeholder="Enter your email" class="input_control" autocomplete="on" />
                             <label for="userName" class="icon_user"><i class="fa-solid fa-envelope"></i></label>
@@ -39,7 +41,7 @@
                             <span class="errorMsg">Password confirm can be not blank!</span>
                         </div>
                         <div class="mb-3">
-                            <button class="btnLogin">Đăng ký</button>
+                            <button class="btnSignup">Đăng ký</button>
                         </div>
                      </form>
                      <div class="text-center">
