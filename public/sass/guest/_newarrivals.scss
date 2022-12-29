@@ -1,0 +1,31 @@
+.new_arrivals{
+    background-color: $bg_second;
+    display: flex;
+    justify-content: space-between;
+
+    .card{
+        border: none;
+        border-radius: 0;
+        padding: 10px;
+        &:hover{
+            border: 1px solid $Color__E94560;
+        }
+        .card_info{
+            .name{
+                font-size: 1.25rem;
+                font-weight: 600;
+                color: $Color__0F3460;
+                text-decoration: none;
+                &:hover{
+                    color: $Color__E94560;
+                    text-decoration: underline;
+                }
+            }
+            .price{
+                font-size: 1.125rem;
+                color: $Color__E94560;
+                font-weight: 400;
+            }
+        }
+    }
+}

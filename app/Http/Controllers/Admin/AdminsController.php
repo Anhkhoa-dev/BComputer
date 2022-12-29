@@ -17,4 +17,15 @@ class AdminsController extends Controller
         // $this->admin.'home'
         return view($this->admin.'home');
     }
+
+
+    public function getLogin(){
+
+
+    }
+
+    public function postLogin(){
+
+        
+    }
 }

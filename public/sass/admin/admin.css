@@ -1,0 +1,34 @@
+.modal__acount {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 20;
+}
+
+.actived_status {
+  background: rgb(3, 237, 58);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.clocked_status {
+  background: rgb(107, 107, 107);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.khoa-admin {
+  display: flex;
+  gap: 10px;
+}
+.khoa-admin .admin-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.khoa-admin .img_admin {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}/*# sourceMappingURL=admin.css.map */

@@ -1,11 +1,12 @@
 @extends('guest.elemnts.master')
 
-@section('name')
+@section('title')
     
 @endsection
 
-
-
 @section('user-contents')
+
     <h1>ABC</h1>
 @endsection
+@endsection
+
