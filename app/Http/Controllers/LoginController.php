@@ -58,12 +58,19 @@ class LoginController extends Controller
              $user = User::where('email', $data['email'])->first();
              Auth::login($user);
             //  session()->put('user', $user);
-            // dd($user);
-            if($user->level == 1) {
-                return redirect('/');
-            }elseif ($user->level == 2){
-                return redirect('admin');
+            // dd($user->status);
+            if($user->status == 1 ){
+                if($user->level == 1) {
+                    return redirect('/');
+                }elseif ($user->level == 2){
+                    return redirect('admin');
+                }
+            }else{
+                return back()->withErrors([
+                    'errorMsg' => 'Tài khoản đang bị khóa, vui lòng liên hệ admin'
+                ])->onlyInput('email');
             }
+            
             
         }
         return back()->withErrors([

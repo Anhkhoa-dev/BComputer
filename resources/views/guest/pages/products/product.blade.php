@@ -7,4 +7,3 @@
 @section('user-contents')
 
 @endsection
-@endsection

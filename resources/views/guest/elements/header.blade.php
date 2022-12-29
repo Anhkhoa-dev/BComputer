@@ -71,17 +71,7 @@
                                         <li><a class="dropdown-item" href="#"><i class="fa-solid fa-box me-1"></i>My Order</a></li>
                                         <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="fa-solid fa-power-off me-1"></i>Logout</a></li>
                                       </ul>
-                                </div>
-                                {{-- <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                      Dropdown button
-                                    </button>
-                                    <ul class="dropdown-menu">
-                                      <li><a class="dropdown-item" href="#">Action</a></li>
-                                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                    </ul>
-                                  </div> --}}
+                                </div>                              
                            @else
                              <div class="icon__user">
                                 <i class="fa-solid fa-user"></i>
