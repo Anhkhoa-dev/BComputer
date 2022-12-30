@@ -17,21 +17,21 @@
                         @include('guest.pages.sidebar.sidebar')
                     </div>
                 </div>
-                <div class="col-md-9">
-                    <div class="col-md-12">
-                        <div class="row">
+                <div class="col-md-9 pt-4 pb-0">
+                    <div class="col-md-12"> 
+                         <div class="row">
                             @include('guest.pages.sidebar.banner')
-                        </div>
-                    </div>
+                         </div> 
+                     </div> 
 
                 </div>
             </div>
         </div>
     </div>
     <section class="flash-delas">
-        <div class="container-md">
+        <div class="container-xl">
             <div class="row">
-                <div class="on_sale">
+                <div class="on_sale col-md-12">
                     <div class="d-flex justify-content-start align-items-center">
                         <div class="title">
                             <i class="fa-solid fa-bolt"></i>
@@ -49,11 +49,12 @@
                         <a href="#">View all</a>
                     </div>
                 </div>
-                <div class="col-md-12 mt-4">
-                    <div class="row">
-                        @include('guest.pages.flashDelas.flashDelas')
-                    </div>
+                
+                 <div class="col-md-12 mt-1 py-3">
+                    @include('guest.pages.flashDelas.flashDelas')    
                 </div>
+                    
+            
             </div>
         </div>
     </section>
@@ -179,4 +180,64 @@
 
     </section>
 
+
+
+
+
+
+
+@endsection
+
+@section('myjs')
+    <script>
+
+        //slide banner
+       var owl_carousel_banner = $('#banner');
+        owl_carousel_banner.owlCarousel({
+            loop:true,
+            margin:15,
+            // nav:true,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:1
+                },
+                1000:{
+                    items:1
+                }
+            }
+        });
+
+        // slide flash delas
+        var owl_carousel_flashdelas = $('#flash-delas');
+        owl_carousel_flashdelas.owlCarousel({
+            loop:true,
+            margin:10,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true,
+            // nav:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:5
+                }
+            }
+        });
+
+
+
+
+    </script>
+    
 @endsection

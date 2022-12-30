@@ -45,18 +45,17 @@ section{
     padding-right: 20px;
     padding-top: 20px;
     padding-bottom: 25px;
-    box-shadow: $box__shadow;
     display: grid;
     grid-template-rows: 1fr 0.3fr;
     gap: 20px;
-    background: $bg_second  ;
-    // border: 1px solid $Color__0F3460;
-    border-radius: 10px;
-    box-shadow: #C9C9C9 -2px 1px 13px 7px;
+    background: $bg_second;
+    border-radius: 5px;
+    // &:hover{
+    //     border: 1px solid $Color__E94560;
+    // }
     .card_image{
         width: 100%;
         height: auto;
-        // border: 1px solid $Color__0F3460;
         border-radius: 10px;
         position: relative;
         img{
@@ -70,10 +69,6 @@ section{
             padding-top: 5px;
             padding-bottom: 5px;
             padding-left: 15px;
-
-            // display: flex;
-            // justify-content: center;
-            // align-items: center;
             position: absolute;
             top: -12px;
             left: -10px;
@@ -91,8 +86,8 @@ section{
             grid-template-rows: 1fr 1fr;
             gap: 5px;
             .p_like_sosanh{
-                width: 30px;
-                height: 30px;
+                width: 25px;
+                height: 25px;
                 border-radius: 50%;
                 border: 1px solid $Color__E94560;
                 text-decoration: none;
@@ -106,7 +101,7 @@ section{
                 text-decoration: none;
                 color: $Color__E94560;
                 i{
-                    font-size: 30px;
+                    font-size: 25px;
                 }
             }
         }
@@ -118,7 +113,6 @@ section{
             color: $Color__0F3460;
             font-weight: 600;
             text-decoration: none;
-           // margin-bottom: 20px;
             &:hover{
                 color: $Color__E94560;
             }

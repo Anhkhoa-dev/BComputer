@@ -62,13 +62,11 @@ section .title i {
   padding-right: 20px;
   padding-top: 20px;
   padding-bottom: 25px;
-  box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
   display: grid;
   grid-template-rows: 1fr 0.3fr;
   gap: 20px;
   background: #fff;
-  border-radius: 10px;
-  box-shadow: #C9C9C9 -2px 1px 13px 7px;
+  border-radius: 5px;
 }
 .home-card .card_image {
   width: 100%;
@@ -105,8 +103,8 @@ section .title i {
   gap: 5px;
 }
 .home-card .card_image .p_like .p_like_sosanh {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   border: 1px solid #E94560;
   text-decoration: none;
@@ -121,7 +119,7 @@ section .title i {
   color: #E94560;
 }
 .home-card .card_image .p_like .p_like_heart i {
-  font-size: 30px;
+  font-size: 25px;
 }
 .home-card .card_info {
   width: 100%;
@@ -453,10 +451,10 @@ section .title i {
   transition: all 0.5s ease-in;
 }
 .khoa-banner .banner {
-  padding: 25px;
+  padding: 30px;
 }
 .khoa-banner .banner .banner-box {
-  padding: 20px 10px;
+  padding: 20px 30px;
 }
 .khoa-banner .banner .banner-box .banner-title {
   text-transform: uppercase;
@@ -468,6 +466,7 @@ section .title i {
   font-size: 0.875rem;
   font-weight: 500;
   text-align: justify;
+  margin-bottom: 50px;
 }
 
 .flash-delas .on_sale {
