@@ -468,6 +468,9 @@ section .title i {
   text-align: justify;
   margin-bottom: 50px;
 }
+.khoa-banner .banner .banner-box .btnBox {
+  margin-top: 30px;
+}
 
 .flash-delas .on_sale {
   background-color: #fff;

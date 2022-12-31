@@ -7,10 +7,10 @@
                         <h1 class="banner-title">
                             50% Off for you firt shopping
                         </h1>
-                        <p class="banner-desc mb-3">
+                        <p class="banner-desc">
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis tempore nisi dolores ad sit pariatur sed libero enim iusto quo accusamus magnam itaque non animi, natus debitis assumenda earum officia.
                         </p>
-                        <a href="#" class="btnBox mt-3">Visit Collection</a>
+                        <a href="#" class="btnBox">Visit Collection</a>
                     </div>
                 </div>
                 <div class="col-md-4">
