@@ -27,8 +27,8 @@
         <div class="container-md">
             <div class="navbar">
                 <div class="navbar__logo">
-                    <a href="{{ route('user/index') }}" class="text-decoration-none">
-                        <span class="navbar__logo-b">B</span><span class="navbar__logo-c">C</span>omputer
+                    <a href="{{ route('user/index') }}" class="logo">
+                        <span class="letterB">B</span><span class="letterC">C</span>omputer
                     </a>
                 </div>
                 <div class="navbar__search">

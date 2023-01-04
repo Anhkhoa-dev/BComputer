@@ -29,6 +29,22 @@ section .title i {
   color: #E94560;
 }
 
+.logo {
+  text-decoration: none;
+  font-size: 2rem;
+  color: #E94560;
+  font-weight: 500;
+}
+.logo .letterB {
+  font-size: 3rem;
+  font-weight: 600;
+}
+.logo .letterC {
+  font-size: 3rem;
+  font-weight: 600;
+  color: #0F3460;
+}
+
 .btnBox {
   padding: 10px 20px;
   border-radius: 5px;
@@ -161,26 +177,12 @@ section .title i {
 }
 
 .khoa-navbar {
-  padding: 15px 0;
+  padding: 10px 0;
   background: #fff;
 }
 .khoa-navbar .navbar {
   display: flex;
   justify-content: space-between;
-}
-.khoa-navbar .navbar .navbar__logo a {
-  color: #E94560;
-  font-size: 2rem;
-}
-.khoa-navbar .navbar .navbar__logo a .navbar__logo-b {
-  font-size: 2.625rem;
-  color: #E94560;
-  font-weight: 600;
-}
-.khoa-navbar .navbar .navbar__logo a .navbar__logo-c {
-  font-size: 2.625rem;
-  color: #0F3460;
-  font-weight: 600;
 }
 .khoa-navbar .navbar .navbar__search .form__search {
   position: relative;
@@ -450,25 +452,25 @@ section .title i {
   color: #fff;
   transition: all 0.5s ease-in;
 }
-.khoa-banner .banner {
+.khoa-banner #banner {
   padding: 30px;
 }
-.khoa-banner .banner .banner-box {
+.khoa-banner #banner .banner-box {
   padding: 20px 30px;
 }
-.khoa-banner .banner .banner-box .banner-title {
+.khoa-banner #banner .banner-box .banner-title {
   text-transform: uppercase;
   font-size: 2.8125rem;
   color: #E94560;
   font-weight: 600;
 }
-.khoa-banner .banner .banner-box .banner-desc {
+.khoa-banner #banner .banner-box .banner-desc {
   font-size: 0.875rem;
   font-weight: 500;
   text-align: justify;
   margin-bottom: 50px;
 }
-.khoa-banner .banner .banner-box .btnBox {
+.khoa-banner #banner .banner-box .btnBox {
   margin-top: 30px;
 }
 

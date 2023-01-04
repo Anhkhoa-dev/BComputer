@@ -7,7 +7,7 @@
         <div class="row">
             <div class="login_nen">
                 <div class="box_login">
-                    <h1 class="text-center mb-4"><span class="logoB">B</span><span class="logoC">C</span>omputer</h1>
+                    <h1 class="text-center mb-4 logo"><span class="letterB">B</span><span class="letterC">C</span>omputer</h1>
                      <form action="{{ URL('process') }}" method="post" class="form_login">
                         @csrf
                         {{-- @method('post') --}}

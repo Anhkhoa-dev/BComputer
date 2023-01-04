@@ -67,7 +67,7 @@ class AcountConroller extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
