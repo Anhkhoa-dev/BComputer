@@ -1,12 +1,14 @@
 @import 'reset';
 
-@import 'variables'; // khia báo biến
+@import 'variables'; // khai báo biến
 @import 'global'; //css toàn cục
 @import 'header'; //scss header
 @import 'footer'; // scss foooter
 @import 'banner'; 
 @import 'flashDelas';
 @import 'newarrivals';
+@import 'account'; // scss trang thong tin tài khoản
+
 
 // css trang login
 @import 'login';

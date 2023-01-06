@@ -16,10 +16,10 @@ class LoginController extends Controller
         // $this->user='guest/pages/';
         // $this->IndexController = new IndexController;
         // chưa có thư mục lưu hình
-        if(!is_dir('image/user')){
-            // tạo thư mục lưu hình
-            mkdir('images/user', 0777, true);
-        }
+        // if(!is_dir('image/user')){
+        //     // tạo thư mục lưu hình
+        //     mkdir('images/user', 0777, true);
+        // }
     }
     public function  getLogin(){
         
@@ -43,6 +43,7 @@ class LoginController extends Controller
     }
 
     public function postLogin(Request $request){
+        //bat lỗi nhập liệu
         $request->validate(
             [
                 'email' => 'required',
@@ -64,7 +65,7 @@ class LoginController extends Controller
             // $user = Auth::user();
              $user = User::where('email', $data['email'])->first();
              Auth::login($user);
-            //  session()->put('user', $user);
+            //   session()->put('user', $user);
             // dd($user->status);
             if($user->status == 1 ){
                 if($user->level == 1) {

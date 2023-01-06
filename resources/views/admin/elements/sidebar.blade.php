@@ -80,9 +80,9 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="../../index3.html" class="nav-link">
+                <a href="{{ route('admin/supplier') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Province</p>
+                  <p>Supplier</p>
                 </a>
               </li>
               <li class="nav-item">

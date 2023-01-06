@@ -66,7 +66,7 @@
                                         {{$user->fullname}}
                                     </a>
                                       <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user me-1"></i>View account</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('user/taikhoan') }}"><i class="fa-solid fa-user me-1"></i>View account</a></li>
                                         <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bell me-1"></i> Notify</a></li>
                                         <li><a class="dropdown-item" href="#"><i class="fa-solid fa-box me-1"></i>My Order</a></li>
                                         <li><a class="dropdown-item" href="{{ route('logout') }}"><i class="fa-solid fa-power-off me-1"></i>Logout</a></li>

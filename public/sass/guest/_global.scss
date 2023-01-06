@@ -157,3 +157,39 @@ section{
     width: 100%;
     height: auto;
 }
+
+.khoa-bc{
+    background-color: #d6d6d6;
+    display: flex;
+    justify-content: flex-start;
+    padding: 8px 9%;
+    .bc-items{
+        text-decoration: none;
+        padding: 0 10px;
+        color: #565656;
+        &:hover{
+            color: #4f23ff;
+        }
+        
+    }
+    .bc-divider{
+        i{
+            font-size: 0.825rem;
+            color: $Color__0F3460;
+        }
+    }
+    .bc-item.active{
+        text-decoration: none;
+        padding: 0 10px;
+        color: $Color__0F3460;
+        font-weight: 600;
+        &:hover{
+            color: #4f23ff;
+        }
+    }
+}
+
+.bg-white{
+    background-color: $bg_second;
+    padding: 50px 0;
+}

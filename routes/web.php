@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Admin\AcountConroller;
 use App\Http\Controllers\Guest\IndexController;
+use App\Http\Controllers\Guest\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminsController;
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\LoginController;
 
 
@@ -33,6 +35,13 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     // phần dành cho user
     Route::group(['middleware' => 'ckUserLogin'], function () {
         // hành động check thanh toán, thêm giỏ hàng, thêm sản phẩm yêu thích, comment
+
+
+        Route::get('/account', [
+            AccountController::class, 'getAccount'
+        ])->name('user/taikhoan');
+
+
     });        
  });
 
@@ -41,11 +50,14 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
  // phần dành cho admin
 Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogin'], function(){
 
-    
+    // Phần dashboard - Phúc
     Route::get("/admin", [AdminsController::class, "getHome"])->name("admin/dashboard");
     Route::get('admin/acount', [ AcountConroller::class, 'index' ])->name('admin/acount');
 
 
+    // Phần danh cho supplier - Khoa
+    Route::get('admin/supplier', [SupplierController::class, 'index'])->name('admin/supplier');
+    Route::get('admin/supplier/create', [SupplierController::class, 'create'])->name('supplier/create');
 });
 
 

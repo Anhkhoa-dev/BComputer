@@ -4,27 +4,20 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\ACOUNT;
+use App\Models\SUPPLIER;
 
-class AcountConroller extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
-    //  public function __construct()
-    // {
-    //     $this->admin='admin/pages/';
-    //     // $this->IndexController = new IndexController;
-    // }
-
     public function index()
     {
         //
-        $prods = ACOUNT::all();
-        return view('admin.pages.acounts.index', compact('prods'));
+        $prods = SUPPLIER::all();
+        return view('admin.pages.suppliers.index', compact('prods'));
     }
 
     /**
@@ -34,7 +27,9 @@ class AcountConroller extends Controller
      */
     public function create()
     {
-        //
+        //Lấy view show ra
+
+        return view('admin.pages.suppliers.create');
     }
 
     /**
@@ -45,7 +40,8 @@ class AcountConroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //xử lý create
+       
     }
 
     /**
@@ -56,7 +52,7 @@ class AcountConroller extends Controller
      */
     public function show($id)
     {
-        //
+        //hiển thị view
     }
 
     /**
@@ -67,7 +63,7 @@ class AcountConroller extends Controller
      */
     public function edit($id)
     {
-
+        //trả về view
     }
 
     /**
@@ -79,7 +75,7 @@ class AcountConroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //lấy dữ liệu update
     }
 
     /**
@@ -90,6 +86,6 @@ class AcountConroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        //xử lý xóa
     }
 }

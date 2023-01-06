@@ -171,6 +171,39 @@ section .title i {
   height: auto;
 }
 
+.khoa-bc {
+  background-color: #d6d6d6;
+  display: flex;
+  justify-content: flex-start;
+  padding: 8px 9%;
+}
+.khoa-bc .bc-items {
+  text-decoration: none;
+  padding: 0 10px;
+  color: #565656;
+}
+.khoa-bc .bc-items:hover {
+  color: #4f23ff;
+}
+.khoa-bc .bc-divider i {
+  font-size: 0.825rem;
+  color: #0F3460;
+}
+.khoa-bc .bc-item.active {
+  text-decoration: none;
+  padding: 0 10px;
+  color: #0F3460;
+  font-weight: 600;
+}
+.khoa-bc .bc-item.active:hover {
+  color: #4f23ff;
+}
+
+.bg-white {
+  background-color: #fff;
+  padding: 50px 0;
+}
+
 .khoa-header__info {
   padding: 10px 0;
   background: #0F3460;
@@ -357,7 +390,6 @@ section .title i {
 .footer {
   background: #0F3460;
   padding: 50px 0;
-  margin-top: 30px;
   color: #fff;
 }
 .footer .Logo {
@@ -515,6 +547,163 @@ section .title i {
   font-size: 1.125rem;
   color: #E94560;
   font-weight: 400;
+}
+
+.khoa-tk-sidebar {
+  width: 100%;
+}
+.khoa-tk-sidebar .sidebar-link {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-decoration: none;
+  padding: 10px 20px;
+  color: #111;
+  opacity: 0.8;
+  transition: all 0.2s ease-in;
+  font-size: 1.25rem;
+}
+.khoa-tk-sidebar .sidebar-link:hover {
+  background: #E94560;
+  color: #fff;
+  transition: all 0.2s ease-in;
+}
+.khoa-tk-sidebar .sidebar-link i {
+  margin-right: 10px;
+}
+.khoa-tk-sidebar .sidebar-link .not-seen-qty, .khoa-tk-sidebar .sidebar-link .processing-qty {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #0F3460;
+  margin-left: 30px;
+  font-size: 0.75rem;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.account-box {
+  padding-top: 30px;
+  padding-left: 30px;
+  padding-right: 40px;
+  padding-bottom: 80px;
+  box-shadow: #CCCCCC -3px -1px 17px 8px;
+  border-radius: 20px;
+}
+.account-box .tk-image {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  position: relative;
+  margin-bottom: 15px;
+}
+.account-box .tk-image .image-img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.account-box .tk-image .image-hover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #3e48fe;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+}
+.account-box .tk-image .image-hover .input-change {
+  display: none;
+}
+.account-box .tk-image .image-hover .change-image {
+  text-decoration: none;
+  color: #fff;
+  cursor: pointer;
+}
+.account-box .tk-image:hover .image-hover {
+  visibility: inherit;
+}
+.account-box .tk-information {
+  color: #6d6d6d;
+}
+.account-box .tk-information a {
+  text-decoration: none;
+  color: #6d6d6d;
+  font-size: 1.25rem;
+}
+.account-box .tk-information a i {
+  margin-left: 5px;
+}
+.account-box .tk-information .change-name {
+  width: 200px;
+  border: none;
+  border-bottom: 1.5px solid #E94560;
+  outline: none;
+}
+.account-box .tk-information .btn-change {
+  border: none;
+  outline: none;
+  background: none;
+  color: #1924f4;
+  margin-top: 5px;
+}
+.account-box .shipment-details {
+  margin-left: 30px;
+}
+.account-box .shipment-details .box-address {
+  width: 100%;
+  padding: 25px;
+  border: 1px solid #a4a4a4;
+}
+.account-box .shipment-details .box-address p.title {
+  color: #6d6d6d;
+  text-align: center;
+}
+.account-box .shipment-details .box-address p.title .add {
+  color: #1924f4;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.account-box .shipment-details .box-address .address-info-active .user-info {
+  display: flex;
+  justify-content: space-between;
+}
+.account-box .shipment-details .box-address .address-info-active .user-info .info-left {
+  display: flex;
+  justify-content: start;
+}
+.account-box .shipment-details .box-address .address-info-active .user-info .info-left .name {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.account-box .shipment-details .box-address .address-info-active .user-info .info-left .using {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-left: 20px;
+  gap: 10px;
+  color: #00f435;
+}
+.account-box .shipment-details .box-address .address-info-active .user-info .edit-address {
+  color: #1924f4;
+  cursor: pointer;
+}
+.account-box .shipment-details .change-password {
+  margin-top: 25px;
+  color: #1924f4;
+}
+.account-box .shipment-details .change-password a {
+  text-decoration: none;
+}
+
+.khoa-add-address {
+  padding: 50px;
 }
 
 .khoa-login {

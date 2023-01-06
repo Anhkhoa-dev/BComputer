@@ -17,6 +17,6 @@ class IndexController extends Controller
     //
     public function getHome(){
          //dd(Auth::user()->image);
-        return view($this->user.'home');
+        return view('guest.pages.home');
     }
 }
