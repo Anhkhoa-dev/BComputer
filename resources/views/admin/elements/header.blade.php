@@ -148,7 +148,7 @@
     <div class="khoa-admin">
       @if (Auth::check())
         <div class="admin-image">
-          <img src="{{ asset('image/'. (Auth::user()->image != null ? Auth::user()->image : 'avatar-default.png')) }}" class="img_admin" alt="User Image">
+          <img src="{{ asset('image/user/'. (Auth::user()->image != null ? Auth::user()->image : 'avatar-default.png')) }}" class="img_admin" alt="User Image">
         </div>
         <div class="info dropdown">
           {{-- <h6 class="text-white">Welcom,</h6> --}}

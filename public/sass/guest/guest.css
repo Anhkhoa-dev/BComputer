@@ -706,6 +706,73 @@ section .title i {
   padding: 50px;
 }
 
+#khoa-acount-address .add-new-address {
+  width: 100%;
+  border: 3px dashed rgba(100, 100, 100, 0.4);
+  padding: 15px;
+  text-align: center;
+  font-size: 1.25rem;
+  color: rgba(29, 29, 29, 0.4);
+}
+#khoa-acount-address .address-info-01 {
+  border: 3 dashed #00f435;
+  padding: 15px 20px;
+}
+#khoa-acount-address .address-info-01 .user-info {
+  display: flex;
+  justify-content: space-between;
+}
+#khoa-acount-address .address-info-01 .user-info .info-left {
+  display: flex;
+  justify-content: start;
+}
+#khoa-acount-address .address-info-01 .user-info .info-left .name {
+  text-transform: uppercase;
+  font-weight: 600;
+}
+#khoa-acount-address .address-info-01 .user-info .info-left .using {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  margin-left: 20px;
+  gap: 10px;
+  color: #00f435;
+}
+#khoa-acount-address .address-info-01 .user-info .info-right {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#khoa-acount-address .address-info-01 .user-info .info-right .edit-address {
+  color: #1924f4;
+  cursor: pointer;
+  margin-right: 15px;
+}
+#khoa-acount-address .address-info-01 .user-info .info-right .delete-address {
+  text-decoration: none;
+  cursor: pointer;
+  color: red;
+}
+#khoa-acount-address .address-info-first {
+  border: 3px dashed #00f435;
+}
+#khoa-acount-address .address-info-second {
+  border: 3px dashed #353535;
+}
+#khoa-acount-address .set-default {
+  text-decoration: none;
+  padding: 7px 10px;
+  background: #00a824;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1rem;
+}
+
+.sidebar-link.account-sidebar-active {
+  background: #E94560;
+  color: #fff;
+}
+
 .khoa-login {
   background-image: url(../../image/login/4882066.jpg);
   background-size: cover;

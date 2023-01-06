@@ -21,7 +21,7 @@
                 @break
             @case('sec-diachi')
                 @section("title")Address | BComputer @stop
-                <a href="#" class="bc-item active">Address</a>
+                <a href="{{ route('user/address') }}" class="bc-item active">Address</a>
                 @break
             @case('sec-yeuthich')
                 @section("title")Like | BComputer @stop
@@ -53,6 +53,7 @@
 @endsection
 
 @section('myjs')
+ {{-- Phần xử lý thông tin địa chỉ, tỉnh, quận, phường --}}
 <script>
 	var citis = document.getElementById("address-city");
     var districts = document.getElementById("address-district");

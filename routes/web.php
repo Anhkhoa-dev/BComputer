@@ -36,12 +36,14 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::group(['middleware' => 'ckUserLogin'], function () {
         // hành động check thanh toán, thêm giỏ hàng, thêm sản phẩm yêu thích, comment
 
+        // Phần hiển thị view tài khoản 
+        Route::get('/account', [ AccountController::class, 'getAccount' ])->name('user/taikhoan');
 
-        Route::get('/account', [
-            AccountController::class, 'getAccount'
-        ])->name('user/taikhoan');
-
-
+        // Phần Route post xử lý user thêm địa chỉ giao hàng
+       
+        Route::get('account/address', [AccountController::class, 'getAddress'])->name('user/address');
+        Route::post('account/postAddress', [AccountController::class, 'postAddress'])->name('user/add-address');
+        Route::get('account/set-default', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
     });        
  });
 

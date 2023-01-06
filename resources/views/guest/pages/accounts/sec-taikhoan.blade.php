@@ -1,6 +1,9 @@
 <div class="col-md-12">
     <div class="row">
         <div class="col-3">
+            @section('acc-info-active')
+                account-sidebar-active
+            @endsection
             @include('guest.pages.accounts.sec-slidebar')
         </div>
         <div class="col-md-9">
@@ -11,7 +14,7 @@
                             <div class="col-md-3">
                                 <div class="col-12 align-items-center">
                                     <div class="tk-image">
-                                        <img src="{{ asset('image/'.$user->image) }}" alt="{{$user->fullname}}" width="200" class="image-img">   
+                                        <img src="{{ asset('image/user/'.$user->image) }}" alt="{{$user->fullname}}" width="200" class="image-img">   
                                         <div class="image-hover">
                                             <input type="file" class="input-change" id="change-avt-inp" data-modal='avt' accept="image/*">
                                             <div class="change-image" id="btn-change-avt">Change image</div>
@@ -37,25 +40,30 @@
                                 <div class="shipment-details">
                                     <h5>Thông tin giao hàng</h5>
                                     <div class="box-address">
-                                        <p class="title">You don't have a shipping address yet? <span class="add" data-bs-toggle="modal" data-bs-target="#add-address">Add address</span></p> 
-                                        {{-- <div class="address-info-active">
+                                      @if ($addressDefault == null)
+                                        <p class="title">You don't have a shipping address yet? <a href="#" class="add" >Add address</a></p> 
+                                      @else
+                                           <div class="address-info-active">
                                             <div class="user-info">
                                                 <div class="info-left">
-                                                    <div class="name">Nguyễn Anh Khoa</div>
+                                                    <div class="name">{{$addressDefault->fullname}}</div>
                                                     <div class="using">
                                                         <i class="fa-regular fa-circle-check"></i>
                                                         <div>Đang sử dụng</div>
                                                     </div>
                                                 </div>
-                                                <div class="edit-address" data-bs-toggle="modal" data-bs-target="#edit-address">Chỉnh sửa</div>
+                                                {{-- <div class="edit-address" data-bs-toggle="modal" data-bs-target="#edit-address" data-id="{{$addressDefault->id}}">Chỉnh sửa</div> --}}
                                             </div>
                                             <div class="address-info mt-2">
-                                                <div class="address"><b>Address:</b> Hẻm 64, Đường 79, Phường Tân Quy, Quận 7, Thành phố Hồ Chí Minh</div>
+                                                <div class="address"><b>Address:</b> {{$addressDefault->address}}, {{$addressDefault->wards}}, {{$addressDefault->district}}, {{$addressDefault->province}}</div>
                                             </div>
                                             <div class="phone-info mt-2">
-                                                <div class="phone"><b>Phone:</b> 086577010</div>
+                                                <div class="phone"><b>Phone:</b> {{$addressDefault->phone}}</div>
                                             </div>
-                                        </div> --}}
+                                        </div> 
+                                      @endif
+                                        
+                                        
                                         
                                     </div>
                                     <div class="change-password">
@@ -72,94 +80,7 @@
     </div>
 </div>
 
-
-{{-- modal thêm địa chỉ mới --}}
-<div class="modal fade" id="add-address" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add new address</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form action="#" class="khoa-add-address">
-             <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="" class="fw-bold mb-3" >Full name</label>
-                        <input type="text" name="address-fullname-inp" class="form-control">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                      <label for="" class="fw-bold mb-3" >Delivery phone</label>
-                      <input type="text" name="address-phone-inp" class="form-control">
-                  </div>
-              </div>
-              <div class="col-md-12">
-                <h5>Address</h5>
-              </div>
-              
-              <div class="col-md-6">
-                    <div class="mb-3">
-                        <select id="address-city" class="form-select">
-                            <option value="" selected>Chọn Tỉnh / Thành Phố</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                      <select name="" id="address-ward" class="form-select">
-                        <option value="" selected>Chọn Phường / Xã</option>
-                      </select>
-                    </div>
-              </div>
-              <div class="col-md-6">
-                    <div class="mb-3">
-                      <select name="" id="address-district" class="form-select">
-                         <option value="" selected>Chọn Quận / Huyện</option>
-                      </select>
-                    </div>
-                    <div class="mb-3">
-                        <input type="text" name="address-phone-inp" class="form-control" placeholder="Enter house number, street name">
-                    </div>
-              </div>
-              <div class="col-md-12">
-                 <input type="checkbox" name="check-address-default" id="checkaddress">
-                 <label for="checkaddress">Set as default address</label>
-              </div>
-
-             </div>
-
-
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Add</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  {{-- modal chỉnh sửa địa chỉ mới --}}
-<div class="modal fade" id="edit-address" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Edit address</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Add</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
+{{-- @include('guest.pages.modal.diachi-modal') --}}
 
 {{-- modal thay đổi password --}}
 
