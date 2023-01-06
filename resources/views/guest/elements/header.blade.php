@@ -58,7 +58,7 @@
                            @if (Auth::check() || session('user'))
                            <?php $user = Auth::user() ?>
                                 <div class="icon__user">
-                                    <img src="{{ asset('image/'. ($user->image != null ? $user->image : 'user/avatar-default.png')) }}" alt="" class="img-user">
+                                    <img src="{{ asset('image/'. ($user->image != null ? $user->image : 'avatar-default.png')) }}" alt="" class="img-user">
                                  </div>
                                  <div class="user_info dropdown">
                                     <div class="author">Xin chào!</div>
