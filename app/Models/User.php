@@ -17,9 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $table = 'tbuser';
+    protected $table = 'user';
     // protected $timestamp = false;
-    public $timestamps = false;
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
@@ -36,6 +35,7 @@ class User extends Authenticatable
         'dateRegister',
         'loginStatus',
         'device_token',
+        
     ];
 
     /**

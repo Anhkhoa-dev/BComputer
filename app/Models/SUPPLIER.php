@@ -8,13 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class SUPPLIER extends Model
 {
     use HasFactory;
-    protected $table = 'tbsupplier';
+    protected $table = 'supplier';
     // protected $timestamp = false;
-    public $timestamps = false;
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
-        'supplierName',
+        'name',
         'image',
         'address',
         'phone',

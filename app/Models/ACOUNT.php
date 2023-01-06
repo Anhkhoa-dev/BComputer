@@ -8,9 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ACOUNT extends Model
 {
     use HasFactory;
-    protected $table = 'tbuser';
+    protected $table = 'user';
     // protected $timestamp = false;
-    public $timestamps = false;
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',

@@ -97,7 +97,7 @@
                   </div>
               </div>
               <div class="col-md-12">
-                <h4>Address</h4>
+                <h5>Address</h5>
               </div>
               
               <div class="col-md-6">
@@ -108,15 +108,14 @@
                     </div>
                     <div class="mb-3">
                       <select name="" id="address-ward" class="form-select">
-                        <option value="">Chọn Phường / Xã</option>
-                        
+                        <option value="" selected>Chọn Phường / Xã</option>
                       </select>
                     </div>
               </div>
               <div class="col-md-6">
                     <div class="mb-3">
                       <select name="" id="address-district" class="form-select">
-                         <option value="">Chọn Quận / Huyện</option>
+                         <option value="" selected>Chọn Quận / Huyện</option>
                       </select>
                     </div>
                     <div class="mb-3">
