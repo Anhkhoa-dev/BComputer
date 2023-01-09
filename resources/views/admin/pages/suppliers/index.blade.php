@@ -44,12 +44,10 @@
                 <tr>
                     <th style="width: 1%"> ID</th>
                     <th style="width: 13%"> Full name </th>
-                    <th> Birthday </th>
-                    <th> Email</th>
-                    <th> Phone</th>
+                    <th style=auto> Image </th>
                     <th> Address </th>
-                    <th> Image </th>
-                    <th> Role </th>
+                    <th> Phone</th>
+                    <th> Email</th>
                     <th> Status </th>
                     <th> Action </th>
                 </tr>
@@ -57,25 +55,26 @@
             <tbody>
                 @foreach ($prods as $item)
                 <tr class="align-items-center">
-                    <td></td>
-                    <td>{{$item->fullname}}</td>
-                    <td>{{date('d-m-Y', strtotime($item->birthday))}}</td>
-                    <td>{{$item->email}}</td>
-                    <td>{{$item->phone ?? 'null'}}</td>
-                    <td>{{$item->address ?? 'null'}}</td>
+                    <td>{{$item->id}}</td>
+                    <td>{{$item->name}}</td>
                     <td>{{$item->image}}</td>
-                    <td>{{$item->role == 2 ? 'admin' : 'user'}}</td>
+                    <td>{{$item->address ?? 'null'}}</td>
+                    <td>{{$item->phone ?? 'null'}}</td>
+                    <td>{{$item->email}}</td>
                     <td><p class="btn {{$item->status == 1 ? 'btn-success' : 'btn-secondary'}} btn-sm">
-                        {{$item->status == 1 ? 'Actived' : 'Clocked'}}
-                        </p>
+                      {{$item->status == 1 ? 'Actived' : 'Clocked'}}
+                      </p>
                     </td>
+                    {{-- <td>{{date('d-m-Y',$item->create_at)}}</td>
+                    <td>{{date('d-m-Y',$item->update_at)}}</td> --}}
+                    {{-- <td>{{$item->role == 2 ? 'admin' : 'user'}}</td> --}}
                     <td class="project-actions text-right">
                         <a class="btn btn-primary btn-sm" href="#">
                             <i class="fas fa-folder">
                             </i>
                             View
                         </a>
-                        <a class="btn btn-info btn-sm" href="#">
+                        <a class="btn btn-info btn-sm" href="{{ route('supplier/edit', $item->id) }}">
                             <i class="fas fa-pencil-alt">
                             </i>
                             Edit
@@ -92,10 +91,7 @@
             </tbody>
         </table>
       </div>
-      <!-- /.card-body -->
     </div>
-    <!-- /.card -->
-
   </section>
 
 

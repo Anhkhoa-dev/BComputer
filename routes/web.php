@@ -70,4 +70,14 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Phần danh cho supplier - Khoa
     Route::get('admin/supplier', [SupplierController::class, 'index'])->name('admin/supplier');
     Route::get('admin/supplier/create', [SupplierController::class, 'create'])->name('supplier/create');
+
+    Route::get('admin/supplier/edit/{slug}', [SupplierController::class, 'edit'])->name('supplier/edit');
+    // Route::post('admin/supplier/delete', [SupplierController::class, 'delete'])->name('deleteSupplierItem');
 });
+
+
+
+    
+
+});
+
