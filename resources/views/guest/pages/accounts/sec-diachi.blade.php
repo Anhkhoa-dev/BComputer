@@ -46,7 +46,7 @@
                                         <div class="info-right">
                                             <div type="button" class="edit-address" data-bs-toggle="modal" data-bs-target="#edit-address">Chỉnh sửa</div>  
                                                 <a href="#" class="delete-address">
-                                                    <i class="fa-solid fa-trash"></i> Xóa
+                                                    <i class="fa-solid fa-trash pe-2" ></i>Xóa
                                                 </a>                  
                                         </div>
                                     </div>
@@ -55,8 +55,7 @@
                                     </div>
                                     <div class="phone-info d-flex justify-content-between mt-3">
                                         <div class="phone"><b>Phone:</b> {{$item->phone}} </div>
-                                        <a href="{{ route('setDefaultAddress')}}" data-id="{{$item->id}}" class="set-default">Set address default</a>
-                                                        
+                                        <a href="{{ route('setDefaultAddress', $item->id ) }}" class="set-default">Set address default</a>                  
                                     </div>
                                 </div>
                             @endforeach
