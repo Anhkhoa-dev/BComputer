@@ -165,6 +165,10 @@
 
 .khoa-add-address{
     padding: 50px;
+    .errorMsg{
+        color: red;
+        font-style: italic;
+    }
 }
 
 #khoa-acount-address{
@@ -243,6 +247,10 @@
 .sidebar-link.account-sidebar-active{
     background: $bg_third;
     color: #fff;
+    
+}
+
+#add-address{
     
 }
 
