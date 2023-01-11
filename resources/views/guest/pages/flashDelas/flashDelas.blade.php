@@ -3,7 +3,7 @@
     <div class="item">
         <div class="home-card">
             <div class="card_image">
-                <a href="#">
+                <a href="{{ route('/produts/detail') }}">
                     <img src="{{ asset('image/flash/flash-3.png') }}" class="img-fluid" alt="">
                 </a>
                 <div class="sale_off">

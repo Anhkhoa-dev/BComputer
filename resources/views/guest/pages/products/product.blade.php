@@ -56,7 +56,7 @@
                         </div>
                         <div class="card-info">
                             <div class="card-title">
-                                product name
+                                <a href="{{ route('/produts/detail') }}">product name</a>
                             </div>
                             <div class="card-price">
                                 <div class="old-price">$ 90</div>

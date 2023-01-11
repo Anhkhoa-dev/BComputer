@@ -9,7 +9,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Guest\CartConntroller;
-
+use App\Http\Controllers\Guest\GuestController;
 
 //thường dân dân
 Route::controller(LoginController::class)->group(function () {
@@ -31,6 +31,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     //phần dành cho guest
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
     Route::get('/products/{slug}', [IndexController::class, 'getProducts'])->name('/products');
+    Route::get('/products/details', [GuestController::class, 'getDetail'])->name('/produts/detail');
 
 
 

@@ -36,7 +36,7 @@
                         </div>
                     </div>
                     <div class="info">
-                        CẤU HÌNH CHI TIẾT ABS sdf sdfsdfsfsfsdfdfs
+                        CẤU HÌNH CHI TIẾT
                     </div>
                     <div class="col-md-12">
                         <div class="detail">

@@ -8,12 +8,16 @@ use Illuminate\Support\Facades\Auth;
 
 class GuestController extends Controller
 {
-    
-    public function __construct()
+
+    // public function __construct()
+// {
+//     $this->user='guest/pages/';
+//     // $this->IndexController = new IndexController;
+// }
+    public function getDetail()
     {
-        $this->user='guest/pages/';
-        // $this->IndexController = new IndexController;
+        return view('guest.pages.products.products-detail');
     }
-    
+
 
 }
