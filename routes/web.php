@@ -5,6 +5,7 @@ use App\Http\Controllers\Guest\IndexController;
 use App\Http\Controllers\Guest\AccountController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminsController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Guest\CartConntroller;
@@ -66,11 +67,13 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::get("/admin", [AdminsController::class, "getHome"])->name("admin/dashboard");
     Route::get('admin/acount', [AcountConroller::class, 'index'])->name('admin/acount');
 
+    // Phần danh cho product manager - khoa
+    Route::get('admin/product', [ProductController::class, 'index'])->name('admin/product');
+    Route::get('admin/product/create', [ProductController::class, 'create'])->name('admin/product/create');
 
     // Phần danh cho supplier - Khoa
     Route::get('admin/supplier', [SupplierController::class, 'index'])->name('admin/supplier');
     Route::get('admin/supplier/create', [SupplierController::class, 'create'])->name('supplier/create');
-
     Route::get('admin/supplier/edit/{slug}', [SupplierController::class, 'edit'])->name('supplier/edit');
     // Route::post('admin/supplier/delete', [SupplierController::class, 'delete'])->name('deleteSupplierItem');
 });

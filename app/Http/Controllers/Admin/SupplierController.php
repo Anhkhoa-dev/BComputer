@@ -40,7 +40,7 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         //xử lý create
-       
+
     }
 
     /**
@@ -65,14 +65,14 @@ class SupplierController extends Controller
         //trả về view
         $url = pathinfo(url()->current(), PATHINFO_BASENAME);
         $supplier = SUPPLIER::where('id', $url)->first();
-        $array= [
+        $array = [
             'supplierEdit' => $supplier,
 
         ];
-        
-            // return view('admin.pages.suppliers.edit', compact('id'));
+
+        // return view('admin.pages.suppliers.edit', compact('id'));
         return view('admin.pages.suppliers.edit')->with($array);
-        
+
     }
 
     /**
@@ -84,30 +84,26 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $prod = $request->all();    // $prod là 1 mảng
-        $prod['slug'] = \Str::slug($request->name);
-        
-        if($request->hasFile('photo'))
-        {
-            $file=$request->file('photo');
-            $extension = $file->getClientOriginalExtension();
-            if($extension != 'jpg' && $extension != 'png' && $extension !='jpeg')
-            {
-                return redirect()->route('admin.product.create')
-                    ->with('loi','Bạn chỉ được chọn file có đuôi jpg,png,jpeg');
-            }
-            $imageName = $file->getClientOriginalName();
-            $file->move("images",$imageName);
-        }
-        else
-        {
-            // trường hợp không upload phải lấy hình cũ
-            $oldItem = SUPPLIER::find($product->id);
-            $imageName = $oldItem->image;
-        }
-        $prod['image'] = $imageName;
-        //$product = new Product($prod);
-        $product->update($prod);
+        //     $prod = $request->all(); // $prod là 1 mảng
+        //     $prod['slug'] = \Str::slug($request->name);
+
+        //     if ($request->hasFile('photo')) {
+        //         $file = $request->file('photo');
+        //         $extension = $file->getClientOriginalExtension();
+        //         if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg') {
+        //             return redirect()->route('admin.product.create')
+        //                 ->with('loi', 'Bạn chỉ được chọn file có đuôi jpg,png,jpeg');
+        //         }
+        //         $imageName = $file->getClientOriginalName();
+        //         $file->move("images", $imageName);
+        //     } else {
+        //         // trường hợp không upload phải lấy hình cũ
+        //         $oldItem = SUPPLIER::find($product->id);
+        //         $imageName = $oldItem->image;
+        //     }
+        //     $prod['image'] = $imageName;
+        //     //$product = new Product($prod);
+        //     $product->update($prod);
         return redirect()->route('admin.product.index');
     }
 
@@ -117,10 +113,10 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SUPPLIER $id)
+    public function destroy($id)
     {
         //xử lý xóa
-        $id->delete();
+        //$id->delete();
         return redirect()->route('admin.pages.suppliers.index');
     }
 }

@@ -80,8 +80,6 @@ class LoginController extends Controller
                     'errorMsg' => 'Tài khoản đang bị khóa, Vui lòng liên hệ admin'
                 ])->onlyInput('email');
             }
-
-
         }
         return back()->withErrors([
             'errorMsg' => 'Email or password không đúng!'

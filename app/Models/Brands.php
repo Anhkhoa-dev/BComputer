@@ -5,17 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Category extends Model
+class Brands extends Model
 {
     use HasFactory;
-    protected $table = 'categories';
-    // protected $timestamp = false;
+    protected $table = 'brands';
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
         'name',
         'slug',
-        'description',
-        'imageIcon',
+        'image',
+        'address',
+        'status',
     ];
 }
