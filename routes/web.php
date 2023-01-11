@@ -7,10 +7,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\Guest\ProductController;
+use App\Http\Controllers\Guest\CartConntroller;
 
 
-//thường dân
+//thường dân dân
 Route::controller(LoginController::class)->group(function () {
     Route::get('login', 'getLogin')->name('user/login');
     Route::post('process', 'postLogin')->name('postLogin');
@@ -22,28 +22,39 @@ Route::controller(LoginController::class)->group(function () {
 });
 
 
-
 // Chuyển  trang tới đăng nhập
+
+
 
 Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'], function () {
     //phần dành cho guest
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
+    Route::get('/products/{slug}', [IndexController::class, 'getProducts'])->name('/products');
 
-    Route::get('/productsdetail', [ProductController::class, 'index']);
+
 
     // phần dành cho user
-    Route::group(['middleware' => 'ckUserLogin'], function () {
-        // hành động check thanh toán, thêm giỏ hàng, thêm sản phẩm yêu thích, comment
+    Route::group(
+        ['middleware' => 'ckUserLogin'],
+        function () {
+            // hành động check thanh toán, thêm giỏ hàng, thêm sản phẩm yêu thích, comment
+    
+            // Xem giỏ hàng
+            Route::get('/cart-items', [CartConntroller::class, 'getViewcart'])->name('user/cart-items');
+            Route::get('/checkout-process', [CartConntroller::class, 'getCheckoutProcess'])->name('checkout/checkout-process');
 
-        // Phần hiển thị view tài khoản 
-        Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
+            Route::get('/checkout-success', [CartConntroller::class, 'getSuccess'])->name('user/checkout-success');
 
-        // Phần Route post xử lý user thêm địa chỉ giao hàng
+            // Phần hiển thị view tài khoản 
+            Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
 
-        Route::get('account/address', [AccountController::class, 'getAddress'])->name('user/address');
-        Route::post('account/postAddress', [AccountController::class, 'postAddress'])->name('user/add-address');
-        Route::get('account/set-default', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
-    });
+            // Phần Route post xử lý user thêm địa chỉ giao hàng
+    
+            Route::get('account/address', [AccountController::class, 'getAddress'])->name('user/address');
+            Route::post('account/postAddress', [AccountController::class, 'postAddress'])->name('user/add-address');
+            Route::get('account/set-default/{slug}', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
+        }
+    );
 });
 
 
@@ -59,4 +70,14 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Phần danh cho supplier - Khoa
     Route::get('admin/supplier', [SupplierController::class, 'index'])->name('admin/supplier');
     Route::get('admin/supplier/create', [SupplierController::class, 'create'])->name('supplier/create');
+
+    Route::get('admin/supplier/edit/{slug}', [SupplierController::class, 'edit'])->name('supplier/edit');
+    // Route::post('admin/supplier/delete', [SupplierController::class, 'delete'])->name('deleteSupplierItem');
 });
+
+
+
+    
+
+});
+
