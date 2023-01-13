@@ -38,7 +38,6 @@ class ProductController extends Controller
             } else {
                 $list_product[$i]->brand = '';
             }
-
         }
 
 

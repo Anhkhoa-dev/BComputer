@@ -30,9 +30,9 @@ Route::controller(LoginController::class)->group(function () {
 Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'], function () {
     //phần dành cho guest
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
-    Route::get('/products/{slug}', [IndexController::class, 'getProducts'])->name('/products');
+    //   Route::get('/products/{slug}', [IndexController::class, 'getProducts'])->name('/products');
     Route::get('/products/details', [GuestController::class, 'getDetail'])->name('/produts/detail');
-    Route::get('/products/details1', [GuestController::class, 'getDetail1'])->name('/produts/detail1');
+    //    Route::get('/products/details1', [GuestController::class, 'getDetail1'])->name('/produts/detail1');
 
 
 
@@ -41,7 +41,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
         ['middleware' => 'ckUserLogin'],
         function () {
             // hành động check thanh toán, thêm giỏ hàng, thêm sản phẩm yêu thích, comment
-    
+
             // Xem giỏ hàng
             Route::get('/cart-items', [CartConntroller::class, 'getViewcart'])->name('user/cart-items');
             Route::get('/checkout-process', [CartConntroller::class, 'getCheckoutProcess'])->name('checkout/checkout-process');
@@ -52,7 +52,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
 
             // Phần Route post xử lý user thêm địa chỉ giao hàng
-    
+
             Route::get('account/address', [AccountController::class, 'getAddress'])->name('user/address');
             Route::post('account/postAddress', [AccountController::class, 'postAddress'])->name('user/add-address');
             Route::get('account/set-default/{slug}', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');

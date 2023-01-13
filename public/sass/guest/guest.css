@@ -231,6 +231,20 @@ section .title i {
   margin-right: 10px;
 }
 
+.product-card {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+.product-card .card {
+  width: 100%;
+}
+.product-card .card .card-image {
+  width: 100%;
+}
+.product-card .card .card-image .image {
+  width: 100%;
+}
+
 .khoa-header__info {
   padding: 10px 0;
   background: #0F3460;
@@ -802,6 +816,136 @@ section .title i {
 .sidebar-link.account-sidebar-active {
   background: #E94560;
   color: #fff;
+}
+
+.han-product-detail .mySlides {
+  width: 100%;
+  height: auto;
+  padding: 20px;
+}
+.han-product-detail .price {
+  font-size: 25px;
+  font-weight: 600;
+  padding: 10px;
+}
+.han-product-detail .form {
+  padding: 20px;
+}
+.han-product-detail .form .button-product {
+  display: flex;
+  gap: 15px;
+  color: white;
+}
+.han-product-detail .form .button-product div {
+  width: 50%;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+.han-product-detail .form .button-product div a {
+  text-decoration: none;
+}
+.han-product-detail .form .button-product div a:hover {
+  color: white;
+}
+.han-product-detail .form .contact {
+  text-align: center;
+  padding: 5px;
+}
+.han-product-detail .form .product-name div {
+  font-weight: 600;
+  font-size: 28px;
+  padding: 10px;
+}
+.han-product-detail .form .detail {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 20px;
+}
+.han-product-detail .form .details {
+  display: flex;
+}
+.han-product-detail .col-md-2 {
+  margin-top: 50px;
+}
+.han-product-detail .col-md-2 h6 {
+  font-weight: 300;
+  font-size: 25px;
+  padding: 0px;
+}
+.han-product-detail .description-info {
+  border-style: ridge;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.han-product-detail .name-doc {
+  background-color: white;
+  color: black;
+  margin-bottom: 20px;
+  padding: 10px;
+  font-weight: 700;
+  font-size: larger;
+  border-radius: 5px;
+}
+.han-product-detail .name-doc .parity-product {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+}
+.han-product-detail .name-doc .parity-product .col-md-12 {
+  display: flex;
+}
+.han-product-detail .name-doc .parity-product .discount-link-product a {
+  font-size: small;
+}
+.han-product-detail .name-doc .parity-product img {
+  width: 100%;
+  height: auto;
+  padding: 20px;
+}
+.han-product-detail .name-doc .parity-product img:hover {
+  padding: 10px;
+  transition: 0.3s;
+  border-bottom: 4px solid #888888;
+  border-radius: 2px;
+}
+.han-product-detail .name-doc .parity-product span {
+  position: absolute;
+  padding: 10px;
+  font-weight: 500;
+}
+.han-product-detail .name-doc .parity-product .discount-off {
+  background-color: red;
+  color: white;
+  border-radius: 10px;
+  width: 100px;
+  height: 30px;
+  font-size: x-small;
+}
+.han-product-detail .name-doc .parity-product a {
+  text-decoration: none;
+}
+.han-product-detail .name-doc .parity-product a:hover {
+  color: #ff2832;
+  cursor: pointer;
+}
+.han-product-detail .description {
+  background-color: white;
+  margin-bottom: 30px;
+}
+.han-product-detail .description button {
+  background-color: #ff2832;
+  border-style: groove;
+  border-radius: 5px;
+  color: white;
+}
+.han-product-detail .description .review {
+  display: none;
+}
+.han-product-detail .description .review input {
+  width: 500px;
+  height: 30px;
 }
 
 #khoa-view-cart .cart-title {
