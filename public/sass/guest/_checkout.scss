@@ -3,34 +3,43 @@
         font-size: 1.5rem;
         color: #373737;
     }
+
     .cart-terms-purchase {
         font-size: 1rem;
         font-style: italic;
     }
+
     .cart-header {
         display: flex;
         padding: 7px 15px;
+
         .select-item-cart {
             display: flex;
             align-items: center;
             width: 5%;
+
             .cus-checkbox {
                 width: 20px;
                 height: 20px;
             }
         }
+
         &-name {
             width: 45%;
         }
+
         &-price {
             width: 15%;
         }
+
         &-qty {
             width: 15%;
         }
+
         &-total {
             width: 15%;
         }
+
         &-trash {
             width: 5%;
         }
@@ -39,32 +48,39 @@
     .list-cart-item {
         padding: 10px 15px;
         background: #fff;
+
         .cart-body {
             display: flex;
             display: flex;
             align-items: center;
+
             .select-item-cart {
                 width: 5%;
                 display: flex;
                 align-items: center;
+
                 //justify-content: center;
                 .cus-checkbox {
                     width: 20px;
                     height: 20px;
                 }
             }
+
             &-name {
                 width: 45%;
                 display: flex;
+
                 // align-items: center;
                 .cart-image {
                     width: 85px;
                     height: 85px;
+
                     img {
                         width: 100%;
                         height: 100%;
                     }
                 }
+
                 .name-info {
                     margin-left: 10px;
                     color: #5d5b5b;
@@ -78,34 +94,42 @@
                     word-break: break-word;
                 }
             }
+
             &-price {
                 width: 15%;
             }
+
             &-qty {
                 width: 15%;
                 display: flex;
                 //justify-content: center;
                 align-items: center;
+
                 .qty-quanity {
                     display: flex;
                     padding: 8px 1px;
                     border: 2px solid #838383;
                     border-radius: 50px;
+
                     .qty-minus {
                         padding: 0 15px;
                         cursor: pointer;
+
                         &:hover {
                             i {
                                 color: #4800ff;
                             }
                         }
                     }
+
                     .quanity {
                         padding: 0 10px;
                     }
+
                     .qty-plus {
                         padding: 0 15px;
                         cursor: pointer;
+
                         &:hover {
                             i {
                                 color: #4800ff;
@@ -114,15 +138,19 @@
                     }
                 }
             }
+
             &-total {
                 width: 15%;
                 color: red;
             }
+
             &-trash {
                 width: 5%;
+
                 i {
                     cursor: pointer;
                     font-size: 1.25rem;
+
                     &:hover {
                         color: #4800ff;
                     }
@@ -141,6 +169,7 @@
     color: #fff;
     margin-top: 15px;
     text-align: center;
+
     &:hover {
         transform: scale(1.1);
         color: #fff;
@@ -150,6 +179,7 @@
 .checkout-proccess {
     // background-color: #fff;
     margin-bottom: 15px;
+
     .checkout-header {
         display: flex;
         justify-content: space-between;
@@ -157,12 +187,15 @@
         padding: 7px 15px;
         background: #f4f3f3;
     }
+
     .checkout-address {
         background: #fff;
         padding: 15px;
+
         .address {
             padding: 25px;
             border: 1px solid #111;
+
             .receiver-name {
                 text-transform: uppercase;
                 font-size: 1.25rem;
@@ -171,24 +204,30 @@
             }
         }
     }
+
     .checkout-product {
         display: flex;
         align-items: center;
         padding: 20px 15px;
         background: #fff;
+
         &-image {
             width: 10%;
+
             img {
                 width: 100%;
             }
         }
+
         &-name {
             width: 50%;
             padding-left: 15px;
         }
+
         &-price {
             width: 25%;
         }
+
         &-quanity {
             width: 15%;
         }
@@ -199,24 +238,29 @@
     .process-box {
         padding: 7px 15px;
         background: #fff;
+
         .title {
             font-size: 1.25rem;
             margin-bottom: 10px;
         }
+
         .select-method {
             .pay-method {
                 padding: 10px 15px;
                 border-radius: 5px;
                 border: 1.5px solid #4800ff;
                 margin-bottom: 10px;
+
                 p {
                     font-size: 0.725rem;
                 }
+
                 // i {
                 //     color: #4800ff;
                 // }
             }
         }
+
         .btnSubmitProcess {
             width: 100%;
             padding: 10px 0;
@@ -227,10 +271,12 @@
             text-align: center;
             border: none;
             outline: none;
+
             &:hover {
                 background: $bg_third;
             }
         }
+
         .text_remind {
             font-size: 0.825rem;
             text-align: center;
@@ -245,28 +291,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
     .box-success {
         width: 800px;
         height: 500px;
         background: #fff;
         border-radius: 20px;
         padding: 80px;
+
         &-check {
             text-align: center;
+
             i {
                 font-size: 8rem;
                 margin-bottom: 30px;
                 color: #00ff62;
             }
+
             .thankyou {
                 font-size: 1.25rem;
             }
         }
+
         .success-nextpage {
             margin-top: 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+
             .box-order-success {
                 width: 200px;
                 height: 50px;
@@ -278,14 +330,17 @@
                 font-size: 22px;
                 color: #fff;
             }
+
             .order-my {
                 text-decoration: none;
                 color: #4800ff;
                 margin-top: 5px;
+
                 &-hover {
                     color: #4800ff;
                 }
             }
+
             .btn-continue {
                 width: 250px;
                 height: 60px;
@@ -297,9 +352,9 @@
                 text-decoration: none;
                 font-size: 1.25rem;
                 border-radius: 10px;
-                &-hover {
-                    box-shadow: $box_shadow;
-                }
+                //     &-hover {
+                //       box-shadow: $box_shadow;
+                //     }
             }
         }
     }
