@@ -56,7 +56,7 @@
                         </div>
                         <div class="card-info">
                             <div class="card-title">
-                                <a href="{{ route('/produts/detail') }}">product name</a>
+                                <a href="#">product name</a>
                             </div>
                             <div class="card-price">
                                 <div class="old-price">$ 90</div>
@@ -151,73 +151,7 @@
                                 <div class="new-price">$ 72</div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <div class="image">
-                                <img src="{{ asset('image/product/Asus_ROG_Gladius_II_01.PNG') }}" alt="">
-                            </div>
-                            <div class="hover">
-                                <div class="hover-sosanh"><i class="fa-solid fa-plus"></i></div>
-                                <div class="hover-xemnhanh"><i class="fa-brands fa-searchengin"></i></div>
-                                <div class="hover-viewdetail"><i class="fa-solid fa-eye"></i></div>
-                                <div class="hover-addtocart"><i class="fa-solid fa-bag-shopping"></i></div>
-                            </div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title">
-                                product name
-                            </div>
-                            <div class="card-price">
-                                <div class="old-price">$ 90</div>
-                                <div class="new-price">$ 72</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <div class="image">
-                                <img src="{{ asset('image/product/Asus_ROG_Gladius_II_01.PNG') }}" alt="">
-                            </div>
-                            <div class="hover">
-                                <div class="hover-sosanh"><i class="fa-solid fa-plus"></i></div>
-                                <div class="hover-xemnhanh"><i class="fa-brands fa-searchengin"></i></div>
-                                <div class="hover-viewdetail"><i class="fa-solid fa-eye"></i></div>
-                                <div class="hover-addtocart"><i class="fa-solid fa-bag-shopping"></i></div>
-                            </div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title">
-                                product name
-                            </div>
-                            <div class="card-price">
-                                <div class="old-price">$ 90</div>
-                                <div class="new-price">$ 72</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <div class="card-image">
-                            <div class="image">
-                                <img src="{{ asset('image/product/Asus_ROG_Gladius_II_01.PNG') }}" alt="">
-                            </div>
-                            <div class="hover">
-                                <div class="hover-sosanh"><i class="fa-solid fa-plus"></i></div>
-                                <div class="hover-xemnhanh"><i class="fa-brands fa-searchengin"></i></div>
-                                <div class="hover-viewdetail"><i class="fa-solid fa-eye"></i></div>
-                                <div class="hover-addtocart"><i class="fa-solid fa-bag-shopping"></i></div>
-                            </div>
-                        </div>
-                        <div class="card-info">
-                            <div class="card-title">
-                                product name
-                            </div>
-                            <div class="card-price">
-                                <div class="old-price">$ 90</div>
-                                <div class="new-price">$ 72</div>
-                            </div>
-                        </div>
-                    </div>
+                    </div> 
                 </div>
             </div>
                 

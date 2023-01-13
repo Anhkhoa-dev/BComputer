@@ -32,7 +32,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
     Route::get('/products/{slug}', [IndexController::class, 'getProducts'])->name('/products');
     Route::get('/products/details', [GuestController::class, 'getDetail'])->name('/produts/detail');
-    Route::get('/products/details1', [GuestController::class, 'getDetail1'])->name('/produts/detail1');
+    // Route::get('/products/details1', [GuestController::class, 'getDetail1'])->name('/produts/detail1');
 
 
 
