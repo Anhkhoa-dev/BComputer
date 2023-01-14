@@ -1,4 +1,6 @@
 .han-product-detail {
+    justify-content: space-between;
+
     .mySlides {
         width: 100%;
         height: auto;
@@ -88,17 +90,10 @@
         border-radius: 5px;
 
         .parity-product {
-            display: flex;
-            padding: 10px;
-            justify-content: center;
-
-            .col-md-12 {
-                display: flex;
-            }
+            justify-content: space-between;
 
             .discount-link-product a {
                 font-size: small;
-
             }
 
             img {
@@ -108,17 +103,16 @@
             }
 
             img:hover {
-                padding: 10px;
+                padding: 0px;
                 transition: .3s;
-                border-bottom: 4px solid #888888;
-                border-radius: 2px;
+                border-right: 1px solid #888888;
+                border-bottom: 1px solid #888888;
             }
 
             span {
                 position: absolute;
                 padding: 10px;
                 font-weight: 500;
-
             }
 
             .discount-off {
@@ -128,6 +122,7 @@
                 width: 100px;
                 height: 30px;
                 font-size: x-small;
+
             }
 
             a {
@@ -158,8 +153,15 @@
             input {
                 width: 500px;
                 height: 30px;
-
             }
         }
+
+    }
+
+    .discount-banner {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        border-radius: 25px;
     }
 }

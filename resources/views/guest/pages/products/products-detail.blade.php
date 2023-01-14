@@ -13,7 +13,7 @@
         <div class="han-product-detail">
             <div class="container">
                 <div class="row">
-                    <div class="w3-content w3-display-container col-md-5">
+                    <div class="w3-content w3-display-container col-lg-5">
                         <img class="mySlides" src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}"
                             style="width:500 ; height:500">
                         <img class="mySlides" src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_02.png') }}"
@@ -26,7 +26,7 @@
                         <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
                         <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
                     </div>
-                    <div class="col-md-5 form">
+                    <div class="col-lg-5 form">
                         <div class="col-md-12">
                             <div class="product-name">
                                 <div> Case 1st Player XF White 4 fan RBG</div>
@@ -82,7 +82,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2 ">
+                    <div class="col-lg-2 ">
                         <div class="col-md-12">
                             <div>
                                 <h6>FREE SHIPPING</h6>
@@ -162,8 +162,7 @@
                         <div class="col-lg-2">
                             <a href="#">
                                 <span class="discount-off">Discount 8%</span>
-                                <img src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}"
-                                    style="width:220px ; height:220px">
+                                <img src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}">
                                 <div class="discount-link-product">
                                     <a class="product-discount-name">CPU 4 fan best</a>
                                     <h6>$120</h6>
@@ -173,8 +172,7 @@
                         <div class="col-lg-2">
                             <a href="#">
                                 <span class="discount-off">Discount 8%</span>
-                                <img src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}"
-                                    style="width:220px ; height:220px">
+                                <img src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}">
                                 <div class="discount-link-product">
                                     <a class="product-discount-name">CPU 4 fan best</a>
                                     <h6>$120</h6>
@@ -184,8 +182,7 @@
                         <div class="col-lg-2">
                             <a href="#">
                                 <span class="discount-off">Discount 8%</span>
-                                <img src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}"
-                                    style="width:220px ; height:220px">
+                                <img src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}">
                                 <div class="discount-link-product">
                                     <a class="product-discount-name">CPU 4 fan best</a>
                                     <h6>$120</h6>
@@ -195,8 +192,7 @@
                         <div class="col-lg-2">
                             <a href="#">
                                 <span class="discount-off">Discount 8%</span>
-                                <img src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}"
-                                    style="width:220px ; height:220px">
+                                <img src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}">
                                 <div class="discount-link-product">
                                     <a class="product-discount-name">CPU 4 fan best</a>
                                     <h6>$120</h6>
@@ -206,8 +202,17 @@
                         <div class="col-lg-2">
                             <a href="#">
                                 <span class="discount-off">Discount 8%</span>
-                                <img src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}"
-                                    style="width:220px ; height:220px">
+                                <img src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}">
+                                <div class="discount-link-product">
+                                    <a class="product-discount-name">CPU 4 fan best</a>
+                                    <h6>$120</h6>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-lg-2">
+                            <a href="#">
+                                <span class="discount-off">Discount 8%</span>
+                                <img src="{{ asset('image/Case_1st_Player_XF_White_(4_fan_RGB)_01.png') }}">
                                 <div class="discount-link-product">
                                     <a class="product-discount-name">CPU 4 fan best</a>
                                     <h6>$120</h6>
@@ -216,9 +221,7 @@
                         </div>
                     </div>
                 </div>
-                <img src="{{ asset('image/banner_product_home_1.png') }}" style="width:1400px ; height:200px"
-                    alt="">
-
+                <img class="discount-banner" src="{{ asset('image/banner_product_home_1.png') }}">
             </div>
         </div>
         </div>
