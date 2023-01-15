@@ -31,17 +31,17 @@ class IndexController extends Controller
     }
 
 
-    public function getProducts(){
+    public function getProducts($id){
 
         // lấy URL hiện tại trang web để xứ lý tìm sản phẩm theo id category
-        $url = url()->current();
-        $url_name = pathinfo($url, PATHINFO_BASENAME);
-        $cata = Category::where('slug', $url_name)->first();
+        // $url = url()->current();
+        // $url_name = pathinfo($url, PATHINFO_BASENAME);
+        // $cata = Category::where('slug', $url_name)->first();
+        // $filterProductCategory = Products::where('id_ca', $cata->id)->get();
+        //
+        $cata = Category::where('slug', $id)->first();
         $filterProductCategory = Products::where('id_ca', $cata->id)->get();
-
-
-
-
+        // dd($filterProductCategory);
 
         // Mảng lưu dữ liệu đê đẩy dữ liệu ra trang view
         $array = [
@@ -52,6 +52,12 @@ class IndexController extends Controller
 
     }
 
+
+    public function getDetail()
+    {
+
+        return view('guest.pages.products.products-detail');
+    }
 
 
     public function getAddressDefault($id_tk){

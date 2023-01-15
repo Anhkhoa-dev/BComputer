@@ -1,17 +1,17 @@
 <div class="card_side">
-    @if ($fillCatagoryAll !=null)
+    @if ($fillCatagoryAll != null)
         @foreach ($fillCatagoryAll as $item)
-        <a href="{{ URL('/products', $item->slug) }}" class="side-box" data-id="{{$item->slug}}">
-            <img src="{{ asset('image/icon/'.$item->imageIcon) }}" width="25" alt="{{$item->name}}">
-            <div>{{$item->name}}</div>
-            @section('product-title')
-                {{$item->name}}
-            @endsection
-        </a>
+            <a href="{{ route('/products', $item->slug) }}" class="side-box" data-id="{{ $item->slug }}">
+                <img src="{{ asset('image/icon/' . $item->imageIcon) }}" width="25" alt="{{ $item->name }}">
+                <div>{{ $item->name }}</div>
+                @section('product-title')
+                    {{ $item->name }}
+                @endsection
+            </a>
         @endforeach
     @endif
 
-    
+
     {{-- <a href="" class="side-box">
         <img src="{{ asset('image/icon/004-computer.png') }}" width="25" alt="">
         <div>PC Intel</div>

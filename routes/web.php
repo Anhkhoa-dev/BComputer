@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\AcountConroller;
-use App\Http\Controllers\Guest\IndexController;
-use App\Http\Controllers\Guest\AccountController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AcountConroller;
 use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Guest\CartConntroller;
-use App\Http\Controllers\Guest\GuestController;
+use App\Http\Controllers\Guest\IndexController;
+use App\Http\Controllers\Guest\AccountController;
 
 //thường dân dân
 Route::controller(LoginController::class)->group(function () {
@@ -31,7 +30,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     //phần dành cho guest
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
     Route::get('/products/{slug}', [IndexController::class, 'getProducts'])->name('/products');
-    Route::get('/products/sanpham', [IndexController::class, 'getDetail'])->name('/produts/detail');
+    Route::get('/products/details/{name}', [IndexController::class, 'getDetail'])->name('/products/detail/');
 
 
 
