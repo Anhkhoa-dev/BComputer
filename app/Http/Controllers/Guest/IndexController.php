@@ -14,7 +14,7 @@ class IndexController extends Controller
 {
     // public function __construct()
     // {
-        
+
     //     $this->user='guest/pages/';
     //     // $this->IndexController = new IndexController;
     // }
@@ -32,7 +32,7 @@ class IndexController extends Controller
 
 
     public function getProducts(){
-        
+
         // lấy URL hiện tại trang web để xứ lý tìm sản phẩm theo id category
         $url = url()->current();
         $url_name = pathinfo($url, PATHINFO_BASENAME);
@@ -48,7 +48,7 @@ class IndexController extends Controller
             'filterProductCategory' => $filterProductCategory,
             'title' => $cata->name,
         ];
-        return view('guest.pages.products.product')->with($array);    
+        return view('guest.pages.products.product')->with($array);
 
     }
 

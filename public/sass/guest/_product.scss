@@ -165,3 +165,112 @@
         border-radius: 25px;
     }
 }
+
+
+
+// css Khoa Product
+
+.filter-product{
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    .filter-item{
+        position: relative;
+        .filter-item_title{
+            border: 1px solid rgb(66, 66, 66);
+            background: #fff;
+            padding: 5px 10px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            a{
+                margin-right: 5px;
+                text-decoration: none;
+                color: $Color__0F3460;
+            }
+        }
+        .filter-item_title.active{
+            border: 1px solid $Color__E94560;
+        }
+        .filter-item_dropdown{
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            width: 600px;
+            height: auto;
+            z-index: 100;
+            margin-top: 10px;
+            // border: 1px solid #111;
+            border-radius: 10px;
+            padding: 10px 0px;
+            box-shadow: $box__shadow;
+            .filter-dropdown__top{
+                display: flex;
+                flex-wrap: wrap;
+                // grid-template-columns: repeat(5, 1fr);
+                // justify-content: flex-start;
+                gap: 7px;
+                padding: 10px 10px 15px 10px;
+                .filter-list__item{
+                    border: 1px solid #acaaaa;
+                    background-color: #fff;
+                    padding: 5px 8px;
+                    border-radius: 5px;
+                    &:hover{
+                        border: 1px solid  $Color__E94560;
+                        a{
+                            color: $Color__E94560;
+                        }
+                    }
+                    a{
+                        text-decoration: none;
+                        font-size: 0.925rem;
+                        color: $Color__0F3460;
+                    }
+                }
+                .filter-list__item.active{
+                    border: 1px solid $Color__E94560;
+                }
+            }
+
+            .filter-dropdown__bottom{
+                padding: 10px 15px;
+                box-shadow: #CCCCCC -1px -4px 10px -2px;
+                display: flex;
+                gap: 10px;
+                text-align: center;
+                align-items: center;
+                .btn-remove_all{
+                    min-width: 150px;
+                    border: 1px solid $Color__E94560;
+                    background: #fff;
+                    color: $Color__E94560;
+                    border-radius: 5px;
+                    padding: 5px 10px;
+                    text-decoration: none;
+                    cursor: pointer;
+
+                }
+                .btn-view__result{
+                    min-width: 150px;
+                    // height: 50px;
+                    border: 1px solid $Color__E94560;
+                    background: $bg_third;
+                    color: #fff;
+                    border-radius: 5px;
+                    padding: 5px 10px;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            }
+
+        }
+
+    }
+}
+
+.show{
+    display: block;
+}
