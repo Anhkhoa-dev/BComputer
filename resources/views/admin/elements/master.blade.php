@@ -1,5 +1,8 @@
 @include('admin.elements.head')
 
+
+    
+
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->

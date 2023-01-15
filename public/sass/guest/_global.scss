@@ -217,17 +217,65 @@ section {
     height: 20px;
     margin-right: 10px;
 }
-
-.product-card {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    .card {
+.card-product {
+    width: 100%;
+    background: #fff;
+    .card-image {
         width: 100%;
-        .card-image {
+        position: relative;
+        cursor: pointer;
+        .image {
             width: 100%;
-            .image {
-                width: 100%;
+        }
+        .hover-icons {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 35, 82, 0.3);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 10px;
+            visibility: hidden;
+            padding-right: 10px;
+            .hover-sosanh,
+            .hover-xemnhanh,
+            .hover-viewdetail,
+            .hover-addtocart {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                background-color: $bg_third;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+            }
+            i {
+                font-size: 1rem;
+                color: #fff;
+            }
+        }
+    }
+    .card-image:hover {
+        .hover-icons {
+            visibility: inherit;
+        }
+    }
+    .card-info {
+        padding: 15px;
+        .card-title {
+            a {
+                text-decoration: none;
+                color: $Color__0F3460;
+                font-size: 1.25rem;
             }
         }
     }
 }
+
+// css toast-message

@@ -51,7 +51,7 @@
                 </div>
                 
                  <div class="col-md-12 mt-1 py-3">
-                    @include('guest.pages.flashDelas.flashDelas')    
+                    @include('guest.pages.flashDelas')    
                 </div>
                     
             
@@ -179,6 +179,26 @@
         </div>
 
     </section>
+    
+    {{-- Big Discount --}}
+    <section>
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title">
+                        <img src="{{ asset('image/icon/002-new.png') }}" alt="" width="30">
+                        Big DisCount
+                    </div>
+                    <div><a href="#"></a>View all</a></div>
+                </div>
+                <div class="col-md-12">
+                    @include('guest.pages.big-discount')  
+                </div>
+            </div>
+        </div>
+
+
+    </section>
 
 
 
@@ -190,7 +210,6 @@
 
 @section('myjs')
     <script>
-
         //slide banner
        var owl_carousel_banner = $('#banner');
         owl_carousel_banner.owlCarousel({
@@ -216,6 +235,28 @@
         // slide flash delas
         var owl_carousel_flashdelas = $('#flash-delas');
         owl_carousel_flashdelas.owlCarousel({
+            loop:true,
+            margin:10,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true,
+            // nav:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:3
+                },
+                1000:{
+                    items:5
+                }
+            }
+        });
+
+        // slide flash delas
+        var owl_carousel_big_discount = $('#big-discount');
+        owl_carousel_big_discount.owlCarousel({
             loop:true,
             margin:10,
             autoplay:true,
