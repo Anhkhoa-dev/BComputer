@@ -43,4 +43,6 @@ $(function () {
     $("#btn-change-avt").click(function () {
         $("#change-avt-inp").trigger("click");
     });
+
+
 });

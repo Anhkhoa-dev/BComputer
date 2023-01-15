@@ -1,5 +1,5 @@
 {{-- kế thừa layout --}}
-@extends('guest.elements.master') 
+@extends('guest.elements.master')
 
 {{--  Kế thừa title --}}
 @section('title')
@@ -18,11 +18,11 @@
                     </div>
                 </div>
                 <div class="col-md-9 pt-4 pb-0">
-                    <div class="col-md-12"> 
+                    <div class="col-md-12">
                          <div class="row">
                             @include('guest.pages.sidebar.banner')
-                         </div> 
-                     </div> 
+                         </div>
+                     </div>
 
                 </div>
             </div>
@@ -49,12 +49,12 @@
                         <a href="#">View all</a>
                     </div>
                 </div>
-                
+
                  <div class="col-md-12 mt-1 py-3">
-                    @include('guest.pages.flashDelas')    
+                    @include('guest.pages.flashDelas')
                 </div>
-                    
-            
+
+
             </div>
         </div>
     </section>
@@ -179,20 +179,22 @@
         </div>
 
     </section>
-    
+
     {{-- Big Discount --}}
     <section>
         <div class="container-xl">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-12 d-flex justify-content-between align-itmes-center">
                     <div class="title">
                         <img src="{{ asset('image/icon/002-new.png') }}" alt="" width="30">
-                        Big DisCount
+                        Big Count
                     </div>
-                    <div><a href="#"></a>View all</a></div>
+                    <div class="view_all">
+                        <a href="#">View all</a>
+                    </div>
                 </div>
                 <div class="col-md-12">
-                    @include('guest.pages.big-discount')  
+                    @include('guest.pages.big-discount')
                 </div>
             </div>
         </div>
@@ -268,10 +270,10 @@
                     items:1
                 },
                 600:{
-                    items:3
+                    items:4
                 },
                 1000:{
-                    items:5
+                    items:6
                 }
             }
         });
@@ -280,5 +282,5 @@
 
 
     </script>
-    
+
 @endsection
