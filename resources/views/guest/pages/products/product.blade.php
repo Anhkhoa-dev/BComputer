@@ -10,7 +10,7 @@
 @section('breadcrumb')
     <a href="#" class="bc-items">category</a>
     <div class="bc-divider"><i class="fas fa-chevron-right"></i></div>
-    <a href="#" class="bc-items">Product</a>
+    <a href="#" class="bc-items">{{ $title }}</a>
 @endsection
 @include('guest.pages.section.sec-thanhdieuhuong')
 
@@ -107,7 +107,10 @@
 
                     <div class="card-info">
                         <div class="card-title">
-                            <a href="#">CPU Intel Core i9 12900k Box Chính Hãng </a>
+                            <a href="{{ route('/products/detail/', 'asus-rog-gladius-ii') }}">CPU Intel Core i9
+                                12900k Box
+                                Chính Hãng
+                            </a>
                         </div>
                         <div class="card-price">
                             <div class="old-price">$ 90</div>
