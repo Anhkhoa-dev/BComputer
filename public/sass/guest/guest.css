@@ -984,8 +984,6 @@ section .title i {
 .han-product-detail .name-doc .parity-product img:hover {
   padding: 0px;
   transition: 0.3s;
-  border-right: 1px solid #888888;
-  border-bottom: 1px solid #888888;
 }
 .han-product-detail .name-doc .parity-product span {
   position: absolute;
