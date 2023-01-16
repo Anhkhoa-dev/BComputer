@@ -96,14 +96,14 @@ class SupplierController extends Controller
         //trả về view
         $url = pathinfo(url()->current(), PATHINFO_BASENAME);
         $supplier = SUPPLIER::where('id', $url)->first();
-        $array= [
+        $array = [
             'supplierEdit' => $supplier,
 
         ];
-        
-            // return view('admin.pages.suppliers.edit', compact('id'));
+
+        // return view('admin.pages.suppliers.edit', compact('id'));
         return view('admin.pages.suppliers.edit')->with($array);
-        
+
     }
 
     /**
@@ -149,10 +149,10 @@ class SupplierController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(SUPPLIER $id)
+    public function destroy($id)
     {
         //xử lý xóa
-        $id->delete();
+        //$id->delete();
         return redirect()->route('admin.pages.suppliers.index');
     }
 }

@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Products;
+use App\Models\SUPPLIER;
+use App\Models\Brands;
+use App\Models\Category;
 
 class ProductController extends Controller
 {
@@ -15,8 +19,33 @@ class ProductController extends Controller
     public function index()
     {
         //
-        
-        return view('admin.pages.products');
+        $list_product = Products::all();
+        //dd($list_product);
+        foreach ($list_product as $i => $key) {
+            if ($key->id_ca) {
+                $list_product[$i]->category = Category::find($key->id_ca)->name;
+            } else {
+                $list_product[$i]->category = '';
+            }
+            if ($key->sup_id) {
+                $list_product[$i]->supplier = SUPPLIER::find($key->sup_id)->name;
+            } else {
+                $list_product[$i]->supplier = '';
+            }
+
+            if ($key->id_brand) {
+                $list_product[$i]->brand = Brands::find($key->id_brand)->name;
+            } else {
+                $list_product[$i]->brand = '';
+            }
+        }
+
+
+
+        $array = [
+            'productAll' => $list_product,
+        ];
+        return view('admin.pages.products.index')->with($array);
     }
 
     /**
@@ -27,6 +56,7 @@ class ProductController extends Controller
     public function create()
     {
         //
+        return view('admin.pages.products.create');
     }
 
     /**

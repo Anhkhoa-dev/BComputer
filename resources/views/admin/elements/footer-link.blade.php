@@ -32,8 +32,12 @@
 <script src="{{ asset('AdminLTE/dist/js/adminlte.js')}}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('AdminLTE/dist/js/demo.js')}}"></script>
+
+{{-- để trống chưa biết làm gì --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/NicEdit/0.93/nicEdit.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('AdminLTE/dist/js/pages/dashboard.js')}}"></script>
-
+<script src="{{ asset('js/admin.js')}}"></script>
+@yield('myjs-admin')
 </body>
 </html>

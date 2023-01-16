@@ -1,2 +1,274 @@
+.han-product-detail {
+    justify-content: space-between;
+
+    .mySlides {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+    }
+
+    .price {
+        font-size: 25px;
+        font-weight: 600;
+        padding: 10px;
+
+    }
+
+    .form {
+        padding: 20px;
+
+        .button-product {
+            display: flex;
+            gap: 15px;
+            color: white;
+
+            div {
+                width: 50%;
+                padding: 15px;
+                border-radius: 5px;
+                text-align: center;
+                cursor: pointer;
+
+                a {
+                    text-decoration: none;
+                }
+
+                a:hover {
+                    color: white;
+                }
+            }
+        }
+
+        .contact {
+            text-align: center;
+            padding: 5px;
+        }
+
+        .product-name div {
+            font-weight: 600;
+            font-size: 28px;
+            padding: 10px;
+        }
+
+        .detail {
+            font-size: 20px;
+            font-weight: 600;
+            padding: 20px;
+        }
+
+        .details {
+            display: flex;
+
+        }
+
+    }
+
+    .col-md-2 {
+        margin-top: 50px;
 
 
+        h6 {
+            font-weight: 300;
+            font-size: 25px;
+            padding: 0px;
+        }
+    }
+
+    .description-info {
+        border-style: ridge;
+        padding: 10px;
+        margin-bottom: 20px;
+    }
+
+    .name-doc {
+        background-color: white;
+        color: black;
+        margin-bottom: 20px;
+        padding: 10px;
+        font-weight: 700;
+        font-size: larger;
+        border-radius: 5px;
+
+        .parity-product {
+            justify-content: space-between;
+
+            .discount-link-product a {
+                font-size: small;
+            }
+
+            img {
+                width: 100%;
+                height: auto;
+                padding: 20px;
+            }
+
+            img:hover {
+                padding: 0px;
+                transition: .3s;
+            }
+
+            span {
+                position: absolute;
+                padding: 10px;
+                font-weight: 500;
+            }
+
+            .discount-off {
+                background-color: red;
+                color: white;
+                border-radius: 10px;
+                width: 100px;
+                height: 30px;
+                font-size: x-small;
+
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: #ff2832;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .description {
+        background-color: white;
+        margin-bottom: 30px;
+
+        button {
+            background-color: #ff2832;
+            border-style: groove;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .review {
+            display: none;
+
+            input {
+                width: 500px;
+                height: 30px;
+            }
+        }
+
+    }
+
+    .discount-banner {
+        width: 100%;
+        height: auto;
+        padding: 20px;
+        border-radius: 25px;
+    }
+}
+
+
+
+// css Khoa Product
+
+.filter-product{
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    .filter-item{
+        position: relative;
+        .filter-item_title{
+            border: 1px solid rgb(66, 66, 66);
+            background: #fff;
+            padding: 5px 10px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            a{
+                margin-right: 5px;
+                text-decoration: none;
+                color: $Color__0F3460;
+            }
+        }
+        .filter-item_title.active{
+            border: 1px solid $Color__E94560;
+        }
+        .filter-item_dropdown{
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            width: 600px;
+            height: auto;
+            z-index: 100;
+            margin-top: 10px;
+            // border: 1px solid #111;
+            border-radius: 10px;
+            padding: 10px 0px;
+            box-shadow: $box__shadow;
+            .filter-dropdown__top{
+                display: flex;
+                flex-wrap: wrap;
+                // grid-template-columns: repeat(5, 1fr);
+                // justify-content: flex-start;
+                gap: 7px;
+                padding: 10px 10px 15px 10px;
+                .filter-list__item{
+                    border: 1px solid #acaaaa;
+                    background-color: #fff;
+                    padding: 5px 8px;
+                    border-radius: 5px;
+                    &:hover{
+                        border: 1px solid  $Color__E94560;
+                        a{
+                            color: $Color__E94560;
+                        }
+                    }
+                    a{
+                        text-decoration: none;
+                        font-size: 0.925rem;
+                        color: $Color__0F3460;
+                    }
+                }
+                .filter-list__item.active{
+                    border: 1px solid $Color__E94560;
+                }
+            }
+
+            .filter-dropdown__bottom{
+                padding: 10px 15px;
+                box-shadow: #CCCCCC -1px -4px 10px -2px;
+                display: flex;
+                gap: 10px;
+                text-align: center;
+                align-items: center;
+                .btn-remove_all{
+                    min-width: 150px;
+                    border: 1px solid $Color__E94560;
+                    background: #fff;
+                    color: $Color__E94560;
+                    border-radius: 5px;
+                    padding: 5px 10px;
+                    text-decoration: none;
+                    cursor: pointer;
+
+                }
+                .btn-view__result{
+                    min-width: 150px;
+                    // height: 50px;
+                    border: 1px solid $Color__E94560;
+                    background: $bg_third;
+                    color: #fff;
+                    border-radius: 5px;
+                    padding: 5px 10px;
+                    text-decoration: none;
+                    cursor: pointer;
+                }
+            }
+
+        }
+
+    }
+}
+
+.show{
+    display: block;
+}

@@ -1,5 +1,5 @@
 {{-- kế thừa layout --}}
-@extends('guest.elements.master') 
+@extends('guest.elements.master')
 
 {{--  Kế thừa title --}}
 @section('title')
@@ -18,11 +18,11 @@
                     </div>
                 </div>
                 <div class="col-md-9 pt-4 pb-0">
-                    <div class="col-md-12"> 
+                    <div class="col-md-12">
                          <div class="row">
                             @include('guest.pages.sidebar.banner')
-                         </div> 
-                     </div> 
+                         </div>
+                     </div>
 
                 </div>
             </div>
@@ -49,12 +49,12 @@
                         <a href="#">View all</a>
                     </div>
                 </div>
-                
+
                  <div class="col-md-12 mt-1 py-3">
-                    @include('guest.pages.flashDelas.flashDelas')    
+                    @include('guest.pages.flashDelas')
                 </div>
-                    
-            
+
+
             </div>
         </div>
     </section>
@@ -180,6 +180,28 @@
 
     </section>
 
+    {{-- Big Discount --}}
+    <section>
+        <div class="container-xl">
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-between align-itmes-center">
+                    <div class="title">
+                        <img src="{{ asset('image/icon/002-new.png') }}" alt="" width="30">
+                        Big Count
+                    </div>
+                    <div class="view_all">
+                        <a href="#">View all</a>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    @include('guest.pages.big-discount')
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
 
 
 
@@ -190,7 +212,6 @@
 
 @section('myjs')
     <script>
-
         //slide banner
        var owl_carousel_banner = $('#banner');
         owl_carousel_banner.owlCarousel({
@@ -235,9 +256,31 @@
             }
         });
 
+        // slide flash delas
+        var owl_carousel_big_discount = $('#big-discount');
+        owl_carousel_big_discount.owlCarousel({
+            loop:true,
+            margin:10,
+            autoplay:true,
+            autoplayTimeout:5000,
+            autoplayHoverPause:true,
+            // nav:true,
+            responsive:{
+                0:{
+                    items:1
+                },
+                600:{
+                    items:4
+                },
+                1000:{
+                    items:6
+                }
+            }
+        });
+
 
 
 
     </script>
-    
+
 @endsection

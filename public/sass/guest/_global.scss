@@ -1,35 +1,35 @@
-section{
+section {
     margin-top: 3.125rem;
-    .title{
+    .title {
         text-transform: uppercase;
         font-size: 1.5rem;
         color: $Color__0F3460;
         font-weight: 600;
         // margin-bottom: 40px;
-        i{
+        i {
             font-size: 1.25rem;
             color: $Color__E94560;
         }
     }
 }
 
-.logo{
+.logo {
     text-decoration: none;
     font-size: 2rem;
     color: $Color__E94560;
     font-weight: 500;
-    .letterB{
+    .letterB {
         font-size: 3rem;
         font-weight: 600;
     }
-    .letterC{
+    .letterC {
         font-size: 3rem;
         font-weight: 600;
         color: $Color__0F3460;
     }
 }
 
-.btnBox{
+.btnBox {
     padding: 10px 20px;
     border-radius: 5px;
     background: $bg_third;
@@ -37,26 +37,26 @@ section{
     color: #fff;
     transition: all 0.5s ease-in;
 }
-.btnBox:hover{
+.btnBox:hover {
     border: 1px solid $Color__E94560;
     background: $bg_second;
     color: $Color__E94560;
     transition: all 0.5s ease-in;
 }
 
-.view_all{
+.view_all {
     font-size: 1.25rem;
-    a{
+    a {
         text-decoration: none;
         color: $Color__E94560;
-        &:hover{
+        &:hover {
             color: $Color__0F3460;
             text-decoration: underline;
         }
     }
 }
 
-.home-card{
+.home-card {
     padding-left: 20px;
     padding-right: 20px;
     padding-top: 20px;
@@ -69,15 +69,15 @@ section{
     // &:hover{
     //     border: 1px solid $Color__E94560;
     // }
-    .card_image{
+    .card_image {
         width: 100%;
         height: auto;
         border-radius: 10px;
         position: relative;
-        img{
+        img {
             width: 100%;
         }
-        .sale_off{
+        .sale_off {
             width: 80px;
             height: 30px;
             border-radius: 100px;
@@ -88,20 +88,20 @@ section{
             position: absolute;
             top: -12px;
             left: -10px;
-            p{
+            p {
                 font-size: 13px;
                 font-weight: 600;
                 color: #fff;
             }
         }
-        .p_like{
+        .p_like {
             position: absolute;
             top: -12px;
             right: -10px;
             display: grid;
             grid-template-rows: 1fr 1fr;
             gap: 5px;
-            .p_like_sosanh{
+            .p_like_sosanh {
                 width: 25px;
                 height: 25px;
                 border-radius: 50%;
@@ -113,83 +113,210 @@ section{
                 background-color: $bg_second;
                 color: $Color__E94560;
             }
-            .p_like_heart{
+            .p_like_heart {
                 text-decoration: none;
                 color: $Color__E94560;
-                i{
+                i {
                     font-size: 25px;
                 }
             }
         }
     }
-    .card_info{
+    .card_info {
         width: 100%;
-        .product_name{
+        .product_name {
             font-size: 1.125rem;
             color: $Color__0F3460;
             font-weight: 600;
             text-decoration: none;
-            &:hover{
+            &:hover {
                 color: $Color__E94560;
             }
-
         }
-        .product_rate{
+        .product_rate {
             margin-top: 15px;
             margin-bottom: 10px;
             display: flex;
             justify-content: start;
             align-items: center;
-            i{
+            i {
                 margin-right: 5px;
                 color: darkorange;
                 font-size: 1rem;
             }
         }
-        .product_price{
+        .product_price {
             color: $Color__E94560;
             font-size: 1.125rem;
         }
     }
 }
 
-.img__full{
+.img__full {
     width: 100%;
     height: auto;
 }
 
-.khoa-bc{
+.khoa-bc {
     background-color: #d6d6d6;
     display: flex;
     justify-content: flex-start;
     padding: 8px 9%;
-    .bc-items{
+    .bc-items {
         text-decoration: none;
         padding: 0 10px;
         color: #565656;
-        &:hover{
+        &:hover {
             color: #4f23ff;
         }
-        
     }
-    .bc-divider{
-        i{
+    .bc-divider {
+        i {
             font-size: 0.825rem;
             color: $Color__0F3460;
         }
     }
-    .bc-item.active{
+    .bc-item.active {
         text-decoration: none;
         padding: 0 10px;
         color: $Color__0F3460;
         font-weight: 600;
-        &:hover{
+        &:hover {
             color: #4f23ff;
         }
     }
 }
 
-.bg-white{
+.bg-white {
     background-color: $bg_second;
     padding: 50px 0;
 }
+.bg-white-0 {
+    background-color: $bg_second;
+}
+
+.error-message,
+.success-message {
+    padding: 7px;
+    width: 100%;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.error-message {
+    background-color: #fcc9c9;
+}
+
+.success-message {
+    background-color: #b5ffd4;
+}
+
+.cus-checked {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+
+.products{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    // gap: 15px;
+    .card-product {
+        width: 100%;
+        background: #fff;
+        display: flex;
+        flex-direction: column;
+        &:hover{
+            box-shadow: $box__shadow;
+        }
+        .card-image {
+            width: 100%;
+            position: relative;
+            cursor: pointer;
+            flex-shrink: 0;
+            .image {
+                width: 100%;
+            }
+            .hover-icons {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                background: rgba(0, 35, 82, 0.3);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-end;
+                gap: 10px;
+                visibility: hidden;
+                padding-right: 10px;
+                .hover-sosanh,
+                .hover-xemnhanh,
+                .hover-viewdetail,
+                .hover-addtocart {
+                    width: 30px;
+                    height: 30px;
+                    border-radius: 50%;
+                    background-color: $bg_third;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                }
+                i {
+                    font-size: 1rem;
+                    color: #fff;
+                }
+            }
+        }
+        .card-image:hover {
+            .hover-icons {
+                visibility: inherit;
+            }
+        }
+        .card-info {
+            padding: 15px;
+            margin-top: 15px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            .card-title {
+                a {
+                    text-decoration: none;
+                    color: $Color__0F3460;
+                    font-size: 1.15rem;
+                    text-align: center;
+                    display:-webkit-box;
+                    -webkit-line-clamp:2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    word-break: break-word;
+                }
+            }
+            .card-price{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 20px;
+                padding: 0 15px;
+                .old-price{
+                    color: #565656;
+                    text-decoration: line-through;
+                }
+                .new-price{
+                    color: $Color__E94560;
+                }
+            }
+        }
+
+    }
+}
+
+
+// css toast-message

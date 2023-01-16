@@ -69,27 +69,28 @@
         });
 
         function renderCity(data) {
+
         for (const x of data) {
-            citis.options[citis.options.length] = new Option(x.Name, x.Id);
+            citis.options[citis.options.length] = new Option(x.Name, x.Name);
         }
         citis.onchange = function () {
             districts.length = 1;
             wards.length = 1;
             if(this.value != ""){
-            const result = data.filter(n => n.Id === this.value);
+            const result = data.filter(n => n.Name === this.value);
 
             for (const k of result[0].Districts) {
-                districts.options[districts.options.length] = new Option(k.Name, k.Id);
+                districts.options[districts.options.length] = new Option(k.Name, k.Name);
             }
             }
         };
         districts.onchange = function () {
             wards.length = 1;
-            const dataCity = data.filter((n) => n.Id === citis.value);
+            const dataCity = data.filter((n) => n.Name === citis.value);
             if (this.value != "") {
-            const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+            const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0].Wards;
             for (const w of dataWards) {
-                wards.options[wards.options.length] = new Option(w.Name, w.Id);
+                wards.options[wards.options.length] = new Option(w.Name, w.Name);
             }
             }
         };

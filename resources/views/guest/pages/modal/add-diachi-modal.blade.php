@@ -14,13 +14,19 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="" class="fw-bold mb-3" >Full name</label>
-                        <input type="text" name="address-fullname-inp" class="form-control">
+                        <input type="text" name="address_fullname_inp" class="form-control" value="{{ old('address_fullname_inp')}}">
+                        @error('address_fullname_inp')
+                                <span class="errorMsg">{{$message}}</span> 
+                            @enderror
                     </div>
                 </div>
                 <div class="col-md-6">
                   <div class="mb-3">
                       <label for="" class="fw-bold mb-3" >Delivery phone</label>
-                      <input type="text" name="address-phone-inp" class="form-control">
+                      <input type="text" name="address_phone_inp" class="form-control" value="{{ old('address_phone_inp')}}" />
+                      @error('address_phone_inp')
+                        <span class="errorMsg">{{$message}}</span> 
+                      @enderror
                   </div>
               </div>
               <div class="col-md-12">
@@ -28,32 +34,44 @@
               </div>
               <div class="col-md-6">
                     <div class="mb-3">
-                        <select id="address-city" name="address-city" class="form-select">
+                        <select id="address-city" name="address_city" class="form-select">
                             <option value="" id="" selected>Chọn Tỉnh / Thành Phố</option>
                         </select>
+                        @error('address_city')
+                            <span class="errorMsg">{{$message}}</span> 
+                        @enderror
                     </div>
                     <div class="mb-3">
-                      <select name="address-ward" id="address-ward" class="form-select">
+                      <select name="address_ward" id="address-ward" class="form-select">
                         <option value="" id="" selected>Chọn Phường / Xã</option>
                       </select>
+                      @error('address_ward')
+                          <span class="errorMsg">{{$message}}</span> 
+                      @enderror
                     </div>
               </div>
               <div class="col-md-6">
                     <div class="mb-3">
-                      <select name="address-district" id="address-district" class="form-select">
+                      <select name="address_district" id="address-district" class="form-select">
                          <option value="" id="" selected>Chọn Quận / Huyện</option>
                       </select>
+                      @error('address_district')
+                          <span class="errorMsg">{{$message}}</span> 
+                      @enderror
                     </div>
                     <div class="mb-3">
-                        <input type="text" name="address-phone-inp" class="form-control" placeholder="Enter house number, street name">
+                        <input type="text" name="address_number_inp" class="form-control" placeholder="Enter house number, street name">
+                        @error('address_number_inp')
+                            <span class="errorMsg">{{$message}}</span> 
+                        @enderror
                     </div>
               </div>
               <div class="col-md-12 mb-3">
-                 <input type="checkbox" name="check-address-default" id="checkaddress">
+                 <input type="checkbox" name="check_address_default" id="checkaddress">
                  <label for="checkaddress">Set as default address</label>
               </div>
               <div class="col-md-12">
-                 <input type="button" class="btn btn-primary" value="Thêm địa chỉ">
+                 <input type="submit" class="btn btn-primary" value="Thêm địa chỉ">
               </div>
              </div>
             </form>

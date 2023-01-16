@@ -1,9 +1,18 @@
 <div class="card_side">
-    <a href="" class="side-box">
-        <img src="{{ asset('image/icon/002-laptop.png') }}" width="25" alt="">
-        <div>Laptop</div>
-    </a>
-    <a href="" class="side-box">
+    @if ($fillCatagoryAll != null)
+        @foreach ($fillCatagoryAll as $item)
+            <a href="{{ route('/products', $item->slug) }}" class="side-box" data-id="{{ $item->slug }}">
+                <img src="{{ asset('image/icon/' . $item->imageIcon) }}" width="25" alt="{{ $item->name }}">
+                <div>{{ $item->name }}</div>
+                @section('product-title')
+                    {{ $item->name }}
+                @endsection
+            </a>
+        @endforeach
+    @endif
+
+
+    {{-- <a href="" class="side-box">
         <img src="{{ asset('image/icon/004-computer.png') }}" width="25" alt="">
         <div>PC Intel</div>
     </a>
@@ -34,7 +43,7 @@
     <a href="" class="side-box">
         <img src="{{ asset('image/icon/007-hard-disc.png') }}" width="25" alt="">
         <div>Other accessories</div>
-    </a>
+    </a> --}}
 
 
 

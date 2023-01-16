@@ -1,14 +1,14 @@
-@import 'reset';
-
-@import 'variables'; // khai báo biến
-@import 'global'; //css toàn cục
-@import 'header'; //scss header
-@import 'footer'; // scss foooter
-@import 'banner'; 
-@import 'flashDelas';
-@import 'newarrivals';
-@import 'account'; // scss trang thong tin tài khoản
-
+@import "reset";
+@import "variables"; // khai báo biến
+@import "global"; //css toàn cục
+@import "header"; //scss header
+@import "footer"; // scss foooter
+@import "banner";
+@import "flashDelas";
+@import "newarrivals";
+@import "account"; // scss trang thong tin tài khoản
+@import "product";
+@import "checkout"; // scss view cart and check out
 
 // css trang login
-@import 'login';
+@import "login";

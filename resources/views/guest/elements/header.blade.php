@@ -43,7 +43,7 @@
                 <div class="navbar__icon">
 
                     {{-- nút giỏ hàng --}}
-                    <a href="#" class="cursor-pointer text-decoration-none text-dark">
+                    <a href="{{ route('user/cart-items') }}" class="cursor-pointer text-decoration-none text-dark">
                         <div class="icon__cart">
                             <p class="cart__number">2</p>
                             <div class="cart__circle">

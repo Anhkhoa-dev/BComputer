@@ -10,22 +10,13 @@ class AdminsController extends Controller
     //
     public function __construct()
     {
-        $this->admin='admin/pages/';
+        // $this->admin = 'admin/pages/';
         // $this->IndexController = new IndexController;
     }
-    public function getHome(){
+    public function getHome()
+    {
         // $this->admin.'home'
-        return view($this->admin.'home');
+        return view('admin.pages.home');
     }
 
-
-    public function getLogin(){
-
-
-    }
-
-    public function postLogin(){
-
-        
-    }
 }
