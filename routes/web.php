@@ -10,7 +10,7 @@ use App\Http\Controllers\Guest\CartConntroller;
 use App\Http\Controllers\Guest\IndexController;
 use App\Http\Controllers\Guest\AccountController;
 
-//thường dân dân
+//Login and register
 Route::controller(LoginController::class)->group(function () {
     Route::get('login', 'getLogin')->name('user/login');
     Route::post('process', 'postLogin')->name('postLogin');
@@ -23,9 +23,6 @@ Route::controller(LoginController::class)->group(function () {
 
 
 // Chuyển  trang tới đăng nhập
-
-
-
 Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'], function () {
     //phần dành cho guest
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
