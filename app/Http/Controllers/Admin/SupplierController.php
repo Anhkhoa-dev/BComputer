@@ -40,7 +40,38 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         //xử lý create
-       
+          // $prod = new Product();
+        // $prod->name = $request->name;
+        // $prod->short_desc = $request->short_desc;
+        // using mass assignment
+
+        $prod = $request->all(); 
+           // $prod là 1 mảngz
+        $prod['slug'] = \Str::slug($request->name);
+        
+        if($request->hasFile('photo'))
+        {
+            $file=$request->file('photo');
+            $extension = $file->getClientOriginalExtension();
+            if($extension != 'jpg' && $extension != 'png' && $extension !='jpeg')
+            {
+                return redirect()->route('supplier/create')
+                    ->with('loi','Bạn chỉ được chọn file có đuôi jpg,png,jpeg');
+            }
+            $image = $file->getClientOriginalName();
+            $file->move("images",$image);
+        }
+        else
+        {
+            $image = null;
+        }
+        $prod['image'] = $image;
+        $supplier = new SUPPLIER($prod);
+        $supplier->save();
+        return redirect()->route('admin/supplier');
+
+        // $prods = SUPPLIER::all();
+        // return view('admin.pages.suppliers.index', compact('prods'));
     }
 
     /**
@@ -85,6 +116,7 @@ class SupplierController extends Controller
     public function update(Request $request, $id)
     {
         $prod = $request->all();    // $prod là 1 mảng
+        dd($prod);
         $prod['slug'] = \Str::slug($request->name);
         
         if($request->hasFile('photo'))
@@ -93,22 +125,22 @@ class SupplierController extends Controller
             $extension = $file->getClientOriginalExtension();
             if($extension != 'jpg' && $extension != 'png' && $extension !='jpeg')
             {
-                return redirect()->route('admin.product.create')
+                return redirect()->route('adminpages.suppliers.create')
                     ->with('loi','Bạn chỉ được chọn file có đuôi jpg,png,jpeg');
             }
-            $imageName = $file->getClientOriginalName();
-            $file->move("images",$imageName);
+            $image = $file->getClientOriginalName();
+            $file->move("images",$image);
         }
         else
         {
             // trường hợp không upload phải lấy hình cũ
-            $oldItem = SUPPLIER::find($product->id);
-            $imageName = $oldItem->image;
+            $oldItem = SUPPLIER::find($supplierEdit->id);
+            $image = $oldItem->image;
         }
-        $prod['image'] = $imageName;
+        $prod['image'] = $image;
         //$product = new Product($prod);
-        $product->update($prod);
-        return redirect()->route('admin.product.index');
+        $supplierEdit->update($prod);
+        return redirect()->route('admin.pages.suppliers.index');
     }
 
     /**
