@@ -9,7 +9,7 @@ $(function () {
     const X_CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
     const MAX_SIZE_IMAGE = 5; // 5 MB
     const BYTE = 1024;
-    const POST_SIZE_MAX = 8; // 8 MB
+    const POST_SIZE_MAX = 10; // 8 MB
 
     /*========================================================================================================================================================
                                                                 HÀM CƠ BẢN KHAI BÁO TRONG NÀY
@@ -21,7 +21,6 @@ $(function () {
             element.next().remove();
         }
     }
-
     function isCorrectFrameRate(url) {
         return new Promise((resolve) => {
             const image = new Image();
@@ -34,10 +33,10 @@ $(function () {
             };
         });
     }
-
+    var idx = 1;
     // Phần xử lý hình ảnh trong product
     $("#choose_image").click(function () {
-        $("#image_inp").click();
+        $(".pro_name[]").click();
     });
 
     $("#image_inp").change(function () {
@@ -51,7 +50,6 @@ $(function () {
         var qty = $("image-preview-div > .row").children().length;
         let imageElement = "";
         let size = 0;
-
         for (var i = 0; i < length; i++) {
             if (qty > 10) {
                 alert("Hình ảnh upload tối đa là 10");
@@ -63,7 +61,11 @@ $(function () {
             const array = fileName.split(".");
             const extend = array[array.length - 1];
             // kiểm tra có phải là hình ảnh không
-            if (extend === "jpg" || extend === "jpeg" || extend === "png") {
+            if (
+                extend.toLowerCase() === "jpg" ||
+                extend.toLowerCase() === "jpeg" ||
+                extend.toLowerCase() === "png"
+            ) {
                 size = this.files[i].size / 1024 / 1024;
                 if (size > 5) {
                     alert("Hình ảnh có dung lượng tối da là 5 MB");
@@ -72,10 +74,47 @@ $(function () {
                 const urlIMG = URL.createObjectURL(this.files[i]);
                 isCorrectFrameRate(urlIMG).then((bool) => {
                     if (bool) {
-                        imageElement = "";
+                        imageElement = `<div id="image-${idx}" data-id="${idx}" class="image-preview col-md-4 col-6">
+                                        <img data-id="${idx}" src="${urlIMG}"
+                                        alt="" class="img-preview">
+                                        <div class="bg-image-hover">
+                                        <div data-id="${idx}" class="delete-icon" title="delete image">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </div>
+                                        </div>
+                                    </div>`;
+                        idx++;
+                        qty++;
+                        $(".image-preview-div > .row").append(imageElement);
+                        $("#qty-image").text(`(${qty})`);
+                    } else {
+                        alert("Một số hình ảnh không đúng tỉ lệ");
                     }
                 });
+            } else {
+                alert("Bạn chỉ có thể upload hình ảnh");
+                break;
             }
+        }
+    });
+    var arrayDelete = [];
+    $(document).on("click", ".delete-icon", function () {
+        var id = $(this).data("id");
+        var imageDelete = $("#image-" + id);
+
+        if (imageDelete.attr("data-name") !== undefined) {
+            const imageName = imageDelete.attr("data-name").split("?")[0];
+            arrayDelete.push(imageName);
+        }
+        imageDelete.remove();
+
+        var qty = $(".image-preview-div > .row").children().length;
+
+        if (qty === 0) {
+            $("#qty-image").hide();
+            $("#image_inp").val("");
+        } else {
+            $("#qty-image").text(`(${qty})`);
         }
     });
 });

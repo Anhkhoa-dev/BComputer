@@ -53,9 +53,6 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
         }
     );
 });
-
-
-
 // phần dành cho admin
 Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogin'], function () {
 
@@ -66,6 +63,9 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Phần danh cho product manager - khoa
     Route::get('admin/product', [ProductController::class, 'index'])->name('admin/product');
     Route::get('admin/product/create', [ProductController::class, 'create'])->name('admin/product/create');
+    Route::post('admin/product/store', [ProductController::class, 'store'])->name('admin/product/store');
+    Route::get('admin/product/show/{slug}', [ProductController::class, 'show'])->name('admin/product/show');
+    Route::get('admin/product/destroy/{id}', [ProductController::class, 'destroy'])->name('admin/product/destroy');
 
     // Phần danh cho supplier - Khoa
     Route::get('admin/supplier', [SupplierController::class, 'index'])->name('admin/supplier');
