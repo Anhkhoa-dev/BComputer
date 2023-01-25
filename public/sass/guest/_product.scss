@@ -1,10 +1,46 @@
 .han-product-detail {
-    justify-content: space-between;
+    .row {
+        margin: -15px 20px -20px 20px;
 
-    .mySlides {
-        width: 100%;
-        height: auto;
-        padding: 20px;
+        .banner {
+            display: flex;
+            padding: 20px;
+
+            .product-name {
+                font-weight: 600;
+                font-size: 28px;
+
+            }
+
+            .likeproduct {
+                text-align: center;
+
+                i {
+                    color: white;
+                    font-size: larger;
+                    margin-top: 10px;
+                }
+            }
+        }
+
+
+
+        .mySlides {
+            width: 100%;
+            height: auto;
+            padding: 30px;
+        }
+
+        img {
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        hr {
+            height: 0.5px;
+            width: 100%;
+            background-color: black;
+        }
     }
 
     .price {
@@ -42,12 +78,6 @@
         .contact {
             text-align: center;
             padding: 5px;
-        }
-
-        .product-name div {
-            font-weight: 600;
-            font-size: 28px;
-            padding: 10px;
         }
 
         .detail {
@@ -168,31 +198,36 @@
 
 // css Khoa Product
 
-.filter-product{
+.filter-product {
     margin-top: 15px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    .filter-item{
+
+    .filter-item {
         position: relative;
-        .filter-item_title{
+
+        .filter-item_title {
             border: 1px solid rgb(66, 66, 66);
             background: #fff;
             padding: 5px 10px;
             text-align: center;
             border-radius: 5px;
             cursor: pointer;
-            a{
+
+            a {
                 margin-right: 5px;
                 text-decoration: none;
                 color: $Color__0F3460;
             }
         }
-        .filter-item_title.active{
+
+        .filter-item_title.active {
             border: 1px solid $Color__E94560;
         }
-        .filter-item_dropdown{
+
+        .filter-item_dropdown {
             display: none;
             position: absolute;
             background-color: #fff;
@@ -204,43 +239,50 @@
             border-radius: 10px;
             padding: 10px 0px;
             box-shadow: $box__shadow;
-            .filter-dropdown__top{
+
+            .filter-dropdown__top {
                 display: flex;
                 flex-wrap: wrap;
                 // grid-template-columns: repeat(5, 1fr);
                 // justify-content: flex-start;
                 gap: 7px;
                 padding: 10px 10px 15px 10px;
-                .filter-list__item{
+
+                .filter-list__item {
                     border: 1px solid #acaaaa;
                     background-color: #fff;
                     padding: 5px 8px;
                     border-radius: 5px;
-                    &:hover{
-                        border: 1px solid  $Color__E94560;
-                        a{
+
+                    &:hover {
+                        border: 1px solid $Color__E94560;
+
+                        a {
                             color: $Color__E94560;
                         }
                     }
-                    a{
+
+                    a {
                         text-decoration: none;
                         font-size: 0.925rem;
                         color: $Color__0F3460;
                     }
                 }
-                .filter-list__item.active{
+
+                .filter-list__item.active {
                     border: 1px solid $Color__E94560;
                 }
             }
 
-            .filter-dropdown__bottom{
+            .filter-dropdown__bottom {
                 padding: 10px 15px;
                 box-shadow: #CCCCCC -1px -4px 10px -2px;
                 display: flex;
                 gap: 10px;
                 text-align: center;
                 align-items: center;
-                .btn-remove_all{
+
+                .btn-remove_all {
                     min-width: 150px;
                     border: 1px solid $Color__E94560;
                     background: #fff;
@@ -251,7 +293,8 @@
                     cursor: pointer;
 
                 }
-                .btn-view__result{
+
+                .btn-view__result {
                     min-width: 150px;
                     // height: 50px;
                     border: 1px solid $Color__E94560;
@@ -269,6 +312,6 @@
     }
 }
 
-.show{
+.show {
     display: block;
 }
