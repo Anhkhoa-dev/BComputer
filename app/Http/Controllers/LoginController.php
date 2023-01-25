@@ -130,7 +130,7 @@ class LoginController extends Controller
             'image' => 'avatar-default.png',
             'password' => bcrypt($request->password),
             'level' => 1,
-            'status' => 1,
+            'status' => 0,
             'dateRegister' => Carbon::now(),
             'loginStatus' => 0,
         ];
