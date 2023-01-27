@@ -20,9 +20,10 @@ class Products extends Model
         'sup_id',
         'description',
         'price',
-        'quanity',
+        'quantity',
         'cauhinh',
         'id_brand',
         'featured',
+        'status',
     ];
 }

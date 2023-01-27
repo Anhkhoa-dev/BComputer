@@ -7,7 +7,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user (optional) -->
-      
+
       <!-- SidebarSearch Form -->
 
       <!-- Sidebar Menu -->
@@ -92,6 +92,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="{{ route('admin/banner') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Banner</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="{{ route('admin/supplier') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Brand</p>
@@ -105,7 +111,7 @@
               </li>
             </ul>
           </li>
-          
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
