@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\USER_ADDRESS;
 use App\Models\Category;
 use App\Models\Products;
+use App\Models\ProductImage;
 
 
 class IndexController extends Controller
@@ -21,9 +22,21 @@ class IndexController extends Controller
     //
     public function getHome(){
         $fillCatagoryAll = Category::all();
+        $featuredProducts = Products::where('featured', 1)->get();
+        foreach ($featuredProducts as $i => $key) {
+            // dd($key->id); //2
+            // dd(ProductImage::where('id_pro', $key->id)->get());
+            if ($key->id) {
+                $featuredProducts[$i]->image = ProductImage::where('id_pro', $key->id)->get();
+            } else {
+                $featuredProducts[$i]->image = '';
+            }
+            // dd($featuredProducts[$i]->image[0]->image);
+        }
 
         $array = [
             'fillCatagoryAll' => $fillCatagoryAll,
+            'featuredProducts' => $featuredProducts,
         ];
 
          //dd(Auth::user()->image);
@@ -55,7 +68,6 @@ class IndexController extends Controller
 
     public function getDetail()
     {
-
         return view('guest.pages.products.products-detail');
     }
 

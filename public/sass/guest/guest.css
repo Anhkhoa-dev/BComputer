@@ -79,7 +79,7 @@ section .title i {
   padding-top: 20px;
   padding-bottom: 25px;
   display: grid;
-  grid-template-rows: 1fr 0.3fr;
+  grid-template-rows: 1fr 0.5fr;
   gap: 20px;
   background: #fff;
   border-radius: 5px;
@@ -89,6 +89,7 @@ section .title i {
   height: auto;
   border-radius: 10px;
   position: relative;
+  flex-shrink: 0;
 }
 .home-card .card_image img {
   width: 100%;
@@ -139,12 +140,23 @@ section .title i {
 }
 .home-card .card_info {
   width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .home-card .card_info .product_name {
   font-size: 1.125rem;
   color: #0F3460;
   font-weight: 600;
   text-decoration: none;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 .home-card .card_info .product_name:hover {
   color: #E94560;
@@ -164,6 +176,13 @@ section .title i {
 .home-card .card_info .product_price {
   color: #E94560;
   font-size: 1.125rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.home-card .card_info .product_price .price-old {
+  color: #565656;
+  text-decoration: line-through;
 }
 
 .img__full {
@@ -327,6 +346,11 @@ section .title i {
 .khoa-header__info {
   padding: 10px 0;
   background: #0F3460;
+}
+.khoa-header__info .header_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .khoa-navbar {
