@@ -45,7 +45,8 @@ class SupplierController extends Controller
         // $prod->short_desc = $request->short_desc;
         // using mass assignment
 
-        $prod = $request->all(); 
+
+        $prod = $request->all();
            // $prod là 1 mảngz
         $prod['slug'] = \Str::slug($request->name);
         
@@ -118,7 +119,6 @@ class SupplierController extends Controller
         $prod = $request->all();    // $prod là 1 mảng
         dd($prod);
         $prod['slug'] = \Str::slug($request->name);
-        
         if($request->hasFile('photo'))
         {
             $file=$request->file('photo');

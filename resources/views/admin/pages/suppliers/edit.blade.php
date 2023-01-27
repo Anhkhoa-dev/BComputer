@@ -1,4 +1,4 @@
-  @extends('admin.elements.master')
+@extends('admin.elements.master')
 
   @section('title')
       Edit Supplier | BComputer
@@ -25,8 +25,9 @@
           <div class="card-header">
               <h3 class="card-title">Supplier</h3>
           </div>
+
           <form 
-          {{-- action="{{ Route('admin.pages.suppliers.update', $supplierEdit->id) }}" method="POST" enctype="multipart/form-data" --}}
+     {{-- action="{{ Route('admin.pages.suppliers.update', $supplierEdit->id) }}" method="POST" enctype="multipart/form-data" --}}
           >
               @csrf
               @method('put')

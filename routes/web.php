@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AcountConroller;
 use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Guest\CartConntroller;
 use App\Http\Controllers\Guest\IndexController;
@@ -58,7 +59,28 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
 
     // Phần dashboard - Phúc
     Route::get("/admin", [AdminsController::class, "getHome"])->name("admin/dashboard");
+
+    // Phần account - Phúc
     Route::get('admin/acount', [AcountConroller::class, 'index'])->name('admin/acount');
+    Route::get('admin/acount/create', [AcountConroller::class, 'create'])->name('admin/acount/create');
+    Route::post('admin/acount/postAcount', [AcountConroller::class, 'store'])->name('admin/acount/store');
+
+    Route::get('admin/acount/edit/{slug}', [AcountConroller::class, 'edit'])->name('admin/acount/edit');
+    Route::post('admin/acount/update', [AcountConroller::class, 'update'])->name('admin/acount/update');
+    Route::get('admin/acount/view', [AcountConroller::class, 'show'])->name('admin/acount/view');
+
+    // Phần Banner - Phúc
+    Route::get('admin/banner', [BannerController::class, 'index'])->name('admin/banner');
+    // Create
+    Route::get('admin/banner/create', [BannerController::class, 'create'])->name('admin/banner/create');
+    Route::post('admin/banner/postBanner', [BannerController::class, 'store'])->name('admin/banner/store');
+    // Update
+    Route::get('admin/banner/edit/{id}', [BannerController::class, 'edit'])->name('admin/banner/edit');
+    Route::post('admin/banner/update/{id}', [BannerController::class, 'update'])->name('admin/banner/update');
+    // Delete
+    Route::get('admin/banner/destroy/{id}', [BannerController::class, 'destroy'])->name('admin/banner/destroy');
+
+
 
     // Phần danh cho product manager - khoa
     Route::get('admin/product', [ProductController::class, 'index'])->name('admin/product');
@@ -74,5 +96,6 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
 
     Route::get('admin/supplier/edit/{slug}', [SupplierController::class, 'edit'])->name('supplier/edit');
     Route::post('admin/supplier/update',[SupplierController::class, 'update'])  ->name('supplier/update');
+
     // Route::post('admin/supplier/delete', [SupplierController::class, 'delete'])->name('deleteSupplierItem');
 });
