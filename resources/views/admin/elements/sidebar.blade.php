@@ -1,19 +1,16 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="{{ route('admin/dashboard')}}" class="brand-link">
-      <img src="{{ asset('image/logo02.png') }}" alt="BComputer logo" class="brand-image elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">BComputer</span>
+    <a href="{{ route('admin/dashboard') }}" class="brand-link">
+        <img src="{{ asset('image/logo02.png') }}" alt="BComputer logo" class="brand-image elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">BComputer</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user (optional) -->
-
-      <!-- SidebarSearch Form -->
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                data-accordion="false">
+                <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="{{ route('admin/dashboard') }}" class="nav-link">
@@ -118,3 +115,4 @@
     </div>
     <!-- /.sidebar -->
   </aside>
+

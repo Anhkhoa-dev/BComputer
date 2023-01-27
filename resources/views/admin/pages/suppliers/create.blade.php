@@ -83,6 +83,7 @@
                                     class="form-control">
                                     <option value="1">Actived</option>
                                     <option value="0">Clocked</option>
+
                                 </select>
                             </div>
                         </div>
