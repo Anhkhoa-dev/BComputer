@@ -76,19 +76,16 @@
                                 <td class="project-actions text-right">
                                     <a class="btn btn-primary btn-sm" href="#">
                                         <i class="fas fa-folder">
-                                        </i>
-                                        View
+                                        </i> View
                                     </a>
                                     <a class="btn btn-info btn-sm" href="{{ route('supplier/edit', $item->id) }}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
-                                        Edit
+                                        Update
                                     </a>
-                                    <a class="btn btn-danger btn-sm" href="#">
-                                        <i class="fas fa-trash">
-                                        </i>
-                                        Delete
-                                    </a>
+                                    <form action="{{ route('deleteSupplier', $item->id) }}" style="display: inline-block">
+                                        <input type="submit" value="Delete" class="btn btn-danger" />
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

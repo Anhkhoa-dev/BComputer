@@ -76,6 +76,7 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::post('admin/supplier/postSupplier',[SupplierController::class, 'store'])  ->name('supplier/store');
 
     Route::get('admin/supplier/edit/{slug}', [SupplierController::class, 'edit'])->name('supplier/edit');
-    Route::post('admin/supplier/update',[SupplierController::class, 'update'])  ->name('supplier/update');
-    // Route::post('admin/supplier/delete', [SupplierController::class, 'delete'])->name('deleteSupplierItem');
+    Route::post('admin/supplier/update/{id}',[SupplierController::class, 'update'])  ->name('updateSupplier');
+    
+    Route::get('admin/supplier/delete/{id}', [SupplierController::class, 'destroy'])->name('deleteSupplier');
 });

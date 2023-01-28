@@ -115,32 +115,25 @@ class SupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $prod = $request->all();    // $prod là 1 mảng
-        dd($prod);
-        $prod['slug'] = \Str::slug($request->name);
-        
-        if($request->hasFile('photo'))
+        $supplier = $request->all();
+        $p = SUPPLIER::find($id);
+
+        $p->update($supplier);
+        if ($request->hasFile('image'))
         {
-            $file=$request->file('photo');
+            $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
-            if($extension != 'jpg' && $extension != 'png' && $extension !='jpeg')
+            if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg')
             {
-                return redirect()->route('adminpages.suppliers.create')
-                    ->with('loi','Bạn chỉ được chọn file có đuôi jpg,png,jpeg');
+                return redirect('supplier/create')->with('Error!', 'You must choose a file which has extension: jpg, png, jpeg');
+
             }
-            $image = $file->getClientOriginalName();
-            $file->move("images",$image);
+            $Imagename = $file->getClientOriginalName();
+            $file->move('images', $Imagename);
+            $p->image = $Imagename;
         }
-        else
-        {
-            // trường hợp không upload phải lấy hình cũ
-            $oldItem = SUPPLIER::find($supplierEdit->id);
-            $image = $oldItem->image;
-        }
-        $prod['image'] = $image;
-        //$product = new Product($prod);
-        $supplierEdit->update($prod);
-        return redirect()->route('admin.pages.suppliers.index');
+        $p->save();
+        return redirect()->route('admin/supplier');
     }
 
     /**
@@ -151,8 +144,8 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        //xử lý xóa
-        //$id->delete();
-        return redirect()->route('admin.pages.suppliers.index');
+        $p = SUPPLIER::find($id);
+        $p->delete();
+        return redirect()->route('admin/supplier');
     }
 }
