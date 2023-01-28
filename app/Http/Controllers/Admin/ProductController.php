@@ -8,6 +8,8 @@ use App\Models\Products;
 use App\Models\SUPPLIER;
 use App\Models\Brands;
 use App\Models\Category;
+use App\Models\ProductImage;
+
 
 class ProductController extends Controller
 {
@@ -56,7 +58,15 @@ class ProductController extends Controller
     public function create()
     {
         //
-        return view('admin.pages.products.create');
+        $category = Category::all();
+        $brands = Brands::all();
+        $supplier = SUPPLIER::all();
+        $array = [
+            'category' => $category,
+            'brands' => $brands,
+            'supplier' => $supplier,
+        ];
+        return view('admin.pages.products.create')->with($array);
     }
 
     /**
@@ -67,7 +77,62 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            $prods = $request->all();
+            $request->validate(
+                [
+                    'pro_name' => 'required',
+                    'pro_price' => 'required',
+                    'pro_discount' => 'required',
+                    'pro_desc' => 'required',
+                    'pro_image' => 'required',
+                ],
+                [
+                    'pro_name.required' => 'Please input name of product',
+                    'pro_price.required' => 'Please input price of product',
+                    'pro_discount.required' => 'Please input discount of product ',
+                    'pro_desc.required' => 'Please input description of product!',
+                    'pro_image.required' => 'Please choose image!',
+            ]);
+
+            $data = [
+                'name' => $prods['pro_name'],
+                'slug' => \Str::slug($prods['pro_name']),
+                'id_ca' => intval($prods['pro_category']),
+                'discount' => intval($prods['pro_discount']),
+                'sup_id' => intval($prods['pro_supplier']),
+                'description' => $prods['pro_desc'],
+                'price' => floatval($prods['pro_price']),
+                'quantity' => intval($prods['pro_quantity']),
+                'cauhinh' => null,
+                'id_brand' => intval($prods['pro_brand']),
+                'featured' => intval($prods['pro_featured']),
+                'status' => intval($prods['pro_active']),
+            ];
+
+            $kiemtraName = Products::where('name', $prods['pro_name'])->first();
+
+            if($kiemtraName != null){
+                return back()->withErrors([
+                    'pro_name' => 'Product dupplicate name'
+                ])->onlyInput('pro_name');
+            }else{
+                Products::create($data);
+                $product_img = Products::where('name', $data['name'])->first();
+                if($request->hasfile('pro_image'))
+                {
+                   foreach($request->file('pro_image') as $file)
+                   {
+                        $fileName = $file->getClientOriginalName();
+                        $file->move("image/product", $fileName);
+                        ProductImage::create([
+                            'id_pro' => $product_img->id,
+                            'image' => $fileName,
+                        ]);
+                   }
+                }
+                return redirect('admin/product')->with('success_message', 'Thêm sản phẩm mới thành công!');
+
+            }
     }
 
     /**
@@ -78,7 +143,31 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Products::where('slug', $id)->first();
+        $productImg = ProductImage::where('id_pro', $product->id)->get();
+        if ($product->id_ca) {
+            $product->category = Category::find($product->id_ca);
+        } else {
+            $product->category = '';
+        }
+        if ($product->sup_id) {
+            $product->supplier = SUPPLIER::find($product->sup_id);
+        } else {
+            $product->supplier = '';
+        }
+
+        if ($product->id_brand) {
+            $product->brand = Brands::find($product->id_brand);
+        } else {
+            $product->brand = '';
+        }
+        //  dd($product);
+        $data = [
+            'proShow' => $product,
+            'proImage' => $productImg,
+        ];
+
+        return view('admin.pages.products.detail')->with($data);
     }
 
     /**
@@ -113,5 +202,7 @@ class ProductController extends Controller
     public function destroy($id)
     {
         //
+        Products::where('id', $id)->update(['status' => 0]);
+        return back()->with('success', 'Delete product success!');
     }
 }

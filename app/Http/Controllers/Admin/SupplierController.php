@@ -45,7 +45,8 @@ class SupplierController extends Controller
         // $prod->short_desc = $request->short_desc;
         // using mass assignment
 
-        $prod = $request->all(); 
+
+        $prod = $request->all();
            // $prod là 1 mảngz
         $prod['slug'] = \Str::slug($request->name);
         

@@ -1,170 +1,193 @@
 @extends('admin.elements.master')
 
 @section('title')
-   Create product | Admin BComputer    
+    Create product | Admin BComputer
 @endsection
 
 @section('admin-main')
     <div class="content-header">
         <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-            <h1 class="m-0">Add new product</h1>
-            </div><!-- /.col -->
-            <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item active">Add Products</li>
-            </ol>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Add new product</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Add Products</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
         </div><!-- /.container-fluid -->
-   </div>
+    </div>
 
-   <section class="content">
+    <section class="content">
 
-    <!-- Default box -->
-    <div class="card">
-      <div class="card-header">
-        {{-- <a class="btn btn-primary">Add new product</a> --}}
-        <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-            <i class="fas fa-minus"></i>
-          </button>
-          <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-            <i class="fas fa-times"></i>
-          </button>
-        </div>
-      </div>
-      <div class="card-body p-0">
-            <form action="#" method="post" class="mt-2 px-5" enctype="multipart/form-data">
-                <h4 class="text-blue font-medium mb-3">Add new product</h4>
-                <hr>
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label for="">Product Name</label>
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="col-12">
-                                            <div class="mb-3">
-                                                <label for="">Price</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="col-12">
-                                            <div class="mb-3">
-                                                <label for="">Quanity</label>
-                                                <input type="number" class="form-control" min="1">
-                                            </div>
-                                        </div>
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                {{-- <a class="btn btn-primary">Add new product</a> --}}
+                <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body p-0">
+                <form action="{{ route('admin/product/store') }}" method="post" class="mt-2 px-5"
+                    enctype="multipart/form-data">
+                    <h4 class="text-blue font-medium mb-3">Add new product</h4>
+                    <hr>
+                    {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="">Product Name</label>
+                                        <input type="text" class="form-control" name="pro_name"
+                                            value="{{ old('pro_name') }}">
+                                        @error('pro_name')
+                                            <span class="errorMsg">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="col-12">
-                                            <div class="mb-3">
-                                                <label for="">Category</label>
-                                                <select name="" id="" class="form-select">
-                                                    <option value="" selected>Select category</option>
-                                                    <option value="">Laptop</option>
-                                                    <option value="">PC Intel</option>
-                                                    <option value="">PC AMD</option>
-                                                </select>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label for="">Price</label>
+                                                    <input type="text" class="form-control" name="pro_price"
+                                                        value="{{ old('pro_price') }}">
+                                                    @error('pro_price')
+                                                        <span class="errorMsg">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="col-12">
-                                            <div class="mb-3">
-                                                <label for="">Brands</label>
-                                                <select name="" id="" class="form-select">
-                                                    <option value="" selected>Select brands</option>
-                                                    <option value="">Acer</option>
-                                                    <option value="">Asus</option>
-                                                    <option value="">Dell</option>
-                                                </select>
+                                        <div class="col-6">
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label for="">Quanity</label>
+                                                    <input type="number" class="form-control" min="1"
+                                                        name="pro_quantity" value="1">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="col-12">
-                                            <div class="mb-3">
-                                                <label for="">Supplier</label>
-                                                <select name="" id="" class="form-select">
-                                                    <option value="" selected>Select supplier</option>
-                                                    <option value="">Dell Việt Nam</option>
-                                                    <option value="">Asus Việt Nam</option>
-                                                    <option value="">Acer Việt Nam</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="col-12">
-                                            <div class="mb-3">
-                                                <label for="">Discount</label>
-                                                <input type="number" class="form-control" min="10" max="30">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label for="">Tạo file cấu hình</label>
-                                    <div class="form-control btn-primary text-center">Tạo cấu hình sản phẩm</div>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="mb-3">
-                                    <label for="">Description</label>
-                                    <textarea name="" id="productdesc" rows="8" class="form-control"></textarea>
-                                </div>
-                            </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label for="">Category</label>
+                                                    <select name="pro_category" id="" class="form-select">
+                                                        <option value="" selected>Select category</option>
+                                                        @foreach ($category as $item)
+                                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                                        @endforeach
+                                                    </select>
 
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label for="">Brands</label>
+                                                    <select name="pro_brand" id="" class="form-select">
+                                                        <option value="" selected>Select brands</option>
+                                                        @foreach ($brands as $brand)
+                                                            <option value="{{ $brand->id }}">{{ $brand->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label for="">Supplier</label>
+                                                    <select name="pro_supplier" id="" class="form-select">
+                                                        <option value="" selected>Select supplier</option>
+                                                        @foreach ($supplier as $sup)
+                                                            <option value="{{ $sup->id }}">{{ $sup->name }}
+                                                            </option>
+                                                        @endforeach
+
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="col-12">
+                                                <div class="mb-3">
+                                                    <label for="">Discount</label>
+                                                    <input type="number" name="pro_discount" class="form-control"
+                                                        min="10" max="40" value="{{ old('pro_discount') }}">
+                                                    @error('pro_discount')
+                                                        <span class="errorMsg">{{ $message }}</span>
+                                                    @enderror
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="">Tạo file cấu hình</label>
+                                        <div class="form-control btn-primary text-center">Tạo cấu hình sản phẩm</div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3">
+                                        <label for="">Description</label>
+                                        <textarea name="pro_desc" id="productdesc" rows="5" class="form-control">{{ old('pro_desc') }}</textarea>
+                                        @error('pro_desc')
+                                            <span class="errorMsg">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
                                 <div class="col-12">
                                     <div class="mb-3">
                                         <label for="">Image product</label>
+                                        <b id="qty-image"></b>
+                                        @error('pro_image')
+                                            <span class="errorMsg">{{ $message }}</span>
+                                        @enderror
                                         <div class="image-preview-div">
                                             <div class="row">
-                                                <div class="col-md-4 col-6">
-                                                    <div class="image-preview">
-                                                        <img src="{{ asset('image/product/Asus_ROG_Gladius_II_01.PNG') }}" alt="" class="img-preview">
-                                                        <div class="bg-image-hover">
-                                                            <div class="delete-icon">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div> 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3">
-                                        <input type="file" id="image_inp" class="d-none" multiple accept="image/*">
-                                        <div class="form-control btn-primary text-center cursor-pointer " id="choose_image">Choose image</div>
+                                        <input type="file" name="pro_image[]" id="image_inp" multiple class="d-none"
+                                            value="{{ old('pro_image[]') }}">
+                                        <label class="form-control btn-primary text-center cursor-pointer "
+                                            for="image_inp">
+                                            Choose image</label>
                                         <p>* Kích thước hình ảnh: 600x600 (px) - Tỉ lệ hình ảnh: 1:1</p>
+
                                     </div>
                                 </div>
                                 <div class="col-12">
@@ -172,7 +195,7 @@
                                         <div class="col-6">
                                             <div class="mb-3">
                                                 <label for="">Featured</label>
-                                                <select name="" id="" class="form-select">
+                                                <select name="pro_featured" id="" class="form-select">
                                                     <option value="1" selected>Nổi bật</option>
                                                     <option value="0">Thường</option>
                                                 </select>
@@ -181,14 +204,14 @@
                                         <div class="col-6">
                                             <div class="mb-3">
                                                 <label for="">Hoạt động</label>
-                                                <select name="" id="" class="form-select">
-                                                    <option value="" selected>Đang kinh doanh</option>
-                                                    <option value="">Ngừng kinh doanh</option>
+                                                <select name="pro_active" id="" class="form-select">
+                                                    <option value="1" selected>Đang kinh doanh</option>
+                                                    <option value="0">Ngừng kinh doanh</option>
                                                 </select>
                                             </div>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="col-12 mt-4">
                                     <div class="row">
@@ -201,23 +224,11 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>   
+                        </div>
                     </div>
-                </div>
+            </div>
             </form>
-      </div>
-    </div>
-  </section>
+        </div>
+        </div>
+    </section>
 @endsection
-{{-- @section('myjs-admin') 
-    <script type="text/javascript">
-        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
-    $(function(){
-        
-        // show dialog chọn hình ảnh
-        
-
-    });
-       
-    </script>
-@endsection --}}

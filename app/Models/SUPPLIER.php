@@ -21,3 +21,4 @@ class SUPPLIER extends Model
         'status',
     ];
 }
+

@@ -35,7 +35,7 @@ class User extends Authenticatable
         'dateRegister',
         'loginStatus',
         'device_token',
-        
+
     ];
 
     /**

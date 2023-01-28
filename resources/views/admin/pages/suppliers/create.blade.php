@@ -81,8 +81,9 @@
                                 <label for="status" class="form-label">Status</label>
                                 <select id='abc' name="staabctus" aria-label="Default select example"
                                     class="form-control">
-                                    <option value="0">Actived</option>
-                                    <option value="1">Clocked</option>
+                                    <option value="1">Actived</option>
+                                    <option value="0">Clocked</option>
+
                                 </select>
                             </div>
                         </div>

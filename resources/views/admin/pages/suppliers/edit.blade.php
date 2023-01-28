@@ -1,4 +1,4 @@
-  @extends('admin.elements.master')
+@extends('admin.elements.master')
 
   @section('title')
       Edit Supplier | BComputer
