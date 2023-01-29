@@ -25,33 +25,28 @@
           <div class="card-header">
               <h3 class="card-title">Supplier</h3>
           </div>
-          <form 
-            {{-- action="{{ Route('supplier/update', $supplierUpdate->id) }}" method="POST" enctype="multipart/form-data"
-          > --}}
-          {{-- action="{{ route('supplier/update',$supplierUpdate->id) }}" method="POST" enctype="multipart/form-data"> --}}
-              @csrf
-              @method('put')
-              {{-- @if ($supplierEdit != null) --}}
                   <div class="modal-body">
-                      <form action="#" method="post">
-                          <div class="d-flex justify-content-between">
+                      <form action="{{ route('supplier/update', $prod->id) }}" method="POST" enctype="multipart/form-data" >  
+                        @csrf
+                        <div class="d-flex justify-content-between">
                               {{-- // cột bên trái --}}
+                              <input type="hidden" name="sup_id" value="{{$prod->id}}">
                               <div style="width: 48%">
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Name</label>
-                                      <input type="texe" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Name">
+                                      <input type="texe" class="form-control" name="sup_name" id="exampleFormControlInput1"
+                                          value="{{$prod->name}}">
                                   </div>
 
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Address</label>
-                                      <input type="text" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Address" >
+                                      <input type="text" class="form-control" name="sup_address"  id="exampleFormControlInput1"
+                                      value="{{$prod->address}}">
                                   </div>
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Email</label>
-                                      <input type="text" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Email">
+                                      <input type="text" class="form-control" name="sup_email" id="exampleFormControlInput1"
+                                      value="{{$prod->email}}">
                                   </div>
 
                               </div>
@@ -65,34 +60,34 @@
                                               <input type="file" class="custom-file-input" name="photo" id="image">
                                               <label class="custom-file-label" for="image">Choose image</label>
                                           </div>
-                                          <div class="input-group-append">
-                                              <span class="input-group-text">Upload</span>
-                                          </div>
                                       </div>
                                   </div>
 
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Phone</label>
-                                      <input type="text" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Phone">
+                                      <input type="text" class="form-control" name="sup_phone"  id="exampleFormControlInput1"
+                                      value="{{$prod->phone}}">
                                   </div>
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Status</label>
-                                      <select id='loai_tk' name="loai_tk" aria-label="Default select example"
-                                          class="form-control"
-                                          >
-                                          <option value="0">Actived</option>
-                                          <option value="1">Clocked</option>
+                                      <select id='loai_tk' name="loai_tk" aria-label="Default select example" class="form-select">
+                                            @if ($prod->status == '1')
+                                                <option selected value="1">Active</option>
+                                                <option value="0">Clocked</option>
+                                            @else
+                                               <option selected value="0">Clocked</option>
+                                               <option value="1">Actived</option>
+                                        @endif
                                       </select>
                                   </div>
                               {{-- </div> --}}
                           </div>
-                      </form>
+                      
                   </div>
                   <div class="modal-footer">
                       <button type="submit" class="btn btn-primary">Save</button>
                   </div>
-          </form>
+                </form>
       </div>
       {{-- @endif --}}
       </section>
