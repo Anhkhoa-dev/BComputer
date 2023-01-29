@@ -40,32 +40,36 @@
             @csrf
             <div class="modal-body">
                 <form action="#" method="post">
-                    <div class="form-group">
-                        <label for="image">Image</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="photo" id="image">
-                                <label class="custom-file-label" for="image">Choose image</label>
-                            </div>
-                            <div class="input-group-append">
-                                <span class="input-group-text">Upload</span>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="d-flex justify-content-between">
+
                         {{-- // cột bên trái --}}
                         <div style="width: 48%">
-                            <div class="mb-3">
+                            <div class="mb-12">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" name = "name" placeholder="Name">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="Name">
                             </div>
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input type="file" class="custom-file-input" name="photo" id="image">
+                                        <label class="custom-file-label" for="image">Choose image</label>
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
+                                </div>
+                            </div>
+
+
                             <div class="mb-3">
                                 <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="address" name = "address"
+                                <input type="text" class="form-control" id="address" name="address"
                                     placeholder="Address">
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name ="email"
+                                <input type="text" class="form-control" id="email" name="email"
                                     placeholder="Email">
                             </div>
                         </div>
@@ -74,7 +78,7 @@
                         <div style="width: 48%">
                             <div class="mb-3">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="phone" name = "phone"
+                                <input type="text" class="form-control" id="phone" name="phone"
                                     placeholder="Phone">
                             </div>
                             <div class="mb-3">
@@ -88,11 +92,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
             </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </form>
+    </div>
 
     </div>
 @endsection

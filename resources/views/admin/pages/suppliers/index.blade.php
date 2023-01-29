@@ -72,20 +72,24 @@
                                         {{ $item->status == 1 ? 'Actived' : 'Clocked' }}
                                     </p>
                                 </td>
-
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary btn-sm" href="#">
+                                    <a class="btn btn-primary" href="#">
                                         <i class="fas fa-folder">
                                         </i> View
                                     </a>
-                                    <a class="btn btn-info btn-sm" href="{{ route('supplier/edit', $item->id) }}">
+                                    <a class="btn btn-info" href="{{ route('supplier/edit', $item->id) }}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Update
                                     </a>
-                                    <form action="{{ route('deleteSupplier', $item->id) }}" style="display: inline-block">
+                                    <a class="btn btn-danger" href="{{ route('supplier/delete', $item->id)}}"  >
+                                        <i class="fa fa-trash">
+                                        </i>
+                                        Delete
+                                    </a>
+                                    {{-- <form action="{{ route('deleteSupplier', $item->id) }}" style="display: inline-block">
                                         <input type="submit" value="Delete" class="btn btn-danger" />
-                                    </form>
+                                    </form> --}}
                                 </td>
                             </tr>
                         @endforeach

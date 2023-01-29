@@ -25,14 +25,13 @@
           <div class="card-header">
               <h3 class="card-title">Supplier</h3>
           </div>
-          <form role="form" id="quickForm" action="{{ route('updateSupplier', $$item->id) }}" 
-            method="POST" enctype="multipart/form-data">
-          {{-- action="{{ Route('admin.pages.suppliers.update', $supplierEdit->id) }}" method="POST" enctype="multipart/form-data" --}}
-          
-          
+          <form 
+            {{-- action="{{ Route('supplier/update', $supplierUpdate->id) }}" method="POST" enctype="multipart/form-data"
+          > --}}
+          {{-- action="{{ route('supplier/update',$supplierUpdate->id) }}" method="POST" enctype="multipart/form-data"> --}}
               @csrf
               @method('put')
-              @if ($supplierEdit != null)
+              {{-- @if ($supplierEdit != null) --}}
                   <div class="modal-body">
                       <form action="#" method="post">
                           <div class="d-flex justify-content-between">
@@ -41,29 +40,24 @@
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Name</label>
                                       <input type="texe" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Name" value="{{ $supplierEdit->name }}">
+                                          placeholder="Name">
                                   </div>
 
-                                  <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" class="form-control" id="name"
-                                    value="{{ $p->name }}" placeholder="Enter Supplier name">
-                                  </div>
-                                  {{-- <div class="mb-3">
+                                  <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Address</label>
                                       <input type="text" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Address" value="{{ $supplierEdit->address }}">
+                                          placeholder="Address" >
                                   </div>
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Email</label>
                                       <input type="text" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Email"value="{{ $supplierEdit->email }}">
-                                  </div> --}}
+                                          placeholder="Email">
+                                  </div>
 
                               </div>
 
                               {{-- cột bên phải  --}}
-                              {{-- <div style="width: 48%">
+                              <div style="width: 48%">
                                   <div class="form-group">
                                       <label for="image">Image</label>
                                       <div class="input-group">
@@ -80,16 +74,17 @@
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Phone</label>
                                       <input type="text" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Phone" value="{{ $supplierEdit->phone }}">
+                                          placeholder="Phone">
                                   </div>
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Status</label>
                                       <select id='loai_tk' name="loai_tk" aria-label="Default select example"
-                                          class="form-control"value="{{ $supplierEdit->status }}">
+                                          class="form-control"
+                                          >
                                           <option value="0">Actived</option>
                                           <option value="1">Clocked</option>
                                       </select>
-                                  </div> --}}
+                                  </div>
                               {{-- </div> --}}
                           </div>
                       </form>
@@ -99,6 +94,6 @@
                   </div>
           </form>
       </div>
-      @endif
+      {{-- @endif --}}
       </section>
   @endsection
