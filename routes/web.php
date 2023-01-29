@@ -27,8 +27,8 @@ Route::controller(LoginController::class)->group(function () {
 Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'], function () {
     //phần dành cho guest
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
-    Route::get('/products/{slug}', [IndexController::class, 'getProducts'])->name('/products');
-    Route::get('/products/details/{name}', [IndexController::class, 'getDetail'])->name('/products/detail/');
+    Route::get('collections/{name}', [IndexController::class, 'getProducts'])->name('user/products');
+    Route::get('product/{name}', [IndexController::class, 'getDetail'])->name('user/detail');
 
 
 

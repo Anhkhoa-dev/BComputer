@@ -19,10 +19,10 @@
                 </div>
                 <div class="col-md-9 pt-4 pb-0">
                     <div class="col-md-12">
-                         <div class="row">
+                        <div class="row">
                             @include('guest.pages.sidebar.banner')
-                         </div>
-                     </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     </div>
                 </div>
 
-                 <div class="col-md-12 mt-1 py-3">
+                <div class="col-md-12 mt-1 py-3">
                     @include('guest.pages.flashDelas')
                 </div>
 
@@ -109,7 +109,8 @@
                         <div class="card">
                             <div class="card_img">
                                 <a href="">
-                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt="" class="img__full cursor-pointer">
+                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt=""
+                                        class="img__full cursor-pointer">
                                 </a>
                             </div>
                             <div class="card_info">
@@ -120,7 +121,8 @@
                         <div class="card">
                             <div class="card_img">
                                 <a href="">
-                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt="" class="img__full cursor-pointer">
+                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt=""
+                                        class="img__full cursor-pointer">
                                 </a>
                             </div>
                             <div class="card_info">
@@ -131,7 +133,8 @@
                         <div class="card">
                             <div class="card_img">
                                 <a href="">
-                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt="" class="img__full cursor-pointer">
+                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt=""
+                                        class="img__full cursor-pointer">
                                 </a>
                             </div>
                             <div class="card_info">
@@ -142,7 +145,8 @@
                         <div class="card">
                             <div class="card_img">
                                 <a href="">
-                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt="" class="img__full cursor-pointer">
+                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt=""
+                                        class="img__full cursor-pointer">
                                 </a>
                             </div>
                             <div class="card_info">
@@ -153,7 +157,8 @@
                         <div class="card">
                             <div class="card_img">
                                 <a href="">
-                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt="" class="img__full cursor-pointer">
+                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt=""
+                                        class="img__full cursor-pointer">
                                 </a>
                             </div>
                             <div class="card_info">
@@ -164,7 +169,8 @@
                         <div class="card">
                             <div class="card_img">
                                 <a href="">
-                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt="" class="img__full cursor-pointer">
+                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt=""
+                                        class="img__full cursor-pointer">
                                 </a>
                             </div>
                             <div class="card_info">
@@ -187,49 +193,81 @@
                 <div class="col-md-12 d-flex justify-content-between align-itmes-center">
                     <div class="title">
                         <img src="{{ asset('image/icon/002-new.png') }}" alt="" width="30">
-                        Big Count
+                        Products Featured
                     </div>
                     <div class="view_all">
                         <a href="#">View all</a>
                     </div>
                 </div>
                 <div class="col-md-12">
-                    @include('guest.pages.big-discount')
+                    <div id="big-discount" class="owl-carousel owl-theme">
+                        @foreach ($list_Featured as $item)
+                            <div class="item">
+                                <div class="home-card">
+                                    <div class="card_image">
+                                        <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
+                                            <img src="{{ asset('image/product/' . $item->image[0]->image) }}"
+                                                class="img-fluid" alt="{{ $item->name }}">
+                                        </a>
+                                        <div class="sale_off">
+                                            <p>{{ $item->discount }}% Off</p>
+                                        </div>
+                                        <div class="p_like">
+                                            <a href="#" class="p_like_sosanh" title="product comparison">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </a>
+                                            <a href="#" class="p_like_heart">
+                                                <i class="fa-regular fa-heart"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="card_info">
+                                        <a href="{{ route('user/detail', ['name' => $item['slug']]) }}"
+                                            class="product_name" title="{{ $item->name }}">{{ $item->name }}</a>
+                                        <div class="product_rate">
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star"></i>
+                                            <i class="fa-solid fa-star-half-stroke"></i>
+                                        </div>
+                                        <div class="product_price">
+                                            $ {{ $item->price }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
                 </div>
             </div>
         </div>
 
 
     </section>
-
-
-
-
-
-
-
 @endsection
 
 @section('myjs')
     <script>
         //slide banner
-       var owl_carousel_banner = $('#banner');
+        var owl_carousel_banner = $('#banner');
         owl_carousel_banner.owlCarousel({
-            loop:true,
-            margin:15,
+            loop: true,
+            margin: 15,
             // nav:true,
-            autoplay:true,
-            autoplayTimeout:5000,
-            autoplayHoverPause:true,
-            responsive:{
-                0:{
-                    items:1
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true,
+            responsive: {
+                0: {
+                    items: 1
                 },
-                600:{
-                    items:1
+                600: {
+                    items: 1
                 },
-                1000:{
-                    items:1
+                1000: {
+                    items: 1
                 }
             }
         });
@@ -237,21 +275,21 @@
         // slide flash delas
         var owl_carousel_flashdelas = $('#flash-delas');
         owl_carousel_flashdelas.owlCarousel({
-            loop:true,
-            margin:10,
-            autoplay:true,
-            autoplayTimeout:5000,
-            autoplayHoverPause:true,
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true,
             // nav:true,
-            responsive:{
-                0:{
-                    items:1
+            responsive: {
+                0: {
+                    items: 1
                 },
-                600:{
-                    items:3
+                600: {
+                    items: 3
                 },
-                1000:{
-                    items:5
+                1000: {
+                    items: 5
                 }
             }
         });
@@ -259,28 +297,23 @@
         // slide flash delas
         var owl_carousel_big_discount = $('#big-discount');
         owl_carousel_big_discount.owlCarousel({
-            loop:true,
-            margin:10,
-            autoplay:true,
-            autoplayTimeout:5000,
-            autoplayHoverPause:true,
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 5000,
+            autoplayHoverPause: true,
             // nav:true,
-            responsive:{
-                0:{
-                    items:1
+            responsive: {
+                0: {
+                    items: 1
                 },
-                600:{
-                    items:4
+                600: {
+                    items: 4
                 },
-                1000:{
-                    items:6
+                1000: {
+                    items: 6
                 }
             }
         });
-
-
-
-
     </script>
-
 @endsection

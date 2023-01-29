@@ -6,7 +6,8 @@
   font-size: 16px;
 }
 
-html, body {
+html,
+body {
   scroll-behavior: smooth;
 }
 
@@ -190,31 +191,34 @@ section .title i {
   height: auto;
 }
 
-.khoa-bc {
-  background-color: #d6d6d6;
+.khoa-bg {
+  background: #d6d6d6;
+}
+.khoa-bg .khoa-bc {
   display: flex;
   justify-content: flex-start;
-  padding: 8px 9%;
+  align-items: center;
+  padding: 8px 0;
 }
-.khoa-bc .bc-items {
+.khoa-bg .khoa-bc .bc-items {
   text-decoration: none;
-  padding: 0 10px;
   color: #565656;
+  padding: 0 8px;
 }
-.khoa-bc .bc-items:hover {
+.khoa-bg .khoa-bc .bc-items:hover {
   color: #4f23ff;
 }
-.khoa-bc .bc-divider i {
+.khoa-bg .khoa-bc .bc-divider i {
   font-size: 0.825rem;
   color: #0F3460;
 }
-.khoa-bc .bc-item.active {
+.khoa-bg .khoa-bc .bc-items.active {
   text-decoration: none;
   padding: 0 10px;
   color: #0F3460;
   font-weight: 600;
 }
-.khoa-bc .bc-item.active:hover {
+.khoa-bg .khoa-bc .bc-items.active:hover {
   color: #4f23ff;
 }
 
