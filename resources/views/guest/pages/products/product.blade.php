@@ -70,9 +70,11 @@
                                                 class="fa-solid fa-eye"></i>
                                         </div>
                                     </a>
-                                    <a href="#" class="text-decoration-none text-dark">
-                                        <div class="hover-addtocart" title="Add to cart"><i
-                                                class="fa-solid fa-bag-shopping"></i></div>
+                                    <a href="#" class="text-decoration-none text-dark add-to-cart"
+                                        data-id="{{ $item->id }}">
+                                        <div class="hover-addtocart" title="Add to cart">
+                                            <i class="fa-solid fa-bag-shopping"></i>
+                                        </div>
                                     </a>
                                 </div>
                             </div>

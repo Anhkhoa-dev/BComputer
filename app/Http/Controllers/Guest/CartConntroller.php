@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Auth;
 class CartConntroller extends Controller
 {
     //
+
+
+
+
     public function getViewcart()
     {
         if (!Auth::check()) {
@@ -16,8 +20,6 @@ class CartConntroller extends Controller
         } else {
             return view('guest.pages.carts.cart-item');
         }
-
-
     }
     public function getCheckoutProcess()
     {
@@ -28,4 +30,11 @@ class CartConntroller extends Controller
     {
         return view('guest.pages.carts.checkout-success');
     }
+
+    public function addToCart(Request $request){
+        dd($request->ajax());
+    }
+
+
+
 }
