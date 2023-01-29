@@ -103,8 +103,13 @@ class SupplierController extends Controller
         // return view('admin.pages.suppliers.edit')->with($array);
 
 
-        $p = SUPPLIER::find($id);
-        return view('admin.pages.suppliers.edit');
+        $prod = SUPPLIER::where('id', $id)->first();
+        $array = [
+            'prod' => $prod,
+            'message' => 'Bạn đã đăng nhập thành công',
+        ];
+        // dd($array);
+        return view('admin.pages.suppliers.edit')->with($array);
     }
 
     /**
@@ -115,56 +120,30 @@ class SupplierController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        // $prods = $request->all();
-        // $supplier = SUPPLIER::find($id);
-        // $supplier->update($prods);
-        // if ($request->hasFile('photo'))
-        // {
-        //     $file = $request->file('photo');
-        //     $extension = $file->getClientOriginalExtension();
-        //     if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg')
-        //         // return redirect('suppliers/create')->with('Error!', 'You must choose a file which has extension: jpg, png, jpeg');
-        //     {
-        //         return redirect()->route('admin/suppliers/edit')
-        //             ->with('Lỗi!','Bạn chỉ được chọn file có đuôi jpg,png,jpeg');
-        //     }
-        //     $image = $file->getClientOriginalName();
-        //     $file->move('image/supplier', $image);
-        // }
-        // else
-        // {
-        //     $oldItem = SUPPLIER::find($supplier->id);
-        //     $image = $oldItem->image;
-        // }
-        // $prods['image']->$image;
-        // $supplier->save();
-        // return redirect()->route('admin/supplier');
-
-
-
-        {
+    {        
             $prods = $request->all();
-            dd();
-            $supplierUpdate = SUPPLIER::find($id);
-    
-            $supplierUpdate->update($prods);
-                if ($request->hasFile('image'))
-                {
-                    $file = $request->file('image');
-                    $extension = $file->getClientOriginalExtension();
-                    if ($extension != 'jpg' && $extension != 'png' && $extension != 'jpeg')
-                    {
-                        return redirect('supplier/index')->with('Error!', 'You must choose a file which has extension: jpg, png, jpeg');
-        
-                    }
-                    $Imagename = $file->getClientOriginalName();
-                    $file->move('images', $Imagename);
-                    $supplierUpdate->image = $Imagename;
-                }
-            $supplierUpdate->save();
+            $oldImage = SUPPLIER::where('id', $id)->first();
+            if ($file = $request->file('photo'))
+            {
+                $fileName = $file->getClientOriginalName();
+                $file->move('image/supplier/', $fileName);
+                $prods['image'] = "$fileName";
+            }else{
+                
+                $prods['image'] = $oldImage->image;
+            }
+            $data = [
+                'name' => $prods['sup_name'],
+                'image' => $prods['image'],
+                'address'=> $prods['sup_address'],
+                'phone'=> $prods['sup_phone'],
+                'email'=> $prods['sup_email'],
+                'status'=> intval($prods['loai_tk']),
+            ];
+            //dd($data);
+            SUPPLIER::where('id', intval($prods['sup_id']))->update($data);
             return redirect()->route('admin/supplier');
-        }
+        
     }
 
     /**
