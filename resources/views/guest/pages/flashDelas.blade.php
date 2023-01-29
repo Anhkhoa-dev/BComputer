@@ -1,13 +1,9 @@
 <div id="flash-delas" class="owl-carousel owl-theme">
-    {{-- Dùng để vòng lập sản phẩm --}}
-    {{-- @php
-        $featuredPro = $featuredProducts;
-    @endphp --}}
-    @foreach ($featuredProducts as $item)
+    @foreach ($bigDiscount as $item)
         <div class="item">
             <div class="home-card">
                 <div class="card_image">
-                    <a href="#">
+                    <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
                         <img src="{{ asset('image/product/' . $item->image[0]->image) }}" class="img-fluid"
                             alt="{{ $item->name }}">
                     </a>
@@ -15,16 +11,17 @@
                         <p>{{ $item->discount }}% Off</p>
                     </div>
                     <div class="p_like">
-                        <a href="#" class="p_like_sosanh" title="so sánh sản phẩm">
+                        <a href="#" class="p_like_sosanh" title="product comparison">
                             <i class="fa-solid fa-plus"></i>
                         </a>
-                        <a href="#" class="p_like_heart">
+                        {{-- <a href="#" class="p_like_heart">
                             <i class="fa-regular fa-heart"></i>
-                        </a>
+                        </a> --}}
                     </div>
                 </div>
                 <div class="card_info">
-                    <a href="#" class="product_name" title="{{ $item->name }}">{{ $item->name }}</a>
+                    <a href="{{ route('user/detail', ['name' => $item['slug']]) }}" class="product_name"
+                        title="{{ $item->name }}">{{ $item->name }}</a>
                     <div class="product_rate">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>

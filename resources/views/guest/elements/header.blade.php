@@ -21,8 +21,6 @@
                     <a href="#" class="text-decoration-none text-white">VI</a> |
                     <a href="#" class="text-decoration-none text-white">EN</a>
                 </div>
-
-
             </div>
 
         </div>
