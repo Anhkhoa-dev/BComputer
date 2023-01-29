@@ -1,3 +1,5 @@
+
+
 $(function () {
     //const page = window.location.pathname.split("/")[1];
 
@@ -64,31 +66,37 @@ $(function () {
     });
 
     // Hàm add to cart
-    $(".add-to-cart").click(function(e){
-        e.preventDefault();
-    });
-        $.ajax({
-            headers: {
-                "X-CSRF-TOKEN": X_CSRF_TOKEN,
-            },
-            url: "/ajax-add-to-cart",
-            type: "POST",
-            data: {
-                id_pro: id_pro,
-                sl: qty
-            },
-            successs: function(data){
-                resolve(data);
-                alert('add product to cart successful.');
-            },
-            error: function(){
-                reject();
-            },
+    function addCart(id_pro, sl){
+        return new Promise((resolve, reject)=>{
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                },
+                url: "{{route ('user/add-to-cart')}}",
+                type: "POST",
+                data: {
+                    id_pro: id_pro,
+                    sl: qty
+                },
+                successs: function(data){
+                    resolve(data);
+                    alert('add product to cart successful.');
+                },
+                error: function(){
+                    reject();
+                },
+            });
         });
-
-
-
+    }
 
 
 
 });
+
+
+
+
+
+
+
+
