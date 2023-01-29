@@ -9,12 +9,12 @@
           <div class="container-fluid">
               <div class="row mb-2">
                   <div class="col-sm-6">
-                      <h1 class="m-0">Edit supplier</h1>
+                      <h1 class="m-0">Upload supplier</h1>
                   </div>
                   <div class="col-sm-6">
                       <ol class="breadcrumb float-sm-right">
                           <li class="breadcrumb-item"><a href="#">Home</a></li>
-                          <li class="breadcrumb-item active">Edit Supplier</li>
+                          <li class="breadcrumb-item active">Upload Supplier</li>
                       </ol>
                   </div>
               </div>
@@ -25,13 +25,13 @@
           <div class="card-header">
               <h3 class="card-title">Supplier</h3>
           </div>
-
           <form 
-     {{-- action="{{ Route('admin.pages.suppliers.update', $supplierEdit->id) }}" method="POST" enctype="multipart/form-data" --}}
-          >
+            {{-- action="{{ Route('supplier/update', $supplierUpdate->id) }}" method="POST" enctype="multipart/form-data"
+          > --}}
+          {{-- action="{{ route('supplier/update',$supplierUpdate->id) }}" method="POST" enctype="multipart/form-data"> --}}
               @csrf
               @method('put')
-              @if ($supplierEdit != null)
+              {{-- @if ($supplierEdit != null) --}}
                   <div class="modal-body">
                       <form action="#" method="post">
                           <div class="d-flex justify-content-between">
@@ -40,17 +40,18 @@
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Name</label>
                                       <input type="texe" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Name" value="{{ $supplierEdit->name }}">
+                                          placeholder="Name">
                                   </div>
+
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Address</label>
                                       <input type="text" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Address" value="{{ $supplierEdit->address }}">
+                                          placeholder="Address" >
                                   </div>
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Email</label>
                                       <input type="text" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Email"value="{{ $supplierEdit->email }}">
+                                          placeholder="Email">
                                   </div>
 
                               </div>
@@ -73,25 +74,26 @@
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Phone</label>
                                       <input type="text" class="form-control" id="exampleFormControlInput1"
-                                          placeholder="Phone" value="{{ $supplierEdit->phone }}">
+                                          placeholder="Phone">
                                   </div>
                                   <div class="mb-3">
                                       <label for="exampleFormControlInput1" class="form-label">Status</label>
                                       <select id='loai_tk' name="loai_tk" aria-label="Default select example"
-                                          class="form-control"value="{{ $supplierEdit->status }}">
+                                          class="form-control"
+                                          >
                                           <option value="0">Actived</option>
                                           <option value="1">Clocked</option>
                                       </select>
                                   </div>
-                              </div>
+                              {{-- </div> --}}
                           </div>
                       </form>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" class="btn btn-primary">Save</button>
+                      <button type="submit" class="btn btn-primary">Save</button>
                   </div>
           </form>
       </div>
-      @endif
+      {{-- @endif --}}
       </section>
   @endsection
