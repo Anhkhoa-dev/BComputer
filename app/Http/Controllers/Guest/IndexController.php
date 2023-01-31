@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Guest;
+
 // Khai báo use Model
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\USER_ADDRESS;
@@ -23,12 +25,14 @@ class IndexController extends Controller
     //     $this->user='guest/pages/';
     // }
     //
-    public function getHome(){
+    public function getHome()
+    {
         $lts_Catagory = $this->getCatagory();
         $featuredProducts = $this->getFeatured();
         // get sản phẩm có giảm giá >= 15% ra trang home
         $bigDiscount = $this->getDiscount();
-
+        // $user_id = Auth::user()->id;
+        // $countCart = Cart::where('id_tk', $user_id)->sum('quanity')
 
         $array = [
             'list_Catagory' => $lts_Catagory,
@@ -38,8 +42,9 @@ class IndexController extends Controller
         return view('guest.pages.home')->with($array);
     }
 
-    public function getDiscount($max = 10){
-        $bigDiscount = Products::where('discount','>=', 15)->where('status', 1)->limit($max)->get();
+    public function getDiscount($max = 10)
+    {
+        $bigDiscount = Products::where('discount', '>=', 15)->where('status', 1)->limit($max)->get();
         foreach ($bigDiscount as $i => $key) {
             if ($key->id) {
                 $bigDiscount[$i]->image = ProductImage::where('id_pro', $key->id)->get();
@@ -50,12 +55,14 @@ class IndexController extends Controller
 
         return $bigDiscount;
     }
-    public function getCatagory(){
+    public function getCatagory()
+    {
         $fillCatagoryAll = Category::all();
         return $fillCatagoryAll;
     }
 
-    public function getFeatured($max = 10){
+    public function getFeatured($max = 10)
+    {
 
         $lst_featured = Products::where('featured', 1)->where('status', 1)->limit($max)->get();
         foreach ($lst_featured as $i => $key) {
@@ -70,7 +77,8 @@ class IndexController extends Controller
     }
 
 
-    public function getProducts($slug){
+    public function getProducts($slug)
+    {
         $cata = Category::where('slug', $slug)->first();
         $filterProductCategory = Products::where('id_ca', $cata->id)->get();
         foreach ($filterProductCategory as $i => $key) {
@@ -106,7 +114,7 @@ class IndexController extends Controller
                 $related[$i]->image = '';
             }
         }
-        $same_price = Products::where('price', '=',  $prod->price)->limit(10)->get();
+        $same_price = Products::where('price', '=', $prod->price)->limit(10)->get();
         foreach ($same_price as $i => $key) {
             if ($key->id) {
                 $same_price[$i]->image = ProductImage::where('id_pro', $key->id)->get();
@@ -119,9 +127,9 @@ class IndexController extends Controller
         $array = [
             'collections' => $collections,
             'prod' => $prod,
-            'image' =>$prodImage,
+            'image' => $prodImage,
             'comment' => $comment,
-            'listRelated' =>$related,
+            'listRelated' => $related,
             'listSamePrice' => $same_price,
             'listBrands' => $listBrands,
         ];
@@ -129,13 +137,15 @@ class IndexController extends Controller
         return view('guest.pages.products.products-detail')->with($array);
     }
 
-    public function getBrand(){
+    public function getBrand()
+    {
         $listBrands = Brands::all();
         return $listBrands;
     }
 
 
-    public function getAddressDefault($id_tk){
+    public function getAddressDefault($id_tk)
+    {
         return USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first() == null ? null : USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first();
     }
 }

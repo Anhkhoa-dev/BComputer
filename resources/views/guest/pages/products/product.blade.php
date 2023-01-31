@@ -103,13 +103,11 @@
                             </div>
                             <div class="card-price">
                                 <div class="old-price">$ {{ $item->price }}</div>
-                                <div class="new-price">$ {{ $item->price * ((100 - $item->discount) / 100) }}</div>
+                                <div class="new-price">$ {{ number_format($item->price * ((100 - $item->discount) / 100), 2) }}</div>
                             </div>
                         </div>
                     </div>
                 @endforeach
-
-
             </div>
 
         </div>
@@ -145,12 +143,13 @@
 @section('myjs')
 <script>
     $(document).ready(function() {
-        // $('.filter-item_title').click(function() {
-        //     $('.filter-item_dropdown').addClass('show');
-        // });
+        $('.filter-item_title').click(function() {
+            $('.filter-item_dropdown').addClass('show');
+        });
 
         // Hàm add to cart
         $(".btn-add-cart").click(function() {
+            var $url = "{{ url('/add-to-cart') }}";
             var id = $(this).data("id");
             var card_product_id = $('.card_product_id_' + id).val();
             var card_product_name = $('.card_product_name_' + id).val();
@@ -159,9 +158,8 @@
             var card_product_discount = $('.card_product_discount_' + id).val();
             var card_product_qty = $('.card_product_qty_' + id).val();
             var _token = $('input[name="_token"]').val();
-            //  alert(card_product_discount);
             $.ajax({
-                url: "{{ url('/add-to-cart/') }}",
+                url: $url,
                 type: "POST",
                 data: {
                     card_product_id: card_product_id,
@@ -173,7 +171,22 @@
                     _token: _token,
                 },
                 success: function(data) {
-                    alert(data);
+                    if(data['status'] == 1){
+                        swal({
+                            title: "Đã thêm sản phẩm vào giỏ hàng",
+                            text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                            showCancelButton: true,
+                            cancelButtonText: "Xem tiếp",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "Đi đến giỏ hàng",
+                            closeOnConfirm: false
+                        },
+                        function() {
+                            window.location.href = "http://127.0.0.1:8000/cart-items";
+                        });
+                    }else{
+                        window.location.href = "http://127.0.0.1:8000/login";
+                    }
                 },
             });
         });

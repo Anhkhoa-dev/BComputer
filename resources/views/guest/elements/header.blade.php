@@ -50,7 +50,10 @@
                     {{-- nút giỏ hàng --}}
                     <a href="{{ route('user/cart-items') }}" class="cursor-pointer text-decoration-none text-dark">
                         <div class="icon__cart">
-                            <p class="cart__number">2</p>
+                            @if (session()->get('TotalCart'))
+                                <p class="cart__number">{{ session()->get('TotalCart')}}</p>
+                            @endif
+                            
                             <div class="cart__circle">
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </div>

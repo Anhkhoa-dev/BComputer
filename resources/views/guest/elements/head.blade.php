@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('OwlCarousel/dist/assets/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('OwlCarousel/dist/assets/owl.theme.default.css') }}">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="{{ asset('sass/guest/sweetalert.css') }}">
     <link rel="stylesheet" href="{{ asset('sass/guest/guest.css') }}">
 </head>
 

@@ -15,9 +15,7 @@ use App\Http\Controllers\Guest\AccountController;
 Route::controller(LoginController::class)->group(function () {
     Route::get('login', 'getLogin')->name('user/login');
     Route::post('process', 'postLogin')->name('postLogin');
-
     Route::get('logout', 'logout')->name('logout');
-
     Route::get('register', 'getRegister')->name('user/dang-ky');
     Route::post('postRegister', 'dangky')->name('user/postDangky');
 });
@@ -37,7 +35,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
         ['middleware' => 'ckUserLogin'],
         function () {
             // hành động check thanh toán, thêm giỏ hàng, thêm sản phẩm yêu thích, comment
-
+    
             // Xem giỏ hàng
             Route::get('/cart-items', [CartConntroller::class, 'getViewcart'])->name('user/cart-items');
             Route::get('/checkout-process', [CartConntroller::class, 'getCheckoutProcess'])->name('checkout/checkout-process');
@@ -45,12 +43,12 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
 
 
             //Thêm sản phẩm vào giỏ hàng
-             Route::post('/add-to-cart', [CartConntroller::class, 'addToCart']);
+            Route::post('add-to-cart', [CartConntroller::class, 'addToCart']);
             // Phần hiển thị view tài khoản
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
 
             // Phần Route post xử lý user thêm địa chỉ giao hàng
-
+    
             Route::get('account/address', [AccountController::class, 'getAddress'])->name('user/address');
             Route::post('account/postAddress', [AccountController::class, 'postAddress'])->name('user/add-address');
             Route::get('account/set-default/{slug}', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
@@ -96,10 +94,10 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::get('admin/supplier', [SupplierController::class, 'index'])->name('admin/supplier');
     //Create
     Route::get('admin/supplier/create', [SupplierController::class, 'create'])->name('supplier/create');
-    Route::post('admin/supplier/postSupplier',[SupplierController::class, 'store'])  ->name('supplier/store');
+    Route::post('admin/supplier/postSupplier', [SupplierController::class, 'store'])->name('supplier/store');
     //Update
     Route::get('admin/supplier/edit/{id}', [SupplierController::class, 'edit'])->name('supplier/edit');
-    Route::post('admin/supplier/update/{id}',[SupplierController::class, 'update'])  ->name('supplier/update');
+    Route::post('admin/supplier/update/{id}', [SupplierController::class, 'update'])->name('supplier/update');
     //Delete
     Route::get('admin/supplier/delete/{id}', [SupplierController::class, 'destroy'])->name('supplier/delete');
 });

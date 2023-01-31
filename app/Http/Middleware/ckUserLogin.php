@@ -18,10 +18,11 @@ class ckUserLogin
     public function handle(Request $request, Closure $next)
     {
 
-        if(Auth::check()){
+        if (Auth::check()) {
             return $next($request);
         }
 
-        return back()->with('error', 'Vui lòng đăng nhập để thực hiện chức năng này');
+        // return back()->with('error', 'Vui lòng đăng nhập để thực hiện chức năng này');
+        return redirect('login');
     }
 }
