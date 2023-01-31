@@ -45,7 +45,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
 
 
             //Thêm sản phẩm vào giỏ hàng
-            Route::post('/ajax-add-to-cart', [CartConntroller::class, 'addToCart'])->name('user/add-to-cart');
+             Route::post('/add-to-cart', [CartConntroller::class, 'addToCart']);
             // Phần hiển thị view tài khoản
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
 

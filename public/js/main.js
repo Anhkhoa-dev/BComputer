@@ -65,32 +65,6 @@ $(function () {
         $("#change-avt-inp").trigger("click");
     });
 
-    // Hàm add to cart
-    function addCart(id_pro, sl){
-        return new Promise((resolve, reject)=>{
-            $.ajax({
-                headers: {
-                    "X-CSRF-TOKEN": X_CSRF_TOKEN,
-                },
-                url: "{{route ('user/add-to-cart')}}",
-                type: "POST",
-                data: {
-                    id_pro: id_pro,
-                    sl: qty
-                },
-                successs: function(data){
-                    resolve(data);
-                    alert('add product to cart successful.');
-                },
-                error: function(){
-                    reject();
-                },
-            });
-        });
-    }
-
-
-
 });
 
 

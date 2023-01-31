@@ -32,7 +32,8 @@ class CartConntroller extends Controller
     }
 
     public function addToCart(Request $request){
-        dd($request->ajax());
+        $data = $request->all();
+        print_r($data);
     }
 
 
