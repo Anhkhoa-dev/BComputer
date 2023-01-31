@@ -1,5 +1,26 @@
+
+
 $(function () {
     //const page = window.location.pathname.split("/")[1];
+
+    function showToast(message){
+        if($("#alert-toast").lenght){
+            $("#alert-toast").remove();
+        }
+        $("body").prepend(
+            `<span id="alert-toast" class="alert-toast">${message}</span>`
+        );
+
+        setTimeout(()=>{
+            clearTimeout(timer);
+            timer = setTimeout(()=>{
+                // Xóa toast
+                setTimeout(()=>{
+                    $("#alert-toast").remove();
+                })
+            }, 3000);
+        }, 200);
+    }
 
     // thông báo toast lưu trong session
     if (sessionStorage.getItem("toast-message")) {
@@ -44,5 +65,12 @@ $(function () {
         $("#change-avt-inp").trigger("click");
     });
 
-
 });
+
+
+
+
+
+
+
+

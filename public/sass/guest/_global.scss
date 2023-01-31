@@ -314,6 +314,12 @@ section {
                 visibility: hidden;
                 padding-right: 10px;
 
+                .add-cart {
+                    outline: none;
+                    border: none;
+                    background: none;
+                }
+
                 .hover-sosanh,
                 .hover-xemnhanh,
                 .hover-viewdetail,

@@ -43,6 +43,9 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::get('/checkout-process', [CartConntroller::class, 'getCheckoutProcess'])->name('checkout/checkout-process');
             Route::get('/checkout-success', [CartConntroller::class, 'getSuccess'])->name('user/checkout-success');
 
+
+            //Thêm sản phẩm vào giỏ hàng
+             Route::post('/add-to-cart', [CartConntroller::class, 'addToCart']);
             // Phần hiển thị view tài khoản
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
 

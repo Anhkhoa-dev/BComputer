@@ -292,6 +292,11 @@ section .title i {
   visibility: hidden;
   padding-right: 10px;
 }
+.products .card-product .card-image .hover-icons .add-cart {
+  outline: none;
+  border: none;
+  background: none;
+}
 .products .card-product .card-image .hover-icons .hover-sosanh,
 .products .card-product .card-image .hover-icons .hover-xemnhanh,
 .products .card-product .card-image .hover-icons .hover-viewdetail,

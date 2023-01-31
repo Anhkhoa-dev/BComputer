@@ -49,7 +49,7 @@
             <div class="products">
                 @foreach ($listProductByCategory as $item)
                     <div class="card-product">
-                        <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
+                        <div class="card-body">
                             <div class="card-image">
                                 <img src="{{ asset('image/product/' . $item->image[0]->image) }}"
                                     alt="{{ $item->name }}" class="img-fluid">
@@ -70,17 +70,36 @@
                                                 class="fa-solid fa-eye"></i>
                                         </div>
                                     </a>
-                                    <a href="#" class="text-decoration-none text-dark">
-                                        <div class="hover-addtocart" title="Add to cart"><i
-                                                class="fa-solid fa-bag-shopping"></i></div>
-                                    </a>
+                                    <form>
+                                        @csrf
+                                        <input type="hidden" value="{{ $item->id }}"
+                                            class="card_product_id_{{ $item->id }}">
+                                        <input type="hidden" value="{{ $item->name }}"
+                                            class="card_product_name_{{ $item->id }}">
+                                        <input type="hidden" value="{{ $item->price }}"
+                                            class="card_product_price_{{ $item->id }}">
+                                        <input type="hidden" value="{{ $item->discount }}"
+                                            class="card_product_discount_{{ $item->id }}">
+                                        <input type="hidden" value="{{ $item->image[0]->image }}"
+                                            class="card_product_image_{{ $item->id }}">
+                                        <input type="hidden" value="1"
+                                            class="card_product_qty_{{ $item->id }}">
+
+                                        <button type="button" class="add-cart btn-add-cart"
+                                            data-id="{{ $item->id }}" name="add-to-cart">
+                                            <div class="hover-addtocart" title="Add to cart">
+                                                <i class="fa-solid fa-bag-shopping"></i>
+                                            </div>
+                                        </button>
+                                    </form>
+
                                 </div>
                             </div>
-                        </a>
-
+                        </div>
                         <div class="card-info">
                             <div class="card-title">
-                                <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">{{ $item->name }}</a>
+                                <a
+                                    href="{{ route('user/detail', ['name' => $item['slug']]) }}">{{ $item->name }}</a>
                             </div>
                             <div class="card-price">
                                 <div class="old-price">$ {{ $item->price }}</div>
@@ -126,8 +145,37 @@
 @section('myjs')
 <script>
     $(document).ready(function() {
-        $('.filter-item_title').click(function() {
-            $('.filter-item_dropdown').addClass('show');
+        // $('.filter-item_title').click(function() {
+        //     $('.filter-item_dropdown').addClass('show');
+        // });
+
+        // Hàm add to cart
+        $(".btn-add-cart").click(function() {
+            var id = $(this).data("id");
+            var card_product_id = $('.card_product_id_' + id).val();
+            var card_product_name = $('.card_product_name_' + id).val();
+            var card_product_image = $('.card_product_image_' + id).val();
+            var card_product_price = $('.card_product_price_' + id).val();
+            var card_product_discount = $('.card_product_discount_' + id).val();
+            var card_product_qty = $('.card_product_qty_' + id).val();
+            var _token = $('input[name="_token"]').val();
+            //  alert(card_product_discount);
+            $.ajax({
+                url: "{{ url('/add-to-cart/') }}",
+                type: "POST",
+                data: {
+                    card_product_id: card_product_id,
+                    card_product_name: card_product_name,
+                    card_product_image: card_product_image,
+                    card_product_price: card_product_price,
+                    card_product_discount: card_product_discount,
+                    card_product_qty: card_product_qty,
+                    _token: _token,
+                },
+                success: function(data) {
+                    alert(data);
+                },
+            });
         });
     });
 </script>
