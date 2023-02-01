@@ -69,44 +69,52 @@ class CartConntroller extends Controller
         $data = $request->all();
 
         if (Auth::check()) {
-            $use_id = Auth::user()->id;
-            $array = [
-                'id_tk' => intval($use_id),
-                'id_pro' => intval($data['card_product_id']),
-                'quanity' => intval($data['card_product_qty']),
-            ];
-            // lấy toàn bộ sản phẩm đã thêm có thuộc id_tk
-            $listCartbyUser = Cart::where('id_tk', $array['id_tk'])->get();
-
-            // kiểm tra k có id tài khoản trùng thi thêm mới
-            if (count($listCartbyUser) == 0) {
-                Cart::create($array);
-            } else { // id_tk có trong data
-                foreach ($listCartbyUser as $value) {
-                    if ($value->id_pro == $data['card_product_id']) {
-                        $qty = intval(Cart::where('id_tk', $array['id_tk'])->where('id_pro', $value->id_pro)->first()->quanity);
-                        $qty += $array['quanity'];
-                        $qtyInStock = Products::where('id', $array['id_pro'])->first()->quantity;
-                        if ($qty > $qtyInStock) {
-                            return [
-                                'status' => 'alraedy have',
-                                'qtyInStock' => $qtyInStock,
-                            ];
-                        }
-                        Cart::where('id_tk', $use_id)->where('id_pro', $data['card_product_id'])->update(['quanity' => $qty]);
-                    }
-                }
-                Cart::create($array);
-                return [
-                    'status' => 1,
-                ];
-            }
-            $countCart = Cart::where('id_tk', $use_id)->sum('quanity');
-            session()->put('TotalCart', $countCart);
-        } else {
             return [
-                'status' => 0,
+                'status' => 'login required',
+            ];
+        }
+        $array = [
+            'id_tk' => Auth::user()->id,
+            'id_pro' => intval($data['card_product_id']),
+            'quanity' => intval($data['card_product_qty']),
+        ];
+        // lấy toàn bộ sản phẩm đã thêm có thuộc id_tk
+        $listCartbyUser = Cart::where('id_tk', $array['id_tk'])->get();
+
+        // kiểm tra k có id tài khoản trùng thi thêm mới
+        if (count($listCartbyUser) == 0) {
+            Cart::create($array);
+            // Trừ tồn kho trong table Product
+            return [
+                'status' => 'new one',
+            ];
+
+        } else { // id_tk có trong data
+            foreach ($listCartbyUser as $value) {
+                if ($value->id_pro == $data['card_product_id']) {
+                    $qty = intval(Cart::where('id_tk', $array['id_tk'])->where('id_pro', $array['id_pro'])->first()->quanity);
+                    $qty += $array['quanity'];
+                    $qtyInStock = Products::where('id', $array['id_pro'])->first()->quantity;
+                    if ($qty > $qtyInStock || $qty > 5) {
+                        return [
+                            'status' => 'already have',
+                            'qtyInStock' => $qtyInStock,
+                        ];
+                    }
+                    Cart::where('id_tk', $array['id_tk'])->where('id_pro', $array['id_pro'])->update(['quanity' => $qty]);
+                    // Trừ tồn kho trong table Product
+                    return [
+                        'status' => 'update',
+                    ];
+                }
+            }
+            Cart::create($array);
+            // Trừ tồn kho trong table Product
+
+            return [
+                'status' => 'new one',
             ];
         }
     }
+
 }

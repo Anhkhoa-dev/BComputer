@@ -74,19 +74,11 @@
                                         @csrf
                                         <input type="hidden" value="{{ $item->id }}"
                                             class="card_product_id_{{ $item->id }}">
-                                        <input type="hidden" value="{{ $item->name }}"
-                                            class="card_product_name_{{ $item->id }}">
-                                        <input type="hidden" value="{{ $item->price }}"
-                                            class="card_product_price_{{ $item->id }}">
-                                        <input type="hidden" value="{{ $item->discount }}"
-                                            class="card_product_discount_{{ $item->id }}">
-                                        <input type="hidden" value="{{ $item->image[0]->image }}"
-                                            class="card_product_image_{{ $item->id }}">
                                         <input type="hidden" value="1"
                                             class="card_product_qty_{{ $item->id }}">
 
                                         <button type="button" class="add-cart btn-add-cart"
-                                            data-id="{{ $item->id }}" name="add-to-cart">
+                                            data-id="{{ $item->id }}">
                                             <div class="hover-addtocart" title="Add to cart">
                                                 <i class="fa-solid fa-bag-shopping"></i>
                                             </div>
@@ -152,10 +144,6 @@
             var $url = "{{ url('/add-to-cart') }}";
             var id = $(this).data("id");
             var card_product_id = $('.card_product_id_' + id).val();
-            var card_product_name = $('.card_product_name_' + id).val();
-            var card_product_image = $('.card_product_image_' + id).val();
-            var card_product_price = $('.card_product_price_' + id).val();
-            var card_product_discount = $('.card_product_discount_' + id).val();
             var card_product_qty = $('.card_product_qty_' + id).val();
             var _token = $('input[name="_token"]').val();
             $.ajax({
@@ -163,10 +151,6 @@
                 type: "POST",
                 data: {
                     card_product_id: card_product_id,
-                    card_product_name: card_product_name,
-                    card_product_image: card_product_image,
-                    card_product_price: card_product_price,
-                    card_product_discount: card_product_discount,
                     card_product_qty: card_product_qty,
                     _token: _token,
                 },
@@ -176,6 +160,7 @@
                             title: "Đã thêm sản phẩm vào giỏ hàng",
                             text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
                             showCancelButton: true,
+                            cancelButtonClass: "btn-primary",
                             cancelButtonText: "Xem tiếp",
                             confirmButtonClass: "btn-success",
                             confirmButtonText: "Đi đến giỏ hàng",

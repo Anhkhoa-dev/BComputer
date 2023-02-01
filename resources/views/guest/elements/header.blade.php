@@ -50,8 +50,8 @@
                     {{-- nút giỏ hàng --}}
                     <a href="{{ route('user/cart-items') }}" class="cursor-pointer text-decoration-none text-dark">
                         <div class="icon__cart">
-                            @if (session()->get('TotalCart'))
-                                <p class="cart__number">{{ session()->get('TotalCart')}}</p>
+                            @if (session()->get('totalCart'))
+                                <p class="cart__number">{{ session()->get('totalCart')}}</p>
                             @endif
                             
                             <div class="cart__circle">

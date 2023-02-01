@@ -16,6 +16,7 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('login', 'getLogin')->name('user/login');
     Route::post('process', 'postLogin')->name('postLogin');
     Route::get('logout', 'logout')->name('logout');
+    Route::get('recovery-account', 'RecoveryAcount')->name('recovey-account');
     Route::get('register', 'getRegister')->name('user/dang-ky');
     Route::post('postRegister', 'dangky')->name('user/postDangky');
 });
