@@ -90,12 +90,13 @@
                         </div>
                         <div class="card-info">
                             <div class="card-title">
-                                <a
-                                    href="{{ route('user/detail', ['name' => $item['slug']]) }}">{{ $item->name }}</a>
+                                <a href="{{ route('user/detail', ['name' => $item['slug']]) }}"
+                                    title="{{ $item->name }}">{{ $item->name }}</a>
                             </div>
                             <div class="card-price">
                                 <div class="old-price">$ {{ $item->price }}</div>
-                                <div class="new-price">$ {{ number_format($item->price * ((100 - $item->discount) / 100), 2) }}</div>
+                                <div class="new-price">$
+                                    {{ number_format($item->price * ((100 - $item->discount) / 100), 2) }}</div>
                             </div>
                         </div>
                     </div>
@@ -155,21 +156,22 @@
                     _token: _token,
                 },
                 success: function(data) {
-                    if(data['status'] == 1){
+                    if (data['status'] == 1) {
                         swal({
-                            title: "Đã thêm sản phẩm vào giỏ hàng",
-                            text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
-                            showCancelButton: true,
-                            cancelButtonClass: "btn-primary",
-                            cancelButtonText: "Xem tiếp",
-                            confirmButtonClass: "btn-success",
-                            confirmButtonText: "Đi đến giỏ hàng",
-                            closeOnConfirm: false
-                        },
-                        function() {
-                            window.location.href = "http://127.0.0.1:8000/cart-items";
-                        });
-                    }else{
+                                title: "Đã thêm sản phẩm vào giỏ hàng",
+                                text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                                showCancelButton: true,
+                                cancelButtonClass: "btn-primary",
+                                cancelButtonText: "Xem tiếp",
+                                confirmButtonClass: "btn-success",
+                                confirmButtonText: "Đi đến giỏ hàng",
+                                closeOnConfirm: false
+                            },
+                            function() {
+                                window.location.href =
+                                    "http://127.0.0.1:8000/cart-items";
+                            });
+                    } else {
                         window.location.href = "http://127.0.0.1:8000/login";
                     }
                 },

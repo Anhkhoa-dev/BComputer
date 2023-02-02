@@ -50,14 +50,20 @@
                     {{-- nút giỏ hàng --}}
                     <a href="{{ route('user/cart-items') }}" class="cursor-pointer text-decoration-none text-dark">
                         <div class="icon__cart">
-                            @if (session()->get('totalCart'))
-                                <p class="cart__number">{{ session()->get('totalCart')}}</p>
+                            @if (Auth::check())
+                                <p class="cart__number">{{ session()->get('totalCart') }}</p>
+                            @else
+                                <p class="cart__number d-none">0</p>
                             @endif
-                            
+
                             <div class="cart__circle">
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </div>
+                            <div id="add-cart-success">
+
+                            </div>
                         </div>
+
                     </a>
                     {{-- Nút đăng nhập --}}
 
