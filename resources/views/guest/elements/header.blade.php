@@ -60,7 +60,6 @@
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </div>
                             <div id="add-cart-success">
-
                             </div>
                         </div>
 

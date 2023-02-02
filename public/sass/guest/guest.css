@@ -440,18 +440,8 @@ section .title i {
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.16);
-  -webkit-animation-name: showAddCartSuccess;
-          animation-name: showAddCartSuccess;
-  -webkit-animation-duration: 0.75s;
-          animation-duration: 0.75s;
-}
-@-webkit-keyframes showAddCartSuccess {
-  from {
-    transform: translateY(30px);
-  }
-  to {
-    transform: translateY(0);
-  }
+  animation-name: showAddCartSuccess;
+  animation-duration: 0.75s;
 }
 @keyframes showAddCartSuccess {
   from {
@@ -1555,12 +1545,6 @@ section .title i {
   outline: none;
   border-radius: 5px;
   padding-left: 45px;
-  font-size: 1rem;
-}
-.khoa-login .login_nen .box_login .form_login .form_group .input_control::-moz-placeholder {
-  font-size: 1rem;
-}
-.khoa-login .login_nen .box_login .form_login .form_group .input_control:-ms-input-placeholder {
   font-size: 1rem;
 }
 .khoa-login .login_nen .box_login .form_login .form_group .input_control::placeholder {

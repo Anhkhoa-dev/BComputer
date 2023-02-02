@@ -64,7 +64,7 @@ $(function () {
         $("#change-avt-inp").trigger("click");
     });
 
-    function addCart(id_pro, qty) {
+    function addCart(id_sp, qty) {
         var $url = "{{ url('/add-to-cart') }}";
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -74,7 +74,7 @@ $(function () {
                 url: $url,
                 type: "POST",
                 data: {
-                    id_pro: id_pro,
+                    id_sp: id_sp,
                     qty: qty,
                     _token: _token,
                 },
@@ -95,8 +95,7 @@ $(function () {
             if ($(".add-cart-success").length) {
                 $(".add-cart-success").remove();
             }
-            const addCartSuccess =
-                `<div class="add-cart-success">
+            const addCartSuccess = `<div class="add-cart-success">
                     <div class="d-flex align-items-center justify-content-center py-3">
                     <i class="fas fa-check-circle success-color me-4"></i>Thêm giỏ hàng thành
                         công!
@@ -115,7 +114,7 @@ $(function () {
                 $(".add-cart-success").hide("fade", 300);
             }, 5000);
         } else {
-            showToast("Thêm giỏ hàng thành công");
+            alert("Thêm giỏ hàng thành công");
         }
     }
 
@@ -138,18 +137,21 @@ $(function () {
                     const qtyInStock = data.qtyInStock;
 
                     if (qtyInStock < 5) {
-                        alert(`Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là ${data.qtyInStock}`);
+                        alert(
+                            "Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là" +
+                                data.qtyInStock
+                        );
                     } else {
-                        alert(`Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5`);
+                        alert(
+                            "Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5"
+                        );
                     }
                     return;
                 }
 
-
-
                 // thông báo thêm giỏ hàng thành công
                 renderAddCartSuccessfully();
             })
-            .catch(() => showAlertTop(errorMessage));
+            .catch(() => alert(errorMessage));
     });
 });

@@ -66,55 +66,57 @@ class CartConntroller extends Controller
 
     public function addToCart(Request $request)
     {
-        $data = $request->all();
-
-        if (Auth::check()) {
-            return [
-                'status' => 'login required',
-            ];
-        }
-        $array = [
-            'id_tk' => Auth::user()->id,
-            'id_pro' => intval($data['card_product_id']),
-            'quanity' => intval($data['card_product_qty']),
-        ];
-        // lấy toàn bộ sản phẩm đã thêm có thuộc id_tk
-        $listCartbyUser = Cart::where('id_tk', $array['id_tk'])->get();
-
-        // kiểm tra k có id tài khoản trùng thi thêm mới
-        if (count($listCartbyUser) == 0) {
-            Cart::create($array);
-            // Trừ tồn kho trong table Product
-            return [
-                'status' => 'new one',
+        if ($request->all()) {
+            $data = $request->all();
+            print_r($data);
+            if (!Auth::check()) {
+                return [
+                    'status' => 'login required',
+                ];
+            }
+            $array = [
+                'id_tk' => Auth::user()->id,
+                'id_pro' => intval($data['card_product_id']),
+                'quanity' => intval($data['card_product_qty']),
             ];
 
-        } else { // id_tk có trong data
-            foreach ($listCartbyUser as $value) {
-                if ($value->id_pro == $data['card_product_id']) {
-                    $qty = intval(Cart::where('id_tk', $array['id_tk'])->where('id_pro', $array['id_pro'])->first()->quanity);
-                    $qty += $array['quanity'];
-                    $qtyInStock = Products::where('id', $array['id_pro'])->first()->quantity;
-                    if ($qty > $qtyInStock || $qty > 5) {
+            // lấy toàn bộ sản phẩm đã thêm có thuộc id_tk
+            $listCartbyUser = Cart::where('id_tk', $array['id_tk'])->get();
+            // kiểm tra k có id tài khoản trùng thi thêm mới
+            if (count($listCartbyUser) == 0) {
+                Cart::create($array);
+                // Trừ tồn kho trong table Product
+                return [
+                    'status' => 'new one',
+                ];
+
+            } else { // id_tk có trong data
+                foreach ($listCartbyUser as $value) {
+                    if ($value['id_pro'] == $array['id_pro']) {
+                        $qty = intval(Cart::where('id_tk', $array['id_tk'])->where('id_pro', $array['id_pro'])->first()->quanity);
+                        $qty += $array['quanity'];
+                        $qtyInStock = Products::where('id', $array['id_pro'])->first()->quantity;
+                        if ($qty > $qtyInStock || $qty > 5) {
+                            return [
+                                'status' => 'already have',
+                                'qtyInStock' => $qtyInStock,
+                            ];
+                        }
+                        Cart::where('id_tk', $array['id_tk'])->where('id_pro', $array['id_pro'])->update(['quanity' => $qty]);
+                        // Trừ tồn kho trong table Product
                         return [
-                            'status' => 'already have',
-                            'qtyInStock' => $qtyInStock,
+                            'status' => 'update',
                         ];
                     }
-                    Cart::where('id_tk', $array['id_tk'])->where('id_pro', $array['id_pro'])->update(['quanity' => $qty]);
-                    // Trừ tồn kho trong table Product
-                    return [
-                        'status' => 'update',
-                    ];
                 }
+                Cart::create($array);
+                // Trừ tồn kho trong table Product
+
+                return [
+                    'status' => 'new one',
+                ];
             }
-            Cart::create($array);
-            // Trừ tồn kho trong table Product
-
-            return [
-                'status' => 'new one',
-            ];
         }
-    }
 
+    }
 }

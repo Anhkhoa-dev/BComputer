@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     use HasFactory;
-    protected $table = 'commment';
+    protected $table = 'comment';
     // protected $timestamp = false;
     protected $primaryKey = 'id';
     protected $fillable = [
@@ -17,6 +17,7 @@ class Comment extends Model
         'content',
         'rate',
         'id_tk',
+        'parentComment',
         'status',
         'thoigian',
     ];
