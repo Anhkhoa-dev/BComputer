@@ -62,8 +62,8 @@ class LoginController extends Controller
 
             if ($user->status == 1) {
                 if ($user->level == 1) {
-                    $totalCart = Cart::where('id_tk', $user->id)->sum('quanity');
-                    session()->put('totalCart', intval($totalCart));
+                    // $totalCart = Cart::where('id_tk', $user->id)->sum('quanity');
+                    // session()->put('totalCart', intval($totalCart));
                     return redirect('/');
                 } elseif ($user->level == 2) {
                     return redirect('admin');

@@ -51,7 +51,7 @@
                     <a href="{{ route('user/cart-items') }}" class="cursor-pointer text-decoration-none text-dark">
                         <div class="icon__cart">
                             @if (Auth::check())
-                                <p class="cart__number">{{ session()->get('totalCart') }}</p>
+                                <p class="cart__number">0</p>
                             @else
                                 <p class="cart__number d-none">0</p>
                             @endif
