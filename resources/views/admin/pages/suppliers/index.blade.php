@@ -61,7 +61,7 @@
                                     <!-- kiểm tra trong db có image thì mới hiển thị -->
                                     @if ($item->image != null && $item->image != '')
                                         <img src="{{ asset('image/supplier/' . $item->image) }}" alt=""
-                                            style="width:100px; height:auto;">
+                                            style="width:50px; height:auto;">
                                     @endif
                                 </td>
                                 <td>{{ $item->address ?? 'null' }}</td>
@@ -87,9 +87,6 @@
                                         </i>
                                         
                                     </a>
-                                    {{-- <form action="{{ route('deleteSupplier', $item->id) }}" style="display: inline-block">
-                                        <input type="submit" value="Delete" class="btn btn-danger" />
-                                    </form> --}}
                                 </td>
                             </tr>
                         @endforeach
