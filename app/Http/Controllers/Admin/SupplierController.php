@@ -39,40 +39,48 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //xử lý create
-          // $prod = new Product();
-        // $prod->name = $request->name;
-        // $prod->short_desc = $request->short_desc;
-        // using mass assignment
-
-
-        $prod = $request->all();
-           // $prod là 1 mảngz
-        $prod['slug'] = \Str::slug($request->name);
-        
-        if($request->hasFile('photo'))
+        $prods = $request->all();
+        // dd($prods);
+           $request->validate(
+            [
+                'sup_name' => 'required',
+                'sup_address' => 'required',
+                'sup_phone' => 'required',
+                'sup_email' => 'required',
+                //'photo' => 'required',
+            ],
+            [
+                'sup_name.required' => 'Please input name of supplier',
+                'sup_address.required' => 'Please input address ',
+                'sup_phone.required' => 'Please input phone  ',
+                'sup_email.required' => 'Please input email',
+                //'photo.required' => 'Please choose image!',
+        ]);
+        if($file = $request->file('photo'))
         {
-            $file=$request->file('photo');
-            $extension = $file->getClientOriginalExtension();
-            if($extension != 'jpg' && $extension != 'png' && $extension !='jpeg')
-            {
-                return redirect()->route('supplier/create')
-                    ->with('loi','Bạn chỉ được chọn file có đuôi jpg,png,jpeg');
-            }
-            $image = $file->getClientOriginalName();
-            $file->move("images",$image);
+        //    $file =$request->file('photo');
+        //    $image =$file->getClientOriginalName();
+        //    $file->move("image/supplier/" ,$image);
+
+           $fileName = $file->getClientOriginalName();
+           $file->move('image/supplier/', $fileName);
+           $prods['image'] = "$fileName";
         }
-        else
-        {
+        else{
             $image = null;
         }
-        $prod['image'] = $image;
-        $supplier = new SUPPLIER($prod);
-        $supplier->save();
-        return redirect()->route('admin/supplier');
 
-        // $prods = SUPPLIER::all();
-        // return view('admin.pages.suppliers.index', compact('prods'));
+        $data = [
+            'name' => $prods['sup_name'],
+            'image' => $prods['image'],
+            'address'=> $prods['sup_address'],
+            'phone'=> $prods['sup_phone'],
+            'email'=> $prods['sup_email'],
+            'status'=> intval($prods['loai_tk']),
+        ];
+        //dd($data);
+        SUPPLIER::create($data);
+        return redirect()->route('admin/supplier');
     }
 
     /**
@@ -84,6 +92,14 @@ class SupplierController extends Controller
     public function show($id)
     {
         //hiển thị view
+        $prod = SUPPLIER::where('id', $id)->first();
+        $array = [
+            'prod' => $prod,
+            'message' => 'Bạn đã đăng nhập thành công',
+        ];
+        // dd($array);
+        return view('admin.pages.suppliers.create')->with($array);
+    
     }
 
     /**
@@ -95,14 +111,6 @@ class SupplierController extends Controller
     public function edit($id)
     {
         //trả về view
-        // $url = pathinfo(url()->current(), PATHINFO_BASENAME);
-        // $supplier = SUPPLIER::where('id', $url)->first();
-        // $array = [
-        //     'supplierEdit' => $supplier,
-        // ];
-        // return view('admin.pages.suppliers.edit')->with($array);
-
-
         $prod = SUPPLIER::where('id', $id)->first();
         $array = [
             'prod' => $prod,
@@ -122,6 +130,23 @@ class SupplierController extends Controller
     public function update(Request $request, $id)
     {        
             $prods = $request->all();
+            // dd($prods);
+            $request->validate(
+                [
+                    'sup_name' => 'required',
+                    'sup_address' => 'required',
+                    'sup_phone' => 'required',
+                    'sup_email' => 'required',
+                    // 'image' => 'required',
+                ],
+                [
+                    'sup_name.required' => 'Please input name of supplier',
+                    'sup_address.required' => 'Please input address ',
+                    'sup_phone.required' => 'Please input phone  ',
+                    'sup_email.required' => 'Please input email',
+                    // 'image.required' => 'Please choose image!',
+            ]);
+
             $oldImage = SUPPLIER::where('id', $id)->first();
             if ($file = $request->file('photo'))
             {

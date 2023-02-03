@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     const CREATE_MESSAGE = "Thêm thành công";
     const EDIT_MESSAGE = "Chỉnh sửa thành công";
     const DELETE_MESSAGE = "Xóa thành công";
@@ -21,11 +21,12 @@ $(function () {
             element.next().remove();
         }
     }
+
     function isCorrectFrameRate(url) {
         return new Promise((resolve) => {
             const image = new Image();
             image.src = url;
-            image.onload = function () {
+            image.onload = function() {
                 const width = this.width;
                 const height = this.height;
 
@@ -35,11 +36,11 @@ $(function () {
     }
     var idx = 1;
     // Phần xử lý hình ảnh trong product
-    $("#choose_image").click(function () {
-        $(".pro_name[]").click();
+    $("#choose_image").click(function() {
+        $(".sup_name[]").click();
     });
 
-    $("#image_inp").change(function () {
+    $("#image_sup").change(function() {
         // HỦy chọn hình
         if ($(this).val() == "") {
             return;
@@ -98,7 +99,7 @@ $(function () {
         }
     });
     var arrayDelete = [];
-    $(document).on("click", ".delete-icon", function () {
+    $(document).on("click", ".delete-icon", function() {
         var id = $(this).data("id");
         var imageDelete = $("#image-" + id);
 
@@ -113,6 +114,90 @@ $(function () {
         if (qty === 0) {
             $("#qty-image").hide();
             $("#image_inp").val("");
+        } else {
+            $("#qty-image").text(`(${qty})`);
+        }
+    });
+
+    //MAN-IMAGE-SUPPLIER
+    $("#choose_image").click(function() {
+        $(".sup_name[]").click();
+    });
+
+    $("#image_sup").change(function() {
+        // HỦy chọn hình
+        if ($(this).val() == "") {
+            return;
+        }
+
+        removeRequired($(".image-sup-div"));
+        var length = this.files.length;
+        var qty = $("image-sup-div > .row").children().length;
+        let imageElement = "";
+        let size = 0;
+        for (var i = 0; i < length; i++) {
+            if (qty > 10) {
+                alert("Hình ảnh upload tối đa là 10");
+                break;
+            }
+            // Kiểm tra file hình
+
+            const fileName = this.files[i].name;
+            const array = fileName.split(".");
+            const extend = array[array.length - 1];
+            // kiểm tra có phải là hình ảnh không
+            if (
+                extend.toLowerCase() === "jpg" ||
+                extend.toLowerCase() === "jpeg" ||
+                extend.toLowerCase() === "png"
+            ) {
+                size = this.files[i].size / 1024 / 1024;
+                if (size > 5) {
+                    alert("Hình ảnh có dung lượng tối da là 5 MB");
+                    break;
+                }
+                const urlIMG = URL.createObjectURL(this.files[i]);
+                isCorrectFrameRate(urlIMG).then((bool) => {
+                    if (bool) {
+                        imageElement = `<div id="image-${idx}" data-id="${idx}" class="image-sup col-md-4 col-6">
+                                        <img data-id="${idx}" src="${urlIMG}"
+                                        alt="" class="img-sup">
+                                        <div class="bg-image-hover">
+                                        <div data-id="${idx}" class="delete-icon" title="delete image">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </div>
+                                        </div>
+                                    </div>`;
+                        idx++;
+                        qty++;
+                        $(".image-sup-div > .row").append(imageElement);
+                        $("#qty-image").text(`(${qty})`);
+                    } else {
+                        alert("Một số hình ảnh không đúng tỉ lệ");
+                    }
+                });
+            } else {
+                alert("Bạn chỉ có thể upload hình ảnh");
+                break;
+            }
+        }
+    });
+    var arrayDelete = [];
+    $(document).on("click", ".delete-icon", function() {
+        var id = $(this).data("id");
+        var imageDelete = $("#image-" + id);
+
+        if (imageDelete.attr("data-name") !== undefined) {
+            const imageName = imageDelete.attr("data-name").split("?")[0];
+            arrayDelete.push(imageName);
+        }
+        imageDelete.remove();
+
+        var qty = $(".image-sup-div > .row").children().length;
+
+        if (qty === 0) {
+            $("#qty-image").hide();
+            $("#image_sup").val("");
         } else {
             $("#qty-image").text(`(${qty})`);
         }

@@ -26,16 +26,6 @@
             <h3 class="card-title">Supplier</h3>
         </div>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
         <form action="{{ Route('supplier/store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-body">
@@ -46,48 +36,72 @@
                         <div style="width: 48%">
                             <div class="mb-12">
                                 <label for="name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                                <input type="text" class="form-control" id="sup_name" name="sup_name"
+                                    placeholder="Name">
+                                @error('sup_name')
+                                    <span class="errorMsg">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div class="form-group">
-                                <label for="image">Image</label>
-                                <div class="input-group">
-                                    <div class="custom-file">
-                                        <input type="file" class="custom-file-input" name="photo" id="image">
-                                        <label class="custom-file-label" for="image">Choose image</label>
-                                    </div>
-                                    <div class="input-group-append">
-                                        <span class="input-group-text">Upload</span>
-                                    </div>
+
+                       
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="sup_email" name="sup_email"
+                                    placeholder="Email">
+                                @error('sup_email')
+                                    <span class="errorMsg">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="text" class="form-control" id="sup_phone" name="sup_phone"
+                                    placeholder="Phone">
+                                @error('sup_phone')
+                                    <span class="errorMsg">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="">Address</label>
+                                    <textarea name="sup_address" id="productdesc" rows="5" class="form-control">{{ old('sup_address') }}</textarea>
+                                    @error('sup_address')
+                                        <span class="errorMsg">{{ $message }}</span>
+                                    @enderror
                                 </div>
                             </div>
 
-
-                            <div class="mb-3">
-                                <label for="address" class="form-label">Address</label>
-                                <input type="text" class="form-control" id="address" name="address"
-                                    placeholder="Address">
-                            </div>
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control" id="email" name="email"
-                                    placeholder="Email">
-                            </div>
                         </div>
 
                         {{-- cột bên phải  --}}
                         <div style="width: 48%">
-                            <div class="mb-3">
-                                <label for="phone" class="form-label">Phone</label>
-                                <input type="text" class="form-control" id="phone" name="phone"
-                                    placeholder="Phone">
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <label for="">Image Supplier</label>
+                                    <b id="image"></b>
+                                    @error('image')
+                                        <span class="errorMsg">{{ $message }}</span>
+                                    @enderror
+                                    <div class="image-sup-div">
+                                        <div class="row">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <input type="file" name="photo" id="image-sup-div" value="{{ old('photo') }}">
+                                    <label class="form-control btn-primary text-center cursor-pointer " for="image_sup">
+                                        Choose image</label>
+                                    <p>* Kích thước hình ảnh: 600x600 (px) - Tỉ lệ hình ảnh: 1:1</p>
+                                </div>
                             </div>
                             <div class="mb-3">
                                 <label for="status" class="form-label">Status</label>
-                                <select id='abc' name="staabctus" aria-label="Default select example"
+                                <select id="loai_tk" name="loai_tk" aria-label="Default select example"
                                     class="form-control">
                                     <option value="1">Actived</option>
                                     <option value="0">Clocked</option>
-
                                 </select>
                             </div>
                         </div>
