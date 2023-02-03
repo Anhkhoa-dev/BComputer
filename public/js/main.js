@@ -1,7 +1,8 @@
 $(function () {
     let timer = null;
     // const page = window.location.pathname.split("/")[1];
-
+    const X_CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
+    const errorMessage = "Đã có lỗi xảy ra. Vui lòng thử lại";
     function showToast(message) {
         if ($("#alert-toast").lenght) {
             $("#alert-toast").remove();
@@ -19,6 +20,42 @@ $(function () {
                 });
             }, 3000);
         }, 200);
+    }
+
+    function showAlertTop(content) {
+        const alertTop = `<div class="alert-top">
+                <div class="close-alert-top-icon"><i class="far fa-times-circle"></i></div>
+                <div class="alert-top-title"></div>
+                <div class="alert-top-content"></div>
+                <div class="alert-top-footer">
+                    <div class="close-alert-top">OK</div>
+                </div>
+            </div>`;
+
+        $("body").prepend(alertTop);
+
+        setTimeout(() => {
+            $(".alert-top").css({
+                "-ms-transform": "translateY(0)",
+                transform: "translateY(0)",
+            });
+            $(".backdrop").css("z-index", "1999");
+            $(".backdrop").fadeIn();
+        }, 200);
+
+        $(".alert-top-content").html(content);
+    }
+
+    function closeAlertTop() {
+        setTimeout(() => {
+            $(".alert-top").remove();
+            $(".backdrop").removeAttr("style");
+        }, 500);
+        $(".alert-top").css({
+            "-ms-transform": "translateY(-500px)",
+            transform: "translateY(-500px)",
+        });
+        $(".backdrop").fadeOut();
     }
 
     // thông báo toast lưu trong session
@@ -65,18 +102,16 @@ $(function () {
     });
 
     function addCart(id_sp, qty) {
-        var $url = "{{ url('/add-to-cart') }}";
         return new Promise((resolve, reject) => {
             $.ajax({
                 headers: {
                     "X-CSRF-TOKEN": X_CSRF_TOKEN,
                 },
-                url: $url,
+                url: "/add-to-cart",
                 type: "POST",
                 data: {
                     id_sp: id_sp,
                     qty: qty,
-                    _token: _token,
                 },
                 success: function (data) {
                     resolve(data);
@@ -97,8 +132,7 @@ $(function () {
             }
             const addCartSuccess = `<div class="add-cart-success">
                     <div class="d-flex align-items-center justify-content-center py-3">
-                    <i class="fas fa-check-circle success-color me-4"></i>Thêm giỏ hàng thành
-                        công!
+                    <i class="fas fa-check-circle success-color me-4"></i>Thêm mới sản phẩm thành công
                      </div>
                     <a href="{{ route('user/cart-items') }}" class="btn btn-success w-100 mt-20">Xem giỏ
                     hàng và thanh toán</a>
@@ -114,44 +148,47 @@ $(function () {
                 $(".add-cart-success").hide("fade", 300);
             }, 5000);
         } else {
-            alert("Thêm giỏ hàng thành công");
+            showAlertTop("Thêm giỏ hàng thành công");
         }
     }
 
     $(".btn-add-cart").click(function () {
         var id = $(this).data("id");
         var id_sp = $(".card_product_id_" + id).val();
-        var sl = $(".card_product_qty_" + id).val();
-        addCart(id_sp, sl)
+        var qty = $(".card_product_qty_" + id).val();
+        addCart(id_sp, qty)
             .then((data) => {
-                // cập nhật số lượng sản phẩm trong giỏ hàng
-                const status = data.status;
-                if (status === "new one") {
-                    if ($(".cart__number").hasClass("d-none")) {
-                        $(".cart__number").removeClass("d-none");
-                    }
-
-                    var qtyHeadCart = parseInt($(".cart__number").text());
-                    $(".cart__number").text(++qtyHeadCart);
-                } else if (status === "already have") {
-                    const qtyInStock = data.qtyInStock;
-
-                    if (qtyInStock < 5) {
-                        alert(
-                            "Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là" +
-                                data.qtyInStock
-                        );
-                    } else {
-                        alert(
-                            "Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5"
-                        );
-                    }
-                    return;
+                switch (data.status) {
+                    case "new one":
+                        if ($(".cart__number").hasClass("d-none")) {
+                            $(".cart__number").removeClass("d-none");
+                        }
+                        var qtyHeadCart = parseInt($(".cart__number").text());
+                        $(".cart__number").text(++qtyHeadCart);
+                        // thông báo thêm giỏ hàng thành công
+                        renderAddCartSuccessfully();
+                        break;
+                    case "already have":
+                        const qtyInstock = data.qtyInStock;
+                        if (qtyInstock > 5) {
+                            showAlertTop(
+                                `Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5`
+                            );
+                        } else {
+                            showAlertTop(
+                                `Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là ${data.qtyInStock}`
+                            );
+                        }
+                        break;
+                    default:
+                        // thông báo thêm giỏ hàng thành công
+                        showAlertTop("Vui lòng đăng nhập để thực hiện chức năng này");
+                    // window.location.href = "http://127.0.0.1:8000/login";
                 }
-
-                // thông báo thêm giỏ hàng thành công
-                renderAddCartSuccessfully();
             })
-            .catch(() => alert(errorMessage));
+            .catch(() => showAlertTop(errorMessage));
     });
 });
+
+
+
