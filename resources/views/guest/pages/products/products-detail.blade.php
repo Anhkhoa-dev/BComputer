@@ -9,7 +9,7 @@
 {{-- Hiễn thị nội dung --}}
 @section('user-contents')
 @section('breadcrumb')
-    <a href="#" class="bc-items">{{ $collections->name }}</a>
+    <a href="{{ route('user/products', ['name' => $collections['slug']]) }}" class="bc-items">{{ $collections->name }}</a>
     <div class="bc-divider"><i class="fas fa-chevron-right"></i></div>
     <a href="#" class="bc-items active">{{ $prod->name }}</a>
 @endsection
@@ -17,120 +17,122 @@
 <div class="han-product-detail pt-2">
     <div class="container">
         <div class="row">
-            <div class="banner">
-                <div class="col-md-8">
-                    <div class="product-name">{{ $prod->name }}</div>
+            <div class="col-md-12">
+                <div class="banner">
+                    <div class="col-md-8">
+                        <div class="product-name">{{ $prod->name }}</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="likeproduct">
+                            <i id="like" onclick="myFunction()" class="fa-solid fa-heart"></i>
+                            Like Product
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="likeproduct">
-                        <i id="like" onclick="myFunction()" class="fa-solid fa-heart"></i>
-                        Like Product
+                <hr style="margin-top:-10px">
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="w3-content w3-display-container col-lg-5">
+                        @foreach ($image as $item)
+                            <img class="mySlides" src="{{ asset('image/product/' . $item->image) }}"
+                                style="width:500 ; height:500">
+                        @endforeach
+                        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+                        <div class="w3-row-padding w3-section">
+                            <?php $index = 0; ?>
+                            @foreach ($image as $item)
+                                <div class="w3-col s3">
+                                    <img class="demo w3-opacity w3-hover-opacity-off"
+                                        src="{{ asset('image/product/' . $item->image) }}"
+                                        style="width:100%;cursor:pointer" onclick="currentDiv({{ $index }})">
+                                </div>
+                                <?php $index++; ?>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-lg-5 form">
+                        <div class="col-md-12">
+                            <div class="price" style="color:#d21212">2.000.000 <span>₫</span></div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="button-product">
+                                <div style="background-color:#fb6e2e"><a href="#">BUY NOW</a></div>
+                                <div style="background-color:#2f90ed"><a href="#">ADD TO CART</a>
+                                </div>
+                            </div>
+                            <div class="contact">
+                                Contact to buy now 0865 677 010 (07:30-22:00)
+                            </div>
+                        </div>
+                        <div class="detail">
+                            Detailed configuration
+                        </div>
+                        <div class="col-md-12">
+                            <div class="details">
+                                <div class="col-md-7">
+                                    <ul><strong>Product</strong></ul>
+                                    <ul><strong>Manufacturer</strong></ul>
+                                    <ul><strong>Model</strong></ul>
+                                    <ul><strong>Socket</strong></ul>
+                                    <ul><strong>Base speed</strong></ul>
+                                    <ul><strong>Cache</strong></ul>
+                                    <ul><strong>CPU</strong></ul>
+                                    <ul><strong>Thread CPU</strong></ul>
+                                    <ul><strong>Graphics processor</strong></ul>
+                                    <ul><strong>Memory support</strong></ul>
+                                    <ul><strong>Maximum voltage consumption</strong></ul>
+                                    <ul><strong>Maximum temperature</strong></ul>
+                                </div>
+                                <div class="col-md-5">
+                                    <ul>Processor CPU</ul>
+                                    <ul>Intel</ul>
+                                    <ul>Intel Core™ i5-13400f</ul>
+                                    <ul>FCLGA1700</ul>
+                                    <ul>3.3 GHz</ul>
+                                    <ul>20 MB</ul>
+                                    <ul>10 Core</ul>
+                                    <ul>16 Thread</ul>
+                                    <ul>Not supported</ul>
+                                    <ul>Maximum 128 GB</ul>
+                                    <ul>65W</ul>
+                                    <ul>100 degrees Celsius </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2">
+                        <div class="col-md-12" style="margin-top: 50px">
+                            <div>
+                                <i class="fa-solid fa-truck-fast"></i>
+                                <h6>FREE SHIPPING</h6>
+                                <div>On Order Over $99</div>
+                                <div>Lorem Ipsum is simply dummy</div>
+                                <div>Text of the printing</div>
+                                <hr>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-gift"></i>
+                                <h6>SPECAIL OFFER</h6>
+                                <div>Get a gift!</div>
+                                <div>Lorem Ipsum is simply dummy</div>
+                                <div>Text of the printing</div>
+                                <hr>
+                            </div>
+                            <div>
+                                <i class="fa-solid fa-arrow-rotate-left"></i>
+                                <h6>ORDER RETURN</h6>
+                                <div>Return within 7 days</div>
+                                <div>Lorem Ipsum is simply dummy</div>
+                                <div>Text of the printing</div>
+                                <hr>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <hr style="margin-top:-10px">
-        </div>
-        <div class="row">
-            <div class="w3-content w3-display-container col-lg-5">
-                @foreach ($image as $item)
-                    <img class="mySlides" src="{{ asset('image/product/' . $item->image) }}"
-                        style="width:500 ; height:500">
-                @endforeach
 
-
-
-                <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-                <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-                <div class="w3-row-padding w3-section">
-                    <?php $index = 0; ?>
-                    @foreach ($image as $item)
-                        <div class="w3-col s3">
-                            <img class="demo w3-opacity w3-hover-opacity-off"
-                                src="{{ asset('image/product/' . $item->image) }}" style="width:100%;cursor:pointer"
-                                onclick="currentDiv({{ $index }})">
-                        </div>
-                        <?php $index++; ?>
-                    @endforeach
-                </div>
-            </div>
-            <div class="col-lg-5 form">
-                <div class="col-md-12">
-                    <div class="price" style="color:#d21212">2.000.000 <span>₫</span></div>
-                </div>
-                <div class="col-md-12">
-                    <div class="button-product">
-                        <div style="background-color:#fb6e2e"><a href="#">BUY NOW</a></div>
-                        <div style="background-color:#2f90ed"><a href="#">ADD TO CART</a>
-                        </div>
-                    </div>
-                    <div class="contact">
-                        Contact to buy now 0865 677 010 (07:30-22:00)
-                    </div>
-                </div>
-                <div class="detail">
-                    Detailed configuration
-                </div>
-                <div class="col-md-12">
-                    <div class="details">
-                        <div class="col-md-7">
-                            <ul><strong>Product</strong></ul>
-                            <ul><strong>Manufacturer</strong></ul>
-                            <ul><strong>Model</strong></ul>
-                            <ul><strong>Socket</strong></ul>
-                            <ul><strong>Base speed</strong></ul>
-                            <ul><strong>Cache</strong></ul>
-                            <ul><strong>CPU</strong></ul>
-                            <ul><strong>Thread CPU</strong></ul>
-                            <ul><strong>Graphics processor</strong></ul>
-                            <ul><strong>Memory support</strong></ul>
-                            <ul><strong>Maximum voltage consumption</strong></ul>
-                            <ul><strong>Maximum temperature</strong></ul>
-                        </div>
-                        <div class="col-md-5">
-                            <ul>Processor CPU</ul>
-                            <ul>Intel</ul>
-                            <ul>Intel Core™ i5-13400f</ul>
-                            <ul>FCLGA1700</ul>
-                            <ul>3.3 GHz</ul>
-                            <ul>20 MB</ul>
-                            <ul>10 Core</ul>
-                            <ul>16 Thread</ul>
-                            <ul>Not supported</ul>
-                            <ul>Maximum 128 GB</ul>
-                            <ul>65W</ul>
-                            <ul>100 degrees Celsius </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2">
-                <div class="col-md-12" style="margin-top: 50px">
-                    <div>
-                        <i class="fa-solid fa-truck-fast"></i>
-                        <h6>FREE SHIPPING</h6>
-                        <div>On Order Over $99</div>
-                        <div>Lorem Ipsum is simply dummy</div>
-                        <div>Text of the printing</div>
-                        <hr>
-                    </div>
-                    <div>
-                        <i class="fa-solid fa-gift"></i>
-                        <h6>SPECAIL OFFER</h6>
-                        <div>Get a gift!</div>
-                        <div>Lorem Ipsum is simply dummy</div>
-                        <div>Text of the printing</div>
-                        <hr>
-                    </div>
-                    <div>
-                        <i class="fa-solid fa-arrow-rotate-left"></i>
-                        <h6>ORDER RETURN</h6>
-                        <div>Return within 7 days</div>
-                        <div>Lorem Ipsum is simply dummy</div>
-                        <div>Text of the printing</div>
-                        <hr>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="description">
@@ -364,20 +366,20 @@
         showDivs(slideIndex += n);
     }
 
-    function showDivs(n) {
-        var i;
-        var x = document.getElementsByClassName("mySlides");
-        if (n > x.length) {
-            slideIndex = 1
-        }
-        if (n < 1) {
-            slideIndex = x.length
-        }
-        for (i = 0; i < x.length; i++) {
-            x[i].style.display = "none";
-        }
-        x[slideIndex - 1].style.display = "block";
-    }
+    // function showDivs(n) {
+    //     var i;
+    //     var x = document.getElementsByClassName("mySlides");
+    //     if (n > x.length) {
+    //         slideIndex = 1
+    //     }
+    //     if (n < 1) {
+    //         slideIndex = x.length
+    //     }
+    //     for (i = 0; i < x.length; i++) {
+    //         x[i].style.display = "none";
+    //     }
+    //     x[slideIndex - 1].style.display = "block";
+    // }
 
     function openTab(cityName) {
         var i;

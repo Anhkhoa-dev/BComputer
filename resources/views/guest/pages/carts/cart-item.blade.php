@@ -18,113 +18,70 @@
                     <h3 class="cart-title">Cart items</h3>
                 </div>
                 <div class="col-md-12">
-                    <p class="cart-terms-purchase">* Số lượng mua cho 1 sản phẩm tối đa là 5</p>
+                    @if ($listCart != null)
+                        <p class="cart-terms-purchase">(*) Số lượng mua cho 1 sản phẩm tối đa là 5</p>  
+                    @else  
+                    <p class="cart-terms-purchase"></p>      
+                    @endif
                     <div class="row">
                         <div class="col-md-9">
                             <div class="row">
                                 <div class="cart-items mb-1">
                                     <div class="cart-header bg-white mb-2">
-                                        <div class="select-item-cart"><input type="checkbox" id="select_all" class="cus-checkbox"></div>
-                                        <div class="cart-header-name">Select all (1 product)</div>
-                                        <div class="cart-header-price">Price</div>
-                                        <div class="cart-header-qty">Quanity</div>
-                                        <div class="cart-header-total">Total</div>
-                                        <div class="cart-header-trash"><i class="fa-solid fa-trash-can"></i></div>
-                                    </div>  
+                                        @if ($listCart != null)
+                                            <div class="select-item-cart"><input type="checkbox" id="select_all" class="cus-checkbox"></div>
+                                            <div class="cart-header-name">Select all (<span id="qty-cart-total">{{$listCart->sum('quanity')}}</span> product)</div>
+                                            <div class="cart-header-price">Price</div>
+                                            <div class="cart-header-qty">Quanity</div>
+                                            <div class="cart-header-total">Total</div>
+                                            <div class="cart-header-trash"><i class="fa-solid fa-trash-can"></i></div>                                           
+                                        @endif 
+                                    </div>
+                                    @if ($listCart != null)
+                                    @foreach ($listCart as $item)
                                     <div class="list-cart-item mb-2">
                                         <div class="cart-body">
                                             <div class="select-item-cart">
-                                                <input type="checkbox" name="check[]" id="" class="cus-checkbox">
+                                                <input type="checkbox" name="check[]" data-id="{{$item->id_pro}}" class="cus-checkbox">
                                             </div>
                                             <div class="cart-body-name">
                                                 <div class="cart-image">
-                                                    <img src="{{ asset('image/product/Asus_ROG_Gladius_II_01.PNG') }}" alt="">
+                                                    <img src="{{ asset('image/product/'.$item->image[0]->image) }}" alt="">
                                                 </div>
                                                 <div class="name-info">
-                                                    Product name 01asdasdasdasdsa
+                                                    {{$item->name}}
                                                 </div>
                                             </div>
-                                            <div class="cart-body-price">$ 72</div>
+                                            <div class="cart-body-price">$ {{ number_format($item->price * ((100 - $item->discount) / 100), 2) }}</div>
                                             <div class="cart-body-qty">
                                                 <div class="qty-quanity">
                                                     <div class="qty-minus"><i class="fa-solid fa-minus"></i></div>
-                                                <div class="quanity">1</div>
+                                                <div class="quanity" id="qty">{{$item->quanity}}</div>
                                                 <div class="qty-plus"><i class="fa-solid fa-plus"></i></div>
                                                 </div>
                                                 
                                             </div>
-                                            <div class="cart-body-total">$ 72</div>
-                                            <div class="cart-body-trash">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </div>
-                                        </div>
-                                    </div>  
-                                    <div class="list-cart-item mb-2">
-                                        <div class="cart-body">
-                                            <div class="select-item-cart">
-                                                <input type="checkbox" name="check[]" id="" class="cus-checkbox">
-                                            </div>
-                                            <div class="cart-body-name">
-                                                <div class="cart-image">
-                                                    <img src="{{ asset('image/product/Asus_ROG_Gladius_II_01.PNG') }}" alt="">
-                                                </div>
-                                                <div class="name-info">
-                                                    Product name 01asdasdasdasdsa
-                                                </div>
-                                            </div>
-                                            <div class="cart-body-price">$ 72</div>
-                                            <div class="cart-body-qty">
-                                                <div class="qty-quanity">
-                                                    <div class="qty-minus"><i class="fa-solid fa-minus"></i></div>
-                                                <div class="quanity">1</div>
-                                                <div class="qty-plus"><i class="fa-solid fa-plus"></i></div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="cart-body-total">$ 72</div>
+                                            <div class="cart-body-total">$ {{number_format($item->price * ((100 - $item->discount) / 100), 2) * $item->quanity }}</div>
                                             <div class="cart-body-trash">
                                                 <i class="fa-solid fa-trash-can"></i>
                                             </div>
                                         </div>
                                     </div> 
-                                    <div class="list-cart-item mb-2">
-                                        <div class="cart-body">
-                                            <div class="select-item-cart">
-                                                <input type="checkbox" name="check[]" id="" class="cus-checkbox">
-                                            </div>
-                                            <div class="cart-body-name">
-                                                <div class="cart-image">
-                                                    <img src="{{ asset('image/product/Asus_ROG_Gladius_II_01.PNG') }}" alt="">
-                                                </div>
-                                                <div class="name-info">
-                                                    Product name 01asdasdasdasdsa
-                                                </div>
-                                            </div>
-                                            <div class="cart-body-price">$ 72</div>
-                                            <div class="cart-body-qty">
-                                                <div class="qty-quanity">
-                                                    <div class="qty-minus"><i class="fa-solid fa-minus"></i></div>
-                                                <div class="quanity">1</div>
-                                                <div class="qty-plus"><i class="fa-solid fa-plus"></i></div>
-                                                </div>
-                                                
-                                            </div>
-                                            <div class="cart-body-total">$ 72</div>
-                                            <div class="cart-body-trash">
-                                                <i class="fa-solid fa-trash-can"></i>
-                                            </div>
-                                        </div>
-                                    </div> 
+                                    @endforeach
+                                     
+                                    @else
+                                        <p>Bạn chưa có sản phẩm nào trong giỏ hàng</p>
+                                        <a href="{{ route('user/index') }}" class="btn btn-primary mt-4"><i class="fa-solid fa-chevron-left"></i> Tiếp tục mua sắm</a>
+                                        </div> 
+                                    @endif  
+                                    
+                                    @if ($listCart != null)
                                     <div class="col-md-12">
                                         <a href="{{ route('user/index') }}" class="btn btn-primary"><i class="fa-solid fa-chevron-left"></i> Tiếp tục mua sắm</a>
-                                    </div>
+                                        </div>   
+                                    @endif
+                                    
                                 </div>
-        
-                                {{-- Chưa có sản phẩm trong giỏ hàng --}}
-                                {{-- <div>
-                                    <p class="cart-notify">Bạn chưa có sản phẩm nào trong giỏ hàng</p>
-                                </div> --}}
-                            
                             </div>
                         </div>
                         
@@ -142,7 +99,7 @@
                                     <h5>Order Summary</h5>
                                     <hr>
                                     <div class="d-flex mb-2">
-                                        <div class="col-9">Subtotal (2 items) </div>
+                                        <div class="col-9">Subtotal (<span id="qty-provisional"></span> items) </div>
                                         <div class="col-3 text-end">$ 72</div>
                                     </div>
                                     <div class="d-flex mb-4">
@@ -162,9 +119,7 @@
                                 <a href="{{ route('checkout/checkout-process') }}" class="btnSubmitCart">Confirm cart (2)</a>
                             </div> 
                         </div>
-                    </div>
-                    
-                    
+                    </div> 
                 </div>
             </div>
             
