@@ -26,9 +26,9 @@ class CartConntroller extends Controller
             $user_id = Auth::user()->id;
             $cart = $this->getCart($user_id);
             $array = [
-                'listCart' => $cart,
+                'cart' => $cart,
             ];
-            dd($array);
+             dd($array);
             return view('guest.pages.carts.cart-item')->with($array);
         }
     }
@@ -117,16 +117,13 @@ class CartConntroller extends Controller
 
         foreach (Cart::where('id_tk', $id_tk)->get() as $item) {
             $product = Products::where('id', $item->id_pro)->first();
-            $image = ProductImage::where('id_pro', $item->id_pro)->get();
-            $thanhtien = intval(
-                $item->quanity * (
-                    $product->price * ((100 - $product->discount) / 100))
+            $product->image = ProductImage::where('id_pro', $item->id_pro)->get();
+            $thanhtien = intval($item->quanity * ($product->price * ((100 - $product->discount) / 100))
             );
 
             $pro_item = [
                 'id' => $item->id,
                 'product' => $product,
-                'image' => $image,
                 'sl' => $item->quanity,
                 'thanhtien' => $thanhtien,
                 'hethang' => false,
@@ -137,7 +134,7 @@ class CartConntroller extends Controller
             if (!$qtyInStock) {
                 $pro_item['hethang'] = true;
             } else {
-                $cart['total'] += $item['thanhtien'];
+                $cart['total'] += $pro_item['thanhtien'];
             }
             array_push($cart['cart'], $pro_item);
             $cart['qty']++;
