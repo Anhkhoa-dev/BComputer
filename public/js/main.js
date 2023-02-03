@@ -151,6 +151,32 @@ $(function () {
             showAlertTop("Thêm giỏ hàng thành công");
         }
     }
+    function renderUpdateCartSuccessfully(id) {
+        if (window.innerWidth > 992) {
+            if ($(".add-cart-success").length) {
+                $(".add-cart-success").remove();
+            }
+            const updateCartSuccess = `<div class="add-cart-success">
+                    <div class="d-flex align-items-center justify-content-center py-3">
+                    <i class="fas fa-check-circle success-color me-4"></i>Update sản phẩm ${id} thành công
+                     </div>
+                    <a href="{{ route('user/cart-items') }}" class="btn btn-success w-100 mt-20">Xem giỏ
+                    hàng và thanh toán</a>
+                </div>`;
+
+            $("#add-cart-success").append(updateCartSuccess);
+
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                setTimeout(() => {
+                    $(".add-cart-success").remove();
+                }, 1000);
+                $(".add-cart-success").hide("fade", 300);
+            }, 5000);
+        } else {
+            showAlertTop("Update giỏ hàng thành công");
+        }
+    }
 
     $(".btn-add-cart").click(function () {
         var id = $(this).data("id");
@@ -159,6 +185,15 @@ $(function () {
         addCart(id_sp, qty)
             .then((data) => {
                 switch (data.status) {
+                    case "update":
+                        if ($(".cart__number").hasClass("d-none")) {
+                            $(".cart__number").removeClass("d-none");
+                        }
+                        var qtyHeadCart = parseInt($(".cart__number").text());
+                        $(".cart__number").text(++qtyHeadCart);
+                        // thông báo thêm giỏ hàng thành công
+                        renderUpdateCartSuccessfully(data.pro_name);
+                        break;
                     case "new one":
                         if ($(".cart__number").hasClass("d-none")) {
                             $(".cart__number").removeClass("d-none");
@@ -182,13 +217,17 @@ $(function () {
                         break;
                     default:
                         // thông báo thêm giỏ hàng thành công
-                        showAlertTop("Vui lòng đăng nhập để thực hiện chức năng này");
+                        showAlertTop(
+                            "Vui lòng đăng nhập để thực hiện chức năng này"
+                        );
                     // window.location.href = "http://127.0.0.1:8000/login";
                 }
             })
             .catch(() => showAlertTop(errorMessage));
     });
+
+    // Sản phẩm tạm tính
+    $("#select_all").click(function () {
+        var totalCart = parseInt($("#qty-cart-total").text());
+    });
 });
-
-
-

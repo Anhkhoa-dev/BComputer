@@ -8,7 +8,7 @@
     @endif
     @if (Auth::check())
         <?php $user = Auth::user(); ?>
-        <?php $totalCart = session()->get('totalCart'); ?>
+        <?php $qtyCart = session()->get('qtyCart'); ?>
         <input type="hidden" id="session-user" data-id="{{ $user->id }}">
     @endif
     {{--  include trang header --}}
