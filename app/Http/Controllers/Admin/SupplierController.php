@@ -99,7 +99,7 @@ class SupplierController extends Controller
         ];
         // dd($array);
         return view('admin.pages.suppliers.create')->with($array);
-    
+
     }
 
     /**
@@ -128,7 +128,7 @@ class SupplierController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {        
+    {
             $prods = $request->all();
             // dd($prods);
             $request->validate(
@@ -142,7 +142,7 @@ class SupplierController extends Controller
                 [
                     'sup_name.required' => 'Please input name of supplier',
                     'sup_address.required' => 'Please input address ',
-                    'sup_phone.required' => 'Please input phone  ',
+                    'sup_phone.required' => 'Please input phone',
                     'sup_email.required' => 'Please input email',
                     // 'image.required' => 'Please choose image!',
             ]);
@@ -154,7 +154,7 @@ class SupplierController extends Controller
                 $file->move('image/supplier/', $fileName);
                 $prods['image'] = "$fileName";
             }else{
-                
+
                 $prods['image'] = $oldImage->image;
             }
             $data = [
@@ -168,7 +168,7 @@ class SupplierController extends Controller
             //dd($data);
             SUPPLIER::where('id', intval($prods['sup_id']))->update($data);
             return redirect()->route('admin/supplier');
-        
+
     }
 
     /**

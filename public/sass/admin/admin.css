@@ -1,256 +1,227 @@
 .modal__acount {
-    display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: 20;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 20;
 }
 
 .actived_status {
-    background: rgb(3, 237, 58);
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+  background: rgb(3, 237, 58);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 .clocked_status {
-    background: rgb(107, 107, 107);
-    color: #fff;
-    padding: 5px 10px;
-    border-radius: 5px;
+  background: rgb(107, 107, 107);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 .khoa-admin {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
-
 .khoa-admin .admin-image {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
 }
-
 .khoa-admin .img_admin {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
 
-.khoa-sup-title {
-    color: red;
+.image-sup-div {
+  width: 100%;
+  height: 250px;
+  border: 1px solid rgb(96, 95, 95);
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
-
-.image-preview-div {
-    width: 100%;
-    height: 250px;
-    border: 1px solid rgb(96, 95, 95);
-    padding: 20px;
-    overflow-y: auto;
-    overflow-x: hidden;
+.image-sup-div .image-sub {
+  width: 100%;
+  position: relative;
+  cursor: pointer;
 }
-
-.image-preview-div .image-preview {
-    width: 100%;
-    position: relative;
-    cursor: pointer;
+.image-sup-div .image-sub:hover .bg-image-hover {
+  visibility: inherit;
 }
-
-.image-preview-div .image-preview:hover .bg-image-hover {
-    visibility: inherit;
+.image-sup-div .image-sub .img-sup {
+  width: 100%;
+  height: 100%;
 }
-
-.image-preview-div .image-preview .img-preview {
-    width: 100%;
-    height: 100%;
+.image-sup-div .image-sub .bg-image-hover {
+  width: 100%;
+  height: 100%;
+  background: rgba(52, 52, 52, 0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.image-preview-div .image-preview .bg-image-hover {
-    width: 100%;
-    height: 100%;
-    background: rgba(52, 52, 52, 0.2);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.image-sup-div .image-sub .bg-image-hover .delete-icon {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #fff;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
 }
-
-.image-preview-div .image-preview .bg-image-hover .delete-icon {
-    width: 50px;
-    height: 50px;
-    border: 2px solid #fff;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.25rem;
-}
-
-.image-preview-div .image-preview .bg-image-hover .delete-icon:hover {
-    background: #fff;
-    color: #E94560;
+.image-sup-div .image-sub .bg-image-hover .delete-icon:hover {
+  background: #fff;
+  color: #E94560;
 }
 
 .errorMsg {
-    color: red;
-    font-style: italic;
+  color: red;
+  font-style: italic;
+}
+
+.image-preview-div {
+  width: 100%;
+  height: 250px;
+  border: 1px solid rgb(96, 95, 95);
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.image-preview-div .image-preview {
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+}
+.image-preview-div .image-preview:hover .bg-image-hover {
+  visibility: inherit;
+}
+.image-preview-div .image-preview .img-preview {
+  width: 100%;
+  height: 100%;
+}
+.image-preview-div .image-preview .bg-image-hover {
+  width: 100%;
+  height: 100%;
+  background: rgba(52, 52, 52, 0.2);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.image-preview-div .image-preview .bg-image-hover .delete-icon {
+  width: 50px;
+  height: 50px;
+  border: 2px solid #fff;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+}
+.image-preview-div .image-preview .bg-image-hover .delete-icon:hover {
+  background: #fff;
+  color: #E94560;
+}
+
+.errorMsg {
+  color: red;
+  font-style: italic;
 }
 
 .phuc-acount {
-    justify-content: center;
-    display: flex;
-    gap: 10px;
+  justify-content: center;
+  display: flex;
+  gap: 10px;
 }
-
 .phuc-acount .acount-image {
-    width: 70px;
-    height: 70px;
-    border-radius: 0%;
+  width: 70px;
+  height: 70px;
+  border-radius: 0%;
 }
-
 .phuc-acount .img_acount {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
 }
-
 .phuc-acount .create-image {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    border-radius: 5%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
 }
-
 .phuc-acount .img_create {
-    border-radius: 5%;
-    padding: 0.25rem;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    border-radius: 0.25rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
-    width: 350px;
-    max-width: 100%;
-    height: 350px;
+  border-radius: 5%;
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+  width: 350px;
+  max-width: 100%;
+  height: 350px;
 }
 
 .phuc-showAcount {
-    justify-content: center;
-    display: flex;
-    gap: 10px;
-    margin-top: 100px;
+  justify-content: center;
+  display: flex;
+  gap: 10px;
+  margin-top: 100px;
 }
-
 .phuc-showAcount .show-image {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    border-radius: 5%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
 }
-
 .phuc-showAcount .img_show {
-    border-radius: 5%;
-    padding: 0.25rem;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    border-radius: 0.25rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
-    width: 350px;
-    max-width: 100%;
-    height: 350px;
+  border-radius: 5%;
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+  width: 350px;
+  max-width: 100%;
+  height: 350px;
 }
 
 .phuc-banner {
-    justify-content: center;
-    display: flex;
+  justify-content: center;
+  display: flex;
 }
-
 .phuc-banner .banner-image {
-    align-items: center;
-    justify-content: center;
-    display: flex;
-    width: 100%;
-    height: 100%;
-    border-radius: 5%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 5%;
 }
-
 .phuc-banner .img_banner {
-    border-radius: 5%;
-    padding: 0.25rem;
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    border-radius: 0.25rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
-    width: auto;
-    max-width: 100%;
-    height: 500px;
-}
-
-
-/* Supplier */
-
-.image-sup-div {
-    width: 100%;
-    height: 200px;
-    border: 1px solid rgb(96, 95, 95);
-    padding: 20px;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-
-.image-sup-div .image-sup {
-    width: 100%;
-    position: relative;
-    cursor: pointer;
-}
-
-.image-sup-div .image-sup:hover .bg-image-hover {
-    visibility: inherit;
-}
-
-.image-sup-div .image-sup .img-sup {
-    width: 170%;
-    height: 100%;
-    margin-left: 90px;
-}
-
-.image-sup-div .image-sup .bg-image-hover {
-    width: 100%;
-    height: 100%;
-    background: rgba(52, 52, 52, 0.2);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-left: 125px;
-}
-
-.image-sup-div .image-sup .bg-image-hover .delete-icon {
-    width: 50px;
-    height: 50px;
-    border: 2px solid #fff;
-    color: #fff;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.25rem;
-}
-
-.image-sup-div .image-sup .bg-image-hover .delete-icon:hover {
-    background: #fff;
-    color: #E94560;
-}
-
-
-/*# sourceMappingURL=admin.css.map */
+  border-radius: 5%;
+  padding: 0.25rem;
+  background-color: #fff;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+  width: auto;
+  max-width: 100%;
+  height: 500px;
+}/*# sourceMappingURL=admin.css.map */

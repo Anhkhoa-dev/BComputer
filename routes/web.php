@@ -36,7 +36,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
         ['middleware' => 'ckUserLogin'],
         function () {
             // hành động check thanh toán, thêm giỏ hàng, thêm sản phẩm yêu thích, comment
-    
+
             // Xem giỏ hàng
             Route::get('/cart-items', [CartConntroller::class, 'getViewcart'])->name('user/cart-items');
             Route::get('/checkout-process', [CartConntroller::class, 'getCheckoutProcess'])->name('checkout/checkout-process');
@@ -45,11 +45,12 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
 
             //Thêm sản phẩm vào giỏ hàng
             Route::post('add-to-cart', [CartConntroller::class, 'addToCart']);
+            Route::post('ajax-update-cart', [CartConntroller::class, 'ajaxUpdateCart']);
             // Phần hiển thị view tài khoản
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
 
             // Phần Route post xử lý user thêm địa chỉ giao hàng
-    
+
             Route::get('account/address', [AccountController::class, 'getAddress'])->name('user/address');
             Route::post('account/postAddress', [AccountController::class, 'postAddress'])->name('user/add-address');
             Route::get('account/set-default/{slug}', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
