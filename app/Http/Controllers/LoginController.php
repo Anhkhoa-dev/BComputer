@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ACOUNT;
+use App\Models\Cart;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,20 +26,10 @@ class LoginController extends Controller
     {
 
         if (Auth::check() || session('user')) {
+
             return back()->with('toast_message', 'Bạn đã đăng nhập');
         }
-        // if(!session()->get('prev_url')){
-        //     $prev_url = '/';
-        //     if(session()->get('_previous')){
-        //         $url = session()->get('_previous')['url'];
-        //         $arrUrl = explode('/', $url);
-        //         $page = $arrUrl[count($arrUrl) - 1];
-        //         // if($page != 'dangky' && $page != 'khoiphuctaikhoan'){
-        //         //     $prev_url = $url;
-        //         // }
-        //     }
-        //     session()->put('prev_url', $prev_url);
-        // }
+
 
         return view('guest.pages.login.login');
     }
@@ -67,18 +58,17 @@ class LoginController extends Controller
             // $user = Auth::user();
             $user = User::where('email', $data['email'])->first();
             Auth::login($user);
-            //   session()->put('user', $user);
-            // dd($user->status);
+            session()->put('user', $user);
+
             if ($user->status == 1) {
                 if ($user->level == 1) {
+
                     return redirect('/');
                 } elseif ($user->level == 2) {
                     return redirect('admin');
                 }
             } elseif ($user->status == 0) {
-                return back()->withErrors([
-                    'errorMsg' => 'Tài khoản đang bị khóa, Vui lòng liên hệ admin'
-                ])->onlyInput('email');
+                return route('recovey-account');
             }
         }
         return back()->withErrors([
@@ -93,6 +83,8 @@ class LoginController extends Controller
         $request->session()->regenerate();
         return redirect('/');
     }
+
+
 
     public function getRegister()
     {
@@ -145,6 +137,11 @@ class LoginController extends Controller
                 'email' => 'Email đã được sử dụng!'
             ])->onlyInput('email');
         }
+    }
+
+    public function RecoveryAcount()
+    {
+        return view('guest.pages.login.khoi-phuc-tai-khoan');
     }
 
 }

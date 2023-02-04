@@ -49,7 +49,7 @@
             <div class="products">
                 @foreach ($listProductByCategory as $item)
                     <div class="card-product">
-                        <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
+                        <div class="card-body">
                             <div class="card-image">
                                 <img src="{{ asset('image/product/' . $item->image[0]->image) }}"
                                     alt="{{ $item->name }}" class="img-fluid">
@@ -70,27 +70,37 @@
                                                 class="fa-solid fa-eye"></i>
                                         </div>
                                     </a>
-                                    <a href="#" class="text-decoration-none text-dark">
-                                        <div class="hover-addtocart" title="Add to cart"><i
-                                                class="fa-solid fa-bag-shopping"></i></div>
-                                    </a>
+                                    <form>
+                                        @csrf
+                                        <input type="hidden" value="{{ $item->id }}"
+                                            class="card_product_id_{{ $item->id }}">
+                                        <input type="hidden" value="1"
+                                            class="card_product_qty_{{ $item->id }}">
+
+                                        <button type="button" class="add-cart btn-add-cart"
+                                            data-id="{{ $item->id }}">
+                                            <div class="hover-addtocart" title="Add to cart">
+                                                <i class="fa-solid fa-bag-shopping"></i>
+                                            </div>
+                                        </button>
+                                    </form>
+
                                 </div>
                             </div>
-                        </a>
-
+                        </div>
                         <div class="card-info">
                             <div class="card-title">
-                                <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">{{ $item->name }}</a>
+                                <a href="{{ route('user/detail', ['name' => $item['slug']]) }}"
+                                    title="{{ $item->name }}">{{ $item->name }}</a>
                             </div>
                             <div class="card-price">
                                 <div class="old-price">$ {{ $item->price }}</div>
-                                <div class="new-price">$ {{ $item->price * ((100 - $item->discount) / 100) }}</div>
+                                <div class="new-price">$
+                                    {{ number_format($item->price * ((100 - $item->discount) / 100), 2) }}</div>
                             </div>
                         </div>
                     </div>
                 @endforeach
-
-
             </div>
 
         </div>
@@ -129,6 +139,44 @@
         $('.filter-item_title').click(function() {
             $('.filter-item_dropdown').addClass('show');
         });
+
+        // Hàm add to cart
+        // $(".btn-add-cart").click(function() {
+        //     var $url = "{{ url('/add-to-cart') }}";
+        //     var id = $(this).data("id");
+        //     var card_product_id = $('.card_product_id_' + id).val();
+        //     var card_product_qty = $('.card_product_qty_' + id).val();
+        //     var _token = $('input[name="_token"]').val();
+        //     $.ajax({
+        //         url: $url,
+        //         type: "POST",
+        //         data: {
+        //             card_product_id: card_product_id,
+        //             card_product_qty: card_product_qty,
+        //             _token: _token,
+        //         },
+        //         success: function(data) {
+        //             if (data['status'] == 1) {
+        //                 swal({
+        //                         title: "Đã thêm sản phẩm vào giỏ hàng",
+        //                         text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+        //                         showCancelButton: true,
+        //                         cancelButtonClass: "btn-primary",
+        //                         cancelButtonText: "Xem tiếp",
+        //                         confirmButtonClass: "btn-success",
+        //                         confirmButtonText: "Đi đến giỏ hàng",
+        //                         closeOnConfirm: false
+        //                     },
+        //                     function() {
+        //                         window.location.href =
+        //                             "http://127.0.0.1:8000/cart-items";
+        //                     });
+        //             } else {
+        //                 window.location.href = "http://127.0.0.1:8000/login";
+        //             }
+        //         },
+        //     });
+        // });
     });
 </script>
 @endsection

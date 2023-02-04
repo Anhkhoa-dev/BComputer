@@ -9,7 +9,7 @@
 {{-- Hiễn thị nội dung --}}
 @section('user-contents')
 @section('breadcrumb')
-    <a href="#" class="bc-items">{{ $collections->name }}</a>
+    <a href="{{ route('user/products', ['name' => $collections['slug']]) }}" class="bc-items">{{ $collections->name }}</a>
     <div class="bc-divider"><i class="fas fa-chevron-right"></i></div>
     <a href="#" class="bc-items active">{{ $prod->name }}</a>
 @endsection
@@ -17,6 +17,7 @@
 <div class="han-product-detail pt-2">
     <div class="container">
         <div class="row">
+
             <div class="w3-content w3-display-container col-lg-5">
                 @foreach ($image as $item)
                     <img class="mySlides" src="{{ asset('image/product/' . $item->image) }}">
@@ -30,11 +31,13 @@
                             <img class="image-details w3-opacity w3-hover-opacity-off"
                                 src="{{ asset('image/product/' . $item->image) }}"
                                 onclick="currentDiv({{ $index }})">
+
                         </div>
-                        <?php $index++; ?>
-                    @endforeach
+                    </div>
                 </div>
+                <hr style="margin-top:-10px">
             </div>
+
             <div class="col-lg-7 form">
                 <div class="banner">
                     <div class="col-md-12">
@@ -171,11 +174,13 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="description col-md-12">
@@ -450,6 +455,7 @@
         showDivs(slideIndex += n);
     }
 
+
     function myFunction() {
         document.getElementById("heart").style.color = "red";
     }
@@ -457,6 +463,7 @@
     function myFunctionlike() {
         document.getElementById("like").style.color = "#0F3460";
     }
+
 
     function openTab(cityName) {
         var i;

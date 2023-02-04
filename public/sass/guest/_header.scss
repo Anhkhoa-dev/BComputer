@@ -87,6 +87,42 @@
                 justify-content: center;
                 align-items: center;
 
+                .add-cart-success {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    margin-top: 10px;
+                    width: 350px;
+                    padding: 20px;
+                    background-color: white;
+                    border-radius: 5px;
+                    box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.16);
+                    animation-name: showAddCartSuccess;
+                    animation-duration: .75s;
+                }
+
+                @keyframes showAddCartSuccess {
+                    from {
+                        transform: translateY(30px);
+                    }
+
+                    to {
+                        transform: translateY(0);
+                    }
+                }
+
+                .add-cart-success::before {
+                    content: '';
+                    position: absolute;
+                    left: 35px;
+                    top: -10px;
+                    width: 0;
+                    height: 0;
+                    border-left: 5px solid transparent;
+                    border-right: 5px solid transparent;
+                    border-bottom: 10px solid white;
+                }
+
                 &:hover {
                     i {
 
