@@ -108,7 +108,7 @@ class ProductController extends Controller
                 'featured' => intval($prods['pro_featured']),
                 'status' => intval($prods['pro_active']),
             ];
-
+            
             $kiemtraName = Products::where('name', $prods['pro_name'])->first();
 
             if($kiemtraName != null){

@@ -27,7 +27,10 @@
     <div class="card">
       <div class="card-header">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create_acount">Create</button>
-
+        <a class="btn btn-primary" href="{{ route('admin/acount/create') }}">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            {{-- Create --}}
+        </a>
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
             <i class="fas fa-minus"></i>
@@ -84,7 +87,7 @@
                     </td>
                 </tr>
                 @endforeach
-                
+
             </tbody>
         </table>
       </div>
@@ -175,7 +178,7 @@
             </div>
 
           </form>
-            
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
