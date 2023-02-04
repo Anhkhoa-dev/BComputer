@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     const CREATE_MESSAGE = "Thêm thành công";
     const EDIT_MESSAGE = "Chỉnh sửa thành công";
     const DELETE_MESSAGE = "Xóa thành công";
@@ -26,7 +26,7 @@ $(function() {
         return new Promise((resolve) => {
             const image = new Image();
             image.src = url;
-            image.onload = function() {
+            image.onload = function () {
                 const width = this.width;
                 const height = this.height;
 
@@ -34,13 +34,25 @@ $(function() {
             };
         });
     }
+    function isCorrectFrameRateWith(url) {
+        return new Promise((resolve) => {
+            const image = new Image();
+            image.src = url;
+            image.onload = function () {
+                const width = this.width;
+                const height = this.height;
+
+                resolve(width != height);
+            };
+        });
+    }
     var idx = 1;
     // Phần xử lý hình ảnh trong product
-    $("#choose_image").click(function() {
-        $(".sup_name[]").click();
-    });
+    // $("#choose_image").click(function () {
+    //     $(".sup_name[]").click();
+    // });
 
-    $("#image_sup").change(function() {
+    $("#image_inp").change(function () {
         // HỦy chọn hình
         if ($(this).val() == "") {
             return;
@@ -99,7 +111,7 @@ $(function() {
         }
     });
     var arrayDelete = [];
-    $(document).on("click", ".delete-icon", function() {
+    $(document).on("click", ".delete-icon", function () {
         var id = $(this).data("id");
         var imageDelete = $("#image-" + id);
 
@@ -120,11 +132,11 @@ $(function() {
     });
 
     //MAN-IMAGE-SUPPLIER
-    $("#choose_image").click(function() {
+    $("#choose_image").click(function () {
         $(".sup_name[]").click();
     });
 
-    $("#image_sup").change(function() {
+    $("#image_sup").change(function () {
         // HỦy chọn hình
         if ($(this).val() == "") {
             return;
@@ -157,7 +169,7 @@ $(function() {
                     break;
                 }
                 const urlIMG = URL.createObjectURL(this.files[i]);
-                isCorrectFrameRate(urlIMG).then((bool) => {
+                isCorrectFrameRateWith(urlIMG).then((bool) => {
                     if (bool) {
                         imageElement = `<div id="image-${idx}" data-id="${idx}" class="image-sup col-md-4 col-6">
                                         <img data-id="${idx}" src="${urlIMG}"
@@ -183,7 +195,7 @@ $(function() {
         }
     });
     var arrayDelete = [];
-    $(document).on("click", ".delete-icon", function() {
+    $(document).on("click", ".delete-icon", function () {
         var id = $(this).data("id");
         var imageDelete = $("#image-" + id);
 

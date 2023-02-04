@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\Products;
 use App\Models\ACOUNT;
+use App\Models\USER_ADDRESS;
 
 
 class CartConntroller extends Controller
@@ -28,7 +29,7 @@ class CartConntroller extends Controller
             $array = [
                 'cart' => $cart,
             ];
-             dd($array);
+            //dd($array);
             return view('guest.pages.carts.cart-item')->with($array);
         }
     }
@@ -108,6 +109,7 @@ class CartConntroller extends Controller
             'cart' => [],
             'qty' => 0,
             'total' => 0,
+            'address' => [],
         ];
         $i = 0;
 
@@ -117,13 +119,13 @@ class CartConntroller extends Controller
 
         foreach (Cart::where('id_tk', $id_tk)->get() as $item) {
             $product = Products::where('id', $item->id_pro)->first();
-            $product->image = ProductImage::where('id_pro', $item->id_pro)->get();
-            $thanhtien = intval($item->quanity * ($product->price * ((100 - $product->discount) / 100))
-            );
-
+            $image = ProductImage::where('id_pro', $item->id_pro)->get();
+            $cart['address'] = USER_ADDRESS::where('id_tk', $id_tk)->get();
+            $thanhtien = $item->quanity * ($product->price * ((100 - $product->discount) / 100));
             $pro_item = [
                 'id' => $item->id,
                 'product' => $product,
+                'image' => $image,
                 'sl' => $item->quanity,
                 'thanhtien' => $thanhtien,
                 'hethang' => false,
