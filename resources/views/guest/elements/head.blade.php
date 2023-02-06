@@ -12,8 +12,11 @@
     <link rel="stylesheet" href="{{ asset('OwlCarousel/dist/assets/owl.carousel.css') }}">
     <link rel="stylesheet" href="{{ asset('OwlCarousel/dist/assets/owl.theme.default.css') }}">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="{{ asset('sass/guest/sweetalert.css') }}">
+    <link rel='stylesheet' href='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.css'>
+
+    {{-- <link rel="stylesheet" href="{{ asset('sass/guest/sweetalert.css') }}"> --}}
     <link rel="stylesheet" href="{{ asset('sass/guest/guest.css') }}">
+    
 </head>
 
 <body>
