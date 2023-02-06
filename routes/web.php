@@ -49,6 +49,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::post('add-to-cart', [CartConntroller::class, 'addToCart']);
             Route::post('ajax-update-cart', [CartConntroller::class, 'ajaxUpdateCart']);
             Route::post('ajax-get-provisional-order', [CartConntroller::class, 'AjaxGetProvisionalOrder']);
+            Route::post('ajax-delete-cart', [CartConntroller::class, 'AjaxDeleteCart']);
             // Phần hiển thị view tài khoản
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
 

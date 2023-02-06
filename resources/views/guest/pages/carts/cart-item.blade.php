@@ -106,7 +106,7 @@
                                                         <div class="cart-body-total">$
                                                             <span class="thanhtien" data-id="{{$id}}">{{ number_format($item['thanhtien'], 2) }}</span>
                                                         </div>
-                                                        <div class="cart-body-trash">
+                                                        <div class="cart-body-trash" id="delete-item-cart" data-id="{{ $id }}" data-name="{{$product->name}}">
                                                             <i class="fa-solid fa-trash-can"></i>
                                                         </div>
                                                     @endif
@@ -187,6 +187,25 @@
 
 </div>
 
+</div>
+
+<div class="modal" id="delete-modal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="delete-content"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p id="delete-body"></p>
+        </div>
+        <div class="modal-footer">
+          <div  class="btn btn-secondary" data-bs-dismiss="modal">Close</div>
+          <div  class="btn btn-danger" id="delete-btn">Delete</div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 @endsection
 

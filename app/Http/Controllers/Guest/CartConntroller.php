@@ -62,6 +62,8 @@ class CartConntroller extends Controller
             if (count(Cart::where('id_tk', Auth::user()->id)->get()) == 0) {
                 Cart::create($array);
                 // Trừ tồn kho trong table Product
+                session()->forget('qtyCart');
+                session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
                 return [
                     'status' => 'new one',
                 ];
@@ -80,6 +82,8 @@ class CartConntroller extends Controller
                             ];
                         }
                         Cart::where('id_tk', Auth::user()->id)->where('id_pro', $request->id_sp)->update(['quanity' => $qty]);
+                        session()->forget('qtyCart');
+                        session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
                         // Trừ tồn kho trong table Product
                         return [
                             'status' => 'update',
@@ -88,12 +92,14 @@ class CartConntroller extends Controller
                     }
                 }
                 Cart::create($array);
+                session()->forget('qtyCart');
+                session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
                 return [
                     'status' => 'new one',
                 ];
             }
         }
-
+        
     }
 
     // update cart
@@ -128,9 +134,26 @@ class CartConntroller extends Controller
             $newPrice = ($product->price * ((100 - $product->discount) / 100)) * $qty;
             $data['newPrice'] = number_format($newPrice, 2);
             // print_r($data);
+            session()->forget('qtyCart');
+            session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
             return $data;
         }
         
+    }
+
+    public function AjaxDeleteCart(Request $request){
+        if($request->ajax()){
+            $id = $request->id;
+            // print_r($data);
+            
+            Cart::where('id', $id)->delete();
+            $data = [
+                'status' => 'Delete success',
+            ];
+            session()->forget('qtyCart');
+            session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
+            return $data;
+        }
     }
 
     public function AjaxGetProvisionalOrder(Request $request)
