@@ -34,7 +34,7 @@ class AcountConroller extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.pages.acounts.create');
     }
 
     /**
@@ -43,10 +43,12 @@ class AcountConroller extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $id)
     {
-        //
+        $prods = ACOUNT::all();
+        return view('admin.pages.acounts.index', compact('prods'));
     }
+
 
     /**
      * Display the specified resource.
@@ -54,9 +56,17 @@ class AcountConroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $id)
     {
+        // $prods = ACOUNT::all();
+        // return view('admin.pages.acounts.view', compact('prods'));
+        // $show = ACOUNT::where('id',$id)->first();
         //
+        $show = ACOUNT::where('id',$id)->first();
+        $array= [
+            'filterAcount' => $show,
+        ];
+        return view('admin.pages.acounts.view')->with($array);
     }
 
     /**
@@ -67,6 +77,11 @@ class AcountConroller extends Controller
      */
     public function edit($id)
     {
+        $prod = ACOUNT::where('id',$id)->first();
+        $array= [
+            'filterAcount' => $prod,
+        ];
+       return view('admin.pages.acounts.update')->with($array);
 
     }
 
@@ -77,10 +92,35 @@ class AcountConroller extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Acount $acount)
     {
-        //
+        $prod = $request->all();    // $prod là 1 mảng
+        $prod['slug'] = \Str::slug($request->name);
+
+        if($request->hasFile('photo'))
+        {
+            $file=$request->file('photo');
+            $extension = $file->getClientOriginalExtension();
+            if($extension != 'jpg' && $extension != 'png' && $extension !='jpeg')
+            {
+                return redirect()->route('admin.acounts.create')
+                    ->with('loi','Bạn chỉ được chọn file có đuôi jpg,png,jpeg');
+            }
+            $imageName = $file->getClientOriginalName();
+            $file->move("images",$imageName);
+        }
+        else
+        {
+            // trường hợp không upload phải lấy hình cũ
+            $oldItem = ACOUNT::find($acount->id);
+            $imageName = $oldItem->image;
+        }
+        $prod['image'] = $imageName;
+        //$product = new Product($prod);
+        $acount->update($prod);
+        return redirect()->route('admin.acounts.index');
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -81,6 +81,8 @@ class SupplierController extends Controller
         //dd($data);
         SUPPLIER::create($data);
         return redirect()->route('admin/supplier');
+
+
     }
 
     /**
@@ -130,7 +132,6 @@ class SupplierController extends Controller
     public function update(Request $request, $id)
     {
             $prods = $request->all();
-            // dd($prods);
             $request->validate(
                 [
                     'sup_name' => 'required',
@@ -144,7 +145,6 @@ class SupplierController extends Controller
                     'sup_address.required' => 'Please input address ',
                     'sup_phone.required' => 'Please input phone',
                     'sup_email.required' => 'Please input email',
-                    // 'image.required' => 'Please choose image!',
             ]);
 
             $oldImage = SUPPLIER::where('id', $id)->first();

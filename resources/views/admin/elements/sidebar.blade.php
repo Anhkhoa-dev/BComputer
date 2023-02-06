@@ -106,6 +106,18 @@
                   <p>Address shop</p>
                 </a>
               </li>
+              <li class="nav-item">
+                <a href="{{ route('admin/userAddress') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>User Address</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('admin/voucher') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Voucher</p>
+                </a>
+              </li>
             </ul>
           </li>
 

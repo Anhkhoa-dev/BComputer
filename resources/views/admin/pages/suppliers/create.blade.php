@@ -41,9 +41,7 @@
                                 @error('sup_name')
                                     <span class="errorMsg">{{ $message }}</span>
                                 @enderror
-                            </div>
 
-                       
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
                                 <input type="text" class="form-control" id="sup_email" name="sup_email"
@@ -90,8 +88,17 @@
                             </div>
                             <div class="col-12">
                                 <div class="mb-3">
-                                    <input type="file" name="photo" id="image-sup-div" value="{{ old('photo') }}">
-                                    <label class="form-control btn-primary text-center cursor-pointer " for="image_sup">
+
+                                    <div class="image-preview-div">
+                                        <div class="row">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="mb-3">
+                                    <input type="file" name="photo" id="image_inp" value="{{ old('photo') }}">
+                                    <label class="form-control btn-primary text-center cursor-pointer " for="image_inp">
                                         Choose image</label>
                                     <p>* Kích thước hình ảnh: 600x600 (px) - Tỉ lệ hình ảnh: 1:1</p>
                                 </div>
