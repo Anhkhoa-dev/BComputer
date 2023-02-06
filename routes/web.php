@@ -30,8 +30,8 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
     Route::get('collections/{name}', [IndexController::class, 'getProducts'])->name('user/products');
     Route::get('product/{name}', [IndexController::class, 'getDetail'])->name('user/detail');
-
-
+    Route::get('/aboutus', [IndexController::class, 'aboutus'])->name('user/aboutus');
+    Route::get('/contact', [IndexController::class, 'contact'])->name('user/contact');
 
     // phần dành cho user
     Route::group(

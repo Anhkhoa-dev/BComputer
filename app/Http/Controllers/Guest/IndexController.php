@@ -97,7 +97,6 @@ class IndexController extends Controller
             'title' => $cata->name,
         ];
         return view('guest.pages.products.product')->with($array);
-
     }
 
 
@@ -143,6 +142,16 @@ class IndexController extends Controller
     {
         $listBrands = Brands::all();
         return $listBrands;
+    }
+
+    public function aboutus()
+    {
+        return view('guest.pages.aboutUs');
+    }
+
+    public function contact()
+    {
+        return view('guest.pages.contact');
     }
 
 
