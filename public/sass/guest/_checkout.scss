@@ -51,7 +51,6 @@
 
         .cart-body {
             display: flex;
-            display: flex;
             align-items: center;
 
             .select-item-cart {
@@ -59,7 +58,7 @@
                 display: flex;
                 align-items: center;
 
-                //justify-content: center;
+                // justify-content: center;
                 .cus-checkbox {
                     width: 20px;
                     height: 20px;
@@ -102,7 +101,7 @@
             &-qty {
                 width: 15%;
                 display: flex;
-                //justify-content: center;
+                // justify-content: center;
                 align-items: center;
 
                 .qty-quanity {
@@ -122,8 +121,9 @@
                         }
                     }
 
-                    .quanity {
+                    .qty-quanity-sl {
                         padding: 0 10px;
+                        color: #ff0000;
                     }
 
                     .qty-plus {
@@ -358,4 +358,9 @@
             }
         }
     }
+}
+
+.out-of-stock {
+    color: #ff0000;
+    font-size: 2rem;
 }

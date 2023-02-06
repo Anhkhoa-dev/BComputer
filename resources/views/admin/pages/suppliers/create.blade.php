@@ -41,8 +41,6 @@
                                 @error('sup_name')
                                     <span class="errorMsg">{{ $message }}</span>
                                 @enderror
-                            </div>
-
 
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email</label>
@@ -90,6 +88,7 @@
                             </div>
                             <div class="col-12">
                                 <div class="mb-3">
+
                                     <div class="image-preview-div">
                                         <div class="row">
                                         </div>

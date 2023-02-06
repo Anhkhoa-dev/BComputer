@@ -39,63 +39,7 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        // $prod = $request->all();
-        // $request->validate(
-        //     [
-        //         'sup_name' => 'required',
-        //         'sup_address' => 'required',
-        //         'sup_phone' => 'required',
-        //         'sup_email' => 'required',
-        //         // 'image' => 'required',
-        //     ],
-        //     [
-        //         'sup_name.required' => 'Please input name of supplier',
-        //         'sup_address.required' => 'Please input address ',
-        //         'sup_phone.required' => 'Please input phone  ',
-        //         'sup_email.required' => 'Please input email',
-        //         // 'image.required' => 'Please choose image!',
-        // ]);
-
-        // $prod['slug'] = \Str::slug($request->name);
-        // if($request->hasFile('photo'))
-        // {
-        //     $file=$request->file('photo');
-        //     $extension = $file->getClientOriginalExtension();
-        //     if($extension != 'jpg' && $extension != 'png' && $extension !='jpeg')
-        //     {
-        //         return redirect()->route('supplier/create')
-        //             ->with('loi','Bạn chỉ được chọn file có đuôi jpg,png,jpeg');
-        //     }
-        //     $image = $file->getClientOriginalName();
-        //     $file->move("images",$image);
-        // }
-        // else
-        // {
-        //     $image = null;
-        // }
-        // $prod['image'] = $image;
-        // $supplier = new SUPPLIER($prod);
-        // $supplier->save();
-        // return redirect()->route('admin/supplier');
-
-        // $prods = $request->all();
-        // dd($prods);
-        // $request->validate(
-        //     [
-        //         'sup_name' => 'required',
-        //         'sup_address' => 'required',
-        //         'sup_phone' => 'required',
-        //         'sup_email' => 'required',
-        //         // 'image' => 'required',
-        //     ],
-        //     [
-        //         'sup_name.required' => 'Please input name of supplier',
-        //         'sup_address.required' => 'Please input address ',
-//         'sup_phone.required' => 'Please input phone  ',
-        //         'sup_email.required' => 'Please input email',
-        //         // 'image.required' => 'Please choose image!',
-        // ]);
-   $prods = $request->all();
+        $prods = $request->all();
         // dd($prods);
            $request->validate(
             [
@@ -137,7 +81,8 @@ class SupplierController extends Controller
         //dd($data);
         SUPPLIER::create($data);
         return redirect()->route('admin/supplier');
-     
+
+
     }
 
     /**
@@ -198,9 +143,8 @@ class SupplierController extends Controller
                 [
                     'sup_name.required' => 'Please input name of supplier',
                     'sup_address.required' => 'Please input address ',
-                    'sup_phone.required' => 'Please input phone  ',
+                    'sup_phone.required' => 'Please input phone',
                     'sup_email.required' => 'Please input email',
-                    // 'image.required' => 'Please choose image!',
             ]);
 
             $oldImage = SUPPLIER::where('id', $id)->first();

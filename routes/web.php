@@ -17,9 +17,8 @@ use App\Http\Controllers\Guest\AccountController;
 Route::controller(LoginController::class)->group(function () {
     Route::get('login', 'getLogin')->name('user/login');
     Route::post('process', 'postLogin')->name('postLogin');
-
     Route::get('logout', 'logout')->name('logout');
-
+    Route::get('recovery-account', 'RecoveryAcount')->name('recovey-account');
     Route::get('register', 'getRegister')->name('user/dang-ky');
     Route::post('postRegister', 'dangky')->name('user/postDangky');
 });
@@ -29,8 +28,8 @@ Route::controller(LoginController::class)->group(function () {
 Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'], function () {
     //phần dành cho guest
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
-    Route::get('/products/{slug}', [IndexController::class, 'getProducts'])->name('/products');
-    Route::get('/products/details/{name}', [IndexController::class, 'getDetail'])->name('/products/detail/');
+    Route::get('collections/{name}', [IndexController::class, 'getProducts'])->name('user/products');
+    Route::get('product/{name}', [IndexController::class, 'getDetail'])->name('user/detail');
 
 
 
@@ -45,6 +44,10 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::get('/checkout-process', [CartConntroller::class, 'getCheckoutProcess'])->name('checkout/checkout-process');
             Route::get('/checkout-success', [CartConntroller::class, 'getSuccess'])->name('user/checkout-success');
 
+
+            //Thêm sản phẩm vào giỏ hàng
+            Route::post('add-to-cart', [CartConntroller::class, 'addToCart']);
+            Route::post('ajax-update-cart', [CartConntroller::class, 'ajaxUpdateCart']);
             // Phần hiển thị view tài khoản
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
 
@@ -105,14 +108,15 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::get('admin/product/show/{slug}', [ProductController::class, 'show'])->name('admin/product/show');
     Route::get('admin/product/destroy/{id}', [ProductController::class, 'destroy'])->name('admin/product/destroy');
 
-    // Phần danh cho supplier - Khoa
+    // Phần danh cho supplier - Man
     Route::get('admin/supplier', [SupplierController::class, 'index'])->name('admin/supplier');
+    //Create
     Route::get('admin/supplier/create', [SupplierController::class, 'create'])->name('supplier/create');
     Route::post('admin/supplier/postSupplier', [SupplierController::class, 'store'])->name('supplier/store');
 
     Route::get('admin/supplier/edit/{slug}', [SupplierController::class, 'edit'])->name('supplier/edit');
     Route::post('admin/supplier/update', [SupplierController::class, 'update'])->name('supplier/update');
-
     // Route::post('admin/supplier/delete', [SupplierController::class, 'delete'])->name('deleteSupplierItem');
+
 
 });

@@ -21,8 +21,6 @@
                     <a href="#" class="text-decoration-none text-white">VI</a> |
                     <a href="#" class="text-decoration-none text-white">EN</a>
                 </div>
-
-
             </div>
 
         </div>
@@ -52,11 +50,19 @@
                     {{-- nút giỏ hàng --}}
                     <a href="{{ route('user/cart-items') }}" class="cursor-pointer text-decoration-none text-dark">
                         <div class="icon__cart">
-                            <p class="cart__number">2</p>
+                            @if (Auth::check() && $qtyCart != 0)
+                                <p class="cart__number">{{$qtyCart}}</p>
+                            @else
+                                <p class="cart__number d-none">0</p>
+                            @endif
+
                             <div class="cart__circle">
                                 <i class="fa-solid fa-bag-shopping"></i>
                             </div>
+                            <div id="add-cart-success">
+                            </div>
                         </div>
+
                     </a>
                     {{-- Nút đăng nhập --}}
 

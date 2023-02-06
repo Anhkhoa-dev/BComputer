@@ -88,16 +88,6 @@ class AccountController extends Controller
             }
         }
 
-
-
-
-
-
-
-
-
-
-
     }
 
     public function getAddress()
@@ -126,24 +116,6 @@ class AccountController extends Controller
         return redirect('account/address');
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
