@@ -77,6 +77,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+
         $prods = $request->all();
         $request->validate(
             [

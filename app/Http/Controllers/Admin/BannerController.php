@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BANNER;
 use App\Models\Category;
+use App\Http\Requests\BannerRequest;
 
 class BannerController extends Controller
 {
@@ -15,18 +16,14 @@ class BannerController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function banner($slug)
-    // {
-    //     $prod = BANNER::where('slug', '=', $slug)->first();
-    //     return view('fe.banner', compact(
-    //         'prod'
-    //     ));
-    // }
 
     public function index()
     {
         $prods = BANNER::all();
-        return view('admin.pages.banners.index', compact('prods'));
+        $array = [
+            'prods' => $prods,
+        ];
+        return view('admin.pages.banners.index')->with($array);
     }
 
     /**
@@ -37,13 +34,11 @@ class BannerController extends Controller
     public function create()
     {
         $fillCatagoryAll = Category::all();
-
+        $prods = BANNER::all();
         $array = [
             'fillCatagoryAll' => $fillCatagoryAll,
+            'prods' => $prods,
         ];
-
-         //dd(Auth::user()->image);
-       // return view('guest.pages.home')->with($array);
         return view('admin.pages.banners.create')->with($array);
     }
 
@@ -53,61 +48,54 @@ class BannerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(BannerRequest $request)
     {
+        $bans = $request->all();
         // $request->validate(
         //     [
-        //         'title' => 'required',
-        //         'description' => 'required',
-        //         'image' => 'required|image|mimes: png,jpg,jpeg',
-        //         'link' => 'required',
-        //         'status' => 'required',
+        //         'ban_title' => 'required',
+        //         'ban_description' => 'required',
+        //         'ban_image' => 'required|image|mimes:jpg,png,jpeg',
+        //         'ban_link' => 'required',
+        //         'ban_status' => 'required',
         //     ],
         //     [
-        //         'title.required' => 'Vui lòng nhập vào title',
-        //         'description.required' => 'Vui lòng nhập vào description',
-        //         'image.required.mimes' => 'Bạn chỉ được chọn file có đuôi jpg,png,jpeg',
-        //         'link.required' => 'Vui lòng nhập vào link',
-        //         'status.required' => 'Vui lòng nhập vào status',
-        //     ],
+        //         'ban_title.required' => 'Vui lòng nhập vào title',
+        //         'ban_description.required' => 'Vui lòng nhập vào description',
+        //         'ban_image.required' => 'Bạn chỉ được chọn file có đuôi jpg,png,jpeg',
+        //         'ban_link.required' => 'Vui lòng nhập vào link',
+        //         'ban_status.required' => 'Vui lòng nhập vào status',
+        //     ]
         // );
-        // $data = [
-        //     'title' => $request->title,
-        //     'description' => $request->description,
-        //     'image' => $request->image,
-        //     'link' => $request->link,
-        //     'status' => $request->status,
-        // ];
 
-        // //dd($data);
+        // if ($request->hasfile('ban_image')) {
+        //     foreach ($request->file('ban_image') as $file) {
+        //         $fileName = $file->getClientOriginalName();
+        //         $file->move("image/banner", $fileName);
+        //         $bans['ban_image'] = $fileName;
+        //     }
+        // }
 
-        // BANNER::create($data);
-        // // return view('admin.pages.banners.index');
 
-        $prod = $request->all();    // $prod là 1 mảng
-        dd($prod);
-        $prod['slug'] = \Str::slug($request->name);
-
-        if($request->hasFile('photo'))
-        {
-            $file=$request->file('photo');
-            $extension = $file->getClientOriginalExtension();
-            if($extension != 'jpg' && $extension != 'png' && $extension !='jpeg')
-            {
-                return redirect()->route('admin/banner/create')
-                    ->with('loi','Bạn chỉ được chọn file có đuôi jpg,png,jpeg');
-            }
+        if ($request->hasFile('ban_image')) {
+            $file = $request->file('ban_image');
             $image = $file->getClientOriginalName();
-            $file->move("image/banner",$image);
-        }else
-        {
+            $file->move("image/banner", $image);
+        } else {
             $image = null;
         }
-        $prod['image'] = $image;
-        $banner = new BANNER($prod);
-        $banner->save();
-        //dd($prod);
-        return redirect()->route('admin/banner');
+        $bans['ban_image'] = $image;
+
+        $data = [
+            'title' => $bans['ban_title'],
+            'description' => $bans['ban_description'],
+            'image' => $bans['ban_image'],
+            'link' => $bans['ban_link'],
+            'status' => intval($bans['ban_status']),
+        ];
+       // dd($data);
+        BANNER::create($data);
+        return redirect()->route('admin/banner')->with('Success', 'Create Banner success!');
     }
 
 
@@ -131,14 +119,15 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
+        //dd($id);
         $fillCatagoryAll = Category::all();
-
+        $banner = BANNER::where('id',$id)->first();
+        // dd($banner);
         $array = [
             'fillCatagoryAll' => $fillCatagoryAll,
+            'banner' => $banner,
         ];
-        $banner = BANNER::find($id);
-        return view('admin.pages.banners.update', compact('banner'))->with($array);
-        // ->with($array)
+        return view('admin.pages.banners.update')->with($array);
     }
 
     /**
@@ -148,37 +137,48 @@ class BannerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BannerRequest $request, $id)
     {
-        //
-        $prod = $request->all();    // $prod là 1 mảng
-        $banner = BANNER::find($id);
-        $banner->update($prod);
-        //$prod['slug'] = \Str::slug($request->name);
-        //dd($prod);
-        if($request->hasFile('photo'))
-        {
-            $file=$request->file('photo');
-            $extension = $file->getClientOriginalExtension();
-            if($extension != 'jpg' && $extension != 'png' && $extension !='jpeg')
-            {
-                return redirect()->route('admin/banner/edit')
-                    ->with('loi','Bạn chỉ được chọn file có đuôi jpg,png,jpeg');
-            }
-            $image = $file->getClientOriginalName();
-            $file->move("image/banner",$image);
-        }
-        else
-        {
-            // trường hợp không upload phải lấy hình cũ
-            $oldItem = BANNER::find($banner->id);
-            $image = $oldItem->image;
-        }
-        $prod['image'] = $image;
 
-        $banner->save($prod);
+        $bans = $request->all();
 
-        return redirect()->route('admin/banner');
+        $oldImage = BANNER::where('id',$id)->first();
+
+
+        if ($image = $request->file('ban_image')) {
+
+            $filename = $image->getClientOriginalName();
+            $image->move('image/banner/',$filename);
+            $bans['image'] = "$filename";
+        }else{
+            $bans['image'] = $oldImage->image;
+        }
+
+
+        $data = [
+            'title' => $bans['ban_title'],
+            'description' => $bans['ban_description'],
+            'image' => $bans['image'],
+            'link' => $bans['ban_link'],
+            'status' => intval($bans['ban_status']),
+        ];
+        BANNER::where('id', $id)->update($data);
+
+        return redirect()->route('admin/banner')->with('Success', 'Update Banner success!');
+
+
+        //-------------------------------------
+
+        // if ($request->hasFile('ban_image')) {
+        //     $file = $request->file('ban_image');
+        //     $image = $file->getClientOriginalName();
+        //     $file->move("image/banner", $image);
+        // } else {
+        //     // trường hợp không upload phải lấy hình cũ
+        //     unset($input['image']);
+        //     // $oldItem = BANNER::find($banner->id);
+        //     // $image = $oldItem->image;
+        // }
     }
 
     /**
@@ -190,12 +190,10 @@ class BannerController extends Controller
     public function destroy($id)
     {
         $banner = BANNER::find($id);
-        $banner->delete();
-        return redirect()->route('admin/banner');
-
-            //
-            // BANNER::where('id', $id)->update(['status' => 0]);
-            // return back()->with('success', 'Delete product success!');
-
+        // xóa hình
+        //unlink('image/banner/' . $banner->image);
+        BANNER::destroy($id);
+        // $banner->delete();
+        return redirect()->route('admin/banner')->with('Success', 'Delete Banner success!');
     }
 }

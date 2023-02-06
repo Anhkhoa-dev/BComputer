@@ -61,7 +61,8 @@
                                     <!-- kiểm tra trong db có image thì mới hiển thị -->
                                     @if ($item->image != null && $item->image != '')
                                         <img src="{{ asset('image/supplier/' . $item->image) }}" alt=""
-                                            style="width:50px; height:auto;">
+                                            style="width:100px; height:auto;">
+
                                     @endif
                                 </td>
                                 <td>{{ $item->address ?? 'null' }}</td>

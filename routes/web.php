@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\UserAddressController;
+use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Guest\CartConntroller;
 use App\Http\Controllers\Guest\IndexController;
@@ -83,6 +85,20 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Delete
     Route::get('admin/banner/destroy/{id}', [BannerController::class, 'destroy'])->name('admin/banner/destroy');
 
+    // Phần Voucher - Phúc
+    Route::get('admin/voucher', [VoucherController::class, 'index'])->name('admin/voucher');
+    // Create
+    Route::get('admin/voucher/create', [VoucherController::class, 'create'])->name('admin/voucher/create');
+    Route::post('admin/voucher/store', [VoucherController::class, 'store'])->name('admin/voucher/store');
+    // Update
+    //Route::get('admin/voucher/edit/{id}', [VoucherController::class, 'edit'])->name('admin/voucher/edit');
+    Route::post('admin/voucher/update/{id}', [VoucherController::class, 'update'])->name('admin/voucher/update');
+    Route::post("voucher/ajax-get-voucher", [VoucherController::class, "AjaxGetVoucher"]);
+    // Delete
+    Route::get('admin/voucher/destroy/{id}', [VoucherController::class, 'destroy'])->name('admin/voucher/destroy');
+
+    // Phần UserAddress - Phúc
+    Route::get('admin/userAddress', [UserAddressController::class, 'index'])->name('admin/userAddress');
 
 
     // Phần danh cho product manager - khoa
@@ -97,9 +113,10 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     //Create
     Route::get('admin/supplier/create', [SupplierController::class, 'create'])->name('supplier/create');
     Route::post('admin/supplier/postSupplier', [SupplierController::class, 'store'])->name('supplier/store');
-    //Update
-    Route::get('admin/supplier/edit/{id}', [SupplierController::class, 'edit'])->name('supplier/edit');
-    Route::post('admin/supplier/update/{id}', [SupplierController::class, 'update'])->name('supplier/update');
-    //Delete
-    Route::get('admin/supplier/delete/{id}', [SupplierController::class, 'destroy'])->name('supplier/delete');
+
+    Route::get('admin/supplier/edit/{slug}', [SupplierController::class, 'edit'])->name('supplier/edit');
+    Route::post('admin/supplier/update', [SupplierController::class, 'update'])->name('supplier/update');
+    // Route::post('admin/supplier/delete', [SupplierController::class, 'delete'])->name('deleteSupplierItem');
+
+
 });

@@ -27,9 +27,9 @@
         <div class="card">
             <div class="card-header">
                 <h2 class="card-title"><b>Create Banner</b></h2>
-                <div class="card-tools">
+                <div style="text-align: right">
                     <a class="btn btn-tool" href="{{ route('admin/banner') }}">
-                        <i class="fas fa-times"></i>
+                        <i class="fas fa-times fa-lg"></i>
                     </a>
                 </div>
             </div>
@@ -37,96 +37,100 @@
             <form action="{{ route('admin/banner/store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 {{-- @method('put') --}}
-                {{-- <div class="card-body">
-                    <input id='id' value="" hidden>
-                    <div class="phuc-banner">
-                        <div class="banner-image">
-                            <img src="{{ asset('image/logo.png') }}" alt="" class="img_banner">
-                        </div>
+
+                <div class="input-group">
+                    <div class="mb-3">
+                        <label for="formFileSm" class="form-label">Small file input example</label>
+                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="ban_image">
                     </div>
-                    <input style="display:none" type="file" name="photo" id="image" />
-                    <div style="text-align: center">
-                        <label for="image" id="image" style="margin-top: 20px">
-                            <span class="file-box"></span>
-                            <span class="file-button">
-                                <i class="fa fa-upload" aria-hidden="true"></i>
-                                Choose image
-                            </span>
-                        </label>
-                    </div>
-                </div> --}}
-                {{-- @if ($product->image != null && $product->image != '')
-                <div class="form-group">
-                <img src="{{ asset('images/' . $product->image) }}" alt="{{ $product->name }}" style="width:300px; height:auto;">
                 </div>
-                @endif --}}
-                {{-- <div class="form-group">
-                    <div class="file-loading">
-                        <input id="image" type="file" name="photo">
-                        <div class="preview-upload">
-                            <img id='sp_hinh-upload' class="img_acount"/>
-                        </div>
-                    </div>
-                </div> --}}
+
                 <div class="card-body">
-                    <label for="image">Image</label>
-                    <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="photo" id="image">
-                            <label class="custom-file-label" for="image">Choose image</label>
+                    <div class="mb-3 form-select" multiple aria-label="name">
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <div class="image-preview-div">
+                                    <div class="row">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        {{-- <div class="input-group-append">
-                        <span class="input-group-text">Upload</span>
-                      </div> --}}
+                        <div class="col-12">
+                            <div class="mb-3">
+                                <input type="file" name="ban_image" id="image_inp" multiple class="d-none"
+                                    value="{{ old('ban_image') }}">
+                                <label class="form-control btn-info btn-lg text-center cursor-pointer" for="image_inp">
+                                    Choose image Banner</label>
+                                @error('ban_image')
+                                    <span class="errorMsg">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div>
                     </div>
+
                 </div>
                 <div class="card-body d-flex justify-content-between">
                     {{-- // cột bên trai --}}
                     <div style="width: 48%">
-                        <div class="mb-3 form-select" multiple aria-label="description">
+                        {{-- // Title --}}
+                        <div class="mb-3 form-select" multiple aria-label="name">
                             <label for="title" class="form-label">Title</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                            <input type="text" class="form-control" id="title" name="ban_title" placeholder="Title"
+                                value="{{ old('ban_title') }}">
+                            @error('ban_title')
+                                <span class="errorMsg">{{ $message }}</span>
+                            @enderror
                         </div>
-                        <div class="mb-3 form-select" multiple aria-label="description">
-                            <label for="description" class="form-label">Description</label>
-                            <input type="text" class="form-control" id="description" name="description"
-                                placeholder="Description">
+                        {{-- // Categories --}}
+                        <div class="mb-3 form-select" multiple aria-label="link">
+                            <label for="link" class="form-label">Categories</label>
+                            <select name="ban_link" id="link" class="form-select">
+                                <option value="" selected disabled>Select category</option>
+                                @foreach ($fillCatagoryAll as $item)
+                                    <option value="{{ $item->slug }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('ban_link')
+                                <span class="errorMsg">{{ $message }}</span>
+                            @enderror
+                        </div>
+                        {{-- // Status --}}
+                        <div class="mb-3 form-select" multiple aria-label="status">
+                            <label for="status" class="form-label">Status</label>
+                            <select id='status' name="ban_status" aria-label="Default select example"
+                                class="form-control">
+                                @if ('ban_status' == null)
+                                    <option selected value="old('ban_status')">
+                                        @if ($banner->status == '1')
+                                            Active
+                                        @else
+                                            Clocked
+                                        @endif
+                                    </option>
+                                    <option value="0">Clocked</option>
+                                @else
+                                    <option value="0">Clocked</option>
+                                    <option value="1">Actived</option>
+                                @endif
+                            </select>
                         </div>
                     </div>
                     {{-- // cột bên phai --}}
                     <div style="width: 48%">
-                        {{-- <div class="mb-3">
-                            <label for="link" class="form-label">Link</label>
-                            <input type="text" class="form-control" id="link" name="link" placeholder="Link">
-                        </div> --}}
-                        <div class="mb-3 form-select" multiple aria-label="link"">
-                            <label for="link" class="form-label">Link</label>
-                            <select id='link' name="link" aria-label="Default select example" class="form-control" value="">
-                                <option selected>Choose link Banner</option>
-                                    @foreach ($fillCatagoryAll as $item)
-                                    <option value="{{ route('/products', $item->slug) }}" class="side-box"
-                                        data-id="{{ $item->slug }}" style="background-image:url({{ asset('image/icon/' . $item->imageIcon) }})">
-                                        <div style="background-image:url(https://www.google.com/search?q=image&oq=im&aqs=edge.1.69i57j0i512j0i131i433i512j0i433i512j0i512j0i433i512l2j69i60j69i61.3421j0j1&sourceid=chrome&ie=UTF-8#imgrc=22LfYBs93BDCLM)">
-                                            <span><img src="{{ asset('image/icon/' . $item->imageIcon) }}"
-                                            width="25" alt="{{ $item->name }}"></span></div>
-                                        <div>
-                                            {{ $item->name }}
-                                        </div>
-                                     </option>
-                                    @endforeach
-                            </select>
-                            <div style="background-image:url({{ asset('image/icon/' . $item->imageIcon) }})"></div>
-                        </div>
-                        <div class="mb-3 form-select" multiple aria-label="status">
-                            <label for="status" class="form-label">Status</label>
-                            <select id='status' name="status" aria-label="Default select example" class="form-control">
-                                <option value="1">Actived</option>
-                                <option value="0">Clocked</option>
-                            </select>
+                        {{-- // Description --}}
+                        <div class="mb-3 form-select" multiple aria-label="description">
+                            <label for="description" class="form-label" style="margin-bottom: 10px">Description</label>
+                            <textarea type="text" class="form-control" style="margin-bottom: 5px" rows="9" id="description"
+                                name="ban_description">{{ old('ban_description') }}</textarea>
+                            @error('ban_description')
+                                <span class="errorMsg">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
+
                 </div>
                 <div class="card-footer" style="text-align: right">
+                    <button type="reset" class="btn btn-danger">Reset</button>
                     <button type="submit" class="btn btn-primary">Create</button>
                 </div>
             </form>
@@ -134,21 +138,16 @@
     </section>
 @endsection
 
-{{-- @section('custom-scripts')
-<script>
-    // Sử dụng FileReader để đọc dữ liệu tạm trước khi upload lên Server
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('#sp_hinh-upload').attr('src', e.target.result);
+@section('custom-scripts')
+    <script>
+        const input = document.getElementById('file-input');
+        const image = document.getElementById('img-preview');
+
+        input.addEventListener('change', (e) => {
+            if (e.target.files.length) {
+                const src = URL.createObjectURL(e.target.files[0]);
+                image.src = src;
             }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-    // Bắt sự kiện, ngay khi thay đổi file thì đọc lại nội dung và hiển thị lại hình ảnh mới trên khung preview-upload
-    $("#image").change(function(){
-        readURL(this);
-    });
-</script>
-@endsection --}}
+        });
+    </script>
+@endsection
