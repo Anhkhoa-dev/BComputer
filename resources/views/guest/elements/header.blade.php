@@ -51,7 +51,7 @@
                     <a href="{{ route('user/cart-items') }}" class="cursor-pointer text-decoration-none text-dark">
                         <div class="icon__cart">
                             @if (Auth::check() && $qtyCart != 0)
-                                <p class="cart__number">{{$qtyCart}}</p>
+                                <p class="cart__number">{{ $qtyCart }}</p>
                             @else
                                 <p class="cart__number d-none">0</p>
                             @endif

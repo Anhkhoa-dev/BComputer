@@ -644,8 +644,18 @@ section .title i {
   background-color: white;
   border-radius: 5px;
   box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.16);
-  animation-name: showAddCartSuccess;
-  animation-duration: 0.75s;
+  -webkit-animation-name: showAddCartSuccess;
+          animation-name: showAddCartSuccess;
+  -webkit-animation-duration: 0.75s;
+          animation-duration: 0.75s;
+}
+@-webkit-keyframes showAddCartSuccess {
+  from {
+    transform: translateY(30px);
+  }
+  to {
+    transform: translateY(0);
+  }
 }
 @keyframes showAddCartSuccess {
   from {
@@ -1643,6 +1653,56 @@ section .title i {
   display: block;
 }
 
+.han-aboutus .row {
+  padding: 20px;
+  margin-top: 20px;
+}
+.han-aboutus .row .col-lg-6 h1 {
+  text-align: center;
+  color: #0F3460;
+  font-weight: 600;
+}
+.han-aboutus .row .col-lg-6 img {
+  border-radius: 15px;
+  padding: 10px;
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  max-height: 500px;
+}
+.han-aboutus .row .col-lg-6 p {
+  font-weight: 500;
+}
+
+.han-contact .row {
+  padding: 20px;
+  margin: 20px 50px;
+  background-color: #fff;
+}
+.han-contact .row .contact {
+  text-align: center;
+  color: #E94560;
+  font-size: 40px;
+  font-weight: 500;
+  border-bottom: 1px solid #E94560;
+}
+.han-contact .row p {
+  font-weight: 600;
+  color: #E94560;
+}
+.han-contact .row .row .write-review {
+  text-align: center;
+  color: #E94560;
+  font-size: 40px;
+  font-weight: 500;
+}
+.han-contact .row .row .write-review .address-bcomputer {
+  padding: 20px;
+}
+.han-contact .row .row .write-review .icon-social i {
+  margin: 20px;
+}
+
 #khoa-view-cart .cart-title {
   font-size: 1.5rem;
   color: #373737;
@@ -1982,6 +2042,12 @@ section .title i {
   outline: none;
   border-radius: 5px;
   padding-left: 45px;
+  font-size: 1rem;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .input_control::-moz-placeholder {
+  font-size: 1rem;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .input_control:-ms-input-placeholder {
   font-size: 1rem;
 }
 .khoa-login .login_nen .box_login .form_login .form_group .input_control::placeholder {
