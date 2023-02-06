@@ -1290,9 +1290,6 @@ section .title i {
   max-width: 500px;
   max-height: 500px;
 }
-.han-product-detail .row .button-icon {
-  margin-top: -150px;
-}
 .han-product-detail .row .image-details {
   border-radius: 10px;
   padding: 5px;
@@ -1306,10 +1303,12 @@ section .title i {
   margin-top: -20px;
 }
 .han-product-detail .row .discountprice {
+  margin-top: -5px;
   text-decoration: line-through;
   color: #999999;
   font-style: italic;
   font-weight: 300;
+  font-size: small;
 }
 .han-product-detail .row .discount-percent {
   font-weight: 400;
@@ -1331,7 +1330,24 @@ section .title i {
   padding: 10px;
   color: #E94560;
 }
+.han-product-detail .form .price .quantity {
+  color: black;
+  font-weight: 400;
+  padding: 10px;
+}
+.han-product-detail .form .price .quantity .buttons_added .input-qty {
+  text-align: center;
+  width: 30px;
+  font-weight: 600;
+}
+.han-product-detail .form .price .quantity .buttons_added .is-form {
+  border-radius: 3px;
+  width: 30px;
+  border: none;
+  font-weight: 600;
+}
 .han-product-detail .form .price .button-product {
+  padding: 10px;
   display: flex;
   gap: 15px;
   color: #fff;
@@ -1453,6 +1469,28 @@ section .title i {
 .description .review .review-info {
   padding: 20px;
 }
+.description .review .review-info .col-review {
+  display: flex;
+  margin-bottom: 10px;
+  justify-content: space-around;
+}
+.description .review .review-info .col-review .form-image-review {
+  display: flex;
+  margin: 5px;
+}
+.description .review .review-info .col-review .form-image-review .image-review {
+  width: 100%;
+}
+.description .review .review-info .col-review .form-image-review .form-image {
+  display: flex;
+  margin: 5px;
+}
+.description .review .review-info .mySlides1 {
+  position: absolute;
+  width: 100%;
+  max-width: 300px;
+  max-height: 300px;
+}
 .description .review .review-info .review-name {
   font-weight: 600;
 }
@@ -1483,13 +1521,14 @@ section .title i {
   color: #fff;
   font-weight: 300;
 }
-.description .review .comment-text {
+.description .review .like-icon .comment-text {
   margin: 20px;
-  max-width: 800px;
+  max-width: 700px;
   border: none;
   background-color: #f8f8f8;
+  color: black;
 }
-.description .review .comment-text i {
+.description .review .like-icon .comment-text i {
   padding: 20px;
   color: #E94560;
   font-size: small;
@@ -1501,10 +1540,6 @@ section .title i {
   padding: 10px;
   border-radius: 5px;
   border: 0.5px solid #0F3460;
-}
-.description .review img:hover {
-  border: none;
-  transform: scale(3);
 }
 .description .review .iconstar {
   color: #fb6e2e;

@@ -29,7 +29,7 @@ class CartConntroller extends Controller
             $array = [
                 'cart' => $cart,
             ];
-            //dd($array);
+            //  dd($array);
             return view('guest.pages.carts.cart-item')->with($array);
         }
     }
@@ -99,7 +99,70 @@ class CartConntroller extends Controller
     // update cart
     public function ajaxUpdateCart(Request $request)
     {
+        if($request->ajax()){
+            
+            $data = [
+                'status' => '',
+                'newQty' => '',
+                'newPrice' => '',
+            ];
+            // tìm sản phẩm có id truyền vào trunng2 với id trong cart
+            $cart = Cart::where('id', $request->id)->first();
+            $product = Products::where('id', $cart->id_pro)->first();
+            $qty = intval($cart->quanity);
+            if($request->type =='plus'){
+                $qtyInStock= $product->quantity;
+                // print_r($qtyInStock);
+                if($qty <= $qtyInStock){
+                    Cart::where('id', $request->id)->update(['quanity'=> ++$qty]);
+                }else{
+                    $data['status'] = 'not enough';
+                    $data['qtyInStock'] = $qtyInStock;
+                    return $data;
+                }
+            }else{
+                Cart::where('id', $request->id)->update(['quanity'=> --$qty]);
+                
+            }
+            $data['newQty'] = $qty;
+            $newPrice = ($product->price * ((100 - $product->discount) / 100)) * $qty;
+            $data['newPrice'] = number_format($newPrice, 2);
+            // print_r($data);
+            return $data;
+        }
+        
+    }
 
+    public function AjaxGetProvisionalOrder(Request $request)
+    {
+        if ($request->ajax()) {
+            $response = [
+                'provisional' => 0,
+                'voucher' => session('voucher') ? session('voucher') : null
+            ];
+
+            if (empty($request->idList)) {
+                return $response;
+            }
+            // print_r($request->idList);
+            $id_tk = Auth::user()->id;
+            // $cart = Cart::where('id_tk', $id_tk)->get();
+            foreach ($request->idList as $id_cart) {
+                $cart = Cart::where('id', $id_cart)->first();
+                $product = Products::where('id', $cart->id_pro)->first();
+                
+                if ($product->status) {
+                    $qtyInStock = $product->quantity;
+                    print_r($qtyInStock);
+                    if ($qtyInStock > 0) {
+                        $priceKm = $product->price * ((100 - $product->discount) / 100);
+                        $qtyInCart = Cart::where('id_tk', $id_tk)->where('id_pro', $cart->id_pro)->first()->quanity;
+                        $response['provisional'] += $priceKm * $qtyInCart;
+                    }
+                }
+            }
+            return $response;
+        }
     }
 
     // get all cart

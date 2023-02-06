@@ -27,36 +27,35 @@
                     <div class="col-md-9">
                         <div class="row">
                             <div class="cart-items mb-1">
-                                <div class="cart-header bg-white mb-2">
-                                    @if ($cart['qty'])
-                                        <div class="select-item-cart">
-                                            <input type="checkbox" id="select_all"
-                                                class="select-item-cart cus-checkbox check-all" data-id="all" />
-                                        </div>
-                                        <div class="cart-header-name">Select all <span
-                                                id="qty-cart-total">{{ $cart['qty'] }}</span>
-                                            product</div>
-                                        <div class="cart-header-price">Price</div>
-                                        <div class="cart-header-qty">Quanity</div>
-                                        <div class="cart-header-total">Total</div>
-                                        <div class="cart-header-trash"><i class="fa-solid fa-trash-can"></i></div>
-                                    @endif
+                                <div class="cart-header bg-white mb-2">    
+                                    <div class="select-item-cart">
+                                        <input type="checkbox" id="select_all"
+                                            class="select-item-cart cus-checkbox" data-id="all" />
+                                    </div>
+                                    <div class="cart-header-name">Select all <span
+                                            id="qty-cart-total">{{ $cart['qty'] }}</span>
+                                        product</div>
+                                    <div class="cart-header-price">Price</div>
+                                    <div class="cart-header-qty">Quanity</div>
+                                    <div class="cart-header-total">Total</div>
+                                    <div class="cart-header-trash"><i class="fa-solid fa-trash-can"></i></div>
                                 </div>
                                 @if ($cart != null)
                                     <div id="list-cart-item" class="list-cart-item mb-2">
                                         @foreach ($cart['cart'] as $item)
                                             <?php $product = $item['product'];
                                             $image = $item['image'];
+                                            $id = $item['id'];
                                             ?>
                                             <div class="cart-body">
                                                 <div class="select-item-cart">
                                                     @if ($product['status'] == 0 || $item['hethang'])
                                                         <input type="checkbox" name="check[]"
-                                                            data-id="{{ $product->id }}"
+                                                            data-id="{{ $id}}"
                                                             class="select-item-cart cus-checkbox">
                                                     @else
                                                         <input type="checkbox" name="check[]"
-                                                            data-id="{{ $product->id }}"
+                                                            data-id="{{ $id }}"
                                                             class="select-item-cart cus-checkbox cus-checkbox-checked"
                                                             checked>
                                                     @endif
@@ -93,19 +92,19 @@
                                                     @else
                                                         <div class="cart-body-qty">
                                                             <div class="qty-quanity">
-                                                                <div class="update-qty minus" data-id="{{$product->id}}">
+                                                                <div class="update-qty minus" data-id="{{$id}}">
                                                                     <i class="fa-solid fa-minus"></i>
                                                                 </div>
-                                                                <div id="qty" data-id="{{$product->id}}" class="qty-quanity-sl qty-item_{{$product->id}}">
+                                                                <div id="qty" data-id="{{$id}}" class="qty-quanity-sl qty-item_{{$id}}">
                                                                     {{ $item['sl'] }}
                                                                 </div>
-                                                                <div class="update-qty plus" data-id="{{$product->id}}">
+                                                                <div class="update-qty plus" data-id="{{$id}}">
                                                                     <i class="fa-solid fa-plus"></i>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="cart-body-total">$
-                                                            {{ number_format($item['thanhtien'], 2) }}
+                                                            <span class="thanhtien" data-id="{{$id}}">{{ number_format($item['thanhtien'], 2) }}</span>
                                                         </div>
                                                         <div class="cart-body-trash">
                                                             <i class="fa-solid fa-trash-can"></i>
@@ -119,10 +118,10 @@
                                     <p>Bạn chưa có sản phẩm nào trong giỏ hàng</p>
                                     <a href="{{ route('user/index') }}" class="btn btn-primary mt-4"><i
                                             class="fa-solid fa-chevron-left"></i> Tiếp tục mua sắm</a>
-                            </div>
+                                 </div>
                             @endif
 
-                            @if ($cart['qty'])
+                            @if ($cart['qty'] == 0)
                                 <div class="col-md-12">
                                     <a href="{{ route('user/index') }}" class="btn btn-primary"><i
                                             class="fa-solid fa-chevron-left"></i> Tiếp tục mua sắm</a>
@@ -157,24 +156,28 @@
                             <h5>Order Summary</h5>
                             <hr>
                             <div class="d-flex mb-2">
-                                <div class="col-9">Subtotal (<span id="qty-provisional"></span> items) </div>
-                                <div class="col-3 text-end">$ 72</div>
+                                <div class="col-9">Subtotal </div>
+                                <div class="col-3 text-end" id="total-provisional"> </div>
                             </div>
-                            <div class="d-flex mb-4">
+                            {{-- <div class="d-flex mb-4">
                                 <div class="col-9">Shipping Fee </div>
                                 <div class="col-3 text-end">$ 0</div>
-                            </div>
-                            <div class="d-flex mb-5">
-                                <input type="text" name="voucher-inp" class="form-control me-1">
-                                <button class="btn btn-success">Apply</button>
+                            </div> --}}
+                            <div class="d-inline mb-5">
+                                <label for="">Voucher</label>
+                                <div class="d-flex mt-2">
+                                    <input type="text" name="voucher-inp" class="form-control me-1">
+                                    <button class="btn btn-success">Apply</button>
+                                </div>
+                                
                             </div>
                             <hr>
                             <div class="d-flex mt-2">
                                 <div class="col-9">Total </div>
-                                <div class="col-3 text-end">$ 72</div>
+                                <div class="col-3 text-end" id="totalOrder"></div>
                             </div>
                         </div>
-                        <a href="{{ route('checkout/checkout-process') }}" class="btnSubmitCart">Confirm cart (2)</a>
+                        <a href="{{ route('checkout/checkout-process') }}" class="btnSubmitCart">Confirm cart</a>
                     </div>
                 </div>
             </div>
@@ -189,12 +192,12 @@
 
 @section('myjs')
 <script>
-    $(document).ready(function() {
+    // $(document).ready(function() {
 
-        $("#select_all").change(function() {
-            $(".cus-checkbox").prop('checked', $(this).prop("checked"));
-        });
+    //     $("#select_all").change(function() {
+    //         $(".cus-checkbox").prop('checked', $(this).prop("checked"));
+    //     });
 
-    });
+    // });
 </script>
 @endsection
