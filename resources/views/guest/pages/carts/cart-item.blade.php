@@ -93,15 +93,14 @@
                                                     @else
                                                         <div class="cart-body-qty">
                                                             <div class="qty-quanity">
-                                                                <div class="update-qty qty-minus"><i
-                                                                        class="fa-solid fa-minus"></i>
+                                                                <div class="update-qty minus" data-id="{{$product->id}}">
+                                                                    <i class="fa-solid fa-minus"></i>
                                                                 </div>
-                                                                <div id="qty" class="qty-quanity-sl"
-                                                                    data-id="{{ $product->id }}">
+                                                                <div id="qty" data-id="{{$product->id}}" class="qty-quanity-sl qty-item_{{$product->id}}">
                                                                     {{ $item['sl'] }}
                                                                 </div>
-                                                                <div class="update-qty qty-plus"><i
-                                                                        class="fa-solid fa-plus"></i>
+                                                                <div class="update-qty plus" data-id="{{$product->id}}">
+                                                                    <i class="fa-solid fa-plus"></i>
                                                                 </div>
                                                             </div>
                                                         </div>
