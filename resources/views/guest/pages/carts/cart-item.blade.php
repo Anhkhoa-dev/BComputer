@@ -27,12 +27,12 @@
                     <div class="col-md-9">
                         <div class="row">
                             <div class="cart-items mb-1">
-                                <div class="cart-header bg-white mb-2">    
+                                <div class="cart-header bg-white mb-2">
                                     <div class="select-item-cart">
-                                        <input type="checkbox" id="select_all"
-                                            class="select-item-cart cus-checkbox" data-id="all" />
+                                        <input type="checkbox" id="select_all" class="select-item-cart cus-checkbox"
+                                            data-id="all" />
                                     </div>
-                                    <div class="cart-header-name">Select all <span
+                                    <div class="cart-header-name">Select all<span
                                             id="qty-cart-total">{{ $cart['qty'] }}</span>
                                         product</div>
                                     <div class="cart-header-price">Price</div>
@@ -51,7 +51,7 @@
                                                 <div class="select-item-cart">
                                                     @if ($product['status'] == 0 || $item['hethang'])
                                                         <input type="checkbox" name="check[]"
-                                                            data-id="{{ $id}}"
+                                                            data-id="{{ $id }}"
                                                             class="select-item-cart cus-checkbox">
                                                     @else
                                                         <input type="checkbox" name="check[]"
@@ -92,21 +92,27 @@
                                                     @else
                                                         <div class="cart-body-qty">
                                                             <div class="qty-quanity">
-                                                                <div class="update-qty minus" data-id="{{$id}}">
+                                                                <div class="update-qty minus"
+                                                                    data-id="{{ $id }}">
                                                                     <i class="fa-solid fa-minus"></i>
                                                                 </div>
-                                                                <div id="qty" data-id="{{$id}}" class="qty-quanity-sl qty-item_{{$id}}">
+                                                                <div id="qty" data-id="{{ $id }}"
+                                                                    class="qty-quanity-sl qty-item_{{ $id }}">
                                                                     {{ $item['sl'] }}
                                                                 </div>
-                                                                <div class="update-qty plus" data-id="{{$id}}">
+                                                                <div class="update-qty plus"
+                                                                    data-id="{{ $id }}">
                                                                     <i class="fa-solid fa-plus"></i>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                         <div class="cart-body-total">$
-                                                            <span class="thanhtien" data-id="{{$id}}">{{ number_format($item['thanhtien'], 2) }}</span>
+                                                            <span class="thanhtien"
+                                                                data-id="{{ $id }}">{{ number_format($item['thanhtien'], 2) }}</span>
                                                         </div>
-                                                        <div class="cart-body-trash" id="delete-item-cart" data-id="{{ $id }}" data-name="{{$product->name}}">
+                                                        <div class="cart-body-trash" id="delete-item-cart"
+                                                            data-id="{{ $id }}"
+                                                            data-name="{{ $product->name }}">
                                                             <i class="fa-solid fa-trash-can"></i>
                                                         </div>
                                                     @endif
@@ -118,7 +124,7 @@
                                     <p>Bạn chưa có sản phẩm nào trong giỏ hàng</p>
                                     <a href="{{ route('user/index') }}" class="btn btn-primary mt-4"><i
                                             class="fa-solid fa-chevron-left"></i> Tiếp tục mua sắm</a>
-                                 </div>
+                            </div>
                             @endif
 
                             @if ($cart['qty'] == 0)
@@ -169,7 +175,7 @@
                                     <input type="text" name="voucher-inp" class="form-control me-1">
                                     <button class="btn btn-success">Apply</button>
                                 </div>
-                                
+
                             </div>
                             <hr>
                             <div class="d-flex mt-2">
@@ -191,32 +197,50 @@
 
 <div class="modal" id="delete-modal" tabindex="-1">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="delete-content"></h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-content"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="delete-body"></p>
+            </div>
+            <div class="modal-footer">
+                <div class="btn btn-secondary" data-bs-dismiss="modal">Close</div>
+                <div class="btn btn-danger" id="delete-btn">Delete</div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p id="delete-body"></p>
-        </div>
-        <div class="modal-footer">
-          <div  class="btn btn-secondary" data-bs-dismiss="modal">Close</div>
-          <div  class="btn btn-danger" id="delete-btn">Delete</div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
+
+<div class="modal" id="delete-all-modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="delete-all-content"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p id="delete-all-body"></p>
+            </div>
+            <div class="modal-footer">
+                <div class="btn btn-secondary" data-bs-dismiss="modal">Close</div>
+                <div class="btn btn-danger" id="delete-all-btn">Delete all</div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 @endsection
 
 @section('myjs')
 <script>
-    // $(document).ready(function() {
+    $(document).ready(function() {
 
-    //     $("#select_all").change(function() {
-    //         $(".cus-checkbox").prop('checked', $(this).prop("checked"));
-    //     });
+        $("#select_all").change(function() {
+            $(".cus-checkbox").prop('checked', $(this).prop("checked"));
+        });
 
-    // });
+    });
 </script>
 @endsection

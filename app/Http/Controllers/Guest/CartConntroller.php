@@ -99,14 +99,14 @@ class CartConntroller extends Controller
                 ];
             }
         }
-        
+
     }
 
     // update cart
     public function ajaxUpdateCart(Request $request)
     {
         if($request->ajax()){
-            
+
             $data = [
                 'status' => '',
                 'newQty' => '',
@@ -128,7 +128,7 @@ class CartConntroller extends Controller
                 }
             }else{
                 Cart::where('id', $request->id)->update(['quanity'=> --$qty]);
-                
+
             }
             $data['newQty'] = $qty;
             $newPrice = ($product->price * ((100 - $product->discount) / 100)) * $qty;
@@ -138,14 +138,14 @@ class CartConntroller extends Controller
             session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
             return $data;
         }
-        
+
     }
 
     public function AjaxDeleteCart(Request $request){
         if($request->ajax()){
             $id = $request->id;
             // print_r($data);
-            
+
             Cart::where('id', $id)->delete();
             $data = [
                 'status' => 'Delete success',
@@ -153,6 +153,17 @@ class CartConntroller extends Controller
             session()->forget('qtyCart');
             session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
             return $data;
+        }
+    }
+
+    public function AjaxDeleteSelectCart(Request $request){
+        if($request->ajax()){
+            $data = $request->idList;
+            print_r($data);
+            // foreach($data as $id){
+
+            // }
+
         }
     }
 
@@ -173,10 +184,10 @@ class CartConntroller extends Controller
             foreach ($request->idList as $id_cart) {
                 $cart = Cart::where('id', $id_cart)->first();
                 $product = Products::where('id', $cart->id_pro)->first();
-                
+
                 if ($product->status) {
                     $qtyInStock = $product->quantity;
-                    print_r($qtyInStock);
+                    // print_r($qtyInStock);
                     if ($qtyInStock > 0) {
                         $priceKm = $product->price * ((100 - $product->discount) / 100);
                         $qtyInCart = Cart::where('id_tk', $id_tk)->where('id_pro', $cart->id_pro)->first()->quanity;
