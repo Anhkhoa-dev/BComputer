@@ -116,10 +116,10 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     //Create
     Route::get('admin/supplier/create', [SupplierController::class, 'create'])->name('supplier/create');
     Route::post('admin/supplier/postSupplier', [SupplierController::class, 'store'])->name('supplier/store');
-
+    //UD
     Route::get('admin/supplier/edit/{slug}', [SupplierController::class, 'edit'])->name('supplier/edit');
-    Route::post('admin/supplier/update', [SupplierController::class, 'update'])->name('supplier/update');
-    // Route::post('admin/supplier/delete', [SupplierController::class, 'delete'])->name('deleteSupplierItem');
-
+    Route::post('admin/supplier/update/{id}', [SupplierController::class, 'update'])->name('supplier/update');
+    //Delete
+    Route::get('admin/supplier/destroy/{id}', [SupplierController::class, 'destroy'])->name('supplier/destroy');
 
 });

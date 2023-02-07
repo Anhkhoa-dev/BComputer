@@ -62,7 +62,6 @@
                                     @if ($item->image != null && $item->image != '')
                                         <img src="{{ asset('image/supplier/' . $item->image) }}" alt=""
                                             style="width:100px; height:auto;">
-
                                     @endif
                                 </td>
                                 <td>{{ $item->address ?? 'null' }}</td>
@@ -76,17 +75,16 @@
                                 <td class="project-actions text-right">
                                     <a class="btn btn-primary" href="#">
                                         <i class="fas fa-folder">
-                                        </i> 
+                                        </i>
                                     </a>
                                     <a class="btn btn-info" href="{{ route('supplier/edit', $item->id) }}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
-                                        
+
                                     </a>
-                                    <a class="btn btn-danger" href="{{ route('supplier/delete', $item->id)}}"  >
+                                    <a class="btn btn-danger" href="{{ route('supplier/destroy', $item->id) }}">
                                         <i class="fa fa-trash">
                                         </i>
-                                        
                                     </a>
                                 </td>
                             </tr>

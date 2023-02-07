@@ -12,8 +12,8 @@
 
                 <div>
                     <a href="#" class="text-decoration-none text-white"><i class="fa-solid fa-map-location-dot"></i>
-                        590,
-                        CMT8, QUẬN 3, TP.HCM</a>
+                        590, CMT8, DISTRICT 3, HCMC
+                    </a>
                 </div>
                 <div class="text-white">
                     <a href="#" class="text-decoration-none text-white"> <i class="fas fa-globe"></i>
@@ -75,7 +75,7 @@
                                     alt="" class="img-user">
                             </div>
                             <div class="user_info dropdown">
-                                <div class="author">Xin chào!</div>
+                                <div class="author">Hello!</div>
                                 <a class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     {{ $user->fullname }}
@@ -121,20 +121,20 @@
                             <div class="col-md-4 align-items-center">
                                 <div class="box_service">
                                     <img src="{{ asset('image/icon/001-hand.png') }}" width="25" alt="">
-                                    <a href="#" class="service_title">HƯỚNG DẪN THANH TOÁN</a>
+                                    <a href="#" class="service_title">PAYMENT GUIDE</a>
                                 </div>
                             </div>
                             <div class="col-md-4 align-items-center">
                                 <div class="box_service ">
                                     <img src="{{ asset('image/icon/002-vehicle.png') }}" width="25" alt="">
-                                    <a href="#" class="service_title">CHÍNH SÁCH BẢO HÀNH</a>
+                                    <a href="#" class="service_title">WARRANTY POLICY</a>
                                 </div>
                             </div>
                             <div class="col-md-4 align-items-center">
                                 <div class="box_service">
                                     <img src="{{ asset('image/icon/003-fast-delivery.png') }}" width="25"
                                         alt="">
-                                    <a href="#" class="service_title">CHÍNH SÁCH VẬN CHUYỂN</a>
+                                    <a href="#" class="service_title">SHIPPING POLICY</a>
                                 </div>
                             </div>
                         </div>

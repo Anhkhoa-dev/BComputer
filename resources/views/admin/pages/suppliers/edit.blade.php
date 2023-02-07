@@ -69,16 +69,6 @@
 
                     {{-- cột bên phải  --}}
                     <div style="width: 48%">
-                        {{-- <div class="form-group">
-                                      <label for="image">Image</label>
-                                      <div class="input-group">
-                                          <div class="custom-file">
-                                              <input type="file" class="custom-file-input" name="photo" id="image">
-                                              <label class="custom-file-label" for="image">Choose image</label>
-                                          </div>
-                                      </div>
-                                  </div> --}}
-
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="">Image Supplier</label>
@@ -88,6 +78,9 @@
                                 @enderror
                                 <div class="image-sup-div">
                                     <div class="row">
+                                        if(image != 0){
+                                        <img src="" alt="">
+                                        }
                                     </div>
                                 </div>
                             </div>

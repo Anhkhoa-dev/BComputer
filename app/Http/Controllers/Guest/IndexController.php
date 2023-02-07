@@ -46,7 +46,7 @@ class IndexController extends Controller
 
     public function getDiscount($max = 10)
     {
-        $bigDiscount = Products::where('discount', '>=', 15)->where('status', 1)->limit($max)->get();
+        $bigDiscount = Products::where('discount', '>=', 15)->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
         foreach ($bigDiscount as $i => $key) {
             if ($key->id) {
                 $bigDiscount[$i]->image = ProductImage::where('id_pro', $key->id)->get();
@@ -66,7 +66,7 @@ class IndexController extends Controller
     public function getFeatured($max = 10)
     {
 
-        $lst_featured = Products::where('featured', 1)->where('status', 1)->limit($max)->get();
+        $lst_featured = Products::where('featured', 1)->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
         foreach ($lst_featured as $i => $key) {
             if ($key->id) {
                 $lst_featured[$i]->image = ProductImage::where('id_pro', $key->id)->get();
@@ -82,7 +82,7 @@ class IndexController extends Controller
     public function getProducts($slug)
     {
         $cata = Category::where('slug', $slug)->first();
-        $filterProductCategory = Products::where('id_ca', $cata->id)->get();
+        $filterProductCategory = Products::where('id_ca', $cata->id)->where('status', 1)->where('quantity', '>', 0)->get();
         foreach ($filterProductCategory as $i => $key) {
             if ($key->id) {
                 $filterProductCategory[$i]->image = ProductImage::where('id_pro', $key->id)->get();

@@ -61,7 +61,6 @@ class CartConntroller extends Controller
             $prod =  Products::where('id', $request->id_sp)->first();
             // kiểm tra k có id tài khoản trùng thi thêm mới
             if (count(Cart::where('id_tk', Auth::user()->id)->get()) == 0) {
-                if($prod->status == 1 || $prod->quantity >= $request->qty){
                     Cart::create($array);
                     // Trừ tồn kho trong table Product
                     session()->forget('qtyCart');
@@ -69,14 +68,6 @@ class CartConntroller extends Controller
                     return [
                         'status' => 'new one',
                     ];
-                }else{
-                    return [
-                        'status' => 'already have'
-                        
-                    ];
-                }
-                
-
             } else { // id_tk có trong data
                 foreach (Cart::where('id_tk', Auth::user()->id)->get() as $cart) {
                     if ($cart->id_pro == $request->id_sp) {
@@ -110,10 +101,10 @@ class CartConntroller extends Controller
                     ];
                 }else{
                     return [
-                        'status' => 'he', 
+                        'status' => 'he',
                     ];
                 }
-                
+
             }
         }
 
@@ -154,7 +145,7 @@ class CartConntroller extends Controller
             $data['newQty'] = $qty;
             $newPrice = ($product->price * ((100 - $product->discount) / 100)) * $qty;
             $data['newPrice'] = number_format($newPrice, 2);
-                       
+
             return $data;
         }
 
@@ -183,7 +174,7 @@ class CartConntroller extends Controller
                 session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
                 return back();
             }
-        
+
         }
     }
 

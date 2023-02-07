@@ -14,6 +14,11 @@ $(function () {
     /*========================================================================================================================================================
                                                                 HÀM CƠ BẢN KHAI BÁO TRONG NÀY
     ========================================================================================================================================================*/
+    function isValidateCode(nam) {
+
+        return true;
+    }
+
 
     function removeRequired(element) {
         if (element.hasClass("required")) {
@@ -29,12 +34,11 @@ $(function () {
             image.onload = function () {
                 const width = this.width;
                 const height = this.height;
-
                 resolve(width === height);
             };
         });
     }
-    function isCorrectFrameRateWith(url) {
+    function isCorrectFrameRateWithman(url) {
         return new Promise((resolve) => {
             const image = new Image();
             image.src = url;
@@ -47,10 +51,8 @@ $(function () {
         });
     }
     var idx = 1;
-    // Phần xử lý hình ảnh trong product
-    // $("#choose_image").click(function () {
-    //     $(".sup_name[]").click();
-    // });
+
+    // Phần xử lý hình ảnh trong product - Khoa
 
     $("#image_inp").change(function () {
         // HỦy chọn hình
@@ -131,11 +133,8 @@ $(function () {
         }
     });
 
-    //MAN-IMAGE-SUPPLIER
-    $("#choose_image").click(function () {
-        $(".sup_name[]").click();
-    });
 
+    //MAN-IMAGE-SUPPLIER
     $("#image_sup").change(function () {
         // HỦy chọn hình
         if ($(this).val() == "") {
@@ -169,17 +168,17 @@ $(function () {
                     break;
                 }
                 const urlIMG = URL.createObjectURL(this.files[i]);
-                isCorrectFrameRateWith(urlIMG).then((bool) => {
+                isCorrectFrameRateWithman(urlIMG).then((bool) => {
                     if (bool) {
-                        imageElement = `<div id="image-${idx}" data-id="${idx}" class="image-sup col-md-4 col-6">
-                                        <img data-id="${idx}" src="${urlIMG}"
-                                        alt="" class="img-sup">
-                                        <div class="bg-image-hover">
+                        imageElement = `<div id="image-${idx}" data-id="${idx}" class="image-sup col-md-6 col-6">
+                                <img data-id="${idx}" src="${urlIMG}"
+                                    alt="" class="img-sup">
+                                    <div class="bg-image-hover">
                                         <div data-id="${idx}" class="delete-icon" title="delete image">
                                             <i class="fa-solid fa-trash"></i>
                                         </div>
-                                        </div>
-                                    </div>`;
+                                    </div>
+                                </div>`;
                         idx++;
                         qty++;
                         $(".image-sup-div > .row").append(imageElement);
@@ -189,6 +188,7 @@ $(function () {
                     }
                 });
             } else {
+                console(urlIMG);
                 alert("Bạn chỉ có thể upload hình ảnh");
                 break;
             }
@@ -214,7 +214,50 @@ $(function () {
             $("#qty-image").text(`(${qty})`);
         }
     });
+
+    // Xử lý ajax create voucher
+    $('#create-btn').click(function (e) {
+        $("#voucher_create").modal("show");
+    });
+
+    $('#create-submit').click(function (e) {
+        e.preventDefault();
+        var code = $("#code").val();
+        var content = $("#content").val();
+        var discount = $("#Discount").val();
+        var condition = $("#condition").val();
+        var dateStart = $("#dateStart").val();
+        var endStart = $("#endStart").val();
+        // alert(code);
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": X_CSRF_TOKEN,
+            },
+            url: "/admin/voucher/store",
+            type: 'POST',
+            data: {
+                code: code,
+                content: content,
+                discount: discount,
+                condition: condition,
+                dateStart: dateStart,
+                endStart: endStart,
+            },
+            success: function (data) {
+                alert(data.status);
+                location.reload()
+                // if ($.isEmptyObject(data.error)) {
+                //     // $(".errorMsg").html('');
+                //     alert(data.success);
+                // } else {
+                //     // let resp = data.errors;
+                //     // for (index in resp) {
+                //     //     $("#" + index).html(resp[index]);
+                //     printErrorMsg(data.error);
+                // }
+            }
+
+        });
+
+    });
 });
-
-
-

@@ -41,75 +41,30 @@ class VoucherController extends Controller
      */
     public function store(Request $request)
     {
-        //$vous = $request->all();
-        //$request->validate(
-            $validator = Validator::make($request->all(),
-            [       'vou_code' => 'required',
-                    'vou_content' => 'required',
-                    'vou_discount' => 'required',
-                    'vou_condition' => 'required',
-                    'vou_dateStart' => 'after_or_equal:today',
-                    'vou_endStart' => 'after_or_equal:vou_dateStart',
-
-            // [
-            //     'vou_code' => 'required|unique:VOUCHER,code',
-            //     'vou_content' => 'required',
-            //     'vou_discount' => 'required|numeric|min:0|max:100',
-            //     'vou_condition' => 'required|numeric|min:1',
-            //     'vou_dateStart' => 'after_or_equal:today',
-            //     'vou_endStart' => 'after_or_equal:vou_dateStart',
-            // ],
-            // [
-            //     'vou_code.required' => 'Please input Code of Voucher!',
-            //     'vou_code.unique' => 'Voucher dupplicate Code!',
-            //     'vou_content.required' => 'Please input Content of Voucher!',
-            //     'vou_discount.required' => 'Please input Discount of Voucher!',
-            //     'vou_discount.digits' => 'Please input Discount with 0->100 %!',
-            //     'vou_condition.required' => 'Please input Condition of Voucher!',
-            //     'vou_condition.min' => 'Please input Condition more than 0!',
-            //     'vou_dateStart.after_or_equal' => 'Please input Date Start after or equal Today!',
-            //     'vou_endStart.after_or_equal' => 'Please input End Start after or equal Date Start!',
-            ]
-        );
-        if ($validator->passes()) {
-            return response()->json(['success'=>'Added new records.']);
+        if($request->ajax()){
+            $data = [
+                'code' => $request->code,
+                'content' => $request->content,
+                'discount' => $request->discount,
+                'condition' => $request->condition,
+                'dateStart' => $request->dateStart,
+                'endStart' => $request->endStart,
+            ];
+            $isCheck = VOUCHER::where('code', $request->code)->first();
+            // print_r($isCheck);
+             if($isCheck == null){
+                VOUCHER::create($data);
+                return [
+                    'status' => 'Add voucher success',
+                ];
+                return redirect('admin/voucher');
+             }else{
+                return [
+                    'status' => 'vouchers exist',
+                ];
+                return back();
+             }
         }
-    	return response()->json(['error'=>$validator->errors()->all()]);
-
-
-
-    // $data = [
-    //     'code' => $vous['vou_code'],
-    //     'content' => $vous['vou_content'],
-    //     'discount' => doubleval($vous['vou_discount']/100.00),
-    //     'condition' => intval($vous['vou_condition']),
-    //     'dateStart' => $vous['vou_dateStart'],
-    //     'endStart' => $vous['vou_endStart'],
-    // ];
-    // VOUCHER::create($data);
-    // return redirect()->route('admin/voucher')->with('Success', 'Create Voucher success!');
-
-
-        // if($request->ajax()){
-        //     $data = [
-        //         'code' => $request->code,
-        //         'content' => $request->noidung,
-        //         'discount' => doubleval($request->discount),
-        //         'condition' => $request->condition,
-        //         'dateStart' => date('d/m/Y', strtotime($request->dateStart)),
-        //         'endStart' => date('d/m/Y', strtotime($request->endStart)),
-
-        //     ];
-
-        //     // if(VOUCHER::where('code', $data['code'])->first()){
-        //     //     return 'exists';
-        //     // }
-
-        //     VOUCHER::create($data);
-        //     dd($data);
-
-        //     return redirect()->route('admin/voucher')->with('Success', 'Create Voucher success!');
-        //}
     }
 
     /**

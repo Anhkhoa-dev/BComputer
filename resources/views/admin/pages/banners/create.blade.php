@@ -37,41 +37,9 @@
             <form action="{{ route('admin/banner/store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 {{-- @method('put') --}}
-
-                <div class="input-group">
-                    <div class="mb-3">
-                        <label for="formFileSm" class="form-label">Small file input example</label>
-                        <input class="form-control form-control-sm" id="formFileSm" type="file" name="ban_image">
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <div class="mb-3 form-select" multiple aria-label="name">
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <div class="image-preview-div">
-                                    <div class="row">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <input type="file" name="ban_image" id="image_inp" multiple class="d-none"
-                                    value="{{ old('ban_image') }}">
-                                <label class="form-control btn-info btn-lg text-center cursor-pointer" for="image_inp">
-                                    Choose image Banner</label>
-                                @error('ban_image')
-                                    <span class="errorMsg">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
                 <div class="card-body d-flex justify-content-between">
                     {{-- // cột bên trai --}}
-                    <div style="width: 48%">
+                    <div style="width: 39%">
                         {{-- // Title --}}
                         <div class="mb-3 form-select" multiple aria-label="name">
                             <label for="title" class="form-label">Title</label>
@@ -85,10 +53,18 @@
                         <div class="mb-3 form-select" multiple aria-label="link">
                             <label for="link" class="form-label">Categories</label>
                             <select name="ban_link" id="link" class="form-select">
-                                <option value="" selected disabled>Select category</option>
-                                @foreach ($fillCatagoryAll as $item)
-                                    <option value="{{ $item->slug }}">{{ $item->name }}</option>
-                                @endforeach
+                                @if (old('ban_link') == '')
+                                    <option selected disabled>Select category</option>
+                                    @foreach ($fillCatagoryAll as $item)
+                                        <option value="{{ $item->slug }}">{{ $item->name }}</option>
+                                    @endforeach
+                                @else
+                                    <option class="btn btn-light" selected value="0">Clocked</option>
+                                    <option selected>{{ old('ban_link') }}</option>
+                                    @foreach ($fillCatagoryAll as $item)
+                                        <option value="{{ $item->slug }}">{{ $item->name }}</option>
+                                    @endforeach
+                                @endif
                             </select>
                             @error('ban_link')
                                 <span class="errorMsg">{{ $message }}</span>
@@ -96,35 +72,51 @@
                         </div>
                         {{-- // Status --}}
                         <div class="mb-3 form-select" multiple aria-label="status">
-                            <label for="status" class="form-label">Status</label>
-                            <select id='status' name="ban_status" aria-label="Default select example"
-                                class="form-control">
-                                @if ('ban_status' == null)
-                                    <option selected value="old('ban_status')">
-                                        @if ($banner->status == '1')
-                                            Active
-                                        @else
-                                            Clocked
-                                        @endif
-                                    </option>
-                                    <option value="0">Clocked</option>
-                                @else
-                                    <option value="0">Clocked</option>
-                                    <option value="1">Actived</option>
-                                @endif
-                            </select>
+                            <label for="statusBan" class="form-label">Status</label>
+                            @if (old('ban_status') == '0')
+                                <select id='statusBan' name="ban_status" aria-label="Default select example"
+                                    class="form-control btn btn-secondary btn-mg">
+                                    <option class="btn btn-light" selected value="0">Clocked</option>
+                                    <option class="btn btn-light" value="1">Actived</option>
+                                </select>
+                            @else
+                                <select id='status' name="ban_status" aria-label="Default select example"
+                                    class="form-control btn btn-success btn-mg">
+                                    <option class="btn btn-light" selected value="1">Actived</option>
+                                    <option class="btn btn-light" value="0">Clocked</option>
+                                </select>
+                            @endif
                         </div>
-                    </div>
-                    {{-- // cột bên phai --}}
-                    <div style="width: 48%">
                         {{-- // Description --}}
                         <div class="mb-3 form-select" multiple aria-label="description">
-                            <label for="description" class="form-label" style="margin-bottom: 10px">Description</label>
-                            <textarea type="text" class="form-control" style="margin-bottom: 5px" rows="9" id="description"
-                                name="ban_description">{{ old('ban_description') }}</textarea>
+                            <label for="description" class="form-label">Description</label>
+                            <textarea type="text" class="form-control" rows="7" id="description" name="ban_description">{{ old('ban_description') }}</textarea>
                             @error('ban_description')
                                 <span class="errorMsg">{{ $message }}</span>
                             @enderror
+                        </div>
+                    </div>
+                    {{-- // cột bên phai --}}
+                    <div style="width: 59%">
+                        {{-- // Image --}}
+                        <div class="mb-3 form-select" multiple aria-label="name">
+                            <label for="file-ban" class="form-label">Image Banner</label>
+                            <div class="mb-3">
+                                <div class="image-ban-div">
+                                    <div class="image-ban">
+                                        <img class="img-ban" id="img-ban" src="{{ asset('image/logo.png') }}" />
+                                    </div>
+                                </div>
+                            </div>
+                            @error('ban_image')
+                                <span class="errorMsg">{{ $message }}</span>
+                            @enderror
+                            <div class="mb-3">
+                                <label class="form-control btn-primary text-center cursor-pointer" for="file-ban">Choose
+                                    Image</label>
+                                <input accept="image/*" type="file" id="file-ban" multiple class="d-none"
+                                    name="ban_image" />
+                            </div>
                         </div>
                     </div>
 
@@ -138,15 +130,25 @@
     </section>
 @endsection
 
-@section('custom-scripts')
+@section('myjs-admin')
     <script>
-        const input = document.getElementById('file-input');
-        const image = document.getElementById('img-preview');
+        //Phuc-Image-Banner
+        const input = document.getElementById("file-ban");
+        const image = document.getElementById("img-ban");
 
-        input.addEventListener('change', (e) => {
+        input.addEventListener("change", (e) => {
             if (e.target.files.length) {
                 const src = URL.createObjectURL(e.target.files[0]);
                 image.src = src;
+            }
+        });
+        // PHUC-HIENTHI-STATUS-BANNER
+        $('#statusBan').change(function() {
+            var current = $('#statusBan').val();
+            if (current === '1') {
+                $('#statusBan').css('background-color', '#CC9933');
+            } else {
+                $('#statusBan').css('background-color', 'gray');
             }
         });
     </script>
