@@ -1,3 +1,5 @@
+const { upperCase } = require("lodash");
+
 $(function () {
     const CREATE_MESSAGE = "Thêm thành công";
     const EDIT_MESSAGE = "Chỉnh sửa thành công";
@@ -222,7 +224,7 @@ $(function () {
 
     $('#create-submit').click(function (e) {
         e.preventDefault();
-        var code = $("#code").val();
+        var code = upperCase($("#code").val());
         var content = $("#content").val();
         var discount = $("#Discount").val();
         var condition = $("#condition").val();
