@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-12">
                 @if ($cart != null)
-                    <p class="cart-terms-purchase">(*) Số lượng mua cho 1 sản phẩm tối đa là 5</p>
+                    <p class="cart-terms-purchase">(*) The maximum purchase quantity for 1 product is 5</p>
                 @else
                     <p class="cart-terms-purchase"></p>
                 @endif
@@ -72,7 +72,7 @@
                                                 @if ($product['status'] == 0)
                                                     <div class="out-of-stock w-50 text-center"
                                                         data-id="{{ $product->id }}">
-                                                        <p>NGỪNG KINH DOANH</p>
+                                                        <p>STOP BUSINESS</p>
                                                     </div>
                                                 @else
                                                     <div class="cart-body-price">$
@@ -83,7 +83,7 @@
                                                         <div class="d-flex justify-content-between align-items-center">
                                                             <div class="out-of-stock text-center" style="width: 280px"
                                                                 data-id="{{ $product->id }}">
-                                                                <p>TẠM HẾT HÀNG</p>
+                                                                <p>OUT OF STOCK</p>
                                                             </div>
                                                             <div class="cart-body-trash">
                                                                 <i class="fa-solid fa-trash-can"></i>
@@ -121,16 +121,17 @@
                                         @endforeach
                                     </div>
                                 @else
-                                    <p>Bạn chưa có sản phẩm nào trong giỏ hàng</p>
+                                    <p>You have no items in your shopping cart</p>
                                     <a href="{{ route('user/index') }}" class="btn btn-primary mt-4"><i
-                                            class="fa-solid fa-chevron-left"></i> Tiếp tục mua sắm</a>
+                                            class="fa-solid fa-chevron-left"></i> Continue shopping
+                                    </a>
                             </div>
                             @endif
 
-                            @if ($cart['qty'] == 0)
+                            @if ($cart['qty'] != 0)
                                 <div class="col-md-12">
                                     <a href="{{ route('user/index') }}" class="btn btn-primary"><i
-                                            class="fa-solid fa-chevron-left"></i> Tiếp tục mua sắm</a>
+                                            class="fa-solid fa-chevron-left"></i> Continue shopping</a>
                                 </div>
                             @endif
 
@@ -195,6 +196,8 @@
 
 </div>
 
+
+{{-- Modal delete 1 item --}}
 <div class="modal" id="delete-modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -213,6 +216,8 @@
     </div>
 </div>
 
+
+{{-- Modal delete all cart --}}
 <div class="modal" id="delete-all-modal" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">

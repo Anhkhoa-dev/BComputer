@@ -28,7 +28,7 @@
                 @endif
 
                 <div class="d-flex justify-content-between align-items-center ">
-                    <div class="me-2">Sắp xếp theo: </div>
+                    <div class="me-2">Sorted by: </div>
                     <div class="sort-options">
                         <select name="" id="" class="form-select">
                             <option value="">Price: Ascending</option>

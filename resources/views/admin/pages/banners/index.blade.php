@@ -54,11 +54,11 @@
                     <thead>
                         <tr>
                             <th style="width: 1%"> ID</th>
-                            <th style="width: 5%"> Title </th>
-                            <th style="width: 20%"> Description </th>
-                            <th> Categories </th>
-                            <th style="text-align: center; width: 25%"> Image </th>
-                            <th style="text-align: center"> Status </th>
+                            <th style="width: 20%"> Title </th>
+                            <th style="width: 25%;"> Description </th>
+                            <th style="width: 5%; text-align: center;"> Categories </th>
+                            <th style="text-align: center; width: 20%"> Image </th>
+                            <th style="text-align: center; width: 5%"> Status </th>
                             <th style="text-align: center"> Actions </th>
                         </tr>
                     </thead>
@@ -67,7 +67,7 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->title }}</td>
-                                <td>{{ $item->description }}</td>
+                                <td style="text-align: justify;">{{ $item->description }}</td>
                                 <td>{{ $item->link }}</td>
                                 <td>
                                     <div class="phuc-banner">

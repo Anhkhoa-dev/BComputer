@@ -37,36 +37,10 @@
                 @csrf
                 {{-- @method('put') --}}
                 <input type="hidden" name="id" value="{{ $banner->id }}" />
-                <div class="card-body">
-                    <div style="text-align: center">
-                        @if ($banner->image != null && $banner->image != '')
-                            <img src="{{ asset('image/banner/' . $banner->image) }}" alt="{{ $banner->name }}"
-                                class="img_acount" style="text-align: center; max-width:100%">
-                        @endif
-                    </div>
-                    <br>
-                    {{-- <div class="input-group">
-                        <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="photo" id="image">
-                            <label class="custom-file-label" for="image">Choose image</label>
-                        </div>
-                    </div> --}}
-                    {{--  --}}
-                    <div class="card-body">
-                        <div class="input-group">
-                            <div class="mb-3">
-                                <label for="formFileSm" class="form-label">Small file input example</label>
-                                <input class="form-control form-control-sm" id="formFileSm" type="file" name="ban_image">
-                            </div>
-                        </div>
-                        @error('ban_image')
-                            <span class="errorMsg">{{ $message }}</span>
-                        @enderror
-                    </div>
-                </div>
+
                 <div class="card-body d-flex justify-content-between">
                     {{-- // cột bên trai --}}
-                    <div style="width: 48%">
+                    <div style="width: 39%">
                         {{-- // Title --}}
                         <div class="mb-3 form-select" multiple aria-label="description">
                             <label for="title" class="form-label">Title</label>
@@ -80,7 +54,9 @@
                         <div class="mb-3 form-select" multiple aria-label="link">
                             <label for="link" class="form-label">Categories</label>
                             <select id='link' name="ban_link" aria-label="Default select example" class="form-control">
-                                <option selected>{{ $banner->link }}</option>
+                                <option selected>{{ old('ban_link') == '' ? $banner->link : old('ban_link') }}
+                                </option>
+                                {{-- <option selected>{{ $banner->link }}</option> --}}
                                 @foreach ($fillCatagoryAll as $item)
                                     <option value="{{ $item->slug }}" class="side-box">
                                         {{ $item->name }}
@@ -90,29 +66,49 @@
                         </div>
                         {{-- // Status --}}
                         <div class="mb-3 form-select" multiple aria-label="status">
-                            <label for="status" class="form-label">Status</label>
-                            <select id='status' name="ban_status" aria-label="Default select example"
-                                class="form-control">
+                            <label for="statusBan" class="form-label">Status</label>
+                            <select id='statusBan' name="ban_status" aria-label="Default select example"
+                                class="form-control btn {{ $banner->status == 1 ? 'btn-success' : 'btn-secondary' }} btn-mg">
                                 @if ($banner->status == '1')
-                                    <option selected value="1">Active</option>
-                                    <option value="0">Clocked</option>
+                                    <option class="btn btn-light" selected value="1">Active</option>
+                                    <option class="btn btn-light" value="0">Clocked</option>
                                 @else
-                                    <option selected value="0">Clocked</option>
-                                    <option value="1">Actived</option>
+                                    <option class="btn btn-light" selected value="0">Clocked</option>
+                                    <option class="btn btn-light" value="1">Actived</option>
                                 @endif
                             </select>
                         </div>
-                    </div>
-                    {{-- // cột bên phai --}}
-                    <div style="width: 48%">
                         {{-- // Description --}}
                         <div class="mb-3 form-select" multiple aria-label="description">
                             <label for="description" class="form-label">Description</label>
-                            <textarea type="text" class="form-control" style="margin-bottom: 5px" rows="9" id="description"
-                                name="ban_description">{{ $banner->description }}</textarea>
+                            <textarea type="text" class="form-control" rows="7" id="description" name="ban_description">{{ $banner->description }}</textarea>
                             @error('ban_description')
                                 <span class="errorMsg">{{ $message }}</span>
                             @enderror
+                        </div>
+                    </div>
+                    {{-- // cột bên phai --}}
+                    <div style="width: 59%">
+                        {{-- // Image --}}
+                        <div class="mb-3 form-select" multiple aria-label="name">
+                            <label for="file-ban" class="form-label">Image Banner</label>
+                            <div class="mb-3">
+                                <div class="image-ban-div">
+                                    <div class="image-ban">
+                                        <img class="img-ban" id="img-ban"
+                                            src="{{ asset('image/banner/' . $banner->image) }}" />
+                                    </div>
+                                </div>
+                            </div>
+                            @error('ban_image')
+                                <span class="errorMsg">{{ $message }}</span>
+                            @enderror
+                            <div class="mb-3">
+                                <label class="form-control btn-primary text-center cursor-pointer" for="file-ban">Upload
+                                    Image</label>
+                                <input accept="image/*" type="file" id="file-ban" multiple class="d-none"
+                                    name="ban_image" />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -122,4 +118,28 @@
             </form>
         </div>
     </section>
+@endsection
+
+@section('myjs-admin')
+    <script>
+        //Phuc-Image-Banner
+        const input = document.getElementById("file-ban");
+        const image = document.getElementById("img-ban");
+
+        input.addEventListener("change", (e) => {
+            if (e.target.files.length) {
+                const src = URL.createObjectURL(e.target.files[0]);
+                image.src = src;
+            }
+        });
+        // PHUC-HIENTHI-STATUS-BANNER
+        $('#statusBan').change(function() {
+            var current = $('#statusBan').val();
+            if (current === '1') {
+                $('#statusBan').css('background-color', '#CC9933');
+            } else {
+                $('#statusBan').css('background-color', 'gray');
+            }
+        });
+    </script>
 @endsection

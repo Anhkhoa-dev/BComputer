@@ -433,7 +433,7 @@ section .title i {
   cursor: pointer;
   padding: 5px 25px;
   border-radius: 5px;
-  background-color: var(--main);
+  background-color: #0F3460;
   color: #fff;
 }
 

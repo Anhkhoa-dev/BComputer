@@ -179,8 +179,8 @@ class SupplierController extends Controller
      */
     public function destroy($id)
     {
-        $p = SUPPLIER::find($id);
-        $p->delete();
-        return redirect()->route('admin/supplier');
+        $supplier = SUPPLIER::find($id);
+        SUPPLIER::destroy($id);
+        return redirect()->route('admin/supplier')->with('Success', 'Delete Supplier success!');
     }
 }
