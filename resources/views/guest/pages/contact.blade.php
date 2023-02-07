@@ -5,7 +5,7 @@
 {{-- @section('title')
     {{ $title->name }} | BComputer
 @endsection
---}}
+
 
 @section('user-contents')
     {{-- @section('breadcrumb')

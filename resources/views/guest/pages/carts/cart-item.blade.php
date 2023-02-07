@@ -32,7 +32,7 @@
                                         <input type="checkbox" id="select_all" class="select-item-cart cus-checkbox"
                                             data-id="all" />
                                     </div>
-                                    <div class="cart-header-name">Select all<span
+                                    <div class="cart-header-name">Select all <span
                                             id="qty-cart-total">{{ $cart['qty'] }}</span>
                                         product</div>
                                     <div class="cart-header-price">Price</div>

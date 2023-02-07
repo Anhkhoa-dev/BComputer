@@ -2,10 +2,10 @@
 @extends('guest.elements.master')
 
 {{-- Hiển thị tile tabweb --}}
-{{-- @section('title')
-    {{ $title->name }} | BComputer
+@section('title')
+    Abouts | BComputer
 @endsection
---}}
+
 
 @section('user-contents')
     {{-- @section('breadcrumb')

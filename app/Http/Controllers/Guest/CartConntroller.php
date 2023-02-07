@@ -58,15 +58,24 @@ class CartConntroller extends Controller
                 'id_pro' => $request->id_sp,
                 'quanity' => $request->qty,
             ];
+            $prod =  Products::where('id', $request->id_sp)->first();
             // kiểm tra k có id tài khoản trùng thi thêm mới
             if (count(Cart::where('id_tk', Auth::user()->id)->get()) == 0) {
-                Cart::create($array);
-                // Trừ tồn kho trong table Product
-                session()->forget('qtyCart');
-                session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
-                return [
-                    'status' => 'new one',
-                ];
+                if($prod->status == 1 || $prod->quantity >= $request->qty){
+                    Cart::create($array);
+                    // Trừ tồn kho trong table Product
+                    session()->forget('qtyCart');
+                    session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
+                    return [
+                        'status' => 'new one',
+                    ];
+                }else{
+                    return [
+                        'status' => 'already have'
+                        
+                    ];
+                }
+                
 
             } else { // id_tk có trong data
                 foreach (Cart::where('id_tk', Auth::user()->id)->get() as $cart) {
@@ -91,12 +100,20 @@ class CartConntroller extends Controller
                         ];
                     }
                 }
-                Cart::create($array);
-                session()->forget('qtyCart');
-                session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
-                return [
-                    'status' => 'new one',
-                ];
+                if($prod->status == 1 || $prod->quantity >= $request->qty){
+                    Cart::create($array);
+                    // Trừ tồn kho trong table Product
+                    session()->forget('qtyCart');
+                    session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
+                    return [
+                        'status' => 'new one',
+                    ];
+                }else{
+                    return [
+                        'status' => 'he', 
+                    ];
+                }
+                
             }
         }
 
@@ -112,15 +129,17 @@ class CartConntroller extends Controller
                 'newQty' => '',
                 'newPrice' => '',
             ];
-            // tìm sản phẩm có id truyền vào trunng2 với id trong cart
+            // tìm sản phẩm có id truyền vào trùng với id trong cart
             $cart = Cart::where('id', $request->id)->first();
             $product = Products::where('id', $cart->id_pro)->first();
             $qty = intval($cart->quanity);
-            if($request->type =='plus'){
+            if($request->type ==='plus'){
                 $qtyInStock= $product->quantity;
                 // print_r($qtyInStock);
                 if($qty <= $qtyInStock){
                     Cart::where('id', $request->id)->update(['quanity'=> ++$qty]);
+                    session()->forget('qtyCart');
+                    session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
                 }else{
                     $data['status'] = 'not enough';
                     $data['qtyInStock'] = $qtyInStock;
@@ -128,14 +147,14 @@ class CartConntroller extends Controller
                 }
             }else{
                 Cart::where('id', $request->id)->update(['quanity'=> --$qty]);
+                session()->forget('qtyCart');
+                session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
 
             }
             $data['newQty'] = $qty;
             $newPrice = ($product->price * ((100 - $product->discount) / 100)) * $qty;
             $data['newPrice'] = number_format($newPrice, 2);
-            // print_r($data);
-            session()->forget('qtyCart');
-            session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
+                       
             return $data;
         }
 
@@ -158,12 +177,13 @@ class CartConntroller extends Controller
 
     public function AjaxDeleteSelectCart(Request $request){
         if($request->ajax()){
-            $data = $request->idList;
-            print_r($data);
-            // foreach($data as $id){
-
-            // }
-
+            if($request->idList == 'all-cart'){
+                Cart::where('id_tk', Auth::user()->id)->delete();
+                session()->forget('qtyCart');
+                session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
+                return back();
+            }
+        
         }
     }
 
