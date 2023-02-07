@@ -50,6 +50,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::post('ajax-update-cart', [CartConntroller::class, 'ajaxUpdateCart']);
             Route::post('ajax-get-provisional-order', [CartConntroller::class, 'AjaxGetProvisionalOrder']);
             Route::post('ajax-delete-cart', [CartConntroller::class, 'AjaxDeleteCart']);
+            Route::post('ajax-delete-all-select-cart', [CartConntroller::class, 'AjaxDeleteSelectCart']);
             // Phần hiển thị view tài khoản
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
 
