@@ -59,7 +59,7 @@ class IndexController extends Controller
     }
     public function getCatagory()
     {
-        $fillCatagoryAll = Category::all();
+        $fillCatagoryAll = Category::where('status', 1)->get();
         return $fillCatagoryAll;
     }
 
