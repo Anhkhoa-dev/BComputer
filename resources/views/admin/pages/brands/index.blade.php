@@ -1,7 +1,7 @@
 @extends('admin.elements.master')
 
 @section('title')
-    Banner | Admin BComputer
+    Brand | Admin BComputer
 @endsection
 
 @section('admin-main')
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Banner manager</h1>
+                    <h1 class="m-0">Brand manager</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="route('admin/dashboard')">Home</a></li>
-                        <li class="breadcrumb-item active">Banner</li>
+                        <li class="breadcrumb-item active">Brand</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -32,8 +32,8 @@
         @endif
         <div class="card">
             <div class="card-header">
-                <a class="btn btn-tool" href="{{ route('admin/banner/create') }}">
-                    <img src="{{ asset('image/icon/banner_icon.png') }}" width="50px">
+                <a class="btn btn-tool" href="{{ route('admin/brand/create') }}">
+                    <img src="{{ asset('image/icon/brand_icon.png') }}" width="50px">
                     &nbsp;<i class="fas fa-plus fa-lg" aria-hidden="true"></i>
                     {{-- Create --}}
                 </a>
@@ -53,27 +53,23 @@
                 <table class="table table-striped projects">
                     <thead>
                         <tr>
-                            <th style="width: 1%"> ID</th>
-                            <th style="width: 15%"> Title </th>
-                            <th style="width: 25%;"> Description </th>
-                            <th style="width: 11%; text-align: center;"> Categories </th>
-                            <th style="text-align: center; width: 20%"> Image </th>
-                            <th style="text-align: center; width: 5%"> Status </th>
+                            <th style="width: 2%"> ID</th>
+                            <th style="text-align: center; width: 25%"> Name </th>
+                            <th style="text-align: center"> Image </th>
+                            <th style="text-align: center"> Status </th>
                             <th style="text-align: center"> Actions </th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($prods as $item)
+                        @foreach ($brand as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
-                                <td>{{ $item->title }}</td>
-                                <td style="text-align: justify;">{{ $item->description }}</td>
-                                <td style="text-align: center;">{{ $item->link }}</td>
+                                <td style="text-align: center">{{ $item->name }}</td>
                                 <td>
-                                    <div class="phuc-banner">
-                                        <div class="banner-image">
-                                            <img src="{{ asset('image/banner/' . ($item->image != null ? $item->image : 'logo.png')) }}"
-                                                class="img_banner" alt="">
+                                    <div class="phuc-brand">
+                                        <div class="brand-image">
+                                            <img src="{{ asset('image/brand/' . ($item->image != null ? $item->image : 'logo03.png')) }}"
+                                                class="img_brand" alt="">
                                         </div>
                                     </div>
                                 </td>
@@ -82,14 +78,15 @@
                                 </td>
                                 <td class="project-actions text-center">
                                     {{-- View --}}
-                                    <button type="button" class="btn btn-primary btn-mg" data-bs-toggle="modal"
+                                    {{-- <button type="button" class="btn btn-primary btn-mg" data-bs-toggle="modal"
                                         data-bs-target="#show_banner{{ $item->id }}">
                                         <i class="fa-solid fa-magnifying-glass"></i>
-                                    </button>
+                                    </button> --}}
                                     {{-- Edit --}}
-                                    <a class="btn btn-info btn-mg" href="{{ route('admin/banner/edit', $item->id) }}">
+                                    <a class="btn btn-info btn-mg" href="{{ route('admin/brand/edit', $item->id) }}">
                                         <i class="fas fa-pencil-alt"></i>
                                     </a>
+                                    {{-- Delete --}}
                                     {{-- Delete --}}
                                     @if ($item->status == 0)
                                         <button type="button" class="btn btn-danger btn-mg" disabled>
@@ -97,11 +94,10 @@
                                         </button>
                                     @else
                                         <button type="button" class="btn btn-danger btn-mg"" data-bs-toggle="modal"
-                                            data-bs-target="#delete_banner{{ $item->id }}">
+                                            data-bs-target="#delete_brand{{ $item->id }}">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     @endif
-
                                 </td>
                             </tr>
                         @endforeach
@@ -113,7 +109,7 @@
         </div>
         <!-- /.card -->
 
-        <!-- Modal show image -->
+        {{-- <!-- Modal show image -->
 
         @foreach ($prods as $item)
             <div class="modal fade" id="show_banner{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -129,55 +125,22 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="phuc-show">
-                                <div class="container-md">
-                                    <div class="row">
-                                        <div class="col-md-2">
-                                        </div>
-                                        <div class="col-md-9 pt-4 pb-0">
-                                            <div class="col-md-12">
-                                                <div class="row">
-                                                    <div id="bannerShow" class="">
-                                                        {{-- Dòng lập banner --}}
-                                                        <div class="item">
-                                                            <div class="row">
-                                                                <div class="col-md-8">
-                                                                    <div class="bannerShow-box">
-                                                                        <h1 class="bannerShow-title">
-                                                                            {{ $item->title }}
-                                                                        </h1>
-                                                                        <p class="bannerShow-desc">
-                                                                            {{ $item->description }}
-                                                                        </p>
-                                                                        <a href="{{ $item->slug }}"
-                                                                            class="btnShowBox">Visit
-                                                                            Collection</a>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-4">
-                                                                    <img src="{{ asset('image/banner/' . $item->image) }}"
-                                                                        alt="" class="img_acount"
-                                                                        style="text-align: center; max-width:100%">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="show-image">
+                                <div style="text-align: center">
+                                    <img src="{{ asset('image/banner/' . $item->image) }}" alt=""
+                                        class="img_acount" style="text-align: center; max-width:100%">
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        @endforeach
+        @endforeach --}}
 
         <!-- Modal delete -->
 
-        @foreach ($prods as $item)
-            <div class="modal fade" id="delete_banner{{ $item->id }}" tabindex="-1"
+        @foreach ($brand as $item)
+            <div class="modal fade" id="delete_brand{{ $item->id }}" tabindex="-1"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centere">
                     <div class="modal-content">
@@ -190,12 +153,12 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Are you sure you want to delete banner "<b>{{ $item->title }}</b>" ? This action cannot be
+                            Are you sure you want to delete Brand "<b>{{ $item->name }}</b>" ? This action cannot be
                             undone!
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <a href="{{ route('admin/banner/destroy', $item->id) }}" class="btn btn-primary">
+                            <a href="{{ route('admin/brand/destroy', $item->id) }}" class="btn btn-primary">
                                 Delete
                             </a>
                         </div>

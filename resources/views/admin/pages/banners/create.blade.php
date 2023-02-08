@@ -80,7 +80,7 @@
                                     <option class="btn btn-light" value="1">Actived</option>
                                 </select>
                             @else
-                                <select id='status' name="ban_status" aria-label="Default select example"
+                                <select id='statusBan' name="ban_status" aria-label="Default select example"
                                     class="form-control btn btn-success btn-mg">
                                     <option class="btn btn-light" selected value="1">Actived</option>
                                     <option class="btn btn-light" value="0">Clocked</option>
@@ -104,7 +104,7 @@
                             <div class="mb-3">
                                 <div class="image-ban-div">
                                     <div class="image-ban">
-                                        <img class="img-ban" id="img-ban" src="{{ asset('image/logo.png') }}" />
+                                        <img class="img-ban" id="img-ban" src="" />
                                     </div>
                                 </div>
                             </div>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\UserAddressController;
 use App\Http\Controllers\Admin\VoucherController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Guest\CartConntroller;
 use App\Http\Controllers\Guest\IndexController;
@@ -23,7 +24,7 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('register', 'getRegister')->name('user/dang-ky');
     Route::post('postRegister', 'dangky')->name('user/postDangky');
 
-    
+
     Route::get('/email/verify', function () {return view('auth.verify-email'); })->middleware('auth')->name('verification.notice');
     Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
         $request->fulfill();
@@ -89,6 +90,20 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::post('admin/acount/update', [AcountConroller::class, 'update'])->name('admin/acount/update');
     Route::get('admin/acount/view', [AcountConroller::class, 'show'])->name('admin/acount/view');
 
+
+
+    // Phần Brand- Phúc
+    Route::get('admin/brand', [BrandController::class, 'index'])->name('admin/brand');
+    // Create
+    Route::get('admin/brand/create', [BrandController::class, 'create'])->name('admin/brand/create');
+    Route::post('admin/brand/store', [BrandController::class, 'store'])->name('admin/brand/store');
+    // Update
+    Route::get('admin/brand/edit/{id}', [BrandController::class, 'edit'])->name('admin/brand/edit');
+    Route::post('admin/brand/update/{id}', [BrandController::class, 'update'])->name('admin/brand/update');
+    // Delete
+    Route::get('admin/brand/destroy/{id}', [BrandController::class, 'destroy'])->name('admin/brand/destroy');
+
+
     // Phần Banner - Phúc
     Route::get('admin/banner', [BannerController::class, 'index'])->name('admin/banner');
     // Create
@@ -114,7 +129,7 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
 
     // Phần UserAddress - Phúc
     Route::get('admin/userAddress', [UserAddressController::class, 'index'])->name('admin/userAddress');
-
+    Route::post('admin/userAddress/update/{id}', [UserAddressController::class, 'update'])->name('admin/userAddress/update');
 
     // Phần danh cho product manager - khoa
     Route::get('admin/product', [ProductController::class, 'index'])->name('admin/product');

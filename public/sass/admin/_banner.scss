@@ -85,3 +85,70 @@
         }
     }
 }
+
+.phuc-show {
+    background: $bg_second;
+    margin-top: 15px;
+    height: 490px;
+
+    .card_side {
+        padding: 15px 0;
+        border-radius: 10px;
+        box-shadow: #C9C9C9 -2px 1px 13px 7px;
+
+        .sideShow-box {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            gap: 20px;
+            padding: 10px 25px;
+            text-decoration: none;
+            color: rgba(17, 17, 17, 0.8);
+            transition: all 0.3s ease-in;
+
+            &:hover {
+                background-color: $bg_third;
+                color: #fff;
+                transition: all 0.5s ease-in;
+            }
+        }
+    }
+
+    #bannerShow {
+        padding: 30px;
+
+        .bannerShow-box {
+            padding: 20px 30px;
+
+            .bannerShow-title {
+                text-transform: uppercase;
+                font-size: 2.8125rem;
+                color: $Color__E94560;
+                font-weight: 600;
+            }
+
+            .bannerShow-desc {
+                font-size: 0.875rem;
+                font-weight: 500;
+                text-align: justify;
+                margin-bottom: 50px;
+            }
+
+            .btnShowBox {
+                margin-top: 30px;
+                padding: 10px 20px;
+                border-radius: 5px;
+                background: $bg_third;
+                text-decoration: none;
+                color: #fff;
+                transition: all 0.5s ease-in;
+                .btnShowBox:hover {
+                    border: 1px solid $Color__E94560;
+                    background: $bg_second;
+                    color: $Color__E94560;
+                    transition: all 0.5s ease-in;
+                }
+            }
+        }
+    }
+}
