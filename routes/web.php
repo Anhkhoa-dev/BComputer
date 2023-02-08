@@ -1,5 +1,6 @@
 <?php
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AcountConroller;
 use App\Http\Controllers\Admin\AdminsController;
@@ -21,6 +22,17 @@ Route::controller(LoginController::class)->group(function () {
     Route::get('recovery-account', 'RecoveryAcount')->name('recovey-account');
     Route::get('register', 'getRegister')->name('user/dang-ky');
     Route::post('postRegister', 'dangky')->name('user/postDangky');
+
+    
+    Route::get('/email/verify', function () {return view('auth.verify-email'); })->middleware('auth')->name('verification.notice');
+    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+        $request->fulfill();
+        return redirect('/');
+    })->middleware(['auth', 'signed'])->name('verification.verify');
+    Route::post('/email/verification-notification', function (Request $request) {
+        $request->user()->sendEmailVerificationNotification();
+        return back()->with('message', 'Verification link sent!');
+    })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 });
 
 
