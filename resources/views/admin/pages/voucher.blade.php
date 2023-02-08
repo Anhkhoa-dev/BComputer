@@ -76,25 +76,25 @@
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->code }}</td>
                                 <td>{{ $item->content }}</td>
-                                <td style="text-align: center">{{ $item->discount }}</td>
+                                <td style="text-align: center">{{ $item->discount * 100 }}</td>
                                 <td style="text-align: center">{{ $item->condition }}</td>
                                 <td>{{ $item->dateStart }}</td>
                                 <td>{{ $item->endStart }}</td>
                                 <td class="project-actions text-center">
                                     {{-- Edit --}}
                                     @if ($item->condition == 0 || strtotime($item->endStart) < strtotime(date('Y-m-d')))
-                                        <button type="button" class="btn btn-info btn-mg" data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-info btn-mg"" data-bs-toggle="modal"
                                             data-bs-target="#voucher_edit{{ $item->id }}" disabled>
                                             <i class="fas fa-pencil-alt"></i>
                                         </button>
                                     @else
-                                        <button type="button" class="btn btn-info btn-mg" data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-info btn-mg"" data-bs-toggle="modal"
                                             data-bs-target="#voucher_edit{{ $item->id }}">
                                             <i class="fas fa-pencil-alt"></i>
                                         </button>
                                     @endif
                                     {{-- Delete --}}
-                                    <button type="button" class="btn btn-danger btn-mg" data-bs-toggle="modal"
+                                    <button type="button" class="btn btn-danger btn-mg"" data-bs-toggle="modal"
                                         data-bs-target="#delete_banner{{ $item->id }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
