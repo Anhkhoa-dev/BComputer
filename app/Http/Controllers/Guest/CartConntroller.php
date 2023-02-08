@@ -193,18 +193,18 @@ class CartConntroller extends Controller
             $id_tk = Auth::user()->id;
             // $cart = Cart::where('id_tk', $id_tk)->get();
             foreach ($request->idList as $id_cart) {
-                $cart = Cart::where('id', $id_cart)->first();
-                $product = Products::where('id', $cart->id_pro)->first();
-
-                if ($product->status) {
-                    $qtyInStock = $product->quantity;
-                    // print_r($qtyInStock);
-                    if ($qtyInStock > 0) {
-                        $priceKm = $product->price * ((100 - $product->discount) / 100);
-                        $qtyInCart = Cart::where('id_tk', $id_tk)->where('id_pro', $cart->id_pro)->first()->quanity;
-                        $response['provisional'] += $priceKm * $qtyInCart;
-                    }
+                    $cart = Cart::where('id', $id_cart)->first();
+                    $product = Products::where('id', $cart['id_pro'])->first();
+                    if ($product->status) {
+                        $qtyInStock = $product->quantity;
+                        // print_r($qtyInStock);
+                        if ($qtyInStock > 0) {
+                            $priceKm = $product->price * ((100 - $product->discount) / 100);
+                            $qtyInCart = Cart::where('id_tk', $id_tk)->where('id_pro', $cart->id_pro)->first()->quanity;
+                            $response['provisional'] += $priceKm * $qtyInCart;
+                        }
                 }
+                
             }
             return $response;
         }

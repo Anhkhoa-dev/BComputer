@@ -40,7 +40,7 @@
                                     <div class="cart-header-total">Total</div>
                                     <div class="cart-header-trash"><i class="fa-solid fa-trash-can"></i></div>
                                 </div>
-                                @if ($cart != null)
+                                @if ($cart != 0)
                                     <div id="list-cart-item" class="list-cart-item mb-2">
                                         @foreach ($cart['cart'] as $item)
                                             <?php $product = $item['product'];
@@ -125,13 +125,23 @@
                                     <a href="{{ route('user/index') }}" class="btn btn-primary mt-4"><i
                                             class="fa-solid fa-chevron-left"></i> Continue shopping
                                     </a>
-                            </div>
+                                </div>
                             @endif
 
-                            @if ($cart['qty'] != 0)
+                            @if ($cart['qty'] == 0)
                                 <div class="col-md-12">
-                                    <a href="{{ route('user/index') }}" class="btn btn-primary"><i
-                                            class="fa-solid fa-chevron-left"></i> Continue shopping</a>
+                                    <div class="row">
+                                        <div class="cart-item-none">
+                                            <div>
+                                                <p>You have no items in your shopping cart</p>
+                                                <a href="{{ route('user/index') }}" class="btn btn-primary"><i
+                                                class="fa-solid fa-chevron-left"></i> Continue shopping</a>
+                                            </div>
+                                            
+                                        </div>
+                                        
+                                    </div>
+                                    
                                 </div>
                             @endif
 
@@ -155,7 +165,7 @@
                                     @endif
                                 @endforeach
                             @else
-                                <p>Chưa có địa chỉ</p>
+                                <p>No address</p>
                             @endif
 
                         </div>
@@ -163,13 +173,9 @@
                             <h5>Order Summary</h5>
                             <hr>
                             <div class="d-flex mb-2">
-                                <div class="col-9">Subtotal </div>
-                                <div class="col-3 text-end" id="total-provisional"> </div>
+                                <div class="col-8">Subtotal </div>
+                                <div class="col-4 text-end" id="total-provisional"></div>
                             </div>
-                            {{-- <div class="d-flex mb-4">
-                                <div class="col-9">Shipping Fee </div>
-                                <div class="col-3 text-end">$ 0</div>
-                            </div> --}}
                             <div class="d-inline mb-5">
                                 <label for="">Voucher</label>
                                 <div class="d-flex mt-2">
@@ -238,14 +244,12 @@
 </div>
 @endsection
 
-@section('myjs')
+{{-- @section('myjs')
 <script>
     $(document).ready(function() {
 
-        $("#select_all").change(function() {
-            $(".cus-checkbox").prop('checked', $(this).prop("checked"));
-        });
+        
 
     });
 </script>
-@endsection
+@endsection --}}
