@@ -17,5 +17,6 @@ class Category extends Model
         'slug',
         'description',
         'imageIcon',
+        'status',
     ];
 }

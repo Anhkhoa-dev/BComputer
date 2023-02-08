@@ -55,6 +55,7 @@
                                     <span class="errorMsg">{{ $message }}</span>
                                 @enderror
                             </div>
+
                             <div class="col-12">
                                 <div class="mb-3">
                                     <label for="">Address</label>
@@ -65,9 +66,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <button type="submit" class="btn btn-primary">Save</button>
-                        </div>
+
+
                     </div>
 
                     {{-- cột bên phải  --}}
@@ -91,19 +91,23 @@
                                     value="{{ old('photo') }}">
                                 <label class="form-control btn-primary text-center cursor-pointer " for="image_sup">
                                     Choose image</label>
-                                <p>* Kích thước hình ảnh: 600x600 (px) - Tỉ lệ hình ảnh: 1:1</p>
+
                             </div>
                         </div>
+
                         <div class="mb-3">
                             <label for="status" class="form-label">Status</label>
-                            <select id="loai_tk" name="loai_tk" aria-label="Default select example" class="form-control">
+                            <select id="loai_tk" name="loai_tk" aria-label="Default select example"
+                                class="form-control">
                                 <option value="1">Actived</option>
                                 <option value="0">Clocked</option>
                             </select>
                         </div>
                     </div>
                 </div>
-
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
             </form>
         </div>
 

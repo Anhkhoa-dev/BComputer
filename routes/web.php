@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AcountConroller;
 use App\Http\Controllers\Admin\AdminsController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\SupplierController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\UserAddressController;
 use App\Http\Controllers\Admin\VoucherController;
@@ -149,4 +150,18 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     //Delete
     Route::get('admin/supplier/destroy/{id}', [SupplierController::class, 'destroy'])->name('supplier/destroy');
 
+
+
+    // Phần danh cho Catelory - Man
+    Route::get('admin/category', [CategoryController::class, 'index'])->name('admin/category');
+    //Create
+    Route::get('admin/category/create', [CategoryController::class, 'create'])->name('category/create');
+    Route::post('admin/category/postSupplier', [CategoryController::class, 'store'])->name('category/store');
+    //UD
+    Route::get('admin/category/edit/{slug}', [CategoryController::class, 'edit'])->name('category/edit');
+    Route::post('admin/category/update/{id}', [CategoryController::class, 'update'])->name('category/update');
+    //Delete
+    Route::get('admin/category/destroy/{id}', [CategoryController::class, 'destroy'])->name('category/destroy');
+
 });
+
