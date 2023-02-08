@@ -309,54 +309,7 @@
 @endsection
 
 @section('myjs-admin')
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#create-btn").click(function(e) {
-                e.preventDefault();
-
-                var _token = $("input[name='_token']").val();
-                var code = $("input[name='vou_code']").val();
-                var content = $("textarea[name='vou_content']").val();
-                var discount = $("input[name='vou_discount']").val();
-                var condition = $("input[name='vou_condition']").val();
-                var dateStart = $("input[name='vou_dateStart']").val();
-                var endStart = $("input[name='vou_vou_endStart']").val();
-                $.ajax({
-                    url: "{{ route('admin/voucher/store') }}",
-                    type: 'POST',
-                    data: {
-                        _token: _token,
-                        code: vou_code,
-                        content: vou_content,
-                        discout: vou_discount,
-                        condition: vou_condition,
-                        dateStart: vou_dateStart,
-                        endStart: vou_endStart
-                    },
-                    success: function(data) {
-                        alert(data);
-                        // if ($.isEmptyObject(data.error)) {
-                        //     // $(".errorMsg").html('');
-                        //     alert(data.success);
-                        // } else {
-                        //     // let resp = data.errors;
-                        //     // for (index in resp) {
-                        //     //     $("#" + index).html(resp[index]);
-                        //     printErrorMsg(data.error);
-                        // }
-                    }
-                });
-            });
-
-            function printErrorMsg(msg) {
-                $(".print-error-msg").find("ul").html('');
-                $(".print-error-msg").css('display', 'block');
-                $.each(msg, function(key, value) {
-                    $(".print-error-msg").find("ul").append('<li>' + value + '</li>');
-                });
-            }
-        });
-    </script>
+    
 @endsection
 
 

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brands extends Model
+class BRAND extends Model
 {
     use HasFactory;
     protected $table = 'brands';
@@ -13,9 +13,7 @@ class Brands extends Model
     protected $fillable = [
         'id',
         'name',
-        'slug',
         'image',
-        'address',
         'status',
     ];
 }

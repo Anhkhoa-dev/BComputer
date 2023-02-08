@@ -1,0 +1,72 @@
+.phuc-brand{
+    justify-content: center;
+    display: flex;
+    gap: 10px;
+    .brand-image{
+        width: 100px;
+        height: 70px;
+    }
+    .img_brand{
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+}
+
+.image-brand-div {
+    width: 100%;
+    height: 200px;
+    border: 1px solid rgb(96, 95, 95);
+    padding: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    .image-brand {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        position: relative;
+        cursor: pointer;
+
+        &:hover {
+            .bg-image-hover {
+                visibility: inherit;
+            }
+        }
+        .img-brand {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .bg-image-hover {
+            width: 100%;
+            height: 100%;
+            background: rgba(52, 52, 52, 0.2);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            visibility: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .delete-icon {
+                width: 50px;
+                height: 50px;
+                border: 2px solid #fff;
+                color: #fff;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.25rem;
+
+                &:hover {
+                    background: #fff;
+                    color: #E94560;
+                }
+            }
+        }
+    }
+}

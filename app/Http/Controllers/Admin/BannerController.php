@@ -20,8 +20,10 @@ class BannerController extends Controller
     public function index()
     {
         $prods = BANNER::all();
+        $list_Catagory = Category::all();
         $array = [
             'prods' => $prods,
+            'list_Catagory' => $list_Catagory,
         ];
         return view('admin.pages.banners.index')->with($array);
     }

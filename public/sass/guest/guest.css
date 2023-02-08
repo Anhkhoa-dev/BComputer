@@ -2040,6 +2040,9 @@ section .title i {
   padding-left: 45px;
   font-size: 1rem;
 }
+.khoa-login .login_nen .box_login .form_login .form_group .input_control::-moz-placeholder {
+  font-size: 1rem;
+}
 .khoa-login .login_nen .box_login .form_login .form_group .input_control::placeholder {
   font-size: 1rem;
 }
