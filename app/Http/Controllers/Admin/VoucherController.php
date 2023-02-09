@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\VOUCHER;
 use Validator;
+use Illuminate\Support\Str;
 
 class VoucherController extends Controller
 {
@@ -43,7 +44,7 @@ class VoucherController extends Controller
     {
         if($request->ajax()){
             $data = [
-                'code' => $request->code,
+                'code' => strtolower($request->code),
                 'content' => $request->content,
                 'discount' => $request->discount,
                 'condition' => $request->condition,

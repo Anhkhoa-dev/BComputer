@@ -3,12 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BRAND;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\SUPPLIER;
-use App\Models\Brands;
 use App\Models\Category;
 use App\Models\ProductImage;
+use Illuminate\Support\Str;
 
 
 class ProductController extends Controller
@@ -36,7 +37,7 @@ class ProductController extends Controller
             }
 
             if ($key->id_brand) {
-                $list_product[$i]->brand = Brands::find($key->id_brand)->name;
+                $list_product[$i]->brand = BRAND::find($key->id_brand)->name;
             } else {
                 $list_product[$i]->brand = '';
             }
@@ -59,7 +60,7 @@ class ProductController extends Controller
     {
         //
         $category = Category::all();
-        $brands = Brands::all();
+        $brands = BRAND::all();
         $supplier = SUPPLIER::all();
         $array = [
             'category' => $category,
@@ -98,7 +99,7 @@ class ProductController extends Controller
 
         $data = [
             'name' => $prods['pro_name'],
-            'slug' => \Str::slug($prods['pro_name']),
+            'slug' => Str::slug($prods['pro_name']),
             'id_ca' => intval($prods['pro_category']),
             'discount' => intval($prods['pro_discount']),
             'sup_id' => intval($prods['pro_supplier']),
@@ -156,7 +157,7 @@ class ProductController extends Controller
         }
 
         if ($product->id_brand) {
-            $product->brand = Brands::find($product->id_brand);
+            $product->brand = BRAND::find($product->id_brand);
         } else {
             $product->brand = '';
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Guest;
 
 // Khai báo use Model
 use App\Http\Controllers\Controller;
+use App\Models\BRAND;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -12,7 +13,7 @@ use App\Models\Category;
 use App\Models\Products;
 use App\Models\ProductImage;
 use App\Models\Comment;
-use App\Models\Brands;
+// use App\Models\Brands;
 
 // kết thúc Khai báo use Model
 
@@ -140,7 +141,7 @@ class IndexController extends Controller
 
     public function getBrand()
     {
-        $listBrands = Brands::all();
+        $listBrands = BRAND::all();
         return $listBrands;
     }
 

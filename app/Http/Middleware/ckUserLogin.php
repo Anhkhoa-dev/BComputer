@@ -19,10 +19,10 @@ class ckUserLogin
     {
 
         if (Auth::check()) {
-            return $next($request);
-        }
 
-        // return back()->with('error', 'Vui lòng đăng nhập để thực hiện chức năng này');
+            return $next($request);
+            
+        }
         return redirect('login');
     }
 }

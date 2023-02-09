@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\ACOUNT;
-use App\Models\Cart;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -54,15 +55,11 @@ class LoginController extends Controller
         ];
 
         if (Auth::attempt($data)) {
-            // $request->session()->put('email', $data['email']);
-            // $user = Auth::user();
             $user = User::where('email', $data['email'])->first();
             Auth::login($user);
             session()->put('user', $user);
-
             if ($user->status == 1) {
                 if ($user->level == 1) {
-
                     return redirect('/');
                 } elseif ($user->level == 2) {
                     return redirect('admin');
@@ -115,7 +112,7 @@ class LoginController extends Controller
                 'cpassword.between' => 'Password có ít nhất 6 ký tự và lớn nhất 16 ký tự',
             ]
         );
-
+        $token = strtoupper(Str::random(10));
         $data = [
             'fullname' => $request->fullname,
             'email' => $request->email,
@@ -123,18 +120,44 @@ class LoginController extends Controller
             'password' => bcrypt($request->password),
             'level' => 1,
             'status' => 0,
+            'active_token' => $token,
             'dateRegister' => Carbon::now(),
             'loginStatus' => 0,
         ];
 
         $kiemtra = ACOUNT::where('email', $data['email'])->first();
 
-        if ($kiemtra == null) {
-            ACOUNT::create($data);
-            return redirect('login')->with('success_message', 'Đăng ký tài khoản thành công!');
-        } else {
+        if ($kiemtra != null) {
             return back()->withErrors([
                 'email' => 'Email đã được sử dụng!'
+            ])->onlyInput('email');
+                
+        }
+    if($user = ACOUNT::create($data)){
+        Mail::send('email.send-mail-active', compact('user'), function($email) use($user)   {
+            $email->subject('Email kích hoạt tài khoản từ BComputer shop');
+             $email->to($user->email, $user->fullname);
+        });
+        return view('guest.pages.login.active-account', compact('user'));
+        }
+    }
+
+        
+
+    public function actived($id, $token){
+        $data = [
+            'id_tk' => $id,
+            'token' => $token,
+        ];
+        //  dd($data);
+         $user = User::where('id', intval($data['id_tk']))->first();
+        // dd($user);
+        if($user->active_token === $data['token']){
+            User::where('id', intval($data['id_tk']))->update(['status'=> 1, 'active_token' => null]);
+            return redirect('/login');
+        }else{
+            return redirect('login')->withErrors([
+                'errorMsg' => 'Mã xác nhận sai. vui lòng xác nhận lại!'
             ])->onlyInput('email');
         }
     }
@@ -144,4 +167,11 @@ class LoginController extends Controller
         return view('guest.pages.login.khoi-phuc-tai-khoan');
     }
 
+
+    public function getSenMail(){
+        Mail::send('email.test', ['name'=> 'Test mail'], function($email){
+            $email->subject('Kích hoạt tài khoản');
+            $email->to('nguyenkhoa.demolaravel@gmail.com', 'BComputer');
+        });
+    }
 }

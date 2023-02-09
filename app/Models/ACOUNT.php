@@ -22,6 +22,7 @@ class ACOUNT extends Model
         'password',
         'level',
         'status',
+        'active_token',
         'remember_token',
         'dateRegister',
         'loginStatus',

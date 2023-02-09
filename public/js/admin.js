@@ -241,15 +241,7 @@ $(function () {
             success: function (data) {
                 alert(data.status);
                 location.reload()
-                // if ($.isEmptyObject(data.error)) {
-                //     // $(".errorMsg").html('');
-                //     alert(data.success);
-                // } else {
-                //     // let resp = data.errors;
-                //     // for (index in resp) {
-                //     //     $("#" + index).html(resp[index]);
-                //     printErrorMsg(data.error);
-                // }
+               
             }
 
         });
