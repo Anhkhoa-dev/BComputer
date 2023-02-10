@@ -1,5 +1,9 @@
     @include('guest.elements.head')
 
+    <div class="scroll-to-top">
+        <i class="fa-solid fa-up"></i>
+    </div>
+
     @if (session('toast_message'))
         <div id="toast-message" data-message="{{ session('toast_message') }}"></div>
     @endif

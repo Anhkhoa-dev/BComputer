@@ -3,6 +3,38 @@ $(function () {
     const page = window.location.pathname.split("/")[1];
     const X_CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
     const errorMessage = "Đã có lỗi xảy ra. Vui lòng thử lại";
+
+    $(window).scroll(function(){
+        if($(window).scrollTop()>300){
+         $('.scroll-to-top').fadeIn(250);
+        }
+        else{
+         $('.scroll-to-top').fadeOut(250);
+        }
+       });
+       $('.scroll-to-top').click(function(){
+        $('html,body').animate(
+         {scrollTop:0},400
+         );
+       });
+
+       window.addEventListener("scroll", function () {
+        const search = document.querySelector(".khoa-navbar")
+        search.classList.toggle("active", window.scrollY > 100)
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
     function showToast(message) {
         if ($("#alert-toast").lenght) {
             $("#alert-toast").remove();

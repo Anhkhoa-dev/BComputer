@@ -10,9 +10,8 @@
 }
 
 .khoa-navbar {
-    padding: 10px 0;
+    // padding: 5px 0;
     background: $bg_second;
-
     .navbar {
         display: flex;
         justify-content: space-between;
@@ -211,6 +210,15 @@
         }
     }
 
+}
+.khoa-navbar.active{
+    position: fixed;
+    top: 0;
+    z-index: 800;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
+    transition: 0.5s;
 }
 
 .khoa-sidebar {
