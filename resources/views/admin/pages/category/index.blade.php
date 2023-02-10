@@ -4,7 +4,6 @@
     Catelory | BComputer
 @endsection
 
-
 @section('admin-main')
     <div class="content-header">
         <div class="container-fluid">
@@ -23,31 +22,18 @@
     </div>
 
     <section class="content">
-
-        <!-- Default box -->
         <div class="card">
-            {{-- <div class="card-header">
-                <a href="{{ route('supplier/create') }}" class="btn btn-primary">Create</a>
-
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </div>
-            </div> --}}
             <div class="card-body p-0">
                 <table class="table table-striped projects">
                     <thead>
                         <tr>
                             <th style="width: 1%"> ID</th>
-                            <th style="width: 15%"> Name </th>
-                            <th style="width: 15%"> Slug </th>
-                            <th style="width: 10%"> Description </th>
-                            <th style="width: 20%"> Image </th>
-                            <th style="width: 20%"> Action </th>
+                            <th style="width: 19%"> Name </th>
+                            <th style="width: 20%"> Slug </th>
+                            <th style="width: 20%"> Description </th>
+                            <th style="width: 20%" > Image </th>
+                            <th style="width: 10%"> Status </th>
+                            <th style="width: 10%"> Action </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,23 +45,23 @@
                                 <td>{{ $item->description }}</td>
                                 <td>
                                     <!-- kiểm tra trong db có image thì mới hiển thị -->
-                                    @if ($item->image != null && $item->image != '')
-                                        <img src="{{ asset('image/category/' . $item->image) }}" alt=""
-                                            style="width:100px; height:auto;">
+                                    @if ($item->imageIcon != null && $item->imageIcon != '')
+                                        <img src="{{ asset('image/category/' . $item->imageIcon) }}" alt=""
+                                            style="width:70px; height:auto;">
                                     @endif
                                 </td>
-                               
-                                <td class="project-actions text-right">
-                                    <a class="btn btn-primary" href="#">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                    </a>
+                                <td>
+                                    <p class="btn {{ $item->status == 1 ? 'btn-success' : 'btn-secondary' }} btn-sm">
+                                        {{ $item->status == 1 ? 'Actived' : 'Clocked' }}
+                                    </p>
+                                </td>
+                                <td class="project-actions text-left">
                                     <a class="btn btn-info" href="{{ route('category/edit', $item->id) }}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
 
                                     </a>
-                                    @if($item->status == 1)
+                                    {{-- @if($item->status == 1)
                                     <a class="btn btn-danger" href="{{ route('category/destroy', $item->id) }}">
                                         <i class="fa fa-trash">
                                         </i>
@@ -85,7 +71,7 @@
                                         <i class="fa fa-trash">
                                         </i>
                                     </button>
-                                    @endif
+                                    @endif --}}
                                 </td>
                             </tr>
                         @endforeach
