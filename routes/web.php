@@ -26,7 +26,7 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('postRegister', 'dangky')->name('user/postDangky');
     Route::get('active-account/{user}/{token}', 'actived')->name('user/active-account');
     Route::get('send-mail', 'getSenMail');
-    
+
 
     // Route::get('/email/verify', function () {return view('auth.verify-email'); })->middleware('auth')->name('verification.notice');
     // Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
@@ -67,6 +67,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::post('ajax-get-provisional-order', [CartConntroller::class, 'AjaxGetProvisionalOrder']);
             Route::post('ajax-delete-cart', [CartConntroller::class, 'AjaxDeleteCart']);
             Route::post('ajax-delete-all-select-cart', [CartConntroller::class, 'AjaxDeleteSelectCart']);
+            Route::post('ajax-apply-voucher', [CartConntroller::class, 'ajaxVoucher']);
             // Phần hiển thị view tài khoản
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
 

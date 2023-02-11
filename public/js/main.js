@@ -4,34 +4,24 @@ $(function () {
     const X_CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
     const errorMessage = "Đã có lỗi xảy ra. Vui lòng thử lại";
 
-    $(window).scroll(function(){
-        if($(window).scrollTop()>300){
-         $('.scroll-to-top').fadeIn(250);
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 300) {
+            $('.scroll-to-top').fadeIn(250);
         }
-        else{
-         $('.scroll-to-top').fadeOut(250);
+        else {
+            $('.scroll-to-top').fadeOut(250);
         }
-       });
-       $('.scroll-to-top').click(function(){
+    });
+    $('.scroll-to-top').click(function () {
         $('html,body').animate(
-         {scrollTop:0},400
-         );
-       });
+            { scrollTop: 0 }, 400
+        );
+    });
 
-       window.addEventListener("scroll", function () {
+    window.addEventListener("scroll", function () {
         const search = document.querySelector(".khoa-navbar")
         search.classList.toggle("active", window.scrollY > 100)
     })
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -325,10 +315,10 @@ $(function () {
                         $(this).toggleClass("cus-checkbox-checked");
                     }
 
-                     provisionalAndTotalOrder();
+                    provisionalAndTotalOrder();
                 });
 
-
+            // xoa cart items
             $(".cart-body-trash").click(function () {
                 var name = $(this).attr('data-name');
                 $("#delete-content").text("Xóa sản phẩm");
@@ -357,12 +347,45 @@ $(function () {
 
             })
 
+            $('#check-voucher-btn').click(function () {
+                var isVoucher = $('#voucher-inp').val();
+                var isTotal = $('#total-provisional').text();
+                if (isVoucher.lenght <= 0) {
+                    return;
+                } else {
+                    ajaxVoucher(isVoucher, isTotal);
+                }
+            })
+
 
             //update cart trong giỏ hàng
             break;
         }
     }
 
+    function ajaxVoucher(voucher, total) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                },
+                url: "/ajax-apply-voucher",
+                type: "POST",
+                data: {
+                    idVoucher: voucher,
+                    total: total,
+                },
+                success: function (data) {
+                    // resolve(data);
+                    //location.reload();
+                    console.log(data)
+                },
+                error: function () {
+                    reject();
+                },
+            });
+        });
+    }
     function ajaxDeleteAllSelect(idList) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -524,7 +547,7 @@ $(function () {
         const USDollar = new Intl.NumberFormat('en-US', {
             style: 'currency',
             currency: 'USD',
-          });
+        });
         getProvisionalOrder(idList)
             .then((data) => {
                 // tổng tiền
@@ -555,7 +578,7 @@ $(function () {
                     const discount = data.voucher.chietkhau;
                     total = provisional - provisional * discount;
                 } else {
-                total = provisional;
+                    total = provisional;
                 }
                 // showAlertTop(provisional);
                 //cập nhật tạm tính và tổng tiền
@@ -570,7 +593,7 @@ $(function () {
     }
 
 
-    
+
     function getProvisionalOrder(idList) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -583,7 +606,7 @@ $(function () {
                 success: function (data) {
                     console.log(data);
                     resolve(data);
-                    
+
                 },
                 error: function () {
                     reject();

@@ -125,7 +125,7 @@
                                     <a href="{{ route('user/index') }}" class="btn btn-primary mt-4"><i
                                             class="fa-solid fa-chevron-left"></i> Continue shopping
                                     </a>
-                                </div>
+                            </div>
                             @endif
 
                             @if ($cart['qty'] == 0)
@@ -135,13 +135,13 @@
                                             <div>
                                                 <p>You have no items in your shopping cart</p>
                                                 <a href="{{ route('user/index') }}" class="btn btn-primary"><i
-                                                class="fa-solid fa-chevron-left"></i> Continue shopping</a>
+                                                        class="fa-solid fa-chevron-left"></i> Continue shopping</a>
                                             </div>
-                                            
+
                                         </div>
-                                        
+
                                     </div>
-                                    
+
                                 </div>
                             @endif
 
@@ -179,8 +179,8 @@
                             <div class="d-inline mb-5">
                                 <label for="">Voucher</label>
                                 <div class="d-flex mt-2">
-                                    <input type="text" name="voucher-inp" class="form-control me-1">
-                                    <button class="btn btn-success">Apply</button>
+                                    <input type="text" name="voucher-inp" id="voucher-inp" class="form-control me-1">
+                                    <button class="btn btn-success" id="check-voucher-btn">Apply</button>
                                 </div>
 
                             </div>
@@ -248,7 +248,7 @@
 <script>
     $(document).ready(function() {
 
-        
+
 
     });
 </script>
