@@ -62,7 +62,7 @@ class CategoryController extends Controller
     {
         {
             //trả về view
-            $prod = Catelogy::where('id', $id)->first();
+            $prod = Category::where('id', $id)->first();
             $array = [
                 'prod' => $prod,
                 'message' => 'Bạn đã đăng nhập thành công',
@@ -81,8 +81,30 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $prods = $request->all();
+        // dd( $prods);
+        $oldImage = Category::where('id', $id)->first();
+        if ($file = $request->file('photo'))
+        {
+            $fileName = $file->getClientOriginalName();
+            $file->move('image/category/', $fileName);
+            $prods['imageIcon'] = "$fileName";
+        }else{
+
+            $prods['imageIcon'] = $oldImage->image;
+        }
+        $data = [
+            'name' => $prods['cate_name'],
+            'slug' => $prods['cate_slug'],
+            'imageIcon' => $prods['imageIcon'],
+            'description'=> $prods['cate_description'],
+            'status'=> intval($prods['loai_tk']),
+        ];
+        // dd($data);
+        Category::where('id', intval($prods['cate_id']))->update($data);
+        return redirect()->route('admin/category');
+
+}
 
     /**
      * Remove the specified resource from storage.
