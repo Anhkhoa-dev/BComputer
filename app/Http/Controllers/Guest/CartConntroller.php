@@ -10,6 +10,9 @@ use App\Models\Cart;
 use App\Models\Products;
 use App\Models\ACOUNT;
 use App\Models\USER_ADDRESS;
+use App\Models\VOUCHER;
+use App\Models\Order;
+use Carbon\Carbon;
 
 
 class CartConntroller extends Controller
@@ -204,7 +207,7 @@ class CartConntroller extends Controller
                             $response['provisional'] += $priceKm * $qtyInCart;
                         }
                 }
-                
+
             }
             return $response;
         }
@@ -252,4 +255,69 @@ class CartConntroller extends Controller
         }
         return $cart;
     }
+
+
+   public function ajaxVoucher(Request $request){
+            if($request->ajax()){
+                   $data = [
+                        'status' => '',
+                        'code' => '',
+                        'discount' => 0,
+                   ];
+                    $total = ltrim($request->total, '$');
+                    $isCheckOrder = Order::where('id_tk', Auth::user()->id)->get();
+                    if(count($isCheckOrder) <= 0){
+                         // xử lý khách hàng đã mua 1 lần,cho pháp áp dụng voucher
+                         // Lấy ngày hiện tại khi khách hàng áp dụng voucher
+                         $voucher = VOUCHER::where('code', $request->idVoucher)->first();
+                         if($voucher){
+                            if($total >= $voucher->condition){
+                                $dateNow = Carbon::now();
+                                if($dateNow >= $voucher->dateStart && $dateNow <= $voucher->endStart){
+                                    // print_r('Voucher còn hạn dùng');
+                                    // if($voucher->condition > 0 ){
+
+                                    //     session()->put('voucherKH', $request->idVoucher);
+                                    // }
+                                }else{
+                                    $data = [
+                                        'status' => 'Expired voucher',
+                                        'code' => $request->idVoucher,
+                                        'discount' => 0,
+                                    ];
+                                    return $data;
+                                }
+                            }else{
+                                $data = [
+                                    'status' => 'not enough condition',
+                                    'code' => $request->idVoucher,
+                                    'discount' => 0,
+                                ];
+                                return $data;
+                            }
+                         }else{
+                            $data = [
+                                'status' => 'wrong code',
+                                'code' => $request->idVoucher,
+                                'discount' => 0,
+                            ];
+                            return $data;
+                         }
+
+
+                    }else{
+                         // Khách hàng chưa mua hàng lần nào không áp dụng voucher
+                         $data = [
+                            'status' => 'first time buy',
+                            'code' => $request->idVoucher,
+                            'discount' => 0,
+                        ];
+                        return $data;
+                   }
+
+
+
+
+            }
+   }
 }
