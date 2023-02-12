@@ -372,6 +372,17 @@ $(function () {
             break;
         }
         case "checkout-process": {
+            $('#radio_2').click(function () {
+                $('.receiver-name').text('BCOMPUTER SHOP');
+                $('#choose-address-orther').addClass('d-none');
+                $('.receiver-address').text('Address: 590, CMT8, DISTRICT 3, HCMC');
+                $('.receiver-phone').text('Number phone: 0865677010');
+            })
+
+            $('#choose-address-orther').click(function () {
+                alert('alo')
+            })
+
 
 
             break;
@@ -392,12 +403,12 @@ $(function () {
                     code: code,
                 },
                 success: function (data) {
-                    switch(data.status){
+                    switch (data.status) {
                         case 'continue': {
                             window.location.href = "/checkout-process";
                             break;
                         }
-                        case 'await':{
+                        case 'await': {
                             showAlertTop('Vui lòng chọn ít nhất 1 sản phẩm để thanh toán');
                             break;
                         }

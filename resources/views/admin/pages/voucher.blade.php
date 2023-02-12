@@ -64,19 +64,21 @@
                             <th style="width:"> Code </th>
                             <th style="text-align: center"> Content </th>
                             <th style="text-align: center"> Discount </th>
+                            <th style="text-align: center"> Quantity </th>
                             <th style="text-align: center"> Condition </th>
                             <th> Date Start </th>
                             <th> Date End </th>
                             <th style="text-align: center"> Actions </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="voucher_data">
                         @foreach ($voucher as $item)
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->code }}</td>
                                 <td>{{ $item->content }}</td>
-                                <td style="text-align: center">{{ $item->discount * 100 }}</td>
+                                <td style="text-align: center">{{ $item->discount }}</td>
+                                <td style="text-align: center">{{ $item->quanity }}</td>
                                 <td style="text-align: center">{{ $item->condition }}</td>
                                 <td>{{ $item->dateStart }}</td>
                                 <td>{{ $item->endStart }}</td>
@@ -129,13 +131,14 @@
                                         <input type="text" class="form-control" id="code" name="vou_code"
                                             placeholder="Code">
                                     </div>
+                                    <p class="errorMsg" id="code"></p>
                                     {{-- // Discount --}}
                                     <div class="mb-3 form-select" multiple aria-label="description">
                                         <label for="discount" class="form-label">Discount (%)</label>
                                         <input type="number" step="0.1" class="form-control" id="Discount"
                                             name="vou_discount" placeholder="Please input the number percent">
-
                                     </div>
+                                    <p class="errorMsg" id="discount"></p>
                                     <div class="d-flex justify-content-between">
                                         {{-- // Date Start --}}
                                         <div class="mb-3 form-select" style="width: 48%" multiple
@@ -143,20 +146,25 @@
                                             <label for="dateStart" class="form-label">Date Start</label>
                                             <input type="date" class="form-control" id="dateStart"
                                                 name="vou_dateStart">
-
                                         </div>
+                                        <p class="errorMsg" id="discount"></p>
                                         {{-- // Date End --}}
                                         <div class="mb-3 form-select" style="width: 48%" multiple
                                             aria-label="description">
                                             <label for="endStart" class="form-label">Date End</label>
                                             <input type="date" class="form-control" id="endStart"
                                                 name="vou_endStart">
-
                                         </div>
                                     </div>
                                 </div>
                                 {{-- // cột bên phai --}}
                                 <div style="width: 48%">
+                                    {{-- // Quanity --}}
+                                    <div class="mb-3 form-select" multiple aria-label="description">
+                                        <label for="quanity" class="form-label">Quantity</label>
+                                        <input type="number" class="form-control" id="quanity" name="vou_quanity"
+                                            placeholder="Please input the number">
+                                    </div>
                                     {{-- // Condition --}}
                                     <div class="mb-3 form-select" multiple aria-label="description">
                                         <label for="condition" class="form-label">Condition</label>
@@ -166,7 +174,7 @@
                                     {{-- // Content --}}
                                     <div class="mb-3 form-select" multiple aria-label="description">
                                         <label for="content" class="form-label">Content</label>
-                                        <textarea type="text" class="form-control bg-light text-dark" style="margin-bottom: 5px" rows="5"
+                                        <textarea type="text" class="form-control bg-light text-dark" style="margin-bottom: 5px" rows="1"
                                             id="content" name="vou_content"></textarea>
                                     </div>
                                 </div>
@@ -214,11 +222,8 @@
                                         <div class="mb-3 form-select" multiple aria-label="description">
                                             <label for="discount" class="form-label">Discount (%)</label>
                                             <input type="number" class="form-control" id="Discount"
-                                                name="vou_discount" value="{{ $item->discount * 100.0 }}"
+                                                name="vou_discount" value="{{ $item->discount }}"
                                                 placeholder="Please input the number">
-                                            @error('vou_discount')
-                                                <span class="errorMsg">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             {{-- // Date Start --}}
@@ -227,9 +232,6 @@
                                                 <label for="dateStart" class="form-label">Date Start</label>
                                                 <input type="date" class="form-control" id="dateStart"
                                                     name="vou_dateStart" value="{{ $item->dateStart }}">
-                                                @error('vou_dateStart')
-                                                    <span class="errorMsg">{{ $message }}</span>
-                                                @enderror
                                             </div>
                                             {{-- // Date End --}}
                                             <div class="mb-3 form-select" style="width: 48%" multiple
@@ -237,32 +239,30 @@
                                                 <label for="endStart" class="form-label">Date End</label>
                                                 <input type="date" class="form-control" id="endStart"
                                                     name="vou_endStart" value="{{ $item->endStart }}">
-                                                @error('vou_endStart')
-                                                    <span class="errorMsg">{{ $message }}</span>
-                                                @enderror
                                             </div>
                                         </div>
                                     </div>
                                     {{-- // cột bên phai --}}
                                     <div style="width: 48%">
+                                        {{-- // Quantity --}}
+                                        <div class="mb-3 form-select" multiple aria-label="description">
+                                            <label for="quanity" class="form-label">Quantity</label>
+                                            <input type="number" class="form-control" id="quanity"
+                                                name="vou_quanity" placeholder="Please input the number"
+                                                value="{{ $item->quantity }}">
+                                        </div>
                                         {{-- // Condition --}}
                                         <div class="mb-3 form-select" multiple aria-label="description">
-                                            <label for="condition" class="form-label">Condition</label>
+                                            <label for="condition" class="form-label">Quantity</label>
                                             <input type="number" class="form-control" id="fullname"
                                                 name="vou_condition" placeholder="Please input the number"
                                                 value="{{ $item->condition }}">
-                                            @error('vou_condition')
-                                                <span class="errorMsg">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                         {{-- // Content --}}
                                         <div class="mb-3 form-select" multiple aria-label="description">
                                             <label for="content" class="form-label">Content</label>
-                                            <textarea type="text" class="form-control bg-light text-dark" style="margin-bottom: 5px" rows="5"
+                                            <textarea type="text" class="form-control bg-light text-dark" style="margin-bottom: 5px" rows="1"
                                                 id="content" name="vou_content">{{ $item->content }}</textarea>
-                                            @error('vou_content')
-                                                <span class="errorMsg">{{ $message }}</span>
-                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -309,7 +309,6 @@
 @endsection
 
 @section('myjs-admin')
-    
 @endsection
 
 
