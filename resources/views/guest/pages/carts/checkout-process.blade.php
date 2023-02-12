@@ -32,13 +32,13 @@
                             <div class="checkout-address-info mt-3">
                                 <div class="address">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <div class="receiver-name">Lê Ngọc Nhật An</div>
-                                        <div>Select address orther</div>
+                                        <div class="receiver-name">{{$userAddress->fullname}}</div>
+                                        <div id="choose-address-orther" class="cursor-pointer">Choose address orther</div>
                                     </div>
                                     <div>
-                                        Address: Hem 64, Street 79, Phuong Tan Quy, District 7, Ho Chi Minh City.
+                                        Address: {{$userAddress->address}}, {{$userAddress->wards}}, {{$userAddress->district}}, {{$userAddress->province}}
                                     </div>
-                                    <div>Phone number: 0865677010</div>
+                                    <div>Phone number: {{$userAddress->phone}}</div>
                                 </div>
                             </div>
                         </div>
@@ -48,46 +48,23 @@
                     <div class="col-12 checkout-header">
                         <div>Products currently selected</div>
                     </div>
+                    @foreach ($productList as $item)
+                    @php
+                        $product = $item['product'];
+                        $image = $item['image'];
+                    @endphp
                     <div class="col-md-12">
                         <div class="checkout-product">
                             <div class="checkout-product-image"><img
-                                    src="{{ asset('image/product/Asus_VivoBook_14_M413IA_EK481T_01.PNG') }}"
+                                    src="{{ asset('image/product/'.$image[0]->image) }}"
                                     alt=""></div>
-                            <div class="checkout-product-name">Asus ROG Gladius II</div>
-                            <div class="checkout-product-price">$ 72</div>
-                            <div class="checkout-product-quanity">Qty: 2</div>
+                            <div class="checkout-product-name">{{$product->name}}</div>
+                            <div class="checkout-product-price">$ {{ $product->price* ((100-$product->discount)/100) }}</div>
+                            <div class="checkout-product-quanity">Qty: {{$item->quanity}}</div>
                         </div>
                     </div>
-                    <div class="col-md-12">
-                        <div class="checkout-product">
-                            <div class="checkout-product-image"><img
-                                    src="{{ asset('image/product/Asus_VivoBook_14_M413IA_EK481T_01.PNG') }}"
-                                    alt=""></div>
-                            <div class="checkout-product-name">Asus ROG Gladius II</div>
-                            <div class="checkout-product-price">$ 72</div>
-                            <div class="checkout-product-quanity">Qty: 2</div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="checkout-product">
-                            <div class="checkout-product-image"><img
-                                    src="{{ asset('image/product/Asus_VivoBook_14_M413IA_EK481T_01.PNG') }}"
-                                    alt=""></div>
-                            <div class="checkout-product-name">Asus ROG Gladius II</div>
-                            <div class="checkout-product-price">$ 72</div>
-                            <div class="checkout-product-quanity">Qty: 2</div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <div class="checkout-product">
-                            <div class="checkout-product-image"><img
-                                    src="{{ asset('image/product/Asus_VivoBook_14_M413IA_EK481T_01.PNG') }}"
-                                    alt=""></div>
-                            <div class="checkout-product-name">Asus ROG Gladius II</div>
-                            <div class="checkout-product-price">$ 72</div>
-                            <div class="checkout-product-quanity">Qty: 2</div>
-                        </div>
-                    </div>
+                    @endforeach
+                   
                 </div>
 
             </div>
@@ -122,9 +99,8 @@
                 <div class="col-12 mb-3">
                     <div class="col-12 mb-3">
                         <div class="row">
-                            <div class="col-8">Subtotal (8 Items)</div>
-                            <div class="col-4 d-flex justify-content-between align-items-center"><i
-                                    class="fa-solid fa-dollar-sign me-2"></i>576</div>
+                            <div class="col-8">Subtotal</div>
+                            <div class="col-4 d-flex justify-content-between align-items-center">{{$total}}</div>
                         </div>
                     </div>
                     <div class="col-12 mb-3">
@@ -136,10 +112,13 @@
                     </div>
                     <hr>
                     <div class="col-12 mt-2 mb-5">
+                        @php
+                            $total = ltrim($total, '$');
+                        @endphp
                         <div class="row">
                             <div class="col-8">Total </div>
                             <div class="col-4 text-danger d-flex justify-content-between align-items-center"><i
-                                    class="fa-solid fa-dollar-sign me-2"></i>581</div>
+                                    class="fa-solid fa-dollar-sign me-2"></i>{{ $total }}</div>
                         </div>
                     </div>
                     <p class="text_remind">(Please double check your order before ordering)</p>

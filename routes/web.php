@@ -46,7 +46,8 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
 
             // Xem giỏ hàng
             Route::get('/cart-items', [CartConntroller::class, 'getViewcart'])->name('user/cart-items');
-            Route::post('/checkout-process', [CartConntroller::class, 'getCheckoutProcess'])->name('checkout/checkout-process');
+            Route::get('/checkout-process', [CartConntroller::class, 'getCheckoutProcess'])->name('checkout/checkout-process');
+            Route::post('/ajax-checkout-process', [CartConntroller::class, 'ajaxGetCheckOutProcess']);
             Route::get('/checkout-success', [CartConntroller::class, 'getSuccess'])->name('user/checkout-success');
 
 

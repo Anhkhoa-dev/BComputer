@@ -39,15 +39,52 @@ class CartConntroller extends Controller
             return view('guest.pages.carts.cart-item')->with($array);
         }
     }
-    public function getCheckoutProcess(Request $request)
+    public function getCheckoutProcess()
     {
+            $listOrder = session()->get('listCheckOut');
+            $addressCheckout = USER_ADDRESS::where('id_tk', $listOrder['id_tk'])->where('status', 1)->first();
+            $productCheckout = [];
+            //dd($listOrder['checkList']);
+            foreach($listOrder['checkList'] as $key){
+                $prod = Cart::where('id', $key)->first(); 
+                $prod->product = Products::where('id', $prod->id_pro)->first(); 
+                $prod->image = ProductImage::where('id_pro', $prod->id_pro)->get();   
+                array_push($productCheckout, $prod);
+            }
+             //dd($productCheckout);
+            $array =[
+                'userAddress' => $addressCheckout,
+                'productList' => $productCheckout,
+                'codeVoucher' => $listOrder['code'],
+                'total' => $listOrder['total'],
+            ];
+            
+           // dd($array);
+            return view('guest.pages.carts.checkout-process')->with($array);
+
+    }
+
+    public function ajaxGetCheckOutProcess(Request $request){
         if($request->ajax()){
-
-            return view('guest.pages.carts.checkout-process');
+            $OrderCheckout = [
+                'id_tk' => Auth::user()->id,
+                'checkList' => $request->checkList,
+                'total' => $request->total,
+                'code' => $request->code,
+            ];
+            if($request->checkList == null){
+                return [
+                    'status' => 'await',
+                ];
+            }else{
+                session()->put('listCheckOut', $OrderCheckout);    
+                return [
+                    'status' => 'continue',
+                ];
+                
+                
+            }
         }
-
-
-
     }
 
     public function getSuccess()

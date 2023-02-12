@@ -367,7 +367,7 @@ $(function () {
                     }
 
                 });
-                ajaxCheckoutProcess(checkList, Total, code)
+                ajaxCheckoutProcess(checkList, Total, code);
             });
             break;
         }
@@ -384,7 +384,7 @@ $(function () {
                 headers: {
                     "X-CSRF-TOKEN": X_CSRF_TOKEN,
                 },
-                url: "/checkout-process",
+                url: "/ajax-checkout-process",
                 type: "POST",
                 data: {
                     checkList: checkList,
@@ -392,6 +392,16 @@ $(function () {
                     code: code,
                 },
                 success: function (data) {
+                    switch(data.status){
+                        case 'continue': {
+                            window.location.href = "/checkout-process";
+                            break;
+                        }
+                        case 'await':{
+                            showAlertTop('Vui lòng chọn ít nhất 1 sản phẩm để thanh toán');
+                            break;
+                        }
+                    }
                     resolve(data);
                     console.log(data);
                 },
@@ -445,6 +455,7 @@ $(function () {
                         }
                         case "first time buy": {
                             showAlertTop('Customers buy products for the first time');
+                            location.reload();
                             break;
                         }
                     }
