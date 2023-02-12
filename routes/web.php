@@ -26,17 +26,6 @@ Route::controller(LoginController::class)->group(function () {
     Route::post('postRegister', 'dangky')->name('user/postDangky');
     Route::get('active-account/{user}/{token}', 'actived')->name('user/active-account');
     Route::get('send-mail', 'getSenMail');
-
-
-    // Route::get('/email/verify', function () {return view('auth.verify-email'); })->middleware('auth')->name('verification.notice');
-    // Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    //     $request->fulfill();
-    //     return redirect('/');
-    // })->middleware(['auth', 'signed'])->name('verification.verify');
-    // Route::post('/email/verification-notification', function (Request $request) {
-    //     $request->user()->sendEmailVerificationNotification();
-    //     return back()->with('message', 'Verification link sent!');
-    // })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 });
 
 
@@ -57,7 +46,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
 
             // Xem giỏ hàng
             Route::get('/cart-items', [CartConntroller::class, 'getViewcart'])->name('user/cart-items');
-            Route::get('/checkout-process', [CartConntroller::class, 'getCheckoutProcess'])->name('checkout/checkout-process');
+            Route::post('/checkout-process', [CartConntroller::class, 'getCheckoutProcess'])->name('checkout/checkout-process');
             Route::get('/checkout-success', [CartConntroller::class, 'getSuccess'])->name('user/checkout-success');
 
 

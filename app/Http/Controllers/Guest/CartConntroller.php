@@ -24,6 +24,7 @@ class CartConntroller extends Controller
 
     public function getViewcart()
     {
+
         if (!Auth::check()) {
             return back()->with('toast-message', 'Vui lòng đăng nhập để thực hiện chức năng này');
         } else {
@@ -32,13 +33,21 @@ class CartConntroller extends Controller
             $array = [
                 'cart' => $cart,
             ];
+            session()->forget('voucherKH');
+
             //  dd($array);
             return view('guest.pages.carts.cart-item')->with($array);
         }
     }
-    public function getCheckoutProcess()
+    public function getCheckoutProcess(Request $request)
     {
-        return view('guest.pages.carts.checkout-process');
+        if($request->ajax()){
+
+            return view('guest.pages.carts.checkout-process');
+        }
+
+
+
     }
 
     public function getSuccess()
@@ -186,18 +195,16 @@ class CartConntroller extends Controller
         if ($request->ajax()) {
             $response = [
                 'provisional' => 0,
-                'voucher' => session('voucher') ? session('voucher') : null
+                'voucher' => session()->get('voucherKH') ? session()->get('voucherKH') : null
             ];
 
             if (empty($request->idList)) {
                 return $response;
             }
-            // print_r($request->idList);
             $id_tk = Auth::user()->id;
-            // $cart = Cart::where('id_tk', $id_tk)->get();
             foreach ($request->idList as $id_cart) {
                     $cart = Cart::where('id', $id_cart)->first();
-                    $product = Products::where('id', $cart['id_pro'])->first();
+                    $product = Products::where('id', $cart->id_pro)->first();
                     if ($product->status) {
                         $qtyInStock = $product->quantity;
                         // print_r($qtyInStock);
@@ -261,59 +268,64 @@ class CartConntroller extends Controller
             if($request->ajax()){
                    $data = [
                         'status' => '',
-                        'code' => '',
-                        'discount' => 0,
                    ];
                     $total = ltrim($request->total, '$');
                     $isCheckOrder = Order::where('id_tk', Auth::user()->id)->get();
-                    if(count($isCheckOrder) <= 0){
-                         // xử lý khách hàng đã mua 1 lần,cho pháp áp dụng voucher
-                         // Lấy ngày hiện tại khi khách hàng áp dụng voucher
-                         $voucher = VOUCHER::where('code', $request->idVoucher)->first();
-                         if($voucher){
-                            if($total >= $voucher->condition){
-                                $dateNow = Carbon::now();
-                                if($dateNow >= $voucher->dateStart && $dateNow <= $voucher->endStart){
-                                    // print_r('Voucher còn hạn dùng');
-                                    // if($voucher->condition > 0 ){
-
-                                    //     session()->put('voucherKH', $request->idVoucher);
-                                    // }
-                                }else{
-                                    $data = [
-                                        'status' => 'Expired voucher',
-                                        'code' => $request->idVoucher,
-                                        'discount' => 0,
-                                    ];
-                                    return $data;
-                                }
+                    if(!session()->get('voucherKH')){
+                        if(count($isCheckOrder) > 0){
+                            $voucher = VOUCHER::where('code', $request->idVoucher)->first();
+                            if($voucher){
+                               if($total >= $voucher->condition){
+                                   $dateNow = Carbon::now();
+                                   if($dateNow >= $voucher->dateStart && $dateNow <= $voucher->endStart){
+                                       if($voucher->quanity > 0 ){
+                                           $voucherKH = [
+                                               'code' => $voucher->code,
+                                               'condition' => $voucher->condition,
+                                               'discount' => $voucher->discount,
+                                           ];
+                                           $data = [
+                                               'status' => 'Success',
+                                           ];
+                                           session()->put('voucherKH', $voucherKH);
+                                           return $data;
+                                       }else{
+                                           $data = [
+                                               'status' => 'out of stock',
+                                           ];
+                                       }
+                                   }else{
+                                       $data = [
+                                           'status' => 'Expired voucher',
+                                       ];
+                                       return $data;
+                                   }
+                               }else{
+                                   $data = [
+                                       'status' => 'not enough condition',
+                                   ];
+                                   return $data;
+                               }
                             }else{
-                                $data = [
-                                    'status' => 'not enough condition',
-                                    'code' => $request->idVoucher,
-                                    'discount' => 0,
-                                ];
-                                return $data;
+                               $data = [
+                                   'status' => 'wrong code',
+                               ];
+                               return $data;
                             }
-                         }else{
+                       }else{
+                            // Khách hàng chưa mua hàng lần nào không áp dụng voucher
                             $data = [
-                                'status' => 'wrong code',
-                                'code' => $request->idVoucher,
-                                'discount' => 0,
-                            ];
-                            return $data;
-                         }
-
-
+                               'status' => 'first time buy',
+                           ];
+                           return $data;
+                      }
                     }else{
-                         // Khách hàng chưa mua hàng lần nào không áp dụng voucher
-                         $data = [
-                            'status' => 'first time buy',
-                            'code' => $request->idVoucher,
-                            'discount' => 0,
+                        $data = [
+                            'status' => 'code entered',
                         ];
-                        return $data;
-                   }
+                    }
+
+
 
 
 

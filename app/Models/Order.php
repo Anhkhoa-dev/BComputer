@@ -20,6 +20,7 @@ class Order extends Model
         'cod',
         'payment',
         'id_voucher',
+        'total',
         'statusOrder',
     ];
 

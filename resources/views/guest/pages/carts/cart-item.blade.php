@@ -190,7 +190,7 @@
                                 <div class="col-3 text-end" id="totalOrder"></div>
                             </div>
                         </div>
-                        <a href="{{ route('checkout/checkout-process') }}" class="btnSubmitCart">Confirm cart</a>
+                        <div class="btnSubmitCart">Confirm cart</div>
                     </div>
                 </div>
             </div>

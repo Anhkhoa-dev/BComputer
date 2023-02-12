@@ -259,11 +259,10 @@ $(function () {
                 }
 
             });
-
             const response = {
                 checkoutList, outOfStockList,
             };
-            resolve(checkoutList);
+            resolve(response)
         })
 
     }
@@ -357,11 +356,53 @@ $(function () {
                 }
             })
 
+            $('.btnSubmitCart').click(function () {
+                var checkList = [];
+                var Total = $('#totalOrder').text();
+                var code = $('#voucher-inp').val();
+                $.each($(".cus-checkbox-checked"), (i, element) => {
+                    const id = $(element).attr("data-id");
+                    if (id != 'all') {
+                        checkList.push(id);
+                    }
 
-            //update cart trong giỏ hàng
+                });
+                ajaxCheckoutProcess(checkList, Total, code)
+            });
+            break;
+        }
+        case "checkout-process": {
+
+
             break;
         }
     }
+
+    function ajaxCheckoutProcess(checkList, total, code) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                },
+                url: "/checkout-process",
+                type: "POST",
+                data: {
+                    checkList: checkList,
+                    total: total,
+                    code: code,
+                },
+                success: function (data) {
+                    resolve(data);
+                    console.log(data);
+                },
+                error: function () {
+                    reject();
+                },
+            });
+        });
+    }
+
+
 
     function ajaxVoucher(voucher, total) {
         return new Promise((resolve, reject) => {
@@ -376,9 +417,39 @@ $(function () {
                     total: total,
                 },
                 success: function (data) {
-                    // resolve(data);
-                    //location.reload();
-                    console.log(data)
+                    switch (data.status) {
+                        case "Success": {
+                            showAlertTop('Successfully applied voucher code');
+                            provisionalAndTotalOrder();
+                            break;
+                        }
+                        case "Expired voucher": {
+                            showAlertTop('Expired Voucher Code');
+                            break;
+                        }
+                        case "not enough condition": {
+                            showAlertTop('The total amount does not satisfy the conditions to apply the voucher');
+                            break;
+                        }
+                        case "wrong code": {
+                            showAlertTop('Wrong voucher code entered');
+                            break;
+                        }
+                        case "out of stock": {
+                            showAlertTop('Voucher has expired as many times as possible');
+                            break;
+                        }
+                        case "code entered": {
+                            showAlertTop('Voucher code has been applied to this order');
+                            break;
+                        }
+                        case "first time buy": {
+                            showAlertTop('Customers buy products for the first time');
+                            break;
+                        }
+                    }
+                    resolve(data);
+                    // console.log(data);
                 },
                 error: function () {
                     reject();
@@ -528,11 +599,6 @@ $(function () {
         });
     }
 
-    // $("#select_all").change(function() {
-    //     $(".cus-checkbox").prop('checked', $(this).prop("checked"));
-    //     provisionalAndTotalOrder();
-    // });
-
     function provisionalAndTotalOrder() {
         let idList = [];
         // danh sách id_sp thanh toán
@@ -554,45 +620,27 @@ $(function () {
                 let total = 0;
                 // tạm tính
                 const provisional = data.provisional;
-
                 // có sử dụng voucher
                 if (data.voucher) {
                     // kiểm tra nếu tổng tiền < điều kiện của voucher thì hủy voucher
-                    const condition = data.voucher.dieukien;
+                    // const condition = data.voucher.condition;
                     // nếu tạm tính < điều kiện voucher thì hủy voucher
-                    if (provisional < condition) {
-                        removeVoucher().then(() => {
-                            $("#cart-voucher").children().remove();
-                            const chooseVoucherBtn = `<span id="choose-voucher-button" class="pointer-cs main-color-text">
-                                        <i class="fas fa-ticket-alt mr-10"></i>Chọn Mã khuyến mãi
-                                    </span>`;
-                            $("#cart-voucher").append(chooseVoucherBtn);
-                            $("#voucher").parent().remove();
-
-                            showToast(
-                                "Đã hủy mã giảm giá do chưa thỏa điều kiện"
-                            );
-                        });
-                    }
-
-                    const discount = data.voucher.chietkhau;
-                    total = provisional - provisional * discount;
+                    const discount = data.voucher.discount;
+                    total = provisional - (provisional * (discount / 100));
                 } else {
                     total = provisional;
                 }
                 // showAlertTop(provisional);
                 //cập nhật tạm tính và tổng tiền
-                // $("#total-provisional").text(provisional);
                 $("#total-provisional").text(USDollar.format(provisional.toFixed(2)));
-                $("#totalOrder").text(USDollar.format(provisional.toFixed(2)));
+                $("#totalOrder").text(USDollar.format(total.toFixed(2)));
+                // location.reload();
             })
             .catch((error) => {
                 //  console.error(error);
                 showToast(errorMessage);
             });
     }
-
-
 
     function getProvisionalOrder(idList) {
         return new Promise((resolve, reject) => {

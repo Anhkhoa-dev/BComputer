@@ -32,6 +32,7 @@ class IndexController extends Controller
         $featuredProducts = $this->getFeatured();
         // get sản phẩm có giảm giá >= 15% ra trang home
         $bigDiscount = $this->getDiscount();
+        session()->forget('voucherKH');
         if (Auth::user()) {
             $qtyCart = Cart::where('id_tk', Auth::user()->id)->sum('quanity');
             session()->put('qtyCart', intval($qtyCart));
