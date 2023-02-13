@@ -21,27 +21,42 @@
                         <div class="checkout-address">
                             <div class="select_radio d-flex nav nav-pills mb-3" id="pills-tab" role="tablist">
                                 <div class="d-flex me-4">
-                                    <input type="radio" class="cus-checked" name="check_radio" id="radio_1" checked>
+                                    <input type="radio" class="cus-checked" name="check_radio" id="delivery-check" checked>
                                     <label for="radio_2">Delivery</label>
                                 </div>
                                 <div class="d-flex">
-                                    <input type="radio" class="cus-checked" name="check_radio" id="radio_2">
+                                    <input type="radio" class="cus-checked" name="check_radio" id="pick-up-at-the-store">
                                     <label for="radio_2">Pick up at the store</label>
                                 </div>
                             </div>
-                            <div class="address">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="receiver-name">{{ $userAddress->fullname }}</div>
-                                    <div id="choose-address-orther" class="cursor-pointer">Choose address
-                                        orther
+                            <div class="delivery-check">
+                                <div class="address">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="receiver-name">{{ $userAddress->fullname }}</div>
+                                        <div id="choose-address-orther" class="cursor-pointer">Choose address
+                                            orther
+                                        </div>
                                     </div>
+                                    <div class="receiver-address">
+                                        Address: {{ $userAddress->address }}, {{ $userAddress->wards }},
+                                        {{ $userAddress->district }}, {{ $userAddress->province }}
+                                    </div>
+                                    <div class="receiver-phone">Phone number: {{ $userAddress->phone }}</div>
                                 </div>
-                                <div class="receiver-address">
-                                    Address: {{ $userAddress->address }}, {{ $userAddress->wards }},
-                                    {{ $userAddress->district }}, {{ $userAddress->province }}
-                                </div>
-                                <div class="receiver-phone">Phone number: {{ $userAddress->phone }}</div>
                             </div>
+                            
+                            <div class="pick-up-at-the-store d-none">
+                                <div class="address">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="receiver-name">BCOMPUTER SHOP</div>
+                                    </div>
+                                    <div class="receiver-address">
+                                        Address: 590, CMT8, DISTRICT 3, HCMC
+                                    </div>
+                                    <div class="receiver-phone">Phone number: 0865677010</div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -58,7 +73,7 @@
                             $image = $item['image'];
                         @endphp
                         <div class="col-md-12">
-                            <div class="checkout-product" data-id="{{ $product->id }}">
+                            <div class="checkout-product checkout-select" data-id="{{ $product->id }}">
                                 <div class="checkout-product-image"><img
                                         src="{{ asset('image/product/' . $image[0]->image) }}" alt=""></div>
                                 <div class="checkout-product-name">{{ $product->name }}</div>
@@ -86,8 +101,7 @@
                             <input type="radio" name="check_pay_delivery" id="check_delivery" class="cus-checked"
                                 checked>
                         </div>
-                        <hr>
-                        <p class="mt-2">Pay when you receive</p>
+                        <p class="mt-1">Pay when you receive</p>
                     </div>
                     <div class="pay-method">
                         <div class="d-flex justify-content-between align-items-center">
@@ -97,8 +111,7 @@
                             </div>
                             <input type="radio" name="check_pay_delivery" id="check_paypal" class="cus-checked">
                         </div>
-                        <hr>
-                        <p class="mt-2">Connect to Account PayPal</p>
+                        <p class="mt-1">Connect to Account PayPal</p>
                     </div>
 
                 </div>
@@ -130,8 +143,8 @@
                         </div>
                     </div>
                     <p class="text_remind">(Please double check your order before ordering)</p>
-                    <button type="submit" class="btnSubmitProcess"><a href="{{ route('user/checkout-success') }}"
-                            class="text-decoration-none">Proceed to payment</a></button>
+                    <button type="submit" class="btnSubmitProcess"><a href="#"
+                            class="text-decoration-none text-white" id="process-to-payment">Proceed to payment</a></button>
                 </div>
 
             </div>

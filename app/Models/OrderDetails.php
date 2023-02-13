@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrderDetails extends Model
 {
+    use HasFactory;
     protected $table = 'oder';
     // protected $timestamp = false;
     protected $primaryKey = 'id';
@@ -18,3 +19,4 @@ class OrderDetails extends Model
         'discount',
         'totalItem',
     ];
+}

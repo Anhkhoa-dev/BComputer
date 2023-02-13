@@ -372,16 +372,25 @@ $(function () {
             break;
         }
         case "checkout-process": {
-            $('#radio_2').click(function () {
-                $('.receiver-name').text('BCOMPUTER SHOP');
-                $('#choose-address-orther').addClass('d-none');
-                $('.receiver-address').text('Address: 590, CMT8, DISTRICT 3, HCMC');
-                $('.receiver-phone').text('Number phone: 0865677010');
+            $('#pick-up-at-the-store').click(function () {
+                // $(this).attr('checked');
+                $('.delivery-check').addClass('d-none');
+                $('.pick-up-at-the-store').removeClass('d-none');
+            })
+            $('#delivery-check').click(function () {
+                // $(this).attr('checked');
+                $('.delivery-check').removeClass('d-none');
+                $('.pick-up-at-the-store').addClass('d-none');
             })
 
             $('#choose-address-orther').click(function () {
-                alert('alo')
-            })
+                showAlertTop('Chưa làm tới');
+            });
+
+            $('#process-to-payment').click(function(){
+                var totalList = $('.checkout-select').length;
+                alert(totalList);
+            });
 
 
 
