@@ -8,11 +8,9 @@
 
 
 @section('user-contents')
-    {{-- @section('breadcrumb')
-    <a href="#" class="bc-items">Category</a>
-    <div class="bc-divider"><i class="fas fa-chevron-right"></i></div>
-    <a href="#" class="bc-items active">{{ $title }}</a>
-@endsection --}}
+    @section('breadcrumb')
+    <a href="#" class="bc-items">about us</a>
+
     @include('guest.pages.section.sec-thanhdieuhuong')
     <div class="han-aboutus">
         <div class="container-md">

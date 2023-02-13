@@ -1,6 +1,6 @@
 .han-product-detail {
-    .row {
-        margin: -15px 20px 0px 20px;
+    .frame-fisrt {
+        margin: 0px;
 
         .fa-heart {
             color: $bg_second;
@@ -10,7 +10,7 @@
 
         .banner {
             display: flex;
-            padding: 15px;
+            margin: auto;
 
             .product-name {
                 font-weight: 600;
@@ -79,7 +79,7 @@
         .price {
             font-size: 25px;
             font-weight: 600;
-            padding: 10px;
+
             color: $bg_third;
 
             .quantity {
@@ -95,8 +95,10 @@
                     }
 
                     .is-form {
+                        background-color: #2f80ed;
+                        color: $bg_second;
                         border-radius: 3px;
-                        width: 30px;
+                        width: 40px;
                         border: none;
                         font-weight: 600;
                     }
@@ -107,9 +109,8 @@
 
 
             .button-product {
-                padding: 10px;
                 display: flex;
-                gap: 15px;
+
                 color: $bg_second;
                 margin-bottom: 10px;
 
@@ -130,13 +131,17 @@
                 }
 
                 .buynow {
+                    color: $bg_second;
                     background-color: #fb6e2e;
                     font-weight: 300;
+                    width: 100%;
                 }
 
                 .addtocart {
+                    color: $bg_second;
                     background-color: #2f90ed;
                     font-weight: 300;
+                    width: 100%;
                 }
             }
 
@@ -203,7 +208,6 @@
         padding: 0px;
     }
 
-
 }
 
 .description-info {
@@ -231,18 +235,17 @@
         color: $bg_second;
     }
 
-    .col-md-12 {
-        .row {
-            margin-top: 10px;
-
-            p {
-                font-size: larger;
-                font-weight: 500;
-            }
-        }
+    .info-product {
+        font-size: larger;
+        font-weight: 500;
     }
 
+
     .review {
+        .first-form {
+            margin-bottom: 20px;
+        }
+
         display: none;
 
         hr {
@@ -256,9 +259,10 @@
         }
 
         .review-info {
-            padding: 20px;
 
             .col-review {
+
+
                 display: flex;
                 margin-bottom: 10px;
 
@@ -270,6 +274,11 @@
 
                     .image-review {
                         width: 100%;
+                        max-width: 100px;
+
+                        border-radius: 5px;
+                        border: 0.5px solid $bg_first;
+
                     }
 
                     .form-image {
@@ -280,8 +289,8 @@
             }
 
             .mySlides1 {
-                position: absolute;
                 width: 100%;
+                height: auto;
                 max-width: 300px;
                 max-height: 300px;
             }
@@ -340,16 +349,6 @@
                 }
             }
         }
-
-        img {
-            margin: 5px;
-            max-width: 100px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 0.5px solid $bg_first;
-        }
-
-
 
         .iconstar {
             color: #fb6e2e;

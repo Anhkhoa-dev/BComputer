@@ -9,7 +9,6 @@ class Order extends Model
 {
     use HasFactory;
     protected $table = 'order';
-    // protected $timestamp = false;
     protected $primaryKey = 'id';
     protected $fillable = [
         'id',
@@ -20,10 +19,6 @@ class Order extends Model
         'cod',
         'payment',
         'id_voucher',
-        'total',
-        'statusOrder',
+        'statusOder',
     ];
-
-
-
 }

@@ -1290,26 +1290,26 @@ section .title i {
   display: block;
 }
 
-.han-product-detail .row {
-  margin: -15px 20px 0px 20px;
+.han-product-detail .frame-fisrt {
+  margin: 0px;
 }
-.han-product-detail .row .fa-heart {
+.han-product-detail .frame-fisrt .fa-heart {
   color: #fff;
   font-size: 20px;
 }
-.han-product-detail .row .banner {
+.han-product-detail .frame-fisrt .banner {
   display: flex;
-  padding: 15px;
+  margin: auto;
 }
-.han-product-detail .row .banner .product-name {
+.han-product-detail .frame-fisrt .banner .product-name {
   font-weight: 600;
   font-size: 25px;
   margin-top: -10px;
 }
-.han-product-detail .row .banner .likeproduct a {
+.han-product-detail .frame-fisrt .banner .likeproduct a {
   text-decoration: none;
 }
-.han-product-detail .row .mySlides {
+.han-product-detail .frame-fisrt .mySlides {
   margin: auto;
   width: 100%;
   height: auto;
@@ -1317,19 +1317,19 @@ section .title i {
   max-width: 500px;
   max-height: 500px;
 }
-.han-product-detail .row .image-details {
+.han-product-detail .frame-fisrt .image-details {
   border-radius: 10px;
   padding: 5px;
   width: 100%;
   cursor: pointer;
 }
-.han-product-detail .row hr {
+.han-product-detail .frame-fisrt hr {
   height: 0.5px;
   width: 100%;
   background-color: black;
   margin-top: -20px;
 }
-.han-product-detail .row .discountprice {
+.han-product-detail .frame-fisrt .discountprice {
   margin-top: -5px;
   text-decoration: line-through;
   color: #999999;
@@ -1337,7 +1337,7 @@ section .title i {
   font-weight: 300;
   font-size: small;
 }
-.han-product-detail .row .discount-percent {
+.han-product-detail .frame-fisrt .discount-percent {
   font-weight: 400;
 }
 .han-product-detail .form {
@@ -1354,7 +1354,6 @@ section .title i {
 .han-product-detail .form .price {
   font-size: 25px;
   font-weight: 600;
-  padding: 10px;
   color: #E94560;
 }
 .han-product-detail .form .price .quantity {
@@ -1368,15 +1367,15 @@ section .title i {
   font-weight: 600;
 }
 .han-product-detail .form .price .quantity .buttons_added .is-form {
+  background-color: #2f80ed;
+  color: #fff;
   border-radius: 3px;
-  width: 30px;
+  width: 40px;
   border: none;
   font-weight: 600;
 }
 .han-product-detail .form .price .button-product {
-  padding: 10px;
   display: flex;
-  gap: 15px;
   color: #fff;
   margin-bottom: 10px;
 }
@@ -1394,12 +1393,16 @@ section .title i {
   color: #fff;
 }
 .han-product-detail .form .price .button-product .buynow {
+  color: #fff;
   background-color: #fb6e2e;
   font-weight: 300;
+  width: 100%;
 }
 .han-product-detail .form .price .button-product .addtocart {
+  color: #fff;
   background-color: #2f90ed;
   font-weight: 300;
+  width: 100%;
 }
 .han-product-detail .form .price .contact {
   text-align: center;
@@ -1475,15 +1478,15 @@ section .title i {
   border-radius: 5px;
   color: #fff;
 }
-.description .col-md-12 .row {
-  margin-top: 10px;
-}
-.description .col-md-12 .row p {
+.description .info-product {
   font-size: larger;
   font-weight: 500;
 }
 .description .review {
   display: none;
+}
+.description .review .first-form {
+  margin-bottom: 20px;
 }
 .description .review hr {
   width: 100%;
@@ -1492,9 +1495,6 @@ section .title i {
 }
 .description .review .iconstar {
   color: #fb6e2e;
-}
-.description .review .review-info {
-  padding: 20px;
 }
 .description .review .review-info .col-review {
   display: flex;
@@ -1507,14 +1507,17 @@ section .title i {
 }
 .description .review .review-info .col-review .form-image-review .image-review {
   width: 100%;
+  max-width: 100px;
+  border-radius: 5px;
+  border: 0.5px solid #0F3460;
 }
 .description .review .review-info .col-review .form-image-review .form-image {
   display: flex;
   margin: 5px;
 }
 .description .review .review-info .mySlides1 {
-  position: absolute;
   width: 100%;
+  height: auto;
   max-width: 300px;
   max-height: 300px;
 }
@@ -1560,13 +1563,6 @@ section .title i {
   color: #E94560;
   font-size: small;
   font-weight: 300;
-}
-.description .review img {
-  margin: 5px;
-  max-width: 100px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 0.5px solid #0F3460;
 }
 .description .review .iconstar {
   color: #fb6e2e;
@@ -2065,9 +2061,6 @@ section .title i {
   outline: none;
   border-radius: 5px;
   padding-left: 45px;
-  font-size: 1rem;
-}
-.khoa-login .login_nen .box_login .form_login .form_group .input_control::-moz-placeholder {
   font-size: 1rem;
 }
 .khoa-login .login_nen .box_login .form_login .form_group .input_control::placeholder {

@@ -2,17 +2,16 @@
 @extends('guest.elements.master')
 
 {{-- Hiển thị tile tabweb --}}
-{{-- @section('title')
-    {{ $title->name }} | BComputer
+@section('title')
+    Contact| BComputer
 @endsection
 
 
 @section('user-contents')
-    {{-- @section('breadcrumb')
-    <a href="#" class="bc-items">Category</a>
-    <div class="bc-divider"><i class="fas fa-chevron-right"></i></div>
-    <a href="#" class="bc-items active">{{ $title }}</a>
-@endsection --}}
+ @section('breadcrumb')
+    <a href="#" class="bc-items">contact</a>
+
+ @endsection
     @include('guest.pages.section.sec-thanhdieuhuong')
     <div class="han-contact">
         <div class="row">

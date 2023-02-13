@@ -267,8 +267,16 @@ $(function () {
 
     }
 
-
+    // 
+   
     switch (page) {
+        
+        case "acount":{
+            // $('#change-avt-inp').click(function(){
+            //     var avt_inp = $('#change-avt-inp').val();
+            //     alert(avt_inp)
+            // });
+        }
         case "cart-items": {
             // alert(page);
             const totalItem = $("#list-cart-item").children().length;
@@ -388,8 +396,8 @@ $(function () {
             });
 
             $('#process-to-payment').click(function(){
-                var totalList = $('.checkout-select').length;
-                alert(totalList);
+                // var totalList = $('.checkout-select').length;
+                
             });
 
 
@@ -475,7 +483,6 @@ $(function () {
                         }
                         case "first time buy": {
                             showAlertTop('Customers buy products for the first time');
-                            location.reload();
                             break;
                         }
                     }

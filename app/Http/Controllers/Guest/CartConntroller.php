@@ -41,48 +41,46 @@ class CartConntroller extends Controller
     }
     public function getCheckoutProcess()
     {
-            $listOrder = session()->get('listCheckOut');
-            $addressCheckout = USER_ADDRESS::where('id_tk', $listOrder['id_tk'])->where('status', 1)->first();
-            $productCheckout = [];
-            //dd($listOrder['checkList']);
-            foreach($listOrder['checkList'] as $key){
-                $prod = Cart::where('id', $key)->first(); 
-                $prod->product = Products::where('id', $prod->id_pro)->first(); 
-                $prod->image = ProductImage::where('id_pro', $prod->id_pro)->get();   
-                array_push($productCheckout, $prod);
-            }
-             //dd($productCheckout);
-            $array =[
-                'userAddress' => $addressCheckout,
-                'productList' => $productCheckout,
-                'codeVoucher' => $listOrder['code'],
-                'total' => $listOrder['total'],
-            ];
-            
-           // dd($array);
-            return view('guest.pages.carts.checkout-process')->with($array);
+        $listOrder = session()->get('listCheckOut');
+        $addressCheckout = USER_ADDRESS::where('id_tk', $listOrder['id_tk'])->where('status', 1)->first();
+        $productCheckout = [];
+        //dd($listOrder['checkList']);
+        foreach ($listOrder['checkList'] as $key) {
+            $prod = Cart::where('id', $key)->first();
+            $prod->product = Products::where('id', $prod->id_pro)->first();
+            $prod->image = ProductImage::where('id_pro', $prod->id_pro)->get();
+            array_push($productCheckout, $prod);
+        }
+        //dd($productCheckout);
+        $array = [
+            'userAddress' => $addressCheckout,
+            'productList' => $productCheckout,
+            'codeVoucher' => $listOrder['code'],
+            'total' => $listOrder['total'],
+        ];
 
+        // dd($array);
+        return view('guest.pages.carts.checkout-process')->with($array);
     }
 
-    public function ajaxGetCheckOutProcess(Request $request){
-        if($request->ajax()){
+    public function ajaxGetCheckOutProcess(Request $request)
+    {
+        if ($request->ajax()) {
             $OrderCheckout = [
                 'id_tk' => Auth::user()->id,
                 'checkList' => $request->checkList,
                 'total' => $request->total,
                 'code' => $request->code,
             ];
-            if($request->checkList == null){
+            if ($request->checkList == null) {
                 return [
                     'status' => 'await',
                 ];
-            }else{
-                session()->put('listCheckOut', $OrderCheckout);    
+            } else {
+                session()->put('listCheckOut', $OrderCheckout);
                 return [
                     'status' => 'continue',
                 ];
-                
-                
             }
         }
     }
@@ -110,13 +108,13 @@ class CartConntroller extends Controller
             $prod =  Products::where('id', $request->id_sp)->first();
             // kiểm tra k có id tài khoản trùng thi thêm mới
             if (count(Cart::where('id_tk', Auth::user()->id)->get()) == 0) {
-                    Cart::create($array);
-                    // Trừ tồn kho trong table Product
-                    session()->forget('qtyCart');
-                    session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
-                    return [
-                        'status' => 'new one',
-                    ];
+                Cart::create($array);
+                // Trừ tồn kho trong table Product
+                session()->forget('qtyCart');
+                session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
+                return [
+                    'status' => 'new one',
+                ];
             } else { // id_tk có trong data
                 foreach (Cart::where('id_tk', Auth::user()->id)->get() as $cart) {
                     if ($cart->id_pro == $request->id_sp) {
@@ -140,7 +138,7 @@ class CartConntroller extends Controller
                         ];
                     }
                 }
-                if($prod->status == 1 || $prod->quantity >= $request->qty){
+                if ($prod->status == 1 || $prod->quantity >= $request->qty) {
                     Cart::create($array);
                     // Trừ tồn kho trong table Product
                     session()->forget('qtyCart');
@@ -148,21 +146,19 @@ class CartConntroller extends Controller
                     return [
                         'status' => 'new one',
                     ];
-                }else{
+                } else {
                     return [
                         'status' => 'he',
                     ];
                 }
-
             }
         }
-
     }
 
     // update cart
     public function ajaxUpdateCart(Request $request)
     {
-        if($request->ajax()){
+        if ($request->ajax()) {
 
             $data = [
                 'status' => '',
@@ -173,23 +169,22 @@ class CartConntroller extends Controller
             $cart = Cart::where('id', $request->id)->first();
             $product = Products::where('id', $cart->id_pro)->first();
             $qty = intval($cart->quanity);
-            if($request->type ==='plus'){
-                $qtyInStock= $product->quantity;
+            if ($request->type === 'plus') {
+                $qtyInStock = $product->quantity;
                 // print_r($qtyInStock);
-                if($qty <= $qtyInStock){
-                    Cart::where('id', $request->id)->update(['quanity'=> ++$qty]);
+                if ($qty <= $qtyInStock) {
+                    Cart::where('id', $request->id)->update(['quanity' => ++$qty]);
                     session()->forget('qtyCart');
                     session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
-                }else{
+                } else {
                     $data['status'] = 'not enough';
                     $data['qtyInStock'] = $qtyInStock;
                     return $data;
                 }
-            }else{
-                Cart::where('id', $request->id)->update(['quanity'=> --$qty]);
+            } else {
+                Cart::where('id', $request->id)->update(['quanity' => --$qty]);
                 session()->forget('qtyCart');
                 session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
-
             }
             $data['newQty'] = $qty;
             $newPrice = ($product->price * ((100 - $product->discount) / 100)) * $qty;
@@ -197,11 +192,11 @@ class CartConntroller extends Controller
 
             return $data;
         }
-
     }
 
-    public function AjaxDeleteCart(Request $request){
-        if($request->ajax()){
+    public function AjaxDeleteCart(Request $request)
+    {
+        if ($request->ajax()) {
             $id = $request->id;
             // print_r($data);
 
@@ -215,15 +210,15 @@ class CartConntroller extends Controller
         }
     }
 
-    public function AjaxDeleteSelectCart(Request $request){
-        if($request->ajax()){
-            if($request->idList == 'all-cart'){
+    public function AjaxDeleteSelectCart(Request $request)
+    {
+        if ($request->ajax()) {
+            if ($request->idList == 'all-cart') {
                 Cart::where('id_tk', Auth::user()->id)->delete();
                 session()->forget('qtyCart');
                 session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
                 return back();
             }
-
         }
     }
 
@@ -240,18 +235,17 @@ class CartConntroller extends Controller
             }
             $id_tk = Auth::user()->id;
             foreach ($request->idList as $id_cart) {
-                    $cart = Cart::where('id', $id_cart)->first();
-                    $product = Products::where('id', $cart->id_pro)->first();
-                    if ($product->status) {
-                        $qtyInStock = $product->quantity;
-                        // print_r($qtyInStock);
-                        if ($qtyInStock > 0) {
-                            $priceKm = $product->price * ((100 - $product->discount) / 100);
-                            $qtyInCart = Cart::where('id_tk', $id_tk)->where('id_pro', $cart->id_pro)->first()->quanity;
-                            $response['provisional'] += $priceKm * $qtyInCart;
-                        }
+                $cart = Cart::where('id', $id_cart)->first();
+                $product = Products::where('id', $cart->id_pro)->first();
+                if ($product->status) {
+                    $qtyInStock = $product->quantity;
+                    // print_r($qtyInStock);
+                    if ($qtyInStock > 0) {
+                        $priceKm = $product->price * ((100 - $product->discount) / 100);
+                        $qtyInCart = Cart::where('id_tk', $id_tk)->where('id_pro', $cart->id_pro)->first()->quanity;
+                        $response['provisional'] += $priceKm * $qtyInCart;
+                    }
                 }
-
             }
             return $response;
         }
@@ -295,78 +289,72 @@ class CartConntroller extends Controller
             }
             array_push($cart['cart'], $pro_item);
             $cart['qty']++;
-
         }
         return $cart;
     }
 
 
-   public function ajaxVoucher(Request $request){
-            if($request->ajax()){
-                   $data = [
-                        'status' => '',
-                   ];
-                    $total = ltrim($request->total, '$');
-                    $isCheckOrder = Order::where('id_tk', Auth::user()->id)->get();
-                    if(!session()->get('voucherKH')){
-                        if(count($isCheckOrder) > 0){
-                            $voucher = VOUCHER::where('code', $request->idVoucher)->first();
-                            if($voucher){
-                               if($total >= $voucher->condition){
-                                   $dateNow = Carbon::now();
-                                   if($dateNow >= $voucher->dateStart && $dateNow <= $voucher->endStart){
-                                       if($voucher->quanity > 0 ){
-                                           $voucherKH = [
-                                               'code' => $voucher->code,
-                                               'condition' => $voucher->condition,
-                                               'discount' => $voucher->discount,
-                                           ];
-                                           $data = [
-                                               'status' => 'Success',
-                                           ];
-                                           session()->put('voucherKH', $voucherKH);
-                                           return $data;
-                                       }else{
-                                           $data = [
-                                               'status' => 'out of stock',
-                                           ];
-                                       }
-                                   }else{
-                                       $data = [
-                                           'status' => 'Expired voucher',
-                                       ];
-                                       return $data;
-                                   }
-                               }else{
-                                   $data = [
-                                       'status' => 'not enough condition',
-                                   ];
-                                   return $data;
-                               }
-                            }else{
-                               $data = [
-                                   'status' => 'wrong code',
-                               ];
-                               return $data;
+    public function ajaxVoucher(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = [
+                'status' => '',
+            ];
+            $total = ltrim($request->total, '$');
+            $isCheckOrder = Order::where('id_tk', Auth::user()->id)->get();
+            if (!session()->get('voucherKH')) {
+                if (count($isCheckOrder) > 0) {
+                    $voucher = VOUCHER::where('code', $request->idVoucher)->first();
+                    if ($voucher) {
+                        if ($total >= $voucher->condition) {
+                            $dateNow = Carbon::now();
+                            if ($dateNow >= $voucher->dateStart && $dateNow <= $voucher->endStart) {
+                                if ($voucher->quanity > 0) {
+                                    $voucherKH = [
+                                        'code' => $voucher->code,
+                                        'condition' => $voucher->condition,
+                                        'discount' => $voucher->discount,
+                                    ];
+                                    $data = [
+                                        'status' => 'Success',
+                                    ];
+                                    session()->put('voucherKH', $voucherKH);
+                                    return $data;
+                                } else {
+                                    $data = [
+                                        'status' => 'out of stock',
+                                    ];
+                                }
+                            } else {
+                                $data = [
+                                    'status' => 'Expired voucher',
+                                ];
+                                return $data;
                             }
-                       }else{
-                            // Khách hàng chưa mua hàng lần nào không áp dụng voucher
+                        } else {
                             $data = [
-                               'status' => 'first time buy',
-                           ];
-                           return $data;
-                      }
-                    }else{
+                                'status' => 'not enough condition',
+                            ];
+                            return $data;
+                        }
+                    } else {
                         $data = [
-                            'status' => 'code entered',
+                            'status' => 'wrong code',
                         ];
+                        return $data;
                     }
-
-
-
-
-
-
+                } else {
+                    // Khách hàng chưa mua hàng lần nào không áp dụng voucher
+                    $data = [
+                        'status' => 'first time buy',
+                    ];
+                    return $data;
+                }
+            } else {
+                $data = [
+                    'status' => 'code entered',
+                ];
             }
-   }
+        }
+    }
 }

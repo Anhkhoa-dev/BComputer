@@ -16,7 +16,7 @@
                                     <div class="tk-image">
                                         <img src="{{ asset('image/user/'.$user->image) }}" alt="{{$user->fullname}}" width="200" class="image-img">   
                                         <div class="image-hover">
-                                            <input type="file" class="input-change" id="change-avt-inp" data-modal='avt' accept="image/*">
+                                            <input type="file" class="input-change" id="change-avt-inp" name="change-avt-inp" data-modal='avt' accept="image/*">
                                             <div class="change-image" id="btn-change-avt">Change image</div>
                                         </div>
                                     </div>

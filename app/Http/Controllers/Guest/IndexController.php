@@ -46,6 +46,32 @@ class IndexController extends Controller
         return view('guest.pages.home')->with($array);
     }
 
+    public function aboutus()
+    {
+        return view('guest.pages.aboutUs');
+    }
+
+    public function contact()
+    {
+        return view('guest.pages.contact');
+    }
+
+    public function deliverypolicy()
+    {
+        return view('guest.pages.deliverypolicy');
+    }
+
+    public function warrantypolicy()
+    {
+        return view('guest.pages.warrantypolicy');
+    }
+
+    public function paymentpolicy()
+    {
+        return view('guest.pages.paymentpolicy');
+    }
+
+
     public function getDiscount($max = 10)
     {
         $bigDiscount = Products::where('discount', '>=', 15)->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
@@ -144,16 +170,6 @@ class IndexController extends Controller
     {
         $listBrands = BRAND::all();
         return $listBrands;
-    }
-
-    public function aboutus()
-    {
-        return view('guest.pages.aboutUs');
-    }
-
-    public function contact()
-    {
-        return view('guest.pages.contact');
     }
 
 

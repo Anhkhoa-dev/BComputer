@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\UserAddressController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Guest\CartConntroller;
 use App\Http\Controllers\Guest\IndexController;
@@ -35,8 +36,11 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
     Route::get('collections/{name}', [IndexController::class, 'getProducts'])->name('user/products');
     Route::get('product/{name}', [IndexController::class, 'getDetail'])->name('user/detail');
-    Route::get('/aboutus', [IndexController::class, 'aboutus'])->name('user/aboutus');
-    Route::get('/contact', [IndexController::class, 'contact'])->name('user/contact');
+    Route::get('aboutus', [IndexController::class, 'aboutus'])->name('user/aboutus');
+    Route::get('    ', [IndexController::class, 'contact'])->name('user/contact');
+    Route::get('deliverypolicy', [IndexController::class, 'deliverypolicy'])->name('user/deliverypolicy');
+    Route::get('paymentpolicy', [IndexController::class, 'paymentpolicy'])->name('user/paymentpolicy');
+    Route::get('warrantypolicy', [IndexController::class, 'warrantypolicy'])->name('user/warrantypolicy');
 
     // phần dành cho user
     Route::group(
@@ -49,7 +53,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::get('/checkout-process', [CartConntroller::class, 'getCheckoutProcess'])->name('checkout/checkout-process');
             Route::post('/ajax-checkout-process', [CartConntroller::class, 'ajaxGetCheckOutProcess']);
             Route::get('/checkout-success', [CartConntroller::class, 'getSuccess'])->name('user/checkout-success');
-
+            Route::post('/addCart', [IndexController::class, 'addCart'])->name('user/addCart');
 
             //Thêm sản phẩm vào giỏ hàng
             Route::post('add-to-cart', [CartConntroller::class, 'addToCart']);
@@ -121,6 +125,9 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Delete
     Route::get('admin/voucher/destroy/{id}', [VoucherController::class, 'destroy'])->name('admin/voucher/destroy');
 
+    // Phần Order - Phúc
+    Route::get('admin/order', [OrderController::class, 'index'])->name('admin/order');
+
     // Phần UserAddress - Phúc
     Route::get('admin/userAddress', [UserAddressController::class, 'index'])->name('admin/userAddress');
     Route::post('admin/userAddress/update/{id}', [UserAddressController::class, 'update'])->name('admin/userAddress/update');
@@ -155,5 +162,4 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::post('admin/category/update/{id}', [CategoryController::class, 'update'])->name('category/update');
     //Delete
     Route::get('admin/category/destroy/{id}', [CategoryController::class, 'destroy'])->name('category/destroy');
-
 });
