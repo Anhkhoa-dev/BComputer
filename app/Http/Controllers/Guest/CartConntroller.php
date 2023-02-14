@@ -222,6 +222,30 @@ class CartConntroller extends Controller
         }
     }
 
+    public function ajaxPayment(Request $request){
+        if($request->ajax()){
+            // print_r($request->all());
+
+
+
+
+            $Order = [
+                'id_tk' => Auth::user()->id,
+                'date_order' => Carbon::now(),
+                'address' => Auth::user()->id,
+                'ship' => Auth::user()->id,
+                'cod' => Auth::user()->id,
+                'payment' => Auth::user()->id,
+                'id_voucher' => Auth::user()->id,
+                'statusOrder' => Auth::user()->id,
+            ];
+
+
+
+
+        }
+    }
+
     public function AjaxGetProvisionalOrder(Request $request)
     {
         if ($request->ajax()) {

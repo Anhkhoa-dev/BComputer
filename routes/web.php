@@ -62,6 +62,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::post('ajax-delete-cart', [CartConntroller::class, 'AjaxDeleteCart']);
             Route::post('ajax-delete-all-select-cart', [CartConntroller::class, 'AjaxDeleteSelectCart']);
             Route::post('ajax-apply-voucher', [CartConntroller::class, 'ajaxVoucher']);
+            Route::post('ajax-make-payment-process', [CartConntroller::class, 'ajaxPayment']);
             // Phần hiển thị view tài khoản
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
 

@@ -267,11 +267,11 @@ $(function () {
 
     }
 
-    // 
-   
+    //
+
     switch (page) {
-        
-        case "acount":{
+
+        case "acount": {
             // $('#change-avt-inp').click(function(){
             //     var avt_inp = $('#change-avt-inp').val();
             //     alert(avt_inp)
@@ -380,30 +380,93 @@ $(function () {
             break;
         }
         case "checkout-process": {
+            $('#delivery-check').addClass('select_checked');
             $('#pick-up-at-the-store').click(function () {
-                // $(this).attr('checked');
+                $(this).addClass('select_checked');
+                $('#delivery-check').removeClass('select_checked');
                 $('.delivery-check').addClass('d-none');
                 $('.pick-up-at-the-store').removeClass('d-none');
             })
             $('#delivery-check').click(function () {
-                // $(this).attr('checked');
+                $(this).addClass('select_checked');
+                $('#pick-up-at-the-store').removeClass('select_checked');
                 $('.delivery-check').removeClass('d-none');
                 $('.pick-up-at-the-store').addClass('d-none');
+            })
+
+            $('#check_delivery').addClass('check_payment');
+            $('#check_delivery').click(function () {
+                $(this).addClass('check_payment');
+                $('#check_paypal').removeClass('check_payment');
+
+            })
+            $('#check_paypal').click(function () {
+                $(this).addClass('check_payment');
+                $('#check_delivery').removeClass('check_payment');
             })
 
             $('#choose-address-orther').click(function () {
                 showAlertTop('Chưa làm tới');
             });
 
-            $('#process-to-payment').click(function(){
-                // var totalList = $('.checkout-select').length;
-                
-            });
+            $('#process-to-payment').click(function () {
+                let idList = [];
+                let idAddress = [];
+                let idPayment = [];
+                // danh sách id_sp thanh toán
+                $.each($(".checkout-select"), (i, element) => {
+                    const id = $(element).attr("data-id");
+                    if (id !== '') {
+                        idList.push(id);
+                    }
+                });
+                $.each($(".select_checked"), (i, element) => {
+                    const id = $(element).attr("data-id");
+                    if (id !== '') {
+                        idAddress.push(id);
+                    }
+                });
 
+                $.each($(".check_payment"), (i, element) => {
+                    const id = $(element).attr("data-id");
+                    if (id !== '') {
+                        idPayment.push(id);
+                    }
+                });
+                var total = $('.total-checkout').text();
+                makePayment(idList, idAddress, idPayment, total);
+
+            });
 
 
             break;
         }
+    }
+
+    function makePayment(idList, idAddress, idPayment, total) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                },
+                url: "/ajax-make-payment-process",
+                type: "POST",
+                data: {
+                    idList: idList,
+                    idAddress: idAddress,
+                    idPayment: idPayment,
+                    total: total,
+                },
+                success: function (data) {
+
+                    resolve(data);
+                    console.log(data);
+                },
+                error: function () {
+                    reject();
+                },
+            });
+        });
     }
 
     function ajaxCheckoutProcess(checkList, total, code) {
