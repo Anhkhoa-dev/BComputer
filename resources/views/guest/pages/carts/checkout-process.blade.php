@@ -82,7 +82,9 @@
                                 <div class="checkout-product-name">{{ $product->name }}</div>
                                 <div class="checkout-product-price">$
                                     {{ $product->price * ((100 - $product->discount) / 100) }}</div>
-                                <div class="checkout-product-quanity">Qty: {{ $item->quanity }}</div>
+                                
+                                     <div class="checkout-product-quanity ml-2">Qty: <span class="qty-checkout">{{ $item->quanity }}</span></div>
+                               
                             </div>
                         </div>
                     @endforeach
@@ -152,9 +154,7 @@
                         </div>
                     </div>
                     <p class="text_remind">(Please double check your order before ordering)</p>
-                    <button type="submit" class="btnSubmitProcess"><a href="#"
-                            class="text-decoration-none text-white" id="process-to-payment">Proceed to
-                            payment</a></button>
+                    <button  class="btnSubmitProcess"><div class="text-decoration-none text-white" id="process-to-payment">Proceed to payment</div></button>
                 </div>
 
             </div>

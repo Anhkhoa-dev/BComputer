@@ -12,7 +12,9 @@ use App\Models\ACOUNT;
 use App\Models\USER_ADDRESS;
 use App\Models\VOUCHER;
 use App\Models\Order;
+use App\Models\OrderDetails;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 
 class CartConntroller extends Controller
@@ -222,27 +224,62 @@ class CartConntroller extends Controller
         }
     }
 
-    public function ajaxPayment(Request $request){
-        if($request->ajax()){
-            // print_r($request->all());
+    public function ajaxPayment(Request $request)
+    {
+        if ($request->ajax()) {
+            $userAddressDefautl = USER_ADDRESS::where('id', $request->idAddress)->where('status', 1)->first();
+            $voucher = session('voucherKH');
+            $trangthai = 'Chưa tiếp nhận';
 
-
-
-
+            $payment = $request->idPayment;
             $Order = [
                 'id_tk' => Auth::user()->id,
-                'date_order' => Carbon::now(),
-                'address' => Auth::user()->id,
-                'ship' => Auth::user()->id,
-                'cod' => Auth::user()->id,
-                'payment' => Auth::user()->id,
-                'id_voucher' => Auth::user()->id,
-                'statusOrder' => Auth::user()->id,
+                'date_order' => date_format(Carbon::now(), 'Y-m-d H:i'),
+                'address' => $userAddressDefautl != null ? $userAddressDefautl->address . ', ' . $userAddressDefautl->wards . ', ' . $userAddressDefautl->district . ', ' . $userAddressDefautl->province : '590, CMT8, District 3, HCMC',
+                'ship' => null,
+                'cod' => $userAddressDefautl != null ? 'Giao hàng tận nơi' : 'Nhận tại cửa hàng',
+                'payment' => $payment[0] === 'pay_delivery' ? 0 : 1,
+                'id_voucher' => $voucher != null ? VOUCHER::where('code', $voucher['code'])->first()->id : null,
+                'total' => floatval($request->total),
+                'statusOrder' => $trangthai,
             ];
+            $Orderlist  = Order::create($Order);
 
+            foreach ($request->idList as $prod) {
+                $product = Products::where('id', $prod[0])->first();
+                $OrderDetail = [
+                    'id_order' => $Orderlist->id,
+                    'id_pro' => $prod[0],
+                    'price'  => $product->price,
+                    'qty'  => $prod[2],
+                    'discount'  => $product->discount,
+                    'totalItem'  => ($product->price * ((100 - $product->discount) / 100)) * $prod[2],
+                ];
 
+                OrderDetails::create($OrderDetail);
+                Cart::where('id_tk', Auth::user()->id)->where('id_pro', $prod[0])->delete();
+            }
 
+            $OrderProductList = OrderDetails::where('id_order', $Orderlist->id)->get();
+            foreach ($OrderProductList as $i => $key) {
+                if ($key->id_pro) {
+                    $OrderProductList[$i]->name = Products::find($key->id_pro)->name;
+                } else {
+                    $OrderProductList[$i]->name = '';
+                }
+            }
+            session()->forget('qtyCart');
+            session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
+            $user = Auth::user();
 
+            print_r($user);
+            Mail::send('email.xac-nhan-order-success', compact('user', 'Orderlist', 'OrderProductList'), function ($email) use ($user, $Orderlist) {
+                $email->subject('Xác nhận đặt hàng thàng công. Mã đơn hàng: ' . $Orderlist->id);
+                $email->to($user->email, $user->fullname);
+            });
+            return [
+                'status' => 'Order success',
+            ];
         }
     }
 
@@ -326,58 +363,52 @@ class CartConntroller extends Controller
             ];
             $total = ltrim($request->total, '$');
             $isCheckOrder = Order::where('id_tk', Auth::user()->id)->get();
-            if (!session()->get('voucherKH')) {
-                if (count($isCheckOrder) > 0) {
-                    $voucher = VOUCHER::where('code', $request->idVoucher)->first();
-                    if ($voucher) {
-                        if ($total >= $voucher->condition) {
-                            $dateNow = Carbon::now();
-                            if ($dateNow >= $voucher->dateStart && $dateNow <= $voucher->endStart) {
-                                if ($voucher->quanity > 0) {
-                                    $voucherKH = [
-                                        'code' => $voucher->code,
-                                        'condition' => $voucher->condition,
-                                        'discount' => $voucher->discount,
-                                    ];
-                                    $data = [
-                                        'status' => 'Success',
-                                    ];
-                                    session()->put('voucherKH', $voucherKH);
-                                    return $data;
-                                } else {
-                                    $data = [
-                                        'status' => 'out of stock',
-                                    ];
-                                }
+            if (count($isCheckOrder) > 0) {
+                $voucher = VOUCHER::where('code', $request->idVoucher)->first();
+                if ($voucher) {
+                    if ($total >= $voucher->condition) {
+                        $dateNow = Carbon::now();
+                        if ($dateNow >= $voucher->dateStart && $dateNow <= $voucher->endStart) {
+                            if ($voucher->quanity > 0) {
+                                $voucherKH = [
+                                    'code' => $voucher->code,
+                                    'condition' => $voucher->condition,
+                                    'discount' => $voucher->discount,
+                                ];
+                                $data = [
+                                    'status' => 'Success',
+                                ];
+                                session()->put('voucherKH', $voucherKH);
+                                return $data;
                             } else {
                                 $data = [
-                                    'status' => 'Expired voucher',
+                                    'status' => 'out of stock',
                                 ];
-                                return $data;
                             }
                         } else {
                             $data = [
-                                'status' => 'not enough condition',
+                                'status' => 'Expired voucher',
                             ];
                             return $data;
                         }
                     } else {
                         $data = [
-                            'status' => 'wrong code',
+                            'status' => 'not enough condition',
                         ];
                         return $data;
                     }
                 } else {
-                    // Khách hàng chưa mua hàng lần nào không áp dụng voucher
                     $data = [
-                        'status' => 'first time buy',
+                        'status' => 'wrong code',
                     ];
                     return $data;
                 }
             } else {
+                // Khách hàng chưa mua hàng lần nào không áp dụng voucher
                 $data = [
-                    'status' => 'code entered',
+                    'status' => 'first time buy',
                 ];
+                return $data;
             }
         }
     }

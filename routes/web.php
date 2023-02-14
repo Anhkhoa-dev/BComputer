@@ -37,7 +37,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::get('collections/{name}', [IndexController::class, 'getProducts'])->name('user/products');
     Route::get('product/{name}', [IndexController::class, 'getDetail'])->name('user/detail');
     Route::get('aboutus', [IndexController::class, 'aboutus'])->name('user/aboutus');
-    Route::get('    ', [IndexController::class, 'contact'])->name('user/contact');
+    Route::get('contact', [IndexController::class, 'contact'])->name('user/contact');
     Route::get('deliverypolicy', [IndexController::class, 'deliverypolicy'])->name('user/deliverypolicy');
     Route::get('paymentpolicy', [IndexController::class, 'paymentpolicy'])->name('user/paymentpolicy');
     Route::get('warrantypolicy', [IndexController::class, 'warrantypolicy'])->name('user/warrantypolicy');

@@ -416,10 +416,14 @@ $(function () {
                 // danh sách id_sp thanh toán
                 $.each($(".checkout-select"), (i, element) => {
                     const id = $(element).attr("data-id");
+                    const price_discount = $(element).children('.checkout-product-price').text();
+                    const qtyTotal = $(element).children('.checkout-product-quanity').children('.qty-checkout').text();
+
                     if (id !== '') {
-                        idList.push(id);
+                        idList.push([parseInt(id), parseFloat(price_discount.substr(1)), parseInt(qtyTotal)]);
                     }
                 });
+                // console.log(idList);
                 $.each($(".select_checked"), (i, element) => {
                     const id = $(element).attr("data-id");
                     if (id !== '') {
@@ -429,11 +433,14 @@ $(function () {
 
                 $.each($(".check_payment"), (i, element) => {
                     const id = $(element).attr("data-id");
+
                     if (id !== '') {
                         idPayment.push(id);
                     }
                 });
+
                 var total = $('.total-checkout').text();
+                // alert(parseFloat(total));
                 makePayment(idList, idAddress, idPayment, total);
 
             });
@@ -459,8 +466,17 @@ $(function () {
                 },
                 success: function (data) {
 
+                    switch (data.status) {
+                        case 'Order success': {
+                            showAlertTop('Đặt hàng thành công');
+                            window.location.href = "/checkout-success";
+                            break;
+                        }
+                        default:
+                            showAlertTop('Có lỗi khi đặt hàng');
+                            break;
+                    }
                     resolve(data);
-                    console.log(data);
                 },
                 error: function () {
                     reject();
@@ -538,10 +554,6 @@ $(function () {
                         }
                         case "out of stock": {
                             showAlertTop('Voucher has expired as many times as possible');
-                            break;
-                        }
-                        case "code entered": {
-                            showAlertTop('Voucher code has been applied to this order');
                             break;
                         }
                         case "first time buy": {
