@@ -268,6 +268,10 @@ $(function () {
     }
 
     //
+    $('.add-new-address').click(function () {
+        $("#add-address").modal("show");
+    })
+
 
     switch (page) {
 
@@ -409,6 +413,7 @@ $(function () {
                 showAlertTop('Chưa làm tới');
             });
 
+
             $('#process-to-payment').click(function () {
                 let idList = [];
                 let idAddress = [];
@@ -465,18 +470,16 @@ $(function () {
                     total: total,
                 },
                 success: function (data) {
-
+                    resolve(data);
                     switch (data.status) {
                         case 'Order success': {
-                            showAlertTop('Đặt hàng thành công');
                             window.location.href = "/checkout-success";
                             break;
                         }
                         default:
                             showAlertTop('Có lỗi khi đặt hàng');
-                            break;
                     }
-                    resolve(data);
+
                 },
                 error: function () {
                     reject();
@@ -776,6 +779,47 @@ $(function () {
         });
     }
 
+
+    var citis = document.getElementById("address-city");
+    var districts = document.getElementById("address-district");
+    var wards = document.getElementById("address-ward");
+    var Parameter = {
+        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        method: "GET",
+        responseType: "application/json",
+    };
+    var promise = axios(Parameter);
+    promise.then(function (result) {
+        renderCity(result.data);
+    });
+
+    function renderCity(data) {
+
+        for (const x of data) {
+            citis.options[citis.options.length] = new Option(x.Name, x.Name);
+        }
+        citis.onchange = function () {
+            districts.length = 1;
+            wards.length = 1;
+            if (this.value != "") {
+                const result = data.filter(n => n.Name === this.value);
+
+                for (const k of result[0].Districts) {
+                    districts.options[districts.options.length] = new Option(k.Name, k.Name);
+                }
+            }
+        };
+        districts.onchange = function () {
+            wards.length = 1;
+            const dataCity = data.filter((n) => n.Name === citis.value);
+            if (this.value != "") {
+                const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0].Wards;
+                for (const w of dataWards) {
+                    wards.options[wards.options.length] = new Option(w.Name, w.Name);
+                }
+            }
+        };
+    }
 
 
 

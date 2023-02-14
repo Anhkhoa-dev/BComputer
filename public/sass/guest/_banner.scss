@@ -1,12 +1,14 @@
-.khoa-banner{
+.khoa-banner {
     background: $bg_second;
     margin-top: 15px;
     height: 490px;
-    .card_side{
+
+    .card_side {
         padding: 15px 0;
         border-radius: 10px;
         box-shadow: #C9C9C9 -2px 1px 13px 7px;
-        .side-box{
+
+        .side-box {
             display: flex;
             justify-content: start;
             align-items: center;
@@ -15,7 +17,8 @@
             text-decoration: none;
             color: rgba(17, 17, 17, 0.8);
             transition: all 0.3s ease-in;
-            &:hover{
+
+            &:hover {
                 background-color: $bg_third;
                 color: #fff;
                 transition: all 0.5s ease-in;
@@ -24,23 +27,29 @@
 
 
     }
-    #banner{
+
+    #banner {
         padding: 30px;
-        .banner-box{
+
+        .banner-box {
             padding: 20px 30px;
-            .banner-title{
+
+            .banner-title {
                 text-transform: uppercase;
-                font-size: 2.8125rem ;
+                font-size: 2rem;
                 color: $Color__E94560;
                 font-weight: 600;
             }
-            .banner-desc{
+
+            .banner-desc {
                 font-size: 0.875rem;
                 font-weight: 500;
-                text-align: justify ;
+                text-align: justify;
                 margin-bottom: 50px;
+                margin-top: 20px;           
             }
-            .btnBox{
+
+            .btnBox {
                 margin-top: 30px;
             }
         }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\USER_ADDRESS;
+use App\Models\Order;
+use App\Models\OrderDetails;
+
 use App\Http\Controllers\Guest\IndexController;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,16 +21,10 @@ class AccountController extends Controller
     public function getAccount()
     {
         $addressDefault = $this->IndexController->getAddressDefault(Auth::user()->id);
-
-
-
-
-
-
-
         $array = [
             'page' => 'sec-taikhoan',
             'addressDefault' => $addressDefault,
+            'orderList' => session('orderList'),
         ];
 
         return view('guest.pages.accounts.taikhoan')->with($array);
@@ -99,6 +96,7 @@ class AccountController extends Controller
             'page' => 'sec-diachi',
             'addressDefault' => $addressDefault,
             'addressAll' => $addressAll,
+            'orderList' => session('orderList'),
         ];
 
         return view('guest.pages.accounts.taikhoan')->with($array);
@@ -115,6 +113,24 @@ class AccountController extends Controller
 
         return redirect('account/address');
 
+    }
+
+    public function getOrder(){
+        $orderList = Order::where('id_tk', Auth::user()->id)->get();
+        foreach ($orderList as $i => $key) {
+            if ($key->id) {
+                $orderList[$i]->OrderDetail = OrderDetails::where('id_order',$key->id)->get();
+            } else {
+                $orderList[$i]->OrderDetail = '';
+            }
+        }
+        $array = [
+            'page' => 'sec-donhang',
+            'orderList' => $orderList,
+        ];
+        // dd($array);
+        session()->put('orderList', $orderList);
+        return view('guest.pages.accounts.taikhoan')->with($array);
     }
 
 

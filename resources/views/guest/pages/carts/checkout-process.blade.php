@@ -20,33 +20,51 @@
                     <div class="col-md-12">
                         <div class="checkout-address">
                             <div class="select_radio d-flex nav nav-pills mb-3" id="pills-tab" role="tablist">
-                                <div class="d-flex me-4">
-                                    <input type="radio" class="cus-checked" name="check_radio"
-                                        data-id="{{ $userAddress->id }}" id="delivery-check" checked>
-                                    <label for="radio_2">Delivery</label>
-                                </div>
+                                @if ($userAddress != null)
+                                    <div class="d-flex me-4">
+                                        <input type="radio" class="cus-checked" name="check_radio"
+                                            data-id="{{ $userAddress->id }}" id="delivery-check" checked>
+                                        <label for="radio_2">Delivery</label>
+                                    </div>
+                                @else
+                                    <div class="d-flex me-4">
+                                        <input type="radio" class="cus-checked" name="check_radio" id="delivery-check"
+                                            checked>
+                                        <label for="radio_2">Delivery</label>
+                                    </div>
+                                @endif
+
                                 <div class="d-flex">
                                     <input type="radio" class="cus-checked" name="check_radio"
                                         id="pick-up-at-the-store" data-id="store">
                                     <label for="radio_2">Pick up at the store</label>
                                 </div>
                             </div>
-                            <div class="delivery-check">
-                                <div class="address">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="receiver-name" data-id="{{ $userAddress->id }}">
-                                            {{ $userAddress->fullname }}</div>
-                                        <div id="choose-address-orther" class="cursor-pointer">Choose address
-                                            orther
+                            @if ($userAddress != null)
+                                <div class="delivery-check">
+                                    <div class="address">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="receiver-name" data-id="{{ $userAddress->id }}">
+                                                {{ $userAddress->fullname }}</div>
+                                            <div id="choose-address-orther" class="cursor-pointer">Choose address
+                                                orther
+                                            </div>
                                         </div>
+                                        <div class="receiver-address">
+                                            Address: {{ $userAddress->address }}, {{ $userAddress->wards }},
+                                            {{ $userAddress->district }}, {{ $userAddress->province }}
+                                        </div>
+                                        <div class="receiver-phone">Phone number: {{ $userAddress->phone }}</div>
                                     </div>
-                                    <div class="receiver-address">
-                                        Address: {{ $userAddress->address }}, {{ $userAddress->wards }},
-                                        {{ $userAddress->district }}, {{ $userAddress->province }}
-                                    </div>
-                                    <div class="receiver-phone">Phone number: {{ $userAddress->phone }}</div>
                                 </div>
-                            </div>
+                            @else
+                                <div class="delivery-check">
+                                    <div class="address">
+                                        <div class="add-new-address">Add new Address</div>
+                                    </div>
+                                </div>
+                            @endif
+
 
                             <div class="pick-up-at-the-store d-none">
                                 <div class="address">
@@ -64,7 +82,7 @@
                     </div>
                 </div>
 
-
+                @include('guest.pages.modal.add-diachi-modal')
 
                 <div class="checkout-proccess">
                     <div class="col-12 checkout-header">
@@ -82,9 +100,10 @@
                                 <div class="checkout-product-name">{{ $product->name }}</div>
                                 <div class="checkout-product-price">$
                                     {{ $product->price * ((100 - $product->discount) / 100) }}</div>
-                                
-                                     <div class="checkout-product-quanity ml-2">Qty: <span class="qty-checkout">{{ $item->quanity }}</span></div>
-                               
+
+                                <div class="checkout-product-quanity ml-2">Qty: <span
+                                        class="qty-checkout">{{ $item->quanity }}</span></div>
+
                             </div>
                         </div>
                     @endforeach
@@ -154,9 +173,12 @@
                         </div>
                     </div>
                     <p class="text_remind">(Please double check your order before ordering)</p>
-                    <button  class="btnSubmitProcess"><div class="text-decoration-none text-white" id="process-to-payment">Proceed to payment</div></button>
+                    <button class="btnSubmitProcess">
+                        <a href="{{ route('user/checkout-success') }}"
+                            class="text-decoration-none text-white cursor-pointer" id="process-to-payment">Proceed to
+                            payment</a>
+                    </button>
                 </div>
-
             </div>
         </div>
     </div>

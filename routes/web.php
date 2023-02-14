@@ -63,14 +63,13 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::post('ajax-delete-all-select-cart', [CartConntroller::class, 'AjaxDeleteSelectCart']);
             Route::post('ajax-apply-voucher', [CartConntroller::class, 'ajaxVoucher']);
             Route::post('ajax-make-payment-process', [CartConntroller::class, 'ajaxPayment']);
-            // Phần hiển thị view tài khoản
+
+            // Phần Route get, post xử lý account user
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
-
-            // Phần Route post xử lý user thêm địa chỉ giao hàng
-
             Route::get('account/address', [AccountController::class, 'getAddress'])->name('user/address');
             Route::post('account/postAddress', [AccountController::class, 'postAddress'])->name('user/add-address');
             Route::get('account/set-default/{slug}', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
+            Route::get('account/my-order', [AccountController::class, 'getOrder'])->name('user/order');
         }
     );
 });

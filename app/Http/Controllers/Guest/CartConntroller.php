@@ -89,7 +89,11 @@ class CartConntroller extends Controller
 
     public function getSuccess()
     {
-        return view('guest.pages.carts.checkout-success');
+
+        $array = [
+            'codeOrder' => session()->get('codeOrder'),
+        ];
+        return view('guest.pages.carts.checkout-success')->with($array);
     }
 
 
@@ -232,19 +236,20 @@ class CartConntroller extends Controller
             $trangthai = 'Chưa tiếp nhận';
 
             $payment = $request->idPayment;
+            // print_r($payment);
             $Order = [
                 'id_tk' => Auth::user()->id,
                 'date_order' => date_format(Carbon::now(), 'Y-m-d H:i'),
                 'address' => $userAddressDefautl != null ? $userAddressDefautl->address . ', ' . $userAddressDefautl->wards . ', ' . $userAddressDefautl->district . ', ' . $userAddressDefautl->province : '590, CMT8, District 3, HCMC',
                 'ship' => null,
                 'cod' => $userAddressDefautl != null ? 'Giao hàng tận nơi' : 'Nhận tại cửa hàng',
-                'payment' => $payment[0] === 'pay_delivery' ? 0 : 1,
+                'payment' => $payment[0] == 'pay_delivery' ? 0 : 1,
                 'id_voucher' => $voucher != null ? VOUCHER::where('code', $voucher['code'])->first()->id : null,
                 'total' => floatval($request->total),
                 'statusOrder' => $trangthai,
             ];
             $Orderlist  = Order::create($Order);
-
+            session()->put('codeOrder', $Orderlist->id);
             foreach ($request->idList as $prod) {
                 $product = Products::where('id', $prod[0])->first();
                 $OrderDetail = [
@@ -271,10 +276,10 @@ class CartConntroller extends Controller
             session()->forget('qtyCart');
             session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
             $user = Auth::user();
-
-            print_r($user);
-            Mail::send('email.xac-nhan-order-success', compact('user', 'Orderlist', 'OrderProductList'), function ($email) use ($user, $Orderlist) {
-                $email->subject('Xác nhận đặt hàng thàng công. Mã đơn hàng: ' . $Orderlist->id);
+            $userAdd = USER_ADDRESS::where('id_tk', $user->id)->where('status', 1)->first();
+            $discount = $Orderlist->id_voucher != null ? VOUCHER::where('id', $Orderlist->id_voucher)->first()->discount : 0 ;
+            Mail::send('email.xac-nhan-order-success', compact('user', 'userAdd', 'Orderlist', 'OrderProductList', 'discount'), function ($email) use ($user, $Orderlist) {
+                $email->subject('Xác nhận đặt hàng thàng công. Mã đơn hàng: #' . $Orderlist->id);
                 $email->to($user->email, $user->fullname);
             });
             return [

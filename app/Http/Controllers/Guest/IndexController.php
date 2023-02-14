@@ -9,6 +9,7 @@ use App\Models\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\USER_ADDRESS;
+use App\Models\BANNER;
 use App\Models\Category;
 use App\Models\Products;
 use App\Models\ProductImage;
@@ -32,7 +33,9 @@ class IndexController extends Controller
         $featuredProducts = $this->getFeatured();
         // get sản phẩm có giảm giá >= 15% ra trang home
         $bigDiscount = $this->getDiscount();
+        $banner = $this->getBanner();
         session()->forget('voucherKH');
+        session()->forget('codeOrder');
         if (Auth::user()) {
             $qtyCart = Cart::where('id_tk', Auth::user()->id)->sum('quanity');
             session()->put('qtyCart', intval($qtyCart));
@@ -42,6 +45,7 @@ class IndexController extends Controller
             'list_Catagory' => $lts_Catagory,
             'list_Featured' => $featuredProducts,
             'bigDiscount' => $bigDiscount,
+            'banner' => $banner,
         ];
         return view('guest.pages.home')->with($array);
     }
@@ -71,6 +75,10 @@ class IndexController extends Controller
         return view('guest.pages.paymentpolicy');
     }
 
+    public function getBanner(){
+        $bannerList = BANNER::where('status', 1)->get();
+        return $bannerList;
+    }
 
     public function getDiscount($max = 10)
     {

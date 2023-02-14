@@ -71,7 +71,7 @@
                         @if (Auth::check() || session('user'))
                             <?php $user = Auth::user(); ?>
                             <div class="icon__user">
-                                <img src="{{ asset('image/user/'. ($user->image =! null ? $user->image : 'avatar-default.png')) }}"
+                                <img src="{{ asset('image/user/' . ($user->image = !null ? $user->image : 'avatar-default.png')) }}"
                                     alt="" class="img-user">
                             </div>
                             <div class="user_info dropdown">
@@ -85,7 +85,8 @@
                                                 class="fa-solid fa-user me-1"></i>View account</a></li>
                                     <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bell me-1"></i>
                                             Notify</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-box me-1"></i>My
+                                    <li><a class="dropdown-item" href="{{ route('user/order') }}"><i
+                                                class="fa-solid fa-box me-1"></i>My
                                             Order</a></li>
                                     <li><a class="dropdown-item" href="{{ route('logout') }}"><i
                                                 class="fa-solid fa-power-off me-1"></i>Logout</a></li>
