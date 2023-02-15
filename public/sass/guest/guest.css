@@ -1721,11 +1721,11 @@ section .title i {
 }
 .han-contact .han-contact-frame .address-company {
   font-weight: 600;
-  color: #E94560;
+  color: #0F3460;
 }
 .han-contact .han-contact-frame .write-review {
   text-align: center;
-  color: #E94560;
+  color: #0F3460;
   font-size: 40px;
   font-weight: 500;
 }
@@ -1734,6 +1734,14 @@ section .title i {
 }
 .han-contact .han-contact-frame .write-review .icon-social .fa-brands {
   margin: 20px;
+}
+.han-contact .han-contact-frame .form-control-comments {
+  width: 100%;
+  height: 200px;
+}
+.han-contact .han-contact-frame .frame-col-review {
+  margin: auto;
+  padding: 20px;
 }
 
 .han-payment-policy .banner-first .image-big {
