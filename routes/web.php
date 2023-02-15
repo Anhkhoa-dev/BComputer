@@ -79,6 +79,10 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Phần dashboard - Phúc
     Route::get("/admin", [AdminsController::class, "getHome"])->name("admin/dashboard");
 
+<<<<<<< HEAD
+    // Phần account - Phúc
+=======
+>>>>>>> f4c796843c4a6fffa1c6d38b227e7f5b66f5b6f3
     Route::get('admin/account', [AcountConroller::class, 'index'])->name('admin/account');
     // Create
     Route::get('admin/account/create', [AcountConroller::class, 'create'])->name('admin/account/create');
@@ -88,7 +92,10 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::post('admin/account/update', [AcountConroller::class, 'update'])->name('admin/account/update');
     // View
     Route::get('admin/account/view', [AcountConroller::class, 'show'])->name('admin/account/view');
+<<<<<<< HEAD
+=======
 
+>>>>>>> f4c796843c4a6fffa1c6d38b227e7f5b66f5b6f3
 
     // Phần Brand- Phúc
     Route::get('admin/brand', [BrandController::class, 'index'])->name('admin/brand');
@@ -119,9 +126,8 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::get('admin/voucher/create', [VoucherController::class, 'create'])->name('admin/voucher/create');
     Route::post('admin/voucher/store', [VoucherController::class, 'store'])->name('admin/voucher/store');
     // Update
-    //Route::get('admin/voucher/edit/{id}', [VoucherController::class, 'edit'])->name('admin/voucher/edit');
+    Route::get('admin/voucher/edit/{id}', [VoucherController::class, 'edit'])->name('admin/voucher/edit');
     Route::post('admin/voucher/update/{id}', [VoucherController::class, 'update'])->name('admin/voucher/update');
-    Route::post("voucher/ajax-get-voucher", [VoucherController::class, "AjaxGetVoucher"]);
     // Delete
     Route::get('admin/voucher/destroy/{id}', [VoucherController::class, 'destroy'])->name('admin/voucher/destroy');
 
