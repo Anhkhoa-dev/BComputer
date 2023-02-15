@@ -233,7 +233,8 @@ class CartConntroller extends Controller
         if ($request->ajax()) {
             $userAddressDefautl = USER_ADDRESS::where('id', $request->idAddress)->where('status', 1)->first();
             $voucher = session('voucherKH');
-            $trangthai = 'Chưa tiếp nhận';
+
+            $trangthai = 'Đã tiếp nhận';
 
             $payment = $request->idPayment;
             // print_r($payment);
@@ -248,6 +249,11 @@ class CartConntroller extends Controller
                 'total' => floatval($request->total),
                 'statusOrder' => $trangthai,
             ];
+            if (!$voucher) {
+                $qtyVoucher = VOUCHER::where('code', $voucher['code'])->first()->quanity;
+                VOUCHER::where('code', $voucher['code'])->update(['quanity' => --$qtyVoucher]);
+            }
+
             $Orderlist  = Order::create($Order);
             session()->put('codeOrder', $Orderlist->id);
             foreach ($request->idList as $prod) {
@@ -260,7 +266,7 @@ class CartConntroller extends Controller
                     'discount'  => $product->discount,
                     'totalItem'  => ($product->price * ((100 - $product->discount) / 100)) * $prod[2],
                 ];
-
+                VOUCHER::where('id', $voucher['code'])->update(['quanity' => --$voucher->quanity]);
                 OrderDetails::create($OrderDetail);
                 Cart::where('id_tk', Auth::user()->id)->where('id_pro', $prod[0])->delete();
             }
@@ -277,7 +283,7 @@ class CartConntroller extends Controller
             session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
             $user = Auth::user();
             $userAdd = USER_ADDRESS::where('id_tk', $user->id)->where('status', 1)->first();
-            $discount = $Orderlist->id_voucher != null ? VOUCHER::where('id', $Orderlist->id_voucher)->first()->discount : 0 ;
+            $discount = $Orderlist->id_voucher != null ? VOUCHER::where('id', $Orderlist->id_voucher)->first()->discount : 0;
             Mail::send('email.xac-nhan-order-success', compact('user', 'userAdd', 'Orderlist', 'OrderProductList', 'discount'), function ($email) use ($user, $Orderlist) {
                 $email->subject('Xác nhận đặt hàng thàng công. Mã đơn hàng: #' . $Orderlist->id);
                 $email->to($user->email, $user->fullname);
