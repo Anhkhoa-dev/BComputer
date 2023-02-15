@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\User;
+use App\Models\VOUCHER;
 
 class OrderController extends Controller
 {
@@ -26,7 +27,13 @@ class OrderController extends Controller
             } else {
                 $order[$i]->username = '';
             }
+            if ($key->id_voucher) {
+                $order[$i]->voucher = VOUCHER::where('id', $key->id_vc)->first();
+            } else {
+                $order[$i]->voucher = '';
+            }
         }
+
         //dd($order);
         $array = [
             'order' => $order,

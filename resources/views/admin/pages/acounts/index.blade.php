@@ -24,14 +24,21 @@
     <section class="content">
 
         <!-- Default box -->
+        @if (\Session::get('Success'))
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="fa-solid fa-circle-check fa-lg"></i>&nbsp;
+                <strong>Success!</strong>&nbsp;{{ \Session::get('Success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endif
         <div class="card">
             <div class="card-header">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create_acount">
+                {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#create_acount">
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
-                </button>
-                {{-- <a class="btn btn-primary" href="{{ route('admin/acount/create') }}">
+                </button> --}}
+                <a class="btn btn-primary" href="{{ route('admin/account/create') }}">
                     <i class="fa fa-user-plus" aria-hidden="true"></i>
-                </a> --}}
+                </a>
                 {{-- Create --}}
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -47,7 +54,7 @@
                     <thead>
                         <tr>
                             <th style="width: 1%"> ID</th>
-                            <th style="width: 25%"> Full name </th>
+                            <th style="width: 20%"> Full name </th>
                             {{-- <th> Birthday </th> --}}
                             <th> Email</th>
                             {{-- <th> Phone</th>
@@ -55,7 +62,7 @@
                             <th style="text-align: center"> Image </th>
                             <th> Role </th>
                             <th style="text-align: center"> Status </th>
-                            <th style="text-align: center"> Action </th>
+                            <th> Action </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -81,22 +88,29 @@
                                 <td style="text-align: center"><a
                                         class="btn {{ $item->status == 1 ? 'btn-success' : 'btn-secondary' }} btn-mg">{{ $item->status == 1 ? 'Actived' : 'Clocked' }}</a>
                                 </td>
-                                <td class="project-actions text-center">
+                                <td class="project-actions text-left">
                                     {{-- View --}}
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                         data-bs-target="#show_account{{ $item->id }}"><i class="fa fa-user"
                                             aria-hidden="true"></i></button>
                                     {{-- Edit --}}
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                        data-bs-target="#edit_account{{ $item->id }}">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </button>
+                                    <a class="btn btn-info" href="{{ route('admin/account/edit', $item->id) }}">
+                                        <i class="fas fa-pencil-alt" aria-hidden="true"></i></a>
+                                    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#edit_account{{ $item->id }}"><i class="fa fa-user"
+                                            aria-hidden="true"></i></button> --}}
                                     {{-- Delete --}}
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete_account{{ $item->id }}"
-                                        {{ $item->level == 2 ? '' : 'hidden' }}>
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    @if ($item->status == 0)
+                                        <button type="button" class="btn btn-danger btn-mg" disabled>
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    @else
+                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                            data-bs-target="#delete_account{{ $item->id }}"
+                                            {{ $item->level == 2 ? '' : 'hidden' }}>
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
@@ -118,11 +132,10 @@
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header bg-info text-white">
-                        <div class="phuc-text-ban">&nbsp;Account: &nbsp;{{ $item->id }}
-                            <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#edit_account{{ $item->id }}">
+                        <div class="phuc-text-ban">&nbsp;Account: &nbsp;#{{ $item->id }}
+                            <a type="button" class="btn btn-info" href="{{ route('admin/account/edit', $item->id) }}">
                                 <i class="fas fa-pencil-alt"></i>
-                            </button>
+                            </a>
                         </div>
                         <button type="button" class="btn-close btn-lg" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -202,107 +215,6 @@
 
     <!-- Modal Create -->
 
-    <div class="modal fade" id="create_acount" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-info text-white">
-                    <div class="phuc-text-ban">&nbsp;<img src="{{ asset('image/icon/admin_icon.png') }}" width="50px">
-                        &nbsp;Create Admin
-                    </div>
-                    <button type="button" class="btn-close btn-lg" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="{{ route('admin/acount/store', $item->id) }}" method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <input hidden id="level" name="" value="2">
-                        <div class="">
-                            <div class="form-group">
-                                <div class="phuc-acount">
-                                    <img class="img_create" id="img-acc"
-                                        src="{{ asset('image/user/avatar-default.png') }}" />
-                                </div>
-                            </div>
-                            <div style="text-align:center; margin:auto">
-                                <input type="file" multiple class="d-none" accept="image/*" name="image"
-                                    id="file-acc" />
-                                <label for="file-acc" id="file-name">
-                                    <span class="file-button">
-                                        <i class="fa fa-upload"></i>
-                                    </span>&nbsp;
-                                    Choose image</label>
-                            </div>
-                        </div>
-                        <div class="card-body d-flex justify-content-between">
-                            {{-- // cột bên trai --}}
-                            <div style="width: 48%">
-                                {{-- // Full name --}}
-                                <div class="mb-3 form-select" multiple aria-label="description">
-                                    <label for="fullname" class="form-label">Full name</label>
-                                    <input type="text" class="form-control bg-light text-dark" id="fullname"
-                                        name="fullname" value="">
-                                </div>
-                                {{-- // Phone --}}
-                                <div class="mb-3 form-select" multiple aria-label="description">
-                                    <label for="phone" class="form-label">Phone</label>
-                                    <input type="number" class="form-control bg-light text-dark" id="phone"
-                                        name="phone" value="">
-                                </div>
-                                {{-- // Address --}}
-                                <div class="mb-3 form-select" multiple aria-label="">
-                                    <label for="address" class="form-label">Address</label>
-                                    <textarea type="text" class="form-control bg-light text-dark" style="margin-bottom: 5px" rows="5"
-                                        id="address"></textarea>
-                                </div>
-                            </div>
-                            {{-- // cột bên phai --}}
-                            <div style="width: 48%">
-                                {{-- // email --}}
-                                <div class="mb-3 form-select" multiple aria-label="description">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="text" class="form-control bg-light text-dark" id="email"
-                                        name="email" value="">
-                                </div>
-                                <div class="d-flex justify-content-between">
-                                    {{-- // Birthday --}}
-                                    <div class="mb-3 form-select" multiple aria-label="description" style="width: 49%">
-                                        <label for="birthday" class="form-label">Birthday</label>
-                                        <input type="date" class="form-control bg-light text-dark" id="birthday"
-                                            name="birthday" value="">
-                                    </div>
-                                    {{-- // Status --}}
-                                    <div class="mb-3 form-select" multiple aria-label="status" style="width: 49%">
-                                        <label for="statusAcc" class="form-label">Status</label>
-                                        <select id='statusAcc' name="status" aria-label="Default select example"
-                                            class="form-control btn btn-success btn-mg">
-                                            <option class="btn btn-light" selected value="1">Actived</option>
-                                            <option class="btn btn-light" value="0">Clocked</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                {{-- // password --}}
-                                <div class="mb-3 form-select" multiple aria-label="description">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" class="form-control bg-light text-dark" id="password"
-                                        name="password" value="">
-                                </div>
-                                {{-- // Confirm password --}}
-                                <div class="mb-3 form-select" multiple aria-label="description">
-                                    <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control bg-light text-dark" id="confirmPassword"
-                                        name="confirmPassword" value="">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer" style="margin-top:-10px">
-                            <button type="reset" class="btn btn-danger">Reset</button>
-                            <button id="" class="btn btn-primary btn-submit">Create</button>
-                        </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    </div>
 
     <!-- Modal Edit -->
 
@@ -317,7 +229,7 @@
                         <button type="button" class="btn-close btn-lg" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                     </div>
-                    <form action="{{ route('admin/acount/update', $item->id) }}" method="POST"
+                    <form action="{{ route('admin/account/update', $item->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         <div class="modal-body">
@@ -413,7 +325,6 @@
             </div>
         </div>
     @endforeach
-
     <!-- Modal delete -->
 
     @foreach ($prods as $item)
@@ -428,12 +339,13 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Are you sure you want to delete Account "<b>{{ $item->fullname }}</b>" with Email "<b>{{ $item->email }}</b>" ? This action cannot be
+                        Are you sure you want to delete Account "<b>{{ $item->fullname }}</b>" with Email
+                        "<b>{{ $item->email }}</b>" ? This action cannot be
                         undone!
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <a href="{{ route('admin/voucher/destroy', $item->id) }}" class="btn btn-primary">
+                        <a href="{{ route('admin/account/destroy', $item->id) }}" class="btn btn-primary">
                             Delete
                         </a>
                     </div>

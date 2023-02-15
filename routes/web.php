@@ -90,6 +90,10 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // View
     Route::get('admin/account/view', [AcountConroller::class, 'show'])->name('admin/account/view');
 
+    // Delete
+    Route::get('admin/account/destroy/{id}', [AcountConroller::class, 'destroy'])->name('admin/account/destroy');
+
+
     // Phần Brand- Phúc
     Route::get('admin/brand', [BrandController::class, 'index'])->name('admin/brand');
     // Create
