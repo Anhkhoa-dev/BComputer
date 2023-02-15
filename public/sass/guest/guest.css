@@ -1352,7 +1352,7 @@ section .title i {
   font-size: 25px;
   margin-top: -10px;
 }
-.han-product-detail .frame-fisrt .banner .likeproduct a {
+.han-product-detail .frame-fisrt .banner .likeproduct .likeproduct-info {
   text-decoration: none;
 }
 .han-product-detail .frame-fisrt .mySlides {
@@ -1369,12 +1369,6 @@ section .title i {
   width: 100%;
   cursor: pointer;
 }
-.han-product-detail .frame-fisrt hr {
-  height: 0.5px;
-  width: 100%;
-  background-color: black;
-  margin-top: -20px;
-}
 .han-product-detail .frame-fisrt .discountprice {
   margin-top: -5px;
   text-decoration: line-through;
@@ -1386,33 +1380,33 @@ section .title i {
 .han-product-detail .frame-fisrt .discount-percent {
   font-weight: 400;
 }
-.han-product-detail .form {
+.han-product-detail .form-product-detail {
   padding: 20px;
 }
-.han-product-detail .form .iconstar {
+.han-product-detail .form-product-detail .iconstar {
   color: #fb6e2e;
   font-size: 15px;
 }
-.han-product-detail .form a {
+.han-product-detail .form-product-detail .from-product-icon {
   font-size: small;
   text-decoration: none;
 }
-.han-product-detail .form .price {
+.han-product-detail .form-product-detail .price {
   font-size: 25px;
   font-weight: 600;
   color: #E94560;
 }
-.han-product-detail .form .price .quantity {
+.han-product-detail .form-product-detail .price .quantity {
   color: black;
   font-weight: 400;
   padding: 10px;
 }
-.han-product-detail .form .price .quantity .buttons_added .input-qty {
+.han-product-detail .form-product-detail .price .quantity .buttons_added .input-qty {
   text-align: center;
   width: 30px;
   font-weight: 600;
 }
-.han-product-detail .form .price .quantity .buttons_added .is-form {
+.han-product-detail .form-product-detail .price .quantity .buttons_added .is-form {
   background-color: #2f80ed;
   color: #fff;
   border-radius: 3px;
@@ -1420,84 +1414,71 @@ section .title i {
   border: none;
   font-weight: 600;
 }
-.han-product-detail .form .price .button-product {
+.han-product-detail .form-product-detail .price .button-product {
   display: flex;
   color: #fff;
   margin-bottom: 10px;
 }
-.han-product-detail .form .price .button-product div {
+.han-product-detail .form-product-detail .price .button-product .button-product-frame {
   width: 50%;
   padding: 10px;
   border-radius: 5px;
   text-align: center;
   cursor: pointer;
 }
-.han-product-detail .form .price .button-product div a {
+.han-product-detail .form-product-detail .price .button-product .buynow {
   text-decoration: none;
-}
-.han-product-detail .form .price .button-product div a:hover {
-  color: #fff;
-}
-.han-product-detail .form .price .button-product .buynow {
   color: #fff;
   background-color: #fb6e2e;
   font-weight: 300;
   width: 100%;
 }
-.han-product-detail .form .price .button-product .addtocart {
+.han-product-detail .form-product-detail .price .button-product .addtocart {
   color: #fff;
   background-color: #2f90ed;
   font-weight: 300;
   width: 100%;
 }
-.han-product-detail .form .price .contact {
+.han-product-detail .form-product-detail .price .contact {
   text-align: center;
   color: black;
   font-size: small;
   font-weight: 400;
 }
-.han-product-detail .form .price .contact a {
-  text-decoration: none;
-}
-.han-product-detail .form .price .contact .icon {
+.han-product-detail .form-product-detail .price .contact .icon {
   display: flex;
   justify-content: space-around;
   padding: 10px;
   margin-top: 10px;
   color: #0F3460;
 }
-.han-product-detail .form .price .contact .icon i {
+.han-product-detail .form-product-detail .price .contact .icon .icon-contact {
   background-color: #fff;
   padding: 10px;
   border-radius: 50%;
   font-size: 35px;
 }
-.han-product-detail .form .price .contact span {
+.han-product-detail .form-product-detail .price .contact .number-hotline {
   color: #E94560;
   font-weight: 400;
 }
-.han-product-detail .form .price hr {
+.han-product-detail .form-product-detail .price .line {
   height: 0.5px;
   width: 100%;
   background-color: black;
   margin-top: 20px;
 }
-.han-product-detail .form .details {
+.han-product-detail .form-product-detail .details {
   display: flex;
 }
-.han-product-detail .form .details .col-md-4 {
+.han-product-detail .form-product-detail .details .col-md-4 {
   padding: 5px;
 }
-.han-product-detail .form .details .col-md-4 .service-title {
+.han-product-detail .form-product-detail .details .col-md-4 .service-title {
   font-size: large;
 }
-.han-product-detail .form .details .col-md-4 .service-info {
+.han-product-detail .form-product-detail .details .col-md-4 .service-info {
   font-size: small;
-}
-.han-product-detail h6 {
-  font-weight: 300;
-  font-size: 25px;
-  padding: 0px;
 }
 
 .description-info {
@@ -1518,7 +1499,7 @@ section .title i {
 .description {
   background-color: #fff;
 }
-.description button {
+.description .button-color-decor {
   background-color: #E94560;
   border-style: groove;
   border-radius: 5px;
@@ -1534,7 +1515,7 @@ section .title i {
 .description .review .first-form {
   margin-bottom: 20px;
 }
-.description .review hr {
+.description .review .line-review {
   width: 100%;
   height: 1px;
   background-color: #0F3460;
@@ -1586,16 +1567,9 @@ section .title i {
 .description .review .like-icon .form-likeicon {
   padding: 20px;
 }
-.description .review .like-icon i {
+.description .review .like-icon .like-icon-review {
   font-size: medium;
   font-weight: 400;
-}
-.description .review .like-icon button {
-  border-radius: 5px;
-  border: 1px solid black;
-  background-color: #2f90ed;
-  color: #fff;
-  font-weight: 300;
 }
 .description .review .like-icon .comment-text {
   margin: 20px;
@@ -1604,7 +1578,7 @@ section .title i {
   background-color: #f8f8f8;
   color: black;
 }
-.description .review .like-icon .comment-text i {
+.description .review .like-icon .comment-text .comment-text-icon {
   padding: 20px;
   color: #E94560;
   font-size: small;
@@ -1712,16 +1686,16 @@ section .title i {
   display: block;
 }
 
-.han-aboutus .row {
+.han-aboutus .layout-about-us {
   padding: 20px;
   margin-top: 20px;
 }
-.han-aboutus .row .col-lg-6 h1 {
+.han-aboutus .layout-about-us .layout-col-about-us .name-text-h1 {
   text-align: center;
   color: #0F3460;
   font-weight: 600;
 }
-.han-aboutus .row .col-lg-6 img {
+.han-aboutus .layout-about-us .layout-col-about-us .img-aboutus {
   border-radius: 15px;
   padding: 10px;
   width: 100%;
@@ -1729,37 +1703,419 @@ section .title i {
   max-width: 500px;
   max-height: 500px;
 }
-.han-aboutus .row .col-lg-6 p {
+.han-aboutus .layout-about-us .layout-col-about-us .layout-col-about-us-text {
   font-weight: 500;
 }
 
-.han-contact .row {
+.han-contact .han-contact-frame {
   padding: 20px;
   margin: 20px 50px;
   background-color: #fff;
 }
-.han-contact .row .contact {
+.han-contact .han-contact-frame .contact {
   text-align: center;
   color: #E94560;
   font-size: 40px;
   font-weight: 500;
   border-bottom: 1px solid #E94560;
 }
-.han-contact .row p {
+.han-contact .han-contact-frame .address-company {
   font-weight: 600;
   color: #E94560;
 }
-.han-contact .row .row .write-review {
+.han-contact .han-contact-frame .write-review {
   text-align: center;
   color: #E94560;
   font-size: 40px;
   font-weight: 500;
 }
-.han-contact .row .row .write-review .address-bcomputer {
+.han-contact .han-contact-frame .write-review .address-bcomputer {
   padding: 20px;
 }
-.han-contact .row .row .write-review .icon-social i {
+.han-contact .han-contact-frame .write-review .icon-social .fa-brands {
   margin: 20px;
+}
+
+.han-payment-policy .banner-first .image-big {
+  width: 100%;
+  height: auto;
+}
+.han-payment-policy .banner-first .col-payment-policy {
+  position: relative;
+}
+.han-payment-policy .banner-first .col-payment-policy .guide-pay {
+  position: absolute;
+  top: 20px;
+  left: 50px;
+  color: #fff;
+}
+.han-payment-policy .banner-first .col-payment-policy .icon-image {
+  position: absolute;
+  top: 0px;
+  left: 800px;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+}
+@media (max-width: 300px) {
+  .han-payment-policy .banner-first .col-payment-policy .image-big {
+    width: 50%;
+    height: auto;
+  }
+}
+.han-payment-policy .form-info-paymentpolicy {
+  margin: 20px;
+  padding: 20px;
+  height: 220px;
+  border-radius: 10px;
+  background-color: #fff;
+  color: #0F3460;
+}
+.han-payment-policy .form-info-paymentpolicy .service {
+  color: #0F3460;
+  font-weight: 700;
+}
+.han-payment-policy .form-info-paymentpolicy .br-0 {
+  border-bottom: 5px solid #E94560;
+  border-radius: 50px;
+  width: 30px;
+}
+.han-payment-policy .form-info-paymentpolicy .br-1 {
+  border-bottom: 5px solid #339933;
+  border-radius: 50px;
+  width: 30px;
+}
+.han-payment-policy .form-info-paymentpolicy .br-2 {
+  border-bottom: 5px solid #0F3460;
+  border-radius: 50px;
+  width: 30px;
+}
+.han-payment-policy .form-info-paymentpolicy .icon-trasfer {
+  font-size: 80px;
+  color: #E94560;
+}
+.han-payment-policy .form-info-paymentpolicy .icon-cash {
+  font-size: 80px;
+  color: #339933;
+}
+.han-payment-policy .form-info-paymentpolicy .icon-receive {
+  font-size: 80px;
+  color: #0F3460;
+}
+.han-payment-policy .form-info-paymentpolicy:hover {
+  margin-top: 15px;
+}
+.han-payment-policy .color-info {
+  padding: 15px;
+}
+.han-payment-policy .color-info .bank-info-payment .info-transfer-payment {
+  background-color: #fff;
+  padding: 20px;
+}
+.han-payment-policy .color-info .bank-info-payment .info-transfer-payment .info-transfer-payment-text {
+  padding: 10px;
+  color: #3366ff;
+  font-weight: 700;
+  text-align: center;
+  margin-top: -10px;
+}
+.han-payment-policy .color-info .bank-info-payment .info-transfer-payment .form-color {
+  background-color: rgb(237, 246, 255);
+  border-radius: 5px;
+  text-align: center;
+  padding: 25px;
+}
+.han-payment-policy .color-info .bank-info-payment .info-transfer-payment .form-color .img-mb-bank {
+  margin-top: -10px;
+  height: auto;
+  width: 100%;
+  max-width: 200px;
+}
+.han-payment-policy .color-info .bank-info-payment .info-transfer-payment .bank-text {
+  text-align: left;
+  font-weight: 500;
+}
+.han-payment-policy .color-info .bank-info-payment .img-qr {
+  background-color: #fff;
+  text-align: center;
+}
+.han-payment-policy .pay-direct {
+  background-color: rgb(237, 246, 255);
+  margin: auto;
+  margin-bottom: 50px;
+}
+.han-payment-policy .pay-direct .pay-direct-col {
+  text-align: center;
+}
+.han-payment-policy .pay-direct .pay-direct-col .pay-direct-col-content {
+  color: #3366ff;
+  font-weight: 700;
+}
+.han-payment-policy .pay-direct .pay-direct-col .pay-direct-col-info {
+  color: #0F3460;
+  font-weight: 500;
+}
+.han-payment-policy .pay-direct .form-color .map {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  border-radius: 40px;
+}
+.han-payment-policy .pay-direct .form-color .address-showroom {
+  text-align: center;
+  border-radius: 40px;
+}
+.han-payment-policy .pay-direct .form-color .address-showroom .address-showroom-payment-policy {
+  color: #0F3460;
+  font-weight: 500;
+}
+.han-payment-policy .pay-direct .form-color .address-showroom .address-showroom-payment-policy-info {
+  color: #0F3460;
+  font-weight: 500;
+}
+.han-payment-policy .pay-direct .form-color .address-showroom .image-direct {
+  margin-left: -50px;
+  margin-top: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+}
+.han-payment-policy .pay-ondelivery {
+  margin: auto;
+}
+.han-payment-policy .pay-ondelivery .pay-ondelivery-form {
+  margin: auto;
+}
+.han-payment-policy .pay-ondelivery .pay-ondelivery-form .pay-ondelivery-content {
+  margin: auto;
+}
+.han-payment-policy .pay-ondelivery .pay-ondelivery-form .pay-ondelivery-content .pay-ondelivery-text {
+  color: #3366ff;
+  font-weight: 700;
+}
+.han-payment-policy .pay-ondelivery .pay-ondelivery-form .pay-ondelivery-info {
+  background-color: rgb(237, 246, 255);
+  margin: auto;
+  border-radius: 20px;
+  font-weight: 500;
+}
+.han-payment-policy .pay-ondelivery .pay-ondelivery-form .pay-ondelivery-info .pay-ondelivery-text {
+  color: #0F3460;
+  font-weight: 500;
+}
+.han-payment-policy .footer-br {
+  margin: 20px;
+  width: 30%;
+  border-bottom: 5px solid #0F3460;
+}
+
+.han-delivery-policy {
+  text-align: center;
+}
+.han-delivery-policy .form-service {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+.han-delivery-policy .form-service .form-info-delivery {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 3px;
+}
+.han-delivery-policy .form-service .form-info-delivery .fa-location-dot {
+  font-size: 30px;
+  background-color: #E9ECEE;
+  padding: 15px;
+  border-radius: 50%;
+}
+.han-delivery-policy .form-service .form-info-delivery .image-delivery {
+  width: 150px;
+  height: auto;
+}
+.han-delivery-policy .form-service .form-info-delivery-text {
+  justify-content: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 3px;
+}
+.han-delivery-policy .form-service .form-info-delivery-text .form-info-delivery-text-info {
+  text-align: left;
+}
+.han-delivery-policy .form-service .table-delivery-policy {
+  display: flex;
+  margin-top: 10px;
+  justify-content: center;
+  color: #E94560;
+  gap: 10px;
+}
+.han-delivery-policy .form-service .table-delivery-policy .table-delivery-policy-content {
+  text-decoration: none;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-family: tahoma;
+}
+.han-delivery-policy .form-service .table-delivery-policy .text-form {
+  color: black;
+  font-family: tahoma;
+  font-size: 20px;
+  font-weight: 300;
+  padding: 10px;
+}
+.han-delivery-policy .form-service .table-delivery-policy .table-info-delivery-policy {
+  border: 2px solid #E94560;
+  border-radius: 3px;
+  color: black;
+}
+.han-delivery-policy .form-service .table-delivery-policy .table-info-delivery-policy .table-info-delivery-policy-content {
+  border-radius: 3px;
+  color: #fff;
+  background-color: #E94560;
+  padding: 10px;
+}
+.han-delivery-policy .form-service .table-delivery-policy .table-info-delivery-policy .table-info-delivery-policy-info {
+  text-align: left;
+  font-size: medium;
+}
+
+.han-warrantypolicy .form-text-fisrt {
+  margin: auto;
+  position: relative;
+}
+.han-warrantypolicy .form-text-fisrt .banner {
+  width: 100%;
+  height: auto;
+  min-width: 800px;
+  min-height: 200px;
+}
+.han-warrantypolicy .form-text-fisrt .form-text-fisrt-content {
+  position: absolute;
+  color: #E94560;
+  font-weight: 700;
+  top: 20px;
+  left: 16%;
+}
+.han-warrantypolicy .form-text-fisrt .form-text-fisrt-content-info {
+  position: absolute;
+  font-weight: 800;
+  color: black;
+  top: 60px;
+  left: 16%;
+}
+.han-warrantypolicy .form-text-fisrt .form-text-fisrt-content-info .form-text-fisrt-content-text {
+  color: black;
+  font-weight: 600;
+}
+.han-warrantypolicy .form-text-second {
+  margin: auto;
+}
+.han-warrantypolicy .form-text-second .form-text-content {
+  margin-top: 50px;
+}
+.han-warrantypolicy .form-text-second .form-text-content .form-text-content-fame {
+  padding: 5px;
+  text-align: center;
+  color: #fff;
+  border: 2px solid #0F3460;
+}
+.han-warrantypolicy .form-text-second .form-text-content .form-text-content-fame .form-text-content-content {
+  padding: 5px;
+  font-weight: 700;
+  background: #E94560;
+}
+.han-warrantypolicy .form-text-second .form-text-content .form-text-content-fame .frame-info {
+  text-align: left;
+  color: black;
+}
+.han-warrantypolicy .framer-banner {
+  margin-top: 50px;
+}
+.han-warrantypolicy .framer-banner .content-banner {
+  text-align: center;
+  font-weight: 600;
+}
+.han-warrantypolicy .framer-banner .content-banner .content-banner-text {
+  text-decoration: underline;
+  color: #E94560;
+  font-weight: 700;
+}
+.han-warrantypolicy .framer-banner .step-warranty {
+  border: 1px solid #E94560;
+  margin: auto;
+  border-radius: 10px;
+}
+.han-warrantypolicy .framer-banner .step-warranty .step-name {
+  margin: 1%;
+}
+.han-warrantypolicy .framer-banner .step-warranty .step-name .step-name-content {
+  text-align: center;
+  background-color: #E94560;
+  color: #fff;
+  border-top-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font-weight: 600;
+}
+.han-warrantypolicy .framer-banner .step-warranty .step-info {
+  margin-left: 1%;
+}
+.han-warrantypolicy .framer-banner .step-warranty .step-info .step-info-content {
+  text-decoration: none;
+  font-weight: 600;
+}
+.han-warrantypolicy .framer-banner .step-warranty .step-info .step-info-content:hover {
+  color: black;
+}
+.han-warrantypolicy .framer-banner .step-warranty .step-warranty-1-2 {
+  color: #E94560;
+}
+.han-warrantypolicy .framer-banner .step-warranty-step3 {
+  background-color: rgb(237, 246, 255);
+  border: 1px solid #33cc33;
+  margin: auto;
+  border-radius: 10px;
+}
+.han-warrantypolicy .framer-banner .step-warranty-step3 .step-name {
+  margin: 1%;
+}
+.han-warrantypolicy .framer-banner .step-warranty-step3 .step-name .step-info-content-3 {
+  text-align: center;
+  background-color: #33cc33;
+  color: #fff;
+  border-top-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  font-weight: 500;
+}
+.han-warrantypolicy .framer-banner .step-warranty-step3 .step-info-3 {
+  margin-left: 1%;
+}
+.han-warrantypolicy .framer-banner .step-warranty-step3 .step-info-3 .step-info-content {
+  color: #33cc33;
+  font-weight: 600;
+  text-decoration: none;
+}
+.han-warrantypolicy .framer-banner .step-warranty-step3 .step-warranty-3 {
+  color: #33cc33;
+}
+.han-warrantypolicy .background-brand {
+  margin-top: 50px;
+  background-color: rgb(237, 246, 255);
+}
+.han-warrantypolicy .background-brand .info-warranty {
+  margin: auto;
+}
+.han-warrantypolicy .background-brand .info-warranty .img-logo {
+  margin: auto;
+}
+.han-warrantypolicy .background-brand .info-warranty .img-logo .image {
+  margin: 20px;
+  max-width: 150px;
+  width: 100%;
+  height: auto;
+}
+.han-warrantypolicy .background-brand .background-brand-info {
+  text-decoration: underline;
+  font-weight: 500;
+  padding: 20px;
 }
 
 #khoa-view-cart .cart-title {
@@ -2107,6 +2463,9 @@ section .title i {
   outline: none;
   border-radius: 5px;
   padding-left: 45px;
+  font-size: 1rem;
+}
+.khoa-login .login_nen .box_login .form_login .form_group .input_control::-moz-placeholder {
   font-size: 1rem;
 }
 .khoa-login .login_nen .box_login .form_login .form_group .input_control::placeholder {

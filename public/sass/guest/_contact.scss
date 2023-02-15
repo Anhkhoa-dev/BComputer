@@ -1,5 +1,5 @@
 .han-contact {
-    .row {
+    .han-contact-frame {
         padding: 20px;
         margin: 20px 50px;
         background-color: $bg_second;
@@ -13,30 +13,26 @@
 
         }
 
-        p {
+        .address-company {
             font-weight: 600;
             color: $bg_third;
         }
 
-        .row {
-            .write-review {
-                text-align: center;
-                color: $bg_third;
-                font-size: 40px;
-                font-weight: 500;
+        .write-review {
+            text-align: center;
+            color: $bg_third;
+            font-size: 40px;
+            font-weight: 500;
 
-                .address-bcomputer {
+            .address-bcomputer {
 
-                    padding: 20px;
+                padding: 20px;
+            }
+
+            .icon-social {
+                .fa-brands {
+                    margin: 20px;
                 }
-
-                .icon-social {
-                    i {
-                        margin: 20px;
-                    }
-                }
-
-
             }
         }
     }
