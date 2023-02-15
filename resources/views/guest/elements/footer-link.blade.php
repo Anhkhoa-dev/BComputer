@@ -5,6 +5,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
 {{-- <script src="{{ asset('js/sweetalert.js') }}"></script> --}}
 <script src='https://cdn.rawgit.com/t4t5/sweetalert/v0.2.0/lib/sweet-alert.min.js'></script>
+<script src="https://www.paypalobjects.com/api/checkout.js"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 @yield('myjs')
 </body>

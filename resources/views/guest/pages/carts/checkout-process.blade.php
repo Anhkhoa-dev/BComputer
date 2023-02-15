@@ -118,7 +118,7 @@
                 <div class="select-method mb-5">
                     <div class="pay-method">
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center" for="check_delivery">
                                 <i class="fa-solid fa-money-bill-wave me-2 text-blue"></i>
                                 Cash On Delivery
                             </div>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="pay-method">
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center" for="check_paypal" id="paypal-button">
                                 <i class="fa-brands fa-cc-paypal me-2 text-blue"></i>
                                 Cash On Paypal
                             </div>
@@ -183,4 +183,45 @@
         </div>
     </div>
 </div>
+@endsection
+@section('myjs')
+<script>
+    paypal.Button.render({
+        // Configure environment
+        env: 'sandbox',
+        client: {
+            sandbox: 'demo_sandbox_client_id',
+            production: 'demo_production_client_id'
+        },
+        // Customize button (optional)
+        locale: 'en_US',
+        style: {
+            size: 'small',
+            color: 'gold',
+            shape: 'pill',
+        },
+
+        // Enable Pay Now checkout flow (optional)
+        commit: true,
+
+        // Set up a payment
+        payment: function(data, actions) {
+            return actions.payment.create({
+                transactions: [{
+                    amount: {
+                        total: '0.01',
+                        currency: 'USD'
+                    }
+                }]
+            });
+        },
+        // Execute the payment
+        onAuthorize: function(data, actions) {
+            return actions.payment.execute().then(function() {
+                // Show a confirmation message to the buyer
+                window.alert('Thank you for your purchase!');
+            });
+        }
+    }, '#paypal-button');
+</script>
 @endsection
