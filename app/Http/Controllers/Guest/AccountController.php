@@ -28,7 +28,6 @@ class AccountController extends Controller
         ];
 
         return view('guest.pages.accounts.taikhoan')->with($array);
-
     }
 
 
@@ -84,7 +83,6 @@ class AccountController extends Controller
                 return redirect('account/address')->with('success_message', 'Đăng ký tài khoản thành công!');
             }
         }
-
     }
 
     public function getAddress()
@@ -100,7 +98,6 @@ class AccountController extends Controller
         ];
 
         return view('guest.pages.accounts.taikhoan')->with($array);
-
     }
 
     public function setDefaultAddress()
@@ -112,14 +109,14 @@ class AccountController extends Controller
         USER_ADDRESS::where('id', $url_name)->update(['status' => 1]);
 
         return redirect('account/address');
-
     }
 
-    public function getOrder(){
+    public function getOrder()
+    {
         $orderList = Order::where('id_tk', Auth::user()->id)->get();
         foreach ($orderList as $i => $key) {
             if ($key->id) {
-                $orderList[$i]->OrderDetail = OrderDetails::where('id_order',$key->id)->get();
+                $orderList[$i]->OrderDetail = OrderDetails::where('id_order', $key->id)->get();
             } else {
                 $orderList[$i]->OrderDetail = '';
             }
@@ -132,7 +129,4 @@ class AccountController extends Controller
         session()->put('orderList', $orderList);
         return view('guest.pages.accounts.taikhoan')->with($array);
     }
-
-
-
 }

@@ -1523,41 +1523,23 @@ section .title i {
 .description .review .iconstar {
   color: #fb6e2e;
 }
-.description .review .review-info .col-review {
-  display: flex;
-  margin-bottom: 10px;
-  justify-content: space-around;
+.description .review .review-frame .write-comment {
+  width: 80%;
+  height: 120px;
 }
-.description .review .review-info .col-review .form-image-review {
-  display: flex;
-  margin: 5px;
+.description .review .review-frame .review-frame-second {
+  padding: 20px;
 }
-.description .review .review-info .col-review .form-image-review .image-review {
-  width: 100%;
-  max-width: 100px;
-  border-radius: 5px;
-  border: 0.5px solid #0F3460;
-}
-.description .review .review-info .col-review .form-image-review .form-image {
-  display: flex;
-  margin: 5px;
-}
-.description .review .review-info .mySlides1 {
+.description .review .review-frame .review-frame-second .img-user-review {
   width: 100%;
   height: auto;
-  max-width: 300px;
-  max-height: 300px;
+  max-width: 60px;
 }
-.description .review .review-info .review-name {
-  font-weight: 600;
+.description .review .review-frame .review-frame-second .info-text-user {
+  margin-top: -10px;
 }
-.description .review .review-info .icon-bought {
-  color: #2ba832;
-}
-.description .review .review-info .bought-info {
-  color: #2ba832;
-  font-size: small;
-  font-weight: 400;
+.description .review .review-frame .review-frame-second .anser-comment {
+  padding: 10px;
 }
 .description .review .like-icon {
   color: #2f80ed;
