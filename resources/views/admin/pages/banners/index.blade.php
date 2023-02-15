@@ -26,6 +26,7 @@
         <!-- Default box -->
         @if (\Session::get('Success'))
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="fa-solid fa-circle-check fa-lg"></i>&nbsp;
                 <strong>Success!</strong>&nbsp;{{ \Session::get('Success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

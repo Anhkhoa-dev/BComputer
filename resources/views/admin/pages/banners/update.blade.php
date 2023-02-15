@@ -25,10 +25,10 @@
 
         <!-- Default box -->
         <div class="card">
-            <div class="card-header">
-                <h2 class="card-title"><b>Edit Banner</b></h2>
+            <div class="modal-header bg-info text-white">
+                <div class="phuc-text-ban">&nbsp;Update Banner</div>
                 <div style="text-align: right">
-                    <a class="btn btn-tool" href="{{ route('admin/banner') }}">
+                    <a class="btn-close btn-lg" href="{{ route('admin/banner') }}">
                         <i class="fas fa-times fa-lg"></i>
                     </a>
                 </div>

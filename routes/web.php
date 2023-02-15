@@ -80,15 +80,15 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::get("/admin", [AdminsController::class, "getHome"])->name("admin/dashboard");
 
     // Phần account - Phúc
-    Route::get('admin/acount', [AcountConroller::class, 'index'])->name('admin/acount');
-    Route::get('admin/acount/create', [AcountConroller::class, 'create'])->name('admin/acount/create');
-    Route::post('admin/acount/postAcount', [AcountConroller::class, 'store'])->name('admin/acount/store');
-
-    Route::get('admin/acount/edit/{slug}', [AcountConroller::class, 'edit'])->name('admin/acount/edit');
-    Route::post('admin/acount/update', [AcountConroller::class, 'update'])->name('admin/acount/update');
-    Route::get('admin/acount/view', [AcountConroller::class, 'show'])->name('admin/acount/view');
-
-
+    Route::get('admin/account', [AcountConroller::class, 'index'])->name('admin/account');
+    // Create
+    Route::get('admin/account/create', [AcountConroller::class, 'create'])->name('admin/account/create');
+    Route::post('admin/account/store', [AcountConroller::class, 'store'])->name('admin/account/store');
+    // Update
+    Route::get('admin/account/edit/{slug}', [AcountConroller::class, 'edit'])->name('admin/account/edit');
+    Route::post('admin/account/update', [AcountConroller::class, 'update'])->name('admin/account/update');
+    // View
+    Route::get('admin/account/view', [AcountConroller::class, 'show'])->name('admin/account/view');
 
     // Phần Brand- Phúc
     Route::get('admin/brand', [BrandController::class, 'index'])->name('admin/brand');
@@ -119,9 +119,8 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::get('admin/voucher/create', [VoucherController::class, 'create'])->name('admin/voucher/create');
     Route::post('admin/voucher/store', [VoucherController::class, 'store'])->name('admin/voucher/store');
     // Update
-    //Route::get('admin/voucher/edit/{id}', [VoucherController::class, 'edit'])->name('admin/voucher/edit');
+    Route::get('admin/voucher/edit/{id}', [VoucherController::class, 'edit'])->name('admin/voucher/edit');
     Route::post('admin/voucher/update/{id}', [VoucherController::class, 'update'])->name('admin/voucher/update');
-    Route::post("voucher/ajax-get-voucher", [VoucherController::class, "AjaxGetVoucher"]);
     // Delete
     Route::get('admin/voucher/destroy/{id}', [VoucherController::class, 'destroy'])->name('admin/voucher/destroy');
 

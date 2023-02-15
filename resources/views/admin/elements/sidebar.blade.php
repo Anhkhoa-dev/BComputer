@@ -58,12 +58,12 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        {{-- <li class="nav-item">
-                            <a href="../../index.html" class="nav-link">
+                        <li class="nav-item">
+                            <a href="{{ route('admin/order') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Menu</p>
+                                <p>Order</p>
                             </a>
-                        </li> --}}
+                        </li>
                         {{-- <li class="nav-item">
                             <a href="{{ route('admin/supplier') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -71,9 +71,9 @@
                             </a>
                         </li> --}}
                         <li class="nav-item">
-                            <a href="{{ route('admin/acount') }}" class="nav-link">
+                            <a href="{{ route('admin/account') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Acounts</p>
+                                <p>Account</p>
                             </a>
                         </li>
                         <li class="nav-item">

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\BRAND;
@@ -66,8 +67,16 @@ class BrandController extends Controller
             'image' => $brands['brand_image'],
             'status' => intval($brands['brand_status']),
         ];
-        BRAND::create($data);
-        return redirect()->route('admin/brand')->with('Success', 'Create Brand success!');
+        // kiem tra brand co chua
+        $isCheck = BRAND::where('name', $request->brand_name)->first();
+        if ($isCheck == null) {
+            BRAND::create($data);
+            return redirect()->route('admin/brand')->with('Success', 'Create Brand success!');
+        } else {
+            return back()->withErrors([
+                'brand_name' => 'Brand exist!'
+            ])->onlyInput('brand_name');
+        }
     }
 
     /**
@@ -115,23 +124,29 @@ class BrandController extends Controller
             ]
         );
 
-        $oldImage = BRAND::where('id',$id)->first();
+        $oldImage = BRAND::where('id', $id)->first();
 
         if ($image = $request->file('brand_image')) {
 
             $filename = $image->getClientOriginalName();
             $image->move('image/brand/', $filename);
             $brands['brand_image'] = "$filename";
-        }else{
+        } else {
             $brands['brand_image'] = $oldImage->image;
         }
         $data = [
             'image' => $brands['brand_image'],
             'status' => intval($brands['brand_status']),
-        ];
-        BRAND::where('id', $id)->update($data);
-
-        return redirect()->route('admin/brand')->with('Success','Update Brand success!');
+        ];        // kiem tra brand co chua
+        $isCheck = BRAND::where('name', $request->brand_name)->first();
+        if ($isCheck == null) {
+            BRAND::where('id', $id)->update($data);
+            return redirect()->route('admin/brand')->with('Success', 'Update Brand success!');
+        } else {
+            return back()->withErrors([
+                'brand_name' => 'Brand exist!'
+            ])->onlyInput('brand_name');
+        }
     }
 
     /**

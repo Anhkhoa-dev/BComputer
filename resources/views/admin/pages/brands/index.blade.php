@@ -26,6 +26,7 @@
         <!-- Default box -->
         @if (\Session::get('Success'))
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <i class="fa-solid fa-circle-check fa-lg"></i>&nbsp;
                 <strong>Success!</strong>&nbsp;{{ \Session::get('Success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -38,7 +39,6 @@
                     {{-- Create --}}
                 </a>
                 <div class="card-tools">
-
                     {{-- <span style="text-align: right"> --}}
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus fa-xl"></i>
@@ -108,34 +108,6 @@
             <!-- /.card-body -->
         </div>
         <!-- /.card -->
-
-        {{-- <!-- Modal show image -->
-
-        @foreach ($prods as $item)
-            <div class="modal fade" id="show_banner{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog modal-xl">
-                    <div class="modal-content">
-                        <div class="modal-header" style="padding-bottom: 5px">
-                            <a style="align-self: center" class="btn btn-light btn-mg"
-                                href="{{ route('admin/banner/edit', $item->id) }}">
-                                <i class="fa-regular fa-pen-to-square fa-lg"></i></a>&emsp;
-                            <div class="phuc-text-ban">{{ $item->title }}</div>
-                            <button type="button" class="btn-close btn-lg" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="show-image">
-                                <div style="text-align: center">
-                                    <img src="{{ asset('image/banner/' . $item->image) }}" alt=""
-                                        class="img_acount" style="text-align: center; max-width:100%">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @endforeach --}}
 
         <!-- Modal delete -->
 

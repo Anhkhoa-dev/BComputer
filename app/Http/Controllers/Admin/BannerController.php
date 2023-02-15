@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\BANNER;
 use App\Models\Category;
-use App\Http\Requests\BannerRequest;
+
 
 class BannerController extends Controller
 {
@@ -19,8 +19,8 @@ class BannerController extends Controller
 
     public function index()
     {
-        $prods = BANNER::all();
         $list_Catagory = Category::all();
+        $prods = BANNER::all();
         $array = [
             'prods' => $prods,
             'list_Catagory' => $list_Catagory,
@@ -35,7 +35,7 @@ class BannerController extends Controller
      */
     public function create()
     {
-        $fillCatagoryAll = Category::all();
+        $fillCatagoryAll = Category::where('status', 1)->get();
         $prods = BANNER::all();
         $array = [
             'fillCatagoryAll' => $fillCatagoryAll,
@@ -50,35 +50,25 @@ class BannerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(BannerRequest $request)
+    public function store(Request $request)
     {
         $bans = $request->all();
-        // $request->validate(
-        //     [
-        //         'ban_title' => 'required',
-        //         'ban_description' => 'required',
-        //         'ban_image' => 'required|image|mimes:jpg,png,jpeg',
-        //         'ban_link' => 'required',
-        //         'ban_status' => 'required',
-        //     ],
-        //     [
-        //         'ban_title.required' => 'Vui lòng nhập vào title',
-        //         'ban_description.required' => 'Vui lòng nhập vào description',
-        //         'ban_image.required' => 'Bạn chỉ được chọn file có đuôi jpg,png,jpeg',
-        //         'ban_link.required' => 'Vui lòng nhập vào link',
-        //         'ban_status.required' => 'Vui lòng nhập vào status',
-        //     ]
-        // );
-
-        // if ($request->hasfile('ban_image')) {
-        //     foreach ($request->file('ban_image') as $file) {
-        //         $fileName = $file->getClientOriginalName();
-        //         $file->move("image/banner", $fileName);
-        //         $bans['ban_image'] = $fileName;
-        //     }
-        // }
-
-
+        $request->validate(
+            [
+                'ban_title' => 'required|unique:BANNER,title',
+                'ban_description' => 'required',
+                'ban_image' => 'required|mimes:jpg,png,jpeg,gif',
+                'ban_link' => 'required',
+            ],
+            [
+                'ban_title.required' => 'Please input Title of Banner!',
+                'ban_title.unique' => 'Banner dupplicate title!',
+                'ban_description.required' => 'Please input Description of Banner!',
+                'ban_link.required' => 'Please input Categories of Banner!',
+                'ban_image.required'  => 'Please input Image of Banner!',
+                'ban_image.mimes' => 'Accept image type: jpg, png, jpeg, gif!',
+            ]
+        );
         if ($request->hasFile('ban_image')) {
             $file = $request->file('ban_image');
             $image = $file->getClientOriginalName();
@@ -95,7 +85,7 @@ class BannerController extends Controller
             'link' => $bans['ban_link'],
             'status' => intval($bans['ban_status']),
         ];
-       // dd($data);
+        // dd($data);
         BANNER::create($data);
         return redirect()->route('admin/banner')->with('Success', 'Create Banner success!');
     }
@@ -121,9 +111,8 @@ class BannerController extends Controller
      */
     public function edit($id)
     {
-        //dd($id);
-        $fillCatagoryAll = Category::all();
-        $banner = BANNER::where('id',$id)->first();
+        $fillCatagoryAll = Category::where('status', 1)->get();
+        $banner = BANNER::where('id', $id)->first();
         // dd($banner);
         $array = [
             'fillCatagoryAll' => $fillCatagoryAll,
@@ -139,23 +128,35 @@ class BannerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BannerRequest $request, $id)
+    public function update(Request $request, $id)
     {
 
         $bans = $request->all();
+        $request->validate(
+            [
+                'ban_title' => 'required',
+                'ban_description' => 'required',
+                'ban_image' => 'mimes:jpg,png,jpeg,gif',
+                'ban_link' => 'required',
+            ],
+            [
+                'ban_title.required' => 'Please input Title of Banner!',
+                'ban_description.required' => 'Please input Description of Banner!',
+                'ban_link.required' => 'Please input Categories of Banner!',
+                'ban_image.mimes' => 'Accept image type: jpg, png, jpeg, gif!',
+            ]
+        );
 
-        $oldImage = BANNER::where('id',$id)->first();
-
+        $oldImage = BANNER::where('id', $id)->first();
 
         if ($image = $request->file('ban_image')) {
 
             $filename = $image->getClientOriginalName();
-            $image->move('image/banner/',$filename);
+            $image->move('image/banner/', $filename);
             $bans['image'] = "$filename";
-        }else{
+        } else {
             $bans['image'] = $oldImage->image;
         }
-
 
         $data = [
             'title' => $bans['ban_title'],
@@ -167,20 +168,6 @@ class BannerController extends Controller
         BANNER::where('id', $id)->update($data);
 
         return redirect()->route('admin/banner')->with('Success', 'Update Banner success!');
-
-
-        //-------------------------------------
-
-        // if ($request->hasFile('ban_image')) {
-        //     $file = $request->file('ban_image');
-        //     $image = $file->getClientOriginalName();
-        //     $file->move("image/banner", $image);
-        // } else {
-        //     // trường hợp không upload phải lấy hình cũ
-        //     unset($input['image']);
-        //     // $oldItem = BANNER::find($banner->id);
-        //     // $image = $oldItem->image;
-        // }
     }
 
     /**
@@ -191,11 +178,14 @@ class BannerController extends Controller
      */
     public function destroy($id)
     {
-        $banner = BANNER::find($id);
-        // xóa hình
-        //unlink('image/banner/' . $banner->image);
-        BANNER::destroy($id);
-        // $banner->delete();
-        return redirect()->route('admin/banner')->with('Success', 'Delete Banner success!');
+        // $banner = BANNER::find($id);
+        // // xóa hình
+        // //unlink('image/banner/' . $banner->image);
+        // BANNER::destroy($id);
+        // // $banner->delete();
+        // return redirect()->route('admin/banner')->with('Success', 'Delete Banner success!');
+
+        BANNER::where('id', $id)->update(['status' => 0]);
+        return back()->with('Success', 'Banner has been disabled!');
     }
 }
