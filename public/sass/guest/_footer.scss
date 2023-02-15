@@ -55,6 +55,10 @@
             i{
                 font-size: 18px;
             }
+            &:hover{
+                border: 1px solid $Color__E94560;
+                background: #fff;
+            }
         }
     }
     

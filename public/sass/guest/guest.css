@@ -908,6 +908,10 @@ section .title i {
 .footer .footer-icons .footer-icon-socical i {
   font-size: 18px;
 }
+.footer .footer-icons .footer-icon-socical:hover {
+  border: 1px solid #E94560;
+  background: #fff;
+}
 
 .footer-copyright {
   background: #0F3460;
