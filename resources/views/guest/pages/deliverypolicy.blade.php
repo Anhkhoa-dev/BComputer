@@ -1,5 +1,7 @@
 @extends('guest.elements.master')
-
+@section('breadcrumb')
+    <a href="#" class="bc-items">Delivery policy</a>
+@endsection
 @section('user-contents')
     @include('guest.pages.section.sec-thanhdieuhuong')
     <div class="han-delivery-policy col-md-12">
