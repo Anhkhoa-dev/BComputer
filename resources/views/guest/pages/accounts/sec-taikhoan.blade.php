@@ -31,7 +31,9 @@
                                             </a>
                                             <div class="dropdown-menu border-0 mt-2">
                                                 <div class="d-inline ">
-                                                    <input type="text" class="change-name" name="tk-user" placeholder="Enter your full name" />
+                                                    <input type="text" class="change-name" name="tk-user"
+                                                        placeholder="Enter your full name"
+                                                        data-id="{{ $user->id }}" />
                                                     <div class="btn-change" id="btn-tk-name-update">Update</div>
                                                 </div>
                                             </div>

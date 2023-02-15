@@ -383,11 +383,12 @@ $(function () {
     });
     switch (page) {
 
-        case "acount": {
-            // $('#change-avt-inp').click(function(){
-            //     var avt_inp = $('#change-avt-inp').val();
-            //     alert(avt_inp)
-            // });
+        case "account": {
+            $('#btn-tk-name-update').click(function () {
+                var idUser = $('.change-name').attr('data-id');
+                var fullname = $('.change-name').val();
+                ajaxChangeFullname(idUser, fullname)
+            });
         }
         case "cart-items": {
             // alert(page);
@@ -567,6 +568,38 @@ $(function () {
         }
     }
 
+
+    function ajaxChangeFullname(id, name) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                },
+                url: "/ajax-change-fullname-user",
+                type: "POST",
+                data: {
+                    id: id,
+                    name: name,
+                },
+                success: function (data) {
+                    resolve(data);
+                    switch (data.status) {
+                        case 'success': {
+                            showAlertTop('Update full name success')
+                            location.reload();
+                            break;
+                        }
+                        default:
+                            showAlertTop('Có lỗi khi change name');
+                    }
+
+                },
+                error: function () {
+                    reject();
+                },
+            });
+        });
+    }
 
     function makePayment(idList, idAddress, idPayment, total) {
         return new Promise((resolve, reject) => {

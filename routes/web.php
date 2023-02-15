@@ -68,6 +68,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
             Route::get('account/address', [AccountController::class, 'getAddress'])->name('user/address');
             Route::post('account/postAddress', [AccountController::class, 'postAddress'])->name('user/add-address');
+            Route::post('ajax-change-fullname-user', [AccountController::class, 'ajaxChangeName'])->name('user/add-address');
             Route::get('account/set-default/{slug}', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
             Route::get('account/my-order', [AccountController::class, 'getOrder'])->name('user/order');
         }

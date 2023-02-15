@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\USER_ADDRESS;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetails;
 
@@ -30,6 +31,14 @@ class AccountController extends Controller
         return view('guest.pages.accounts.taikhoan')->with($array);
     }
 
+    public function ajaxChangeName(Request $request){
+        if($request->ajax()){
+            User::where('id', intval($request->id))->update(['fullname'=> $request->name]);
+            return [
+                'status' => 'success',
+            ];
+        }
+    }
 
     // Phần xử lý add Địa chỉ giao hàng của 1 user
     public function postAddress(Request $request)
