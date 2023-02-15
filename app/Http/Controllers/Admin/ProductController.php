@@ -10,6 +10,7 @@ use App\Models\SUPPLIER;
 use App\Models\Category;
 use App\Models\ProductImage;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Admin\Carbon;
 
 
 class ProductController extends Controller
@@ -109,6 +110,7 @@ class ProductController extends Controller
             'cauhinh' => null,
             'id_brand' => intval($prods['pro_brand']),
             'featured' => intval($prods['pro_featured']),
+            'create_date' => date_format(Carbon::now(), 'Y-m-d H:i'),
             'status' => intval($prods['pro_active']),
         ];
 
@@ -132,7 +134,6 @@ class ProductController extends Controller
                 }
             }
             return redirect('admin/product')->with('success_message', 'Thêm sản phẩm mới thành công!');
-
         }
     }
 
