@@ -175,6 +175,9 @@ $(function () {
         $("#change-avt-inp").trigger("click");
     });
 
+
+
+
     function addCart(id_sp, qty) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -271,6 +274,111 @@ $(function () {
     $('.add-new-address').click(function () {
         $("#add-address").modal("show");
     })
+
+    // Nút Mua ngay
+    $('#buy-now').click(function(){
+        var id = $(this).attr('data-id');
+        var qty1 = $('.input-qty').val();
+        addCart(id, qty1)
+            .then((data) => {
+                switch (data.status) {
+                    case "update":
+                        if ($(".cart__number").hasClass("d-none")) {
+                            $(".cart__number").removeClass("d-none");
+                        }
+                        var qtyHeadCart = parseInt($(".cart__number").text());
+                        $(".cart__number").text(++qtyHeadCart);
+                        // thông báo thêm giỏ hàng thành công
+                        // renderUpdateCartSuccessfully(data.pro_name);
+                        window.location.href ="/cart-items";
+                        break;
+                    case "new one":
+                        if ($(".cart__number").hasClass("d-none")) {
+                            $(".cart__number").removeClass("d-none");
+                        }
+                        var qtyHeadCart = parseInt($(".cart__number").text());
+                        $(".cart__number").text(++qtyHeadCart);
+                        // thông báo thêm giỏ hàng thành công
+                        // renderAddCartSuccessfully();
+                        window.location.href ="/cart-items";
+                        break;
+                    case "already have":
+                        const qtyInstock = data.qtyInStock;
+                        if (qtyInstock > 5) {
+                            showAlertTop(
+                                `Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5`
+                            );
+                        } else {
+                            showAlertTop(
+                                `Sản phẩm hết hàng hoặc đang ngừng kinh doanh`
+                            );
+                        }
+                        break;
+                    default:
+                        // thông báo thêm giỏ hàng thành công
+                        showAlertTop(
+                            "Vui lòng đăng nhập để thực hiện chức năng này"
+                        );
+                    // window.location.href = "http://127.0.0.1:8000/login";
+                }
+            })
+            .catch(() => showAlertTop(errorMessage));
+         
+    });
+
+    //nut them vao gio hang
+     $('.add-to-cart').click(function(){
+        var id = $(this).attr('data-id');
+        var qty1 = $('.input-qty').val();
+         addCart(id, qty1)
+            .then((data) => {
+                switch (data.status) {
+                    case "update":
+                        if ($(".cart__number").hasClass("d-none")) {
+                            $(".cart__number").removeClass("d-none");
+                        }
+                        var qtyHeadCart = parseInt($(".cart__number").text());
+                        $(".cart__number").text(++qtyHeadCart);
+                        // thông báo thêm giỏ hàng thành công
+                        renderUpdateCartSuccessfully(data.pro_name);
+                        break;
+                    case "new one":
+                        if ($(".cart__number").hasClass("d-none")) {
+                            $(".cart__number").removeClass("d-none");
+                        }
+                        var qtyHeadCart = parseInt($(".cart__number").text());
+                        $(".cart__number").text(++qtyHeadCart);
+                        // thông báo thêm giỏ hàng thành công
+                        renderAddCartSuccessfully();
+                        break;
+                    case "already have":
+                        const qtyInstock = data.qtyInStock;
+                        if (qtyInstock > 5) {
+                            showAlertTop(
+                                `Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5`
+                            );
+                        } else {
+                            showAlertTop(
+                                `Sản phẩm hết hàng hoặc đang ngừng kinh doanh`
+                            );
+                        }
+                        break;
+                    default:
+                        // thông báo thêm giỏ hàng thành công
+                        showAlertTop(
+                            "Vui lòng đăng nhập để thực hiện chức năng này"
+                        );
+                    // window.location.href = "http://127.0.0.1:8000/login";
+                }
+            })
+            .catch(() => showAlertTop(errorMessage));    
+    });
+
+    //nut gui comment
+    $('.send-comment').click(function(){
+            var idp = $(this).attr('data-id');
+            var qty1 = $('.input-qty').val();
+    Sendcomment(idp, qty1)
 
 
     switch (page) {
