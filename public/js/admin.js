@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     const CREATE_MESSAGE = "Thêm thành công";
     const EDIT_MESSAGE = "Chỉnh sửa thành công";
     const DELETE_MESSAGE = "Xóa thành công";
@@ -26,22 +26,23 @@ $(function () {
         return new Promise((resolve) => {
             const image = new Image();
             image.src = url;
-            image.onload = function () {
+            image.onload = function() {
                 const width = this.width;
                 const height = this.height;
                 resolve(width === height);
             };
         });
     }
+
     function isCorrectFrameRateWithman(url) {
         return new Promise((resolve) => {
             const image = new Image();
             image.src = url;
-            image.onload = function () {
+            image.onload = function() {
                 const width = this.width;
                 const height = this.height;
 
-                resolve(width != height);
+                resolve(width != height || width === height);
             };
         });
     }
@@ -49,7 +50,7 @@ $(function () {
 
     // Phần xử lý hình ảnh trong product - Khoa
 
-    $("#image_inp").change(function () {
+    $("#image_inp").change(function() {
         // HỦy chọn hình
         if ($(this).val() == "") {
             return;
@@ -108,7 +109,7 @@ $(function () {
         }
     });
     var arrayDelete = [];
-    $(document).on("click", ".delete-icon", function () {
+    $(document).on("click", ".delete-icon", function() {
         var id = $(this).data("id");
         var imageDelete = $("#image-" + id);
 
@@ -130,7 +131,7 @@ $(function () {
 
 
     //MAN-IMAGE-SUPPLIER
-    $("#image_sup").change(function () {
+    $("#image_sup").change(function() {
         // HỦy chọn hình
         if ($(this).val() == "") {
             return;
@@ -190,7 +191,7 @@ $(function () {
         }
     });
     var arrayDelete = [];
-    $(document).on("click", ".delete-icon", function () {
+    $(document).on("click", ".delete-icon", function() {
         var id = $(this).data("id");
         var imageDelete = $("#image-" + id);
 
@@ -211,11 +212,11 @@ $(function () {
     });
 
     // Xử lý ajax create voucher
-    $('#create-btn').click(function (e) {
+    $('#create-btn').click(function(e) {
         $("#voucher_create").modal("show");
     });
 
-    $('#create-submit').click(function (e) {
+    $('#create-submit').click(function(e) {
         e.preventDefault();
         var code = $("#code").val();
         var content = $("#content").val();
@@ -238,10 +239,10 @@ $(function () {
                 dateStart: dateStart,
                 endStart: endStart,
             },
-            success: function (data) {
+            success: function(data) {
                 alert(data.status);
                 location.reload()
-               
+
             }
 
         });

@@ -1,16 +1,16 @@
 .han-aboutus {
-    .row {
+    .layout-about-us {
         padding: 20px;
         margin-top: 20px;
 
-        .col-lg-6 {
-            h1 {
+        .layout-col-about-us {
+            .name-text-h1 {
                 text-align: center;
                 color: $bg_first;
                 font-weight: 600;
             }
 
-            img {
+            .img-aboutus {
                 border-radius: 15px;
                 padding: 10px;
                 width: 100%;
@@ -19,7 +19,7 @@
                 max-height: 500px;
             }
 
-            p {
+            .layout-col-about-us-text {
                 font-weight: 500;
             }
         }

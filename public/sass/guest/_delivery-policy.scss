@@ -1,0 +1,81 @@
+.han-delivery-policy {
+    text-align: center;
+
+    .form-service {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+
+
+        .form-info-delivery {
+            background-color: $bg_second ;
+            padding: 20px;
+            border-radius: 3px;
+
+            .fa-location-dot {
+                font-size: 30px;
+                background-color: $bg_fourth;
+                padding: 15px;
+                border-radius: 50%;
+            }
+
+            .image-delivery {
+                width: 150px;
+                height: auto;
+            }
+
+        }
+
+        .form-info-delivery-text {
+            justify-content: center;
+            background-color: $bg_second ;
+            padding: 20px;
+            border-radius: 3px;
+
+            .form-info-delivery-text-info {
+                text-align: left;
+            }
+        }
+
+        .table-delivery-policy {
+            display: flex;
+            margin-top: 10px;
+            justify-content: center;
+            color: $bg_third;
+            gap: 10px;
+
+            .table-delivery-policy-content {
+                text-decoration: none;
+                margin-bottom: 20px;
+                font-size: 30px;
+                font-family: tahoma;
+            }
+
+            .text-form {
+                color: black;
+                font-family: tahoma;
+                font-size: 20px;
+                font-weight: 300;
+                padding: 10px;
+            }
+
+            .table-info-delivery-policy {
+                border: 2px solid $bg_third;
+                border-radius: 3px;
+                color: black;
+
+                .table-info-delivery-policy-content {
+                    border-radius: 3px;
+                    color: $bg_second;
+                    background-color: $bg_third;
+                    padding: 10px;
+                }
+
+                .table-info-delivery-policy-info {
+                    text-align: left;
+                    font-size: medium;
+                }
+            }
+        }
+    }
+}

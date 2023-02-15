@@ -1,0 +1,175 @@
+.han-warrantypolicy {
+
+    .form-text-fisrt {
+        margin: auto;
+        position: relative;
+
+        .banner {
+            width: 100%;
+            height: auto;
+            min-width: 800px;
+            min-height: 200px;
+        }
+
+        .form-text-fisrt-content {
+            position: absolute;
+            color: $bg_third;
+            font-weight: 700;
+            top: 20px;
+            left: 16%;
+        }
+
+        .form-text-fisrt-content-info {
+            position: absolute;
+            font-weight: 800;
+            color: black;
+            top: 60px;
+            left: 16%;
+            ;
+
+            .form-text-fisrt-content-text {
+                color: black;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .form-text-second {
+        margin: auto;
+
+        .form-text-content {
+            margin-top: 50px;
+
+            .form-text-content-fame {
+                padding: 5px;
+                text-align: center;
+                color: $bg_second;
+                border: 2px solid $bg_first;
+
+                .form-text-content-content {
+                    padding: 5px;
+                    font-weight: 700;
+                    background: $bg_third;
+                }
+
+                .frame-info {
+                    text-align: left;
+                    color: black;
+                }
+            }
+        }
+    }
+
+    .framer-banner {
+        margin-top: 50px;
+
+        .content-banner {
+            text-align: center;
+            font-weight: 600;
+
+            .content-banner-text {
+                text-decoration: underline;
+                color: $bg_third;
+                font-weight: 700;
+            }
+        }
+
+        .step-warranty {
+            border: 1px solid $bg_third;
+            margin: auto;
+            border-radius: 10px;
+
+            .step-name {
+                margin: 1%;
+
+                .step-name-content {
+                    text-align: center;
+                    background-color: $bg_third;
+                    color: $bg_second;
+                    border-top-left-radius: 8px;
+                    border-bottom-right-radius: 8px;
+                    font-weight: 600;
+                }
+            }
+
+            .step-info {
+                margin-left: 1%;
+
+                .step-info-content {
+                    text-decoration: none;
+                    font-weight: 600;
+                }
+
+                .step-info-content:hover {
+                    color: black;
+                }
+            }
+
+
+            .step-warranty-1-2 {
+                color: $bg_third;
+            }
+        }
+
+        .step-warranty-step3 {
+            background-color: rgb(237, 246, 255);
+            border: 1px solid #33cc33;
+            margin: auto;
+            border-radius: 10px;
+
+            .step-name {
+                margin: 1%;
+
+                .step-info-content-3 {
+                    text-align: center;
+                    background-color: #33cc33;
+                    color: $bg_second;
+                    border-top-left-radius: 8px;
+                    border-bottom-right-radius: 8px;
+                    font-weight: 500;
+                }
+            }
+
+            .step-info-3 {
+                margin-left: 1%;
+
+                .step-info-content {
+                    color: #33cc33;
+                    font-weight: 600;
+                    text-decoration: none;
+                }
+            }
+
+            .step-warranty-3 {
+                color: #33cc33;
+            }
+        }
+    }
+
+    .background-brand {
+        margin-top: 50px;
+        background-color: rgb(237, 246, 255);
+
+        .info-warranty {
+            margin: auto;
+
+            .img-logo {
+                margin: auto;
+
+                .image {
+                    margin: 20px;
+                    max-width: 150px;
+                    width: 100%;
+                    height: auto;
+                }
+            }
+
+        }
+
+        .background-brand-info {
+            text-decoration: underline;
+            font-weight: 500;
+            padding: 20px;
+        }
+    }
+}

@@ -41,12 +41,27 @@
                             placeholder="Search...">
                         <label for="search" class="search_label"><i class="fas fa-search"></i></label>
                         <button class="btnSearch">All Search</button>
-                    </form>
+                        <div class="search-info">
+                            <div class="search-preview">
+                                <div class="search-item">
+                                    <img src="{{ asset('image/product/Asus_VivoBook_14_M413IA_EK481T_03.PNG') }}"
+                                        alt="" width="30">
+                                    <div class="search-info-group">
+                                        <a href="#" class="search-name">Laptop Asus VivoBook 14 X1402ZA EK084W</a>
+                                        <div class="search-price"><i class="fa-solid fa-dollar-sign"></i> 560.50</div>
+                                    </div>
+                                </div>
 
+                            </div>
+                            <div class="text-center py-2 border-top">
+                                <a href="#" class="text-decoration-none text-black">View more 432 products</a>
+                            </div>
+
+                        </div>
+                    </form>
                 </div>
 
                 <div class="navbar__icon">
-
                     {{-- nút giỏ hàng --}}
                     <a href="{{ route('user/cart-items') }}" class="cursor-pointer text-decoration-none text-dark">
                         <div class="icon__cart">
@@ -114,6 +129,21 @@
                             <div>Categories</div>
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
+                        {{-- <div class="card_side">
+                            @if ($list_Catagory != null)
+                                @foreach ($list_Catagory as $item)
+                                    <a href="{{ route('user/products', ['name' => $item['slug']]) }}" class="side-box"
+                                        data-id="{{ $item->slug }}">
+                                        <img src="{{ asset('image/icon/' . $item->imageIcon) }}" width="25" alt="{{ $item->name }}">
+                                        <div>{{ $item->name }}</div>
+                                        @section('product-title')
+                                            {{ $item->name }}
+                                        @endsection
+                                    </a>
+                                @endforeach
+                            @endif
+                        </div> --}}
+
                     </div>
                 </div>
                 <div class="col-md-9">
@@ -122,20 +152,24 @@
                             <div class="col-md-4 align-items-center">
                                 <div class="box_service">
                                     <img src="{{ asset('image/icon/001-hand.png') }}" width="25" alt="">
-                                    <a href="#" class="service_title">PAYMENT GUIDE</a>
+                                    <a href="{{ route('user/paymentpolicy') }}" class="service_title">PAYMENT
+                                        GUIDE</a>
                                 </div>
                             </div>
                             <div class="col-md-4 align-items-center">
                                 <div class="box_service ">
-                                    <img src="{{ asset('image/icon/002-vehicle.png') }}" width="25" alt="">
-                                    <a href="#" class="service_title">WARRANTY POLICY</a>
+                                    <img src="{{ asset('image/icon/002-vehicle.png') }}" width="25"
+                                        alt="">
+                                    <a href="{{ route('user/warrantypolicy') }}" class="service_title">WARRANTY
+                                        POLICY</a>
                                 </div>
                             </div>
                             <div class="col-md-4 align-items-center">
                                 <div class="box_service">
                                     <img src="{{ asset('image/icon/003-fast-delivery.png') }}" width="25"
                                         alt="">
-                                    <a href="#" class="service_title">SHIPPING POLICY</a>
+                                    <a href="{{ route('user/deliverypolicy') }}" class="service_title">SHIPPING
+                                        POLICY</a>
                                 </div>
                             </div>
                         </div>

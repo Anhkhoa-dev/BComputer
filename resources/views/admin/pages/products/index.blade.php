@@ -66,7 +66,7 @@
                                             <i class="fas fa-folder">
                                             </i>
                                         </a>
-                                        <a class="btn btn-info btn-sm" href="#" title="Edit product">
+                                        <a class="btn btn-info btn-sm" href="{{ route('admin/product/edit', $item->id) }}" title="Edit product">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                         </a>

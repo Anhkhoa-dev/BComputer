@@ -101,7 +101,7 @@
                 <div class="col-md-12">
                     <div class="title">
                         <img src="{{ asset('image/icon/002-new.png') }}" alt="" width="30">
-                        New Arrivals
+                        New Product
                     </div>
                 </div>
                 <div class="col-md-12 mt-3">
@@ -118,67 +118,6 @@
                                 <div class="price">$ 100</div>
                             </div>
                         </div>
-                        <div class="card">
-                            <div class="card_img">
-                                <a href="">
-                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt=""
-                                        class="img__full cursor-pointer">
-                                </a>
-                            </div>
-                            <div class="card_info">
-                                <a href="#" class="name">Product 01</a>
-                                <div class="price">$ 100</div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card_img">
-                                <a href="">
-                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt=""
-                                        class="img__full cursor-pointer">
-                                </a>
-                            </div>
-                            <div class="card_info">
-                                <a href="#" class="name">Product 01</a>
-                                <div class="price">$ 100</div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card_img">
-                                <a href="">
-                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt=""
-                                        class="img__full cursor-pointer">
-                                </a>
-                            </div>
-                            <div class="card_info">
-                                <a href="#" class="name">Product 01</a>
-                                <div class="price">$ 100</div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card_img">
-                                <a href="">
-                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt=""
-                                        class="img__full cursor-pointer">
-                                </a>
-                            </div>
-                            <div class="card_info">
-                                <a href="#" class="name">Product 01</a>
-                                <div class="price">$ 100</div>
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card_img">
-                                <a href="">
-                                    <img src="{{ asset('image/flash/flash-1.png') }}" alt=""
-                                        class="img__full cursor-pointer">
-                                </a>
-                            </div>
-                            <div class="card_info">
-                                <a href="#" class="name">Product 01</a>
-                                <div class="price">$ 100</div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>

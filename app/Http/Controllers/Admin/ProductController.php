@@ -10,6 +10,7 @@ use App\Models\SUPPLIER;
 use App\Models\Category;
 use App\Models\ProductImage;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 
 class ProductController extends Controller
@@ -59,7 +60,7 @@ class ProductController extends Controller
     public function create()
     {
         //
-        $category = Category::all();
+        $category = Category::where('status', 1)->get();
         $brands = BRAND::all();
         $supplier = SUPPLIER::all();
         $array = [
@@ -109,6 +110,7 @@ class ProductController extends Controller
             'cauhinh' => null,
             'id_brand' => intval($prods['pro_brand']),
             'featured' => intval($prods['pro_featured']),
+            'create_date' => date_format(Carbon::now(), 'Y-m-d H:i'),
             'status' => intval($prods['pro_active']),
         ];
 
@@ -132,7 +134,6 @@ class ProductController extends Controller
                 }
             }
             return redirect('admin/product')->with('success_message', 'Thêm sản phẩm mới thành công!');
-
         }
     }
 
@@ -177,9 +178,41 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
-    }
+        {
+            //trả về view
+            $category = Category::where('status', 1)->get();
+            $brands = BRAND::where('status', 1)->get();
+            $supplier = SUPPLIER::where('status', 1)->get();
+            $prod = Products::where('id', $id)->first();
+            $productImg = ProductImage::where('id_pro', $prod->id)->get();
+            if ($prod->id_ca) {
+                $prod->category = Category::find($prod->id_ca);
+                
+            } else {
+                $prod->category = '';
+            }
+            if ($prod->sup_id) {
+                $prod->supplier = SUPPLIER::find($prod->sup_id);
+            } else {
+                $prod->supplier = '';
+            }
+            if ($prod->id_brand) {
+                $prod->brand = BRAND::find($prod->id_brand);
+            } else {
+                $prod->brand = '';
+            }
+            $array = [
+                'proShow' => $prod,
+                'category' => $category,
+                'brands' => $brands,
+                'supplier' => $supplier,
+                'prod' => $prod,
+                'message' => 'Bạn đã đăng nhập thành công',
+                'proImage' => $productImg,
+            ];
+            // dd($array);
+            return view('admin.pages.products.edit')->with($array);
+        }
 
     /**
      * Update the specified resource in storage.
@@ -190,8 +223,41 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
+        $prods = $request->all();
+        $product_img = Products::where('id', $id)->first();
+        $oldImage = Products::where('id', $id)->first();
+        if ($request->hasfile('pro_image'))
+        {
+            foreach ($request->file('pro_image') as $file) {
+                $fileName = $file->getClientOriginalName();
+                $file->move("image/product", $fileName);
+                ProductImage::create([
+                    'id_pro' => $product_img->id,
+                    'image' => $fileName,
+                ]);
+            }
+        }else{
+            $prods['pro_image'] = $oldImage->image;
+        }
+       
+        $data = [
+            'name' => $prods['pro_name'],
+            'slug' => Str::slug($prods['pro_name']),
+            'id_ca' => intval($prods['pro_category']),
+            'discount' => intval($prods['pro_discount']),
+            'sup_id' => intval($prods['pro_supplier']),
+            'description' => $prods['pro_desc'],
+            'price' => floatval($prods['pro_price']),
+            'quantity' => intval($prods['pro_quantity']),
+            'cauhinh' => null,
+            'id_brand' => intval($prods['pro_brand']),
+            'featured' => intval($prods['pro_featured']),
+            'status' => intval($prods['pro_active']),
+        ];
+        //dd($data);
+        Products::where('id', $id)->update($data);
+        return redirect('admin/product');
+}
 
     /**
      * Remove the specified resource from storage.

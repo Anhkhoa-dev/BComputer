@@ -11,7 +11,7 @@
     <a href="{{ route('user/order') }}" class="sidebar-link @yield('acc-order-active')">
         <i class="fa-solid fa-box"> </i>
         <div class="sidebar-title">Manager order </div>
-        <div class="processing-qty number-bage">{{ count($orderList) }}</div>
+        <div class="processing-qty number-bage">0</div>
     </a>
     <a href="{{ route('user/address') }}" class="sidebar-link @yield('acc-address-active')">
         <i class="fa-solid fa-map-marked"> </i>

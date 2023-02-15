@@ -455,6 +455,8 @@ $(function () {
         }
     }
 
+    $('.search')
+
     function makePayment(idList, idAddress, idPayment, total) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -520,6 +522,10 @@ $(function () {
                 },
             });
         });
+    }
+
+    function ajaxSearch(Key) {
+
     }
 
 

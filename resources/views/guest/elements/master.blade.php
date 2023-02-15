@@ -1,7 +1,7 @@
     @include('guest.elements.head')
 
     <div class="scroll-to-top">
-        <i class="fa-solid fa-up"></i>
+        <i class="fa-solid fa-chevron-up"></i>
     </div>
 
     @if (session('toast_message'))

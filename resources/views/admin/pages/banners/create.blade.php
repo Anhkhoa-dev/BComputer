@@ -25,10 +25,11 @@
 
         <!-- Default box -->
         <div class="card">
-            <div class="card-header">
-                <h2 class="card-title"><b>Create Banner</b></h2>
+
+            <div class="modal-header bg-info text-white">
+                <div class="phuc-text-ban">&nbsp;Create Banner</div>
                 <div style="text-align: right">
-                    <a class="btn btn-tool" href="{{ route('admin/banner') }}">
+                    <a class="btn-close btn-lg" href="{{ route('admin/banner') }}">
                         <i class="fas fa-times fa-lg"></i>
                     </a>
                 </div>
@@ -62,7 +63,11 @@
                                     <option class="btn btn-light" selected value="0">Clocked</option>
                                     <option selected>{{ old('ban_link') }}</option>
                                     @foreach ($fillCatagoryAll as $item)
-                                        <option value="{{ $item->slug }}">{{ $item->name }}</option>
+                                        @if ($item->status == '0')
+                                            <option disabled value="{{ $item->slug }}">{{ $item->name }}</option>
+                                        @else
+                                            <option value="{{ $item->slug }}">{{ $item->name }}</option>
+                                        @endif
                                     @endforeach
                                 @endif
                             </select>
