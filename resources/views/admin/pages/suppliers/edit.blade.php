@@ -91,9 +91,7 @@
                                 @enderror
                                 <div class="image-sup-div">
                                     <div class="row">
-                                        {{-- if(image != 0){
-                                        <img src="" alt="">
-                                        } --}}
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -106,7 +104,6 @@
                                     Choose image</label>
                             </div>
                         </div>
-
 
                         <div class="mb-3">
                             <label for="exampleFormControlInput1" class="form-label">Status</label>

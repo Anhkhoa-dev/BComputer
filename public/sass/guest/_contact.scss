@@ -15,12 +15,12 @@
 
         .address-company {
             font-weight: 600;
-            color: $bg_third;
+            color: $bg_first;
         }
 
         .write-review {
             text-align: center;
-            color: $bg_third;
+            color: $bg_first;
             font-size: 40px;
             font-weight: 500;
 
@@ -34,6 +34,16 @@
                     margin: 20px;
                 }
             }
+        }
+
+        .form-control-comments {
+            width: 100%;
+            height: 200px;
+        }
+
+        .frame-col-review {
+            margin: auto;
+            padding: 20px;
         }
     }
 }
