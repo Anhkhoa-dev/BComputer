@@ -77,7 +77,8 @@
                         <div class="col-md-12">
                             <div class="button-product">
                                 <div class="col-md-6 button-product-frame">
-                                    <a class="btn buynow" href="#"><b>BUY NOW</b></a>
+                                    <a class="btn buynow" id="buy-now" data-id="{{ $prod->id }}"
+                                        href="#"><b>BUY NOW</b></a>
                                 </div>
                                 <div class="col-md-6 button-product-frame">
                                     <a class="btn addtocart add-to-cart" href="#"
@@ -197,7 +198,7 @@
 
         <div class="col-md-12">
             <div class="row">
-                <div class="description col-md-8">
+                <div class="description col-md-9">
                     <div class="name-doc">
                         <button class="w3-bar-item w3-button button-color-decor" style="border:none"
                             onclick="openTab('description')">Description</button>
@@ -225,8 +226,8 @@
                             5 review
                         </div>
                         <hr class="line-review">
-                        <div class="col-md-12">
-                            <div class="review-info">
+                        <div class="col-md-12 review-frame">
+                            {{-- <div class="review-info">
                                 <div class="col-md-12 row col-review">
                                     <div class="col-md-12">
                                         <span class="review-name">Le Van A</span>
@@ -270,7 +271,7 @@
                                         <span data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
                                             aria-expanded="false" aria-controls="flush-collapseOne">
                                             <i class="fa fa-comment like-icon-review" aria-hidden="true"></i>
-                                            <span>Comment</span>
+                                            <span class="send-comment" data-id="{{ $prod->id }}">Comment</span>
                                         </span>
                                         <form action="">
                                             <div id="flush-collapseOne" class="accordion-collapse collapse"
@@ -278,7 +279,8 @@
                                                 data-bs-parent="#accordionFlushExample">
                                                 <div class="mb-4">
                                                     <div class="comment-text">
-                                                        <i class="fa fa-user comment-text-icon" aria-hidden="true">Seller
+                                                        <i class="fa fa-user comment-text-icon"
+                                                            aria-hidden="true">Seller
                                                             Response</i>
                                                         <div>cảm ơn quý khách đã ủng hộ shop</div>
                                                     </div>
@@ -294,13 +296,70 @@
                                         </form>
                                     </div>
                                 </div>
+                            </div> --}}
+                            <textarea class="write-comment" name="" id="" placeholder="write a review(*)" rows="5"></textarea><br>
+                            <button class="btn btn-primary">Send comment</button>
+                            <div class="review-frame-second">
+                                <h3>Comments(10)</h3>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-xl-1">
+                                            <img class="img-user-review"
+                                                src="{{ asset('image/user/avatar-default.png') }}">
+                                        </div>
+                                        <div class="col-xl-11 info-text-user">
+                                            <h4>Nguyen van A</h4>
+                                            <h6>vừa mua được 1 tháng, dùng tốt</h6>
+                                            <span data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                                aria-expanded="false" aria-controls="flush-collapseOne">
+                                                <button class="badge bg-primary text-wrap"
+                                                    data-id="{{ $prod->id }}">Answer</button>
+                                            </span>
+                                            <form action="">
+                                                <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                                    aria-labelledby="flush-headingOne"
+                                                    data-bs-parent="#accordionFlushExample">
+                                                    <div class="mb-4">
+                                                        <div class="row anser-comment">
+                                                            <div class="col-xl-1">
+                                                                <img class="img-user-review"
+                                                                    src="{{ asset('image/user/avatar-default.png') }}">
+                                                            </div>
+                                                            <div class="col-xl-11 info-text-user">
+                                                                <h4>Nguyen van B</h4>
+                                                                <h6>sản phẩm, có hay bị lỗi vặt không ạ</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row anser-comment">
+                                                            <div class="col-xl-1">
+                                                                <img class="img-user-review"
+                                                                    src="{{ asset('image/user/avatar-default.png') }}">
+                                                            </div>
+                                                            <div class="col-xl-11 info-text-user">
+                                                                <h4>Nguyen van C</h4>
+                                                                <h6>máy dùng khá nóng</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <textarea class="form-control" id="form4Example3" rows="1"></textarea>
+                                                            <span>
+                                                                <a class="input-group-text btn btn-primary text-light"
+                                                                    href="">Send</a>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <hr>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <h1>Cot 4 nam day</h1>
+                <div class="col-md-3">
+                    <h1>Cot 3 nam day</h1>
                 </div>
             </div>
 
@@ -571,31 +630,6 @@
         if (panel.style.display === "none") {
             panel.style.display = "block";
         }
-    });
-
-    $(document).ready(function() {
-        $('.add-to-cart').click(function(e) {
-            e.preventDefault(); // bỏ tác dụng của link
-
-            let pid = $(this).data("id");
-            let quantity = $('input[name="product-quatity"]').val();
-            // dùng jquery ajax gửi request về server
-            $.ajax({
-                type: "post",
-                url: "{{ Route('user/addCart') }}",
-                data: {
-                    pid: pid,
-                    quantity: quantity,
-                    _token: '{{ csrf_token() }}',
-                },
-                success: function(data) {
-                    alert('add product to cart successful.');
-                },
-                error: function(data) {
-                    alert("fail");
-                }
-            });
-        });
     });
 </script>
 @endsection
