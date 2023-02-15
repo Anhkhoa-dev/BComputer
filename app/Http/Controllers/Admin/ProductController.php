@@ -10,7 +10,7 @@ use App\Models\SUPPLIER;
 use App\Models\Category;
 use App\Models\ProductImage;
 use Illuminate\Support\Str;
-use App\Http\Controllers\Admin\Carbon;
+use Carbon\Carbon;
 
 
 class ProductController extends Controller
