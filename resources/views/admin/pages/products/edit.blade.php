@@ -78,44 +78,30 @@
                         </div>
                         <div class="col-12">
                             <div class="row">
-                                {{-- <div class="col-6">
+                                <div class="col-6">
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label for="link" class="form-label">Category</label>
-                                            <select id='link' name="pro_link" id="" class="form-select">
-                                                <option selected>{{ old('pro_link') == '' ? $prod->link : old('pro_link') }}
+                                            <label for="">Category</label>
+                                            <select name="pro_category" id="" class="form-select" readonly>
+                                                <option value="{{ $proShow->category->id }}" selected>
+                                                    {{ $proShow->category->name }}
+                                                </option>
                                                 @foreach ($category as $item)
-                                                    <option value="{{ $item->slug }}">{{ $item->name }}</option>
+                                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
                                                 @endforeach
                                             </select>
 
                                         </div>
                                     </div>
-                                </div> --}}
-
-                                <div class="col-6">
-                                <div class="col-12">
-                                    <div class="mb-3">
-                                        <label for="">Category</label>
-                                        <select name="pro_category" id="" class="form-select" readonly>
-                                            <option value="{{ $proShow->category->id }}" selected >
-                                                {{ $proShow->category->name }}
-                                            </option>
-                                            @foreach ($category as $item)
-                                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                                        @endforeach
-                                        </select>
-
-                                    </div>
                                 </div>
-                            </div>
-
                                 <div class="col-6">
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label for="">Brands</label>
                                             <select name="pro_brand" id="" class="form-select">
-                                                <option value="" selected>Select brands</option>
+                                                <option value="{{ $proShow->brand->id }}" selected>
+                                                    {{ $proShow->brand->name }}
+                                                </option>
                                                 @foreach ($brands as $brand)
                                                     <option value="{{ $brand->id }}">{{ $brand->name }}
                                                     </option>
@@ -134,7 +120,9 @@
                                         <div class="mb-3">
                                             <label for="">Supplier</label>
                                             <select name="pro_supplier" id="" class="form-select">
-                                                <option value="" selected>Select supplier</option>
+                                                <option value="{{ $proShow->supplier->id }}" selected>
+                                                    {{ $proShow->supplier->name }}
+                                                </option>
                                                 @foreach ($supplier as $sup)
                                                     <option value="{{ $sup->id }}">{{ $sup->name }}
                                                     </option>
@@ -182,41 +170,37 @@
                         <div class="col-12">
                             <div class="mb-3">
                                 <label for="">Image product</label>
-                                <b id="qty-image"></b>
-                                @error('pro_image')
-                                    <span class="errorMsg">{{ $message }}</span>
-                                @enderror
+                                <b id="qty-image">({{ count($proImage) }} image)</b>
                                 <div class="image-preview-div">
                                     <div class="row">
+                                        @foreach ($proImage as $item)
+                                            <div class="image-preview col-md-4 col-6">
+                                                <img src="{{ asset('image/product/' . $item->image) }}" alt=""
+                                                    class="img-preview">
+                                                <div class="bg-image-hover">
+                                                </div>
+                                            </div>
+                                        @endforeach
+
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12">
-                            <div class="mb-3">
-                                <input type="file" name="pro_image[]" id="image_inp" multiple class="d-none"
-                                    value="{{ old('pro_image[]') }}">
-                                <label class="form-control btn-primary text-center cursor-pointer " for="image_inp">
-                                    Choose image</label>
-                                <p>* Kích thước hình ảnh: 600x600 (px) - Tỉ lệ hình ảnh: 1:1</p>
 
-                            </div>
-                        </div>
+
                         <div class="col-12">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="mb-3">
                                         <label for="">Featured</label>
                                         <select name="pro_featured" id="" class="form-select">
-                                            {{-- <option value="1" selected>Nổi bật</option>
-                                            <option value="0">Thường</option> --}}
                                             @if ($prod->featured == '1')
-                                            <option selected value="1">Nổi bật</option>
-                                            <option value="0">Thường</option>
-                                        @else
-                                            <option selected value="0">Thường</option>
-                                            <option value="1">Nổi bật</option>
-                                        @endif
+                                                <option selected value="1">Nổi bật</option>
+                                                <option value="0">Thường</option>
+                                            @else
+                                                <option selected value="0">Thường</option>
+                                                <option value="1">Nổi bật</option>
+                                            @endif
                                         </select>
                                     </div>
                                 </div>
