@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class OrderDetails extends Model
 {
     use HasFactory;
-    protected $table = 'oder';
+    protected $table = 'oderdetails';
     // protected $timestamp = false;
     protected $primaryKey = 'id';
     protected $fillable = [

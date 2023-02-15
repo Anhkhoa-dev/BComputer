@@ -16,7 +16,7 @@
 @include('guest.pages.section.sec-thanhdieuhuong')
 <div class="han-product-detail pt-2">
     <div class="container">
-        <div class="row">
+        <div class="row frame-fisrt">
             <div class="w3-content w3-display-container col-lg-5">
                 @foreach ($image as $item)
                     <img class="mySlides" src="{{ asset('image/product/' . $item->image) }}">
@@ -33,7 +33,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-lg-7 form">
+            <div class="col-lg-7 form-product-detail">
                 <div class="banner">
                     <div class="col-md-12">
                         <div class="product-name">{{ $prod->name }}</div>
@@ -41,48 +41,56 @@
                 </div>
                 <div class="col-md-12">
                     <div class="row">
-                        <div class="col-md-4">
-                            <a href="">
+                        <div class="col-md-5">
+                            <a class="from-product-icon" href="">
                                 <i class="fa fa-star iconstar" aria-hidden="true"></i>
                                 <i class="fa fa-star iconstar" aria-hidden="true"></i>
                                 <i class="fa fa-star iconstar" aria-hidden="true"></i>
                                 <i class="fa fa-star iconstar" aria-hidden="true"></i>
                                 <i class="fa fa-star iconstar" aria-hidden="true"></i>
-                                5 review</a>
+                                5 review
+                            </a>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <div class="likeproduct">
-                                <a href="">
+                                <a class="likeproduct-info from-product-icon" href="">
                                     <i id="heart" onclick="myFunction()" class="fa-solid fa-heart"></i>
                                     Like Product
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="price">2.000.000<span>₫</span>
+
+                    <div class="price">{{ $prod->price }}<span>₫</span>
                         <span class="discount-percent">-20%</span>
-                        <div class="discountprice">2.500.000₫</div>
+                        <div class="discountprice">
+                            {{ number_format($prod->price * ((100 - $prod->discount) / 100), 2) }}</div>
                         <div class="quantity">
                             Quantity :
                             <span class="buttons_added">
                                 <input class="minus is-form" type="button" value="-">
-                                <input aria-label="quantity" class="input-qty" max="50" min="0"
-                                    name="" type="number" value="0">
+                                <input aria-label="quantity" class="input-qty" max="50" min="1"
+                                    name="product-quatity" type="number" value="1" pattern="[0-9]*">
                                 <input class="plus is-form" type="button" value="+">
                             </span>
                         </div>
                         <div class="col-md-12">
                             <div class="button-product">
-                                <div class="buynow"><a href="#"><b>BUY NOW</b></a></div>
-                                <div class="addtocart"><a href="#"><b>ADD TO CART</b></a></div>
+                                <div class="col-md-6 button-product-frame">
+                                    <a class="btn buynow" href="#"><b>BUY NOW</b></a>
+                                </div>
+                                <div class="col-md-6 button-product-frame">
+                                    <a class="btn addtocart add-to-cart" href="#"
+                                        data-id="{{ $prod->id }}"><b>ADD TO CART</b></a>
+                                </div>
                             </div>
                             <div class="contact">
-                                Contact to buy now <span> 0865 677 010 </span> (07:30-22:00)
+                                Contact to buy now <span class="number-hotline"> 0865 677 010 </span> (07:30-22:00)
                                 <div class="col-md-12">
                                     <div class="icon">
-                                        <div><i class="fa-solid fa-truck-fast"></i></div>
-                                        <div><i class="fa-solid fa-gift"></i></div>
-                                        <div><i class="fa-solid fa-arrow-rotate-left"></i></div>
+                                        <div><i class="fa-solid fa-truck-fast icon-contact"></i></div>
+                                        <div><i class="fa-solid fa-gift icon-contact"></i></div>
+                                        <div><i class="fa-solid fa-arrow-rotate-left icon-contact"></i></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -96,17 +104,19 @@
                                         </div>
                                         <div class="col-md-4">
                                             <div class="service-title">SPECAIL OFFER</div>
-                                            <div class="service-info">Get a gift! Lorem Ipsum is simply dummy Text of
+                                            <div class="service-info">Get a gift! Lorem Ipsum is simply dummy
+                                                Text of
                                                 the printing</div>
                                         </div>
                                         <div class="col-md-4">
                                             <div class="service-title">ORDER RETURN</div>
-                                            <div class="service-info">Return within 7 days Lorem Ipsum is simply dummy
+                                            <div class="service-info">Return within 7 days Lorem Ipsum is simply
+                                                dummy
                                                 Text of the printing
                                             </div>
                                         </div>
                                     </div>
-                                    <hr>
+                                    <hr class="line">
                                 </div>
                             </div>
                             <div class="accordion" id="accordionExample">
@@ -185,103 +195,115 @@
             </div>
         </div>
 
-        <div class="description col-md-12">
-            <div class="name-doc">
-                <button class="w3-bar-item w3-button" style="border:none"
-                    onclick="openTab('description')">Description</button>
-                <button class="w3-bar-item w3-button" style="border:none" onclick="openTab('review')">Review</button>
-            </div>
-            <div id="description" class="w3-container city">
-                <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <p>{{ $prod->description }}</p>
-                        </div>
-                        <div class="col-md-4">
-                            <h1>Cột 4 nằm đây</h1>
+        <div class="col-md-12">
+            <div class="row">
+                <div class="description col-md-8">
+                    <div class="name-doc">
+                        <button class="w3-bar-item w3-button button-color-decor" style="border:none"
+                            onclick="openTab('description')">Description</button>
+                        <button class="w3-bar-item w3-button button-color-decor" style="border:none"
+                            onclick="openTab('review')">Review</button>
+                    </div>
+                    <div id="description" class="w3-container city">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12 info-product">
+                                    <p>{{ $prod->description }}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div id="review" class="w3-container city review">
-                <h3>Review {{ $prod->name }}</h3>
-                <span class="iconstar">4,5</span>
-                <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                5 review
-                <hr>
-                <div class="col-md-12">
-                    <div class="review-info">
-                        <div class="col-md-12 row col-review">
-                            <div class="col-md-8">
-                                <span class="review-name">Le Van A</span>
-                                <i class="fa fa-check-circle icon-bought" aria-hidden="true"></i><span
-                                    class="bought-info">
-                                    bought at Bcomputer</span>
-                                <div>
-                                    <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                                    <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                                    <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                                    <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                                    <p>Dùng tốt ạ máy rất nhạy đẹp sang tính năng nhiều</p>
-                                    <div class="col-md-12 form-image-review">
-                                        <div class="form-image">
-                                            <?php $index = 0; ?>
-                                            @foreach ($image as $item)
-                                                <div class="image-review">
-                                                    <img class="image-review"src="{{ asset('image/product/' . $item->image) }}"
-                                                        onclick="currentDiv1({{ $index }})">
+                    <div id="review" class="w3-container city review">
+                        <div class="first-form">
+                            <h3>Review {{ $prod->name }}</h3>
+                            <span class="iconstar">4,5</span>
+                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                            5 review
+                        </div>
+                        <hr class="line-review">
+                        <div class="col-md-12">
+                            <div class="review-info">
+                                <div class="col-md-12 row col-review">
+                                    <div class="col-md-12">
+                                        <span class="review-name">Le Van A</span>
+                                        <i class="fa fa-check-circle icon-bought" aria-hidden="true"></i><span
+                                            class="bought-info">
+                                            bought at Bcomputer</span>
+                                        <div class="review-first-form">
+                                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                                            <p>Dùng tốt ạ máy rất nhạy đẹp sang tính năng nhiều</p>
+                                            <div class="col-md-12 form-image-review">
+                                                <div class="form-image">
+                                                    <?php $index = 0; ?>
+                                                    @foreach ($image as $item)
+                                                        <div class="col-md-1">
+                                                            <img id="accordion"
+                                                                class="image-review"src="{{ asset('image/product/' . $item->image) }}"
+                                                                onclick="currentDiv1({{ $index }}) ">
+                                                            <?php $index++; ?>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
-                                                <?php $index++; ?>
-                                            @endforeach
+                                            </div>
                                         </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        @foreach ($image as $item)
+                                            <img class="mySlides1" style="display:none"
+                                                src="{{ asset('image/product/' . $item->image) }}">
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="like-icon col-md-8">
+                                    <div class="form-likeicon">
+                                        <span id="like" onclick="myFunctionlike()">
+                                            <i class="fa fa-thumbs-up like-icon-review" aria-hidden="true"></i>
+                                            <span>Like</span>
+                                        </span>
+                                        <span data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
+                                            aria-expanded="false" aria-controls="flush-collapseOne">
+                                            <i class="fa fa-comment like-icon-review" aria-hidden="true"></i>
+                                            <span>Comment</span>
+                                        </span>
+                                        <form action="">
+                                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                                aria-labelledby="flush-headingOne"
+                                                data-bs-parent="#accordionFlushExample">
+                                                <div class="mb-4">
+                                                    <div class="comment-text">
+                                                        <i class="fa fa-user comment-text-icon" aria-hidden="true">Seller
+                                                            Response</i>
+                                                        <div>cảm ơn quý khách đã ủng hộ shop</div>
+                                                    </div>
+                                                    <div class="input-group">
+                                                        <textarea class="form-control" id="form4Example3" rows="1"></textarea>
+                                                        <span>
+                                                            <a class="input-group-text btn btn-primary text-light"
+                                                                href="">Send</a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                @foreach ($image as $item)
-                                    <img class="mySlides1" src="{{ asset('image/product/' . $item->image) }}">
-                                @endforeach
-                            </div>
                         </div>
-                        <div class="like-icon col-md-8">
-                            <div class="form-likeicon">
-                                <span id="like" onclick="myFunctionlike()">
-                                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                    <span>Like</span>
-                                </span>
-                                <span data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
-                                    aria-expanded="false" aria-controls="flush-collapseOne">
-                                    <i class="fa fa-comment" aria-hidden="true"></i>
-                                    <span>Comment</span>
-                                </span>
-                                <form action="">
-                                    <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                        aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                        <div class="mb-4">
-                                            <div class="comment-text">
-                                                <i class="fa fa-user" aria-hidden="true"> Seller Response</i>
-                                                <div>cảm ơn quý khách đã ủng hộ shop</div>
-                                            </div>
-                                            <div class="input-group">
-                                                <textarea class="form-control" id="form4Example3" rows="1"></textarea>
-                                                <span>
-                                                    <a class="input-group-text btn btn-primary text-light"
-                                                        href="">Send</a>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        <hr>
                     </div>
                 </div>
-                <hr>
+                <div class="col-md-4">
+                    <h1>Cot 4 nam day</h1>
+                </div>
             </div>
+
         </div>
         {{-- Sản phẩm cùng giá --}}
         <section>
@@ -442,8 +464,11 @@
         for (i = 0; i < dots.length; i++) {
             dots[i].className = dots[i].className.replace(" w3-opacity-off", "");
         }
+
         x[slideIndex - 1].style.display = "block";
-        dots[slideIndex - 1].className += " w3-opacity-off";
+        if (dots.length > 0) {
+            dots[slideIndex - 1].className += " w3-opacity-off";
+        }
     }
 
     function currentDiv1(n) {
@@ -512,7 +537,7 @@
         }
     });
 
-    var slideIndex = 1;
+    let slideIndex = 1;
     showDivs(slideIndex);
 
     function plusDivs(n) {
@@ -535,5 +560,42 @@
         }
         document.getElementById(cityName).style.display = "block";
     }
+
+    var acc = document.getElementById("accordion");
+    var i;
+
+    acc.addEventListener("click", function() {
+        this.classList.toggle("active");
+        let panel = document.querySelector(".panel");
+        panel.style.display = "none";
+        if (panel.style.display === "none") {
+            panel.style.display = "block";
+        }
+    });
+
+    $(document).ready(function() {
+        $('.add-to-cart').click(function(e) {
+            e.preventDefault(); // bỏ tác dụng của link
+
+            let pid = $(this).data("id");
+            let quantity = $('input[name="product-quatity"]').val();
+            // dùng jquery ajax gửi request về server
+            $.ajax({
+                type: "post",
+                url: "{{ Route('user/addCart') }}",
+                data: {
+                    pid: pid,
+                    quantity: quantity,
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(data) {
+                    alert('add product to cart successful.');
+                },
+                error: function(data) {
+                    alert("fail");
+                }
+            });
+        });
+    });
 </script>
 @endsection

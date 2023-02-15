@@ -1,74 +1,71 @@
 .footer{
-    background: $bg_first;
-    padding: 50px 0;
-    color: #fff;
-    .Logo{
-        color: $Color__E94560;
-        font-size: 2rem;
-        margin-bottom: 25px;
-            .logoB{
-                font-size: 2.625rem;
-                color: $Color__E94560;
-                font-weight: 600;
-            }
-            .logoC{
-                font-size: 2.625rem;
-                color: #fff;
-                font-weight: 600;
-            }
-    }
-    .Support{
-        p{
-            font-size: 1rem;
-            span{
-                font-weight: 600;
-            }
+    background: #fff;
+    padding: 20px 0;
+    .footer-title{
+        font-size: 20px;
+        font-weight: 600;
+        position: relative;
+        color: $Color__0F3460;
+        &::after{
+            content: '';
+            position: absolute;
+            left: 10px;
+            bottom: -5px;
+            width: 40%;
+            height: 2.5px;
+            background: $Color__E94560;
         }
     }
-    .Policy{
-        list-style: none;
-        padding: 0;
-        li{
-            padding: 5px 0;
-            a{
-                text-decoration: none;
-                color: #fff;
-                transition: all .5s ease-in;
-                &:hover{
-                    color: $Color__E94560;
-                    text-decoration: underline;
-                    transition: all .5s ease-in;
+    .footer-nav{
+        margin-top: 30px;
+        ul{
+            list-style: none;
+            padding-left: 0;
+            padding-right: 10px;
+            li{
+                padding: 3px 0;
+                a{
+                    text-decoration: none;
+                    &:hover{
+                        color:$Color__E94560;
+                    }
                 }
             }
         }
     }
-    .Social{
+    .footer-woking{
+        display: grid;
+        gap: 10px;
+    }
+    .footer-icons{
+        margin-top: 30px;
         display: flex;
-        justify-content: flex-start;
         align-items: center;
-        .icon{
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: $bg_second;
+        gap: 20px;
+        .footer-icon-socical{
+            width: 50px;
+            height: 50px;
             border: 1px solid $Color__E94560;
-            color: $Color__E94560;
-            margin-right: 15px;
+            border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: all .5s ease-in;
-            cursor: pointer;
+            background: $Color__E94560;
+            color: #fff;
             i{
-                font-size: 1rem;
+                font-size: 18px;
             }
             &:hover{
-                background-color: $bg_third;
                 border: 1px solid $Color__E94560;
-                color: #fff;
-                transition: all .5s ease-in;
+                background: #fff;
             }
         }
     }
+    
 }
-           
+.footer-copyright{
+    background: $bg_first;
+    padding: 10px 0;
+    text-align: center;
+    color: #fff;
+}

@@ -1,0 +1,224 @@
+.han-payment-policy {
+
+    .banner-first {
+        .image-big {
+            width: 100%;
+            height: auto;
+
+        }
+
+        .col-payment-policy {
+            position: relative;
+
+            .guide-pay {
+                position: absolute;
+                top: 20px;
+                left: 50px;
+                color: $bg_second;
+            }
+
+            .icon-image {
+                position: absolute;
+                top: 0px;
+                left: 800px;
+                width: 100%;
+                max-width: 300px;
+                height: auto;
+            }
+
+            @media (max-width: 300px) {
+                .image-big {
+                    width: 50%;
+                    height: auto;
+                }
+            }
+        }
+    }
+
+    .form-info-paymentpolicy {
+        margin: 20px;
+        padding: 20px;
+        height: 220px;
+        border-radius: 10px;
+        background-color: $bg_second;
+        color: $bg_first;
+
+        .service {
+            color: $bg_first;
+            font-weight: 700;
+        }
+
+        .br-0 {
+            border-bottom: 5px solid $bg_third;
+            border-radius: 50px;
+            width: 30px;
+        }
+
+        .br-1 {
+            border-bottom: 5px solid #339933;
+            border-radius: 50px;
+            width: 30px;
+        }
+
+        .br-2 {
+            border-bottom: 5px solid $bg_first;
+            border-radius: 50px;
+            width: 30px;
+        }
+
+
+        .icon-trasfer {
+            font-size: 80px;
+            color: $bg_third ;
+        }
+
+        .icon-cash {
+            font-size: 80px;
+            color: #339933;
+        }
+
+        .icon-receive {
+            font-size: 80px;
+            color: $bg_first;
+        }
+
+    }
+
+    .form-info-paymentpolicy:hover {
+        margin-top: 15px;
+    }
+
+
+    .color-info {
+        padding: 15px;
+
+        .bank-info-payment {
+            .info-transfer-payment {
+                background-color: $bg_second;
+                padding: 20px;
+
+                .info-transfer-payment-text {
+                    padding: 10px;
+                    color: #3366ff;
+                    font-weight: 700;
+                    text-align: center;
+                    margin-top: -10px;
+                }
+
+                .form-color {
+                    background-color: rgb(237, 246, 255);
+                    border-radius: 5px;
+                    text-align: center;
+                    padding: 25px;
+
+                    .img-mb-bank {
+                        margin-top: -10px;
+                        height: auto;
+                        width: 100%;
+                        max-width: 200px;
+                    }
+                }
+
+                .bank-text {
+                    text-align: left;
+                    font-weight: 500;
+                }
+            }
+
+            .img-qr {
+                background-color: $bg_second;
+                text-align: center;
+            }
+        }
+    }
+
+    .pay-direct {
+        background-color: rgb(237, 246, 255);
+        margin: auto;
+        margin-bottom: 50px;
+
+        .pay-direct-col {
+            text-align: center;
+
+            .pay-direct-col-content {
+                color: #3366ff;
+                font-weight: 700;
+            }
+
+            .pay-direct-col-info {
+                color: $bg_first;
+                font-weight: 500;
+            }
+        }
+
+        .form-color {
+            .map {
+                display: flex;
+                justify-content: center;
+                margin: auto;
+                border-radius: 40px;
+            }
+
+            .address-showroom {
+                text-align: center;
+                border-radius: 40px;
+
+                .address-showroom-payment-policy {
+                    color: $bg_first;
+                    font-weight: 500;
+                }
+
+                .address-showroom-payment-policy-info {
+                    color: $bg_first;
+                    font-weight: 500;
+                }
+
+                .image-direct {
+                    margin-left: -50px;
+                    margin-top: 20px;
+                    padding: 20px;
+                    width: 100%;
+                    max-width: 450px;
+                    height: auto;
+                }
+            }
+        }
+    }
+
+    .pay-ondelivery {
+        margin: auto;
+
+        .pay-ondelivery-form {
+            margin: auto;
+
+            .pay-ondelivery-content {
+                margin: auto;
+
+                .pay-ondelivery-text {
+                    color: #3366ff;
+                    font-weight: 700;
+                }
+            }
+
+            .pay-ondelivery-info {
+                background-color: rgb(237, 246, 255);
+                margin: auto;
+                border-radius: 20px;
+                font-weight: 500;
+
+                .pay-ondelivery-text {
+                    color: $bg_first;
+                    font-weight: 500;
+                }
+            }
+        }
+
+
+    }
+
+    .footer-br {
+        margin: 20px;
+        width: 30%;
+        border-bottom: 5px solid $bg_first;
+    }
+}

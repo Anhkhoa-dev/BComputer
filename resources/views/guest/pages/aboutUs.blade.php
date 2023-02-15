@@ -17,62 +17,59 @@
     <div class="han-aboutus">
         <div class="container-md">
             <div class="col-md-12">
-                <div class="row">
-                    <div class="col-lg-6">
+                <div class="row layout-about-us">
+                    <div class="col-lg-6 layout-col-about-us">
                         <br style="width: 100% ; height:5px ; color:blue">
-                        <h1>History and Information</h1>
-                        <p>Công ty Cổ phần Đầu tư BComputer là nền tảng bán lẻ đa ngành nghề số 1 Việt Nam về
-                            doanh thu và lợi nhuận. Với chiến lược omni-channel, Công ty vận hành mạng lưới hàng ngàn cửa
-                            hàng
-                            trên toàn quốc song song với việc tận dụng hiểu biết sâu rộng về khách hàng thông qua nền tảng
-                            dữ liệu lớn, năng lực chủ động
-                            triển khai các hoạt động hỗ trợ bán lẻ được xây dựng nội bộ và liên tục đổi mới công nghệ nhằm
-                            tạo ra
-                            trải nghiệm khách hàng vượt trội và thống nhất ở mọi kênh cũng như nâng cao sự gắn kết của người
-                            tiêu
-                            dùng với các thương hiệu của BCP.
-
-                        <P> Công ty chuyên cung cấp dịch vụ
-                            hậu mãi - bảo trì - lắp đặt, dịch vụ giao hàng chặng cuối, dịch vụ quản lý kho vận
-                            logistics
-                            thị
-                            trường nước ngoài với chuỗi bán tại Campuchia và liên doanh tại Indonesia.</P>
+                        <h1 class="name-text-h1">History and Information</h1>
+                        <p class="layout-col-about-us-text">BComputer Investment Joint Stock Company is the number 1
+                            multi-industry retail platform in
+                            Vietnam in terms of revenue and profit. With the omni-channel strategy, the Company operates a
+                            network of thousands of stores nationwide while taking advantage of deep customer insights
+                            through a big data platform, the ability to proactively deploy activities. retail support is
+                            built in-house and continuously innovates technology to create a superior and consistent
+                            customer experience across all channels and enhance consumer engagement with BCP's brands.
+                        <p class="layout-col-about-us-text"> The company specializes in providing after-sales - maintenance -
+                            installation services,
+                            last-mile delivery services, logistics management services in foreign markets with sales chains
+                            in Cambodia and joint ventures in Indonesia.</p>
                         </p>
                     </div>
-                    <div class="col-lg-6">
-                        <img src="{{ asset('image/aboutUs/aboutUs.png') }}" alt="">
+                    <div class="col-lg-6 layout-col-about-us">
+                        <img class="img-aboutus" src="{{ asset('image/aboutUs/aboutUs.png') }}" alt="">
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <img src="{{ asset('image/aboutUs/aboutUs01.png') }}" alt="">
+            <div class="row layout-about-us">
+                <div class="col-lg-6 layout-col-about-us">
+                    <img class="img-aboutus" src="{{ asset('image/aboutUs/aboutUs01.png') }}" alt="">
                 </div>
-                <div class="col-lg-6">
-                    <h1>Product</h1>
-                    <p>Công ty BCP chuyên cung cấp các sản phẩm thương mại điện tử, phụ kiện dành cho văn phòng công sở,
-                        gamer chuyên nghiệp. Sản phẩm đa dạng mẫu mã, mới nhất trên thị trường. Một số sản phẩm như :
-                    <p>+ Laptop</p>
-                    <p>+ Máy tính bàn</p>
-                    <p>+ CPU</p>
-                    <p>+ Case</p>
-                    <p>+ Chuột Máy Tính</p>
-                    <p>+ Bàn phím</p>
-                    <p>+ ...</p>
+                <div class="col-lg-6 layout-col-about-us">
+                    <h1 class="name-text-h1">Product</h1>
+                    <p class="layout-col-about-us-text">BCP Company specializes in providing e-commerce products,
+                        accessories for offices, professional
+                        gamers. The latest products on the market are diverse. Some products like:
+                    <p class="layout-col-about-us-text">+ Laptop</p>
+                    <p class="layout-col-about-us-text">+ Computer</p>
+                    <p class="layout-col-about-us-text">+ CPU</p>
+                    <p class="layout-col-about-us-text">+ Case</p>
+                    <p class="layout-col-about-us-text">+ Computer mouse</p>
+                    <p class="layout-col-about-us-text">+ Keyboard</p>
+                    <p class="layout-col-about-us-text">+ ...</p>
                     </p>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-6">
-                    <h1>Service and Quality</h1>
-                    <p>Chính sách hậu mãi khách hàng bao gồm : Sản phẩm sẽ được đổi mới 100% trong 30 ngày đầu nếu như sản
-                        ra bất kỳ lỗi nào từ nhà sản xuất, và gói bảo hành 1 năm từ nhà sản xuất</p>
-                    <p>+ Email: bcomputercskh@gmail.com</p>
-                    <p>+ Customer support: 190018009</p>
-                    <p>+ Order online: 190018008</p>
+            <div class="row layout-about-us">
+                <div class="col-lg-6 layout-col-about-us">
+                    <h1 class="name-text-h1">Service and Quality</h1>
+                    <p class="layout-col-about-us-text">Customer after-sales policy includes: The product will be renewed
+                        100% in the first 30 days if there
+                        is any defect from the manufacturer, and a 1-year warranty from the manufacturer.</p>
+                    <p class="layout-col-about-us-text">+ Email: bcomputercskh@gmail.com</p>
+                    <p class="layout-col-about-us-text">+ Customer support: 190018009</p>
+                    <p class="layout-col-about-us-text">+ Order online: 190018008</p>
                 </div>
-                <div class="col-lg-6">
-                    <img src="{{ asset('image/aboutUs/aboutUs02.png') }}" alt="">
+                <div class="col-lg-6 layout-col-about-us">
+                    <img class="img-aboutus" src="{{ asset('image/aboutUs/aboutUs02.png') }}" alt="">
                 </div>
             </div>
         </div>

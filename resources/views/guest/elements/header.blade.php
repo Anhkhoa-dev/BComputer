@@ -41,12 +41,26 @@
                             placeholder="Search...">
                         <label for="search" class="search_label"><i class="fas fa-search"></i></label>
                         <button class="btnSearch">All Search</button>
+                        <div class="search-info">
+                            <div class="search-preview">
+                                <div class="search-item">
+                                    <img src="{{ asset('image/product/Asus_VivoBook_14_M413IA_EK481T_03.PNG') }}" alt="" width="30">
+                                    <div class="search-info-group">
+                                        <a href="#" class="search-name">Laptop Asus VivoBook 14 X1402ZA EK084W</a>
+                                        <div class="search-price"><i class="fa-solid fa-dollar-sign"></i> 560.50</div>
+                                    </div>
+                                </div>
+                                
+                            </div> 
+                            <div class="text-center py-2 border-top">
+                                <a href="#" class="text-decoration-none text-black">View more 432 products</a>
+                            </div>
+                            
+                        </div>
                     </form>
-
                 </div>
 
                 <div class="navbar__icon">
-
                     {{-- nút giỏ hàng --}}
                     <a href="{{ route('user/cart-items') }}" class="cursor-pointer text-decoration-none text-dark">
                         <div class="icon__cart">
@@ -71,7 +85,7 @@
                         @if (Auth::check() || session('user'))
                             <?php $user = Auth::user(); ?>
                             <div class="icon__user">
-                                <img src="{{ asset('image/user/'. ($user->image =! null ? $user->image : 'avatar-default.png')) }}"
+                                <img src="{{ asset('image/user/' . ($user->image = !null ? $user->image : 'avatar-default.png')) }}"
                                     alt="" class="img-user">
                             </div>
                             <div class="user_info dropdown">
@@ -85,7 +99,8 @@
                                                 class="fa-solid fa-user me-1"></i>View account</a></li>
                                     <li><a class="dropdown-item" href="#"><i class="fa-solid fa-bell me-1"></i>
                                             Notify</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa-solid fa-box me-1"></i>My
+                                    <li><a class="dropdown-item" href="{{ route('user/order') }}"><i
+                                                class="fa-solid fa-box me-1"></i>My
                                             Order</a></li>
                                     <li><a class="dropdown-item" href="{{ route('logout') }}"><i
                                                 class="fa-solid fa-power-off me-1"></i>Logout</a></li>
@@ -113,6 +128,21 @@
                             <div>Categories</div>
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
+                        {{-- <div class="card_side">
+                            @if ($list_Catagory != null)
+                                @foreach ($list_Catagory as $item)
+                                    <a href="{{ route('user/products', ['name' => $item['slug']]) }}" class="side-box"
+                                        data-id="{{ $item->slug }}">
+                                        <img src="{{ asset('image/icon/' . $item->imageIcon) }}" width="25" alt="{{ $item->name }}">
+                                        <div>{{ $item->name }}</div>
+                                        @section('product-title')
+                                            {{ $item->name }}
+                                        @endsection
+                                    </a>
+                                @endforeach
+                            @endif
+                        </div> --}}
+                        
                     </div>
                 </div>
                 <div class="col-md-9">

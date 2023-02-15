@@ -267,8 +267,20 @@ $(function () {
 
     }
 
+    //
+    $('.add-new-address').click(function () {
+        $("#add-address").modal("show");
+    })
+
 
     switch (page) {
+
+        case "acount": {
+            // $('#change-avt-inp').click(function(){
+            //     var avt_inp = $('#change-avt-inp').val();
+            //     alert(avt_inp)
+            // });
+        }
         case "cart-items": {
             // alert(page);
             const totalItem = $("#list-cart-item").children().length;
@@ -372,30 +384,110 @@ $(function () {
             break;
         }
         case "checkout-process": {
+            $('#delivery-check').addClass('select_checked');
             $('#pick-up-at-the-store').click(function () {
-                // $(this).attr('checked');
+                $(this).addClass('select_checked');
+                $('#delivery-check').removeClass('select_checked');
                 $('.delivery-check').addClass('d-none');
                 $('.pick-up-at-the-store').removeClass('d-none');
             })
             $('#delivery-check').click(function () {
-                // $(this).attr('checked');
+                $(this).addClass('select_checked');
+                $('#pick-up-at-the-store').removeClass('select_checked');
                 $('.delivery-check').removeClass('d-none');
                 $('.pick-up-at-the-store').addClass('d-none');
+            })
+
+            $('#check_delivery').addClass('check_payment');
+            $('#check_delivery').click(function () {
+                $(this).addClass('check_payment');
+                $('#check_paypal').removeClass('check_payment');
+
+            })
+            $('#check_paypal').click(function () {
+                $(this).addClass('check_payment');
+                $('#check_delivery').removeClass('check_payment');
             })
 
             $('#choose-address-orther').click(function () {
                 showAlertTop('Chưa làm tới');
             });
 
-            $('#process-to-payment').click(function(){
-                var totalList = $('.checkout-select').length;
-                alert(totalList);
-            });
 
+            $('#process-to-payment').click(function () {
+                let idList = [];
+                let idAddress = [];
+                let idPayment = [];
+                // danh sách id_sp thanh toán
+                $.each($(".checkout-select"), (i, element) => {
+                    const id = $(element).attr("data-id");
+                    const price_discount = $(element).children('.checkout-product-price').text();
+                    const qtyTotal = $(element).children('.checkout-product-quanity').children('.qty-checkout').text();
+
+                    if (id !== '') {
+                        idList.push([parseInt(id), parseFloat(price_discount.substr(1)), parseInt(qtyTotal)]);
+                    }
+                });
+                // console.log(idList);
+                $.each($(".select_checked"), (i, element) => {
+                    const id = $(element).attr("data-id");
+                    if (id !== '') {
+                        idAddress.push(id);
+                    }
+                });
+
+                $.each($(".check_payment"), (i, element) => {
+                    const id = $(element).attr("data-id");
+
+                    if (id !== '') {
+                        idPayment.push(id);
+                    }
+                });
+
+                var total = $('.total-checkout').text();
+                // alert(parseFloat(total));
+                makePayment(idList, idAddress, idPayment, total);
+
+            });
 
 
             break;
         }
+    }
+
+    $('.search')
+
+    function makePayment(idList, idAddress, idPayment, total) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                },
+                url: "/ajax-make-payment-process",
+                type: "POST",
+                data: {
+                    idList: idList,
+                    idAddress: idAddress,
+                    idPayment: idPayment,
+                    total: total,
+                },
+                success: function (data) {
+                    resolve(data);
+                    switch (data.status) {
+                        case 'Order success': {
+                            window.location.href = "/checkout-success";
+                            break;
+                        }
+                        default:
+                            showAlertTop('Có lỗi khi đặt hàng');
+                    }
+
+                },
+                error: function () {
+                    reject();
+                },
+            });
+        });
     }
 
     function ajaxCheckoutProcess(checkList, total, code) {
@@ -430,6 +522,10 @@ $(function () {
                 },
             });
         });
+    }
+
+    function ajaxSearch(Key) {
+
     }
 
 
@@ -469,13 +565,8 @@ $(function () {
                             showAlertTop('Voucher has expired as many times as possible');
                             break;
                         }
-                        case "code entered": {
-                            showAlertTop('Voucher code has been applied to this order');
-                            break;
-                        }
                         case "first time buy": {
                             showAlertTop('Customers buy products for the first time');
-                            location.reload();
                             break;
                         }
                     }
@@ -694,6 +785,47 @@ $(function () {
         });
     }
 
+
+    var citis = document.getElementById("address-city");
+    var districts = document.getElementById("address-district");
+    var wards = document.getElementById("address-ward");
+    var Parameter = {
+        url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        method: "GET",
+        responseType: "application/json",
+    };
+    var promise = axios(Parameter);
+    promise.then(function (result) {
+        renderCity(result.data);
+    });
+
+    function renderCity(data) {
+
+        for (const x of data) {
+            citis.options[citis.options.length] = new Option(x.Name, x.Name);
+        }
+        citis.onchange = function () {
+            districts.length = 1;
+            wards.length = 1;
+            if (this.value != "") {
+                const result = data.filter(n => n.Name === this.value);
+
+                for (const k of result[0].Districts) {
+                    districts.options[districts.options.length] = new Option(k.Name, k.Name);
+                }
+            }
+        };
+        districts.onchange = function () {
+            wards.length = 1;
+            const dataCity = data.filter((n) => n.Name === citis.value);
+            if (this.value != "") {
+                const dataWards = dataCity[0].Districts.filter(n => n.Name === this.value)[0].Wards;
+                for (const w of dataWards) {
+                    wards.options[wards.options.length] = new Option(w.Name, w.Name);
+                }
+            }
+        };
+    }
 
 
 

@@ -243,13 +243,3 @@
 </div>
 </div>
 @endsection
-
-{{-- @section('myjs')
-<script>
-    $(document).ready(function() {
-
-
-
-    });
-</script>
-@endsection --}}

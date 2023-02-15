@@ -24,6 +24,7 @@ class Products extends Model
         'cauhinh',
         'id_brand',
         'featured',
+        'create_date',
         'status',
     ];
 }

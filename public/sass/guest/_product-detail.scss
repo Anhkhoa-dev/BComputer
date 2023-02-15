@@ -1,6 +1,6 @@
 .han-product-detail {
-    .row {
-        margin: -15px 20px 0px 20px;
+    .frame-fisrt {
+        margin: 0px;
 
         .fa-heart {
             color: $bg_second;
@@ -10,7 +10,7 @@
 
         .banner {
             display: flex;
-            padding: 15px;
+            margin: auto;
 
             .product-name {
                 font-weight: 600;
@@ -20,7 +20,7 @@
 
             .likeproduct {
 
-                a {
+                .likeproduct-info {
                     text-decoration: none;
                 }
             }
@@ -42,13 +42,6 @@
             cursor: pointer;
         }
 
-        hr {
-            height: 0.5px;
-            width: 100%;
-            background-color: black;
-            margin-top: -20px;
-        }
-
         .discountprice {
             margin-top: -5px;
             text-decoration: line-through;
@@ -63,7 +56,7 @@
         }
     }
 
-    .form {
+    .form-product-detail {
         padding: 20px;
 
         .iconstar {
@@ -71,7 +64,7 @@
             font-size: 15px;
         }
 
-        a {
+        .from-product-icon {
             font-size: small;
             text-decoration: none;
         }
@@ -79,7 +72,7 @@
         .price {
             font-size: 25px;
             font-weight: 600;
-            padding: 10px;
+
             color: $bg_third;
 
             .quantity {
@@ -95,8 +88,10 @@
                     }
 
                     .is-form {
+                        background-color: #2f80ed;
+                        color: $bg_second;
                         border-radius: 3px;
-                        width: 30px;
+                        width: 40px;
                         border: none;
                         font-weight: 600;
                     }
@@ -107,36 +102,34 @@
 
 
             .button-product {
-                padding: 10px;
                 display: flex;
-                gap: 15px;
+
                 color: $bg_second;
                 margin-bottom: 10px;
 
-                div {
+                .button-product-frame {
                     width: 50%;
                     padding: 10px;
                     border-radius: 5px;
                     text-align: center;
                     cursor: pointer;
 
-                    a {
-                        text-decoration: none;
-                    }
 
-                    a:hover {
-                        color: $bg_second;
-                    }
                 }
 
                 .buynow {
+                    text-decoration: none;
+                    color: $bg_second;
                     background-color: #fb6e2e;
                     font-weight: 300;
+                    width: 100%;
                 }
 
                 .addtocart {
+                    color: $bg_second;
                     background-color: #2f90ed;
                     font-weight: 300;
+                    width: 100%;
                 }
             }
 
@@ -146,9 +139,6 @@
                 font-size: small;
                 font-weight: 400;
 
-                a {
-                    text-decoration: none;
-                }
 
                 .icon {
                     display: flex;
@@ -157,7 +147,7 @@
                     margin-top: 10px;
                     color: $bg_first;
 
-                    i {
+                    .icon-contact {
                         background-color: $bg_second;
                         padding: 10px;
                         border-radius: 50%;
@@ -165,13 +155,13 @@
                     }
                 }
 
-                span {
+                .number-hotline {
                     color: #E94560;
                     font-weight: 400;
                 }
             }
 
-            hr {
+            .line {
                 height: 0.5px;
                 width: 100%;
                 background-color: black;
@@ -196,14 +186,6 @@
             }
         }
     }
-
-    h6 {
-        font-weight: 300;
-        font-size: 25px;
-        padding: 0px;
-    }
-
-
 }
 
 .description-info {
@@ -224,28 +206,27 @@
 .description {
     background-color: $bg_second;
 
-    button {
+    .button-color-decor {
         background-color: $bg_third;
         border-style: groove;
         border-radius: 5px;
         color: $bg_second;
     }
 
-    .col-md-12 {
-        .row {
-            margin-top: 10px;
-
-            p {
-                font-size: larger;
-                font-weight: 500;
-            }
-        }
+    .info-product {
+        font-size: larger;
+        font-weight: 500;
     }
 
+
     .review {
+        .first-form {
+            margin-bottom: 20px;
+        }
+
         display: none;
 
-        hr {
+        .line-review {
             width: 100%;
             height: 1px;
             background-color: $bg_first;
@@ -256,9 +237,10 @@
         }
 
         .review-info {
-            padding: 20px;
 
             .col-review {
+
+
                 display: flex;
                 margin-bottom: 10px;
 
@@ -270,6 +252,11 @@
 
                     .image-review {
                         width: 100%;
+                        max-width: 100px;
+
+                        border-radius: 5px;
+                        border: 0.5px solid $bg_first;
+
                     }
 
                     .form-image {
@@ -280,8 +267,8 @@
             }
 
             .mySlides1 {
-                position: absolute;
                 width: 100%;
+                height: auto;
                 max-width: 300px;
                 max-height: 300px;
             }
@@ -312,17 +299,9 @@
 
             }
 
-            i {
+            .like-icon-review {
                 font-size: medium;
                 font-weight: 400;
-            }
-
-            button {
-                border-radius: 5px;
-                border: 1px solid black;
-                background-color: #2f90ed;
-                color: #fff;
-                font-weight: 300;
             }
 
             .comment-text {
@@ -332,7 +311,7 @@
                 background-color: #f8f8f8;
                 color: black;
 
-                i {
+                .comment-text-icon {
                     padding: 20px;
                     color: #E94560;
                     font-size: small;
@@ -340,16 +319,6 @@
                 }
             }
         }
-
-        img {
-            margin: 5px;
-            max-width: 100px;
-            padding: 10px;
-            border-radius: 5px;
-            border: 0.5px solid $bg_first;
-        }
-
-
 
         .iconstar {
             color: #fb6e2e;

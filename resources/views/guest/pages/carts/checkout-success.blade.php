@@ -16,7 +16,10 @@
             <div class="">
                 <div>Your code order</div>
                 <div class="box-order-success">
-                    #10
+                    @if ($codeOrder != null)
+                        # {{ $codeOrder }}
+                    @endif
+
                 </div>
                 <div>You can watch it again</div>
                 <a href="#" class="order-my">My Order</a>
