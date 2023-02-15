@@ -33,7 +33,7 @@
                     @endforeach
                 </div>
             </div>
-            <div class="col-lg-7 form">
+            <div class="col-lg-7 form-product-detail">
                 <div class="banner">
                     <div class="col-md-12">
                         <div class="product-name">{{ $prod->name }}</div>
@@ -42,17 +42,18 @@
                 <div class="col-md-12">
                     <div class="row">
                         <div class="col-md-5">
-                            <a href="">
+                            <a class="from-product-icon" href="">
                                 <i class="fa fa-star iconstar" aria-hidden="true"></i>
                                 <i class="fa fa-star iconstar" aria-hidden="true"></i>
                                 <i class="fa fa-star iconstar" aria-hidden="true"></i>
                                 <i class="fa fa-star iconstar" aria-hidden="true"></i>
                                 <i class="fa fa-star iconstar" aria-hidden="true"></i>
-                                5 review</a>
+                                5 review
+                            </a>
                         </div>
                         <div class="col-md-5">
                             <div class="likeproduct">
-                                <a href="">
+                                <a class="likeproduct-info from-product-icon" href="">
                                     <i id="heart" onclick="myFunction()" class="fa-solid fa-heart"></i>
                                     Like Product
                                 </a>
@@ -75,21 +76,21 @@
                         </div>
                         <div class="col-md-12">
                             <div class="button-product">
-                                <div class="col-md-6">
+                                <div class="col-md-6 button-product-frame">
                                     <a class="btn buynow" href="#"><b>BUY NOW</b></a>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-6 button-product-frame">
                                     <a class="btn addtocart add-to-cart" href="#"
                                         data-id="{{ $prod->id }}"><b>ADD TO CART</b></a>
                                 </div>
                             </div>
                             <div class="contact">
-                                Contact to buy now <span> 0865 677 010 </span> (07:30-22:00)
+                                Contact to buy now <span class="number-hotline"> 0865 677 010 </span> (07:30-22:00)
                                 <div class="col-md-12">
                                     <div class="icon">
-                                        <div><i class="fa-solid fa-truck-fast"></i></div>
-                                        <div><i class="fa-solid fa-gift"></i></div>
-                                        <div><i class="fa-solid fa-arrow-rotate-left"></i></div>
+                                        <div><i class="fa-solid fa-truck-fast icon-contact"></i></div>
+                                        <div><i class="fa-solid fa-gift icon-contact"></i></div>
+                                        <div><i class="fa-solid fa-arrow-rotate-left icon-contact"></i></div>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -115,7 +116,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <hr>
+                                    <hr class="line">
                                 </div>
                             </div>
                             <div class="accordion" id="accordionExample">
@@ -198,9 +199,9 @@
             <div class="row">
                 <div class="description col-md-8">
                     <div class="name-doc">
-                        <button class="w3-bar-item w3-button" style="border:none"
+                        <button class="w3-bar-item w3-button button-color-decor" style="border:none"
                             onclick="openTab('description')">Description</button>
-                        <button class="w3-bar-item w3-button" style="border:none"
+                        <button class="w3-bar-item w3-button button-color-decor" style="border:none"
                             onclick="openTab('review')">Review</button>
                     </div>
                     <div id="description" class="w3-container city">
@@ -223,7 +224,7 @@
                             <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
                             5 review
                         </div>
-                        <hr>
+                        <hr class="line-review">
                         <div class="col-md-12">
                             <div class="review-info">
                                 <div class="col-md-12 row col-review">
@@ -263,12 +264,12 @@
                                 <div class="like-icon col-md-8">
                                     <div class="form-likeicon">
                                         <span id="like" onclick="myFunctionlike()">
-                                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                            <i class="fa fa-thumbs-up like-icon-review" aria-hidden="true"></i>
                                             <span>Like</span>
                                         </span>
                                         <span data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
                                             aria-expanded="false" aria-controls="flush-collapseOne">
-                                            <i class="fa fa-comment" aria-hidden="true"></i>
+                                            <i class="fa fa-comment like-icon-review" aria-hidden="true"></i>
                                             <span>Comment</span>
                                         </span>
                                         <form action="">
@@ -277,7 +278,7 @@
                                                 data-bs-parent="#accordionFlushExample">
                                                 <div class="mb-4">
                                                     <div class="comment-text">
-                                                        <i class="fa fa-user" aria-hidden="true">Seller
+                                                        <i class="fa fa-user comment-text-icon" aria-hidden="true">Seller
                                                             Response</i>
                                                         <div>cảm ơn quý khách đã ủng hộ shop</div>
                                                     </div>
