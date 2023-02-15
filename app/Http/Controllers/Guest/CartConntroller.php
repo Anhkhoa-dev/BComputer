@@ -265,7 +265,8 @@ class CartConntroller extends Controller
                     'discount'  => $product->discount,
                     'totalItem'  => ($product->price * ((100 - $product->discount) / 100)) * $prod[2],
                 ];
-                // VOUCHER::where('id', $voucher['code'])->update(['quanity' => --$voucher->quanity]);
+                $qtyStock = Products::where('id', $prod[0])->first();
+                Products::where('id', $OrderDetail)->update(['quantity' => (intval($qtyStock->quantity) - intval($prod[2]))]);
                 OrderDetails::create($OrderDetail);
                 Cart::where('id_tk', Auth::user()->id)->where('id_pro', $prod[0])->delete();
             }

@@ -129,7 +129,7 @@
                     </div>
                     <div class="pay-method">
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center" for="check_paypal" id="paypal-button">
+                            <div class="d-flex align-items-center">
                                 <i class="fa-brands fa-cc-paypal me-2 text-blue"></i>
                                 Cash On Paypal
                             </div>
@@ -138,6 +138,7 @@
                         </div>
                         <p class="mt-1">Connect to Account PayPal</p>
                     </div>
+                    <div id="paypal-button" class="d-none"></div>
 
                 </div>
                 @php
@@ -190,13 +191,13 @@
         // Configure environment
         env: 'sandbox',
         client: {
-            sandbox: 'demo_sandbox_client_id',
+            sandbox: 'AUY1Drlc9SYoTBz_ZVmZuwL9tL-0YQ61ogdpHb5XfA0B6g4Ks09QKQ58tUdXSmlIBDv-DCXTNHoODAhQ',
             production: 'demo_production_client_id'
         },
         // Customize button (optional)
         locale: 'en_US',
         style: {
-            size: 'small',
+            size: 'medium',
             color: 'gold',
             shape: 'pill',
         },

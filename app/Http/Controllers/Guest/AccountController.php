@@ -72,15 +72,15 @@ class AccountController extends Controller
             // set tất cả các tài khoản về 0,
             USER_ADDRESS::where('id_tk', Auth::user()->id)->update(['status' => 0]);
             USER_ADDRESS::create($data);
-            return redirect('account/address')->with('success_message', 'Đăng ký tài khoản thành công!');
+            return back()->with('success_message', 'Đăng ký tài khoản thành công!');
         } else {
             if ($kiemtra == null) {
                 $data['status'] = 1; // kiểm tra người dùng chưa đặt địa chỉ mặc định thì set tài khoản mới nhập là mặc định
                 USER_ADDRESS::create($data);
-                return redirect('account/address')->with('success_message', 'Đăng ký tài khoản thành công!');
+                return back()->with('success_message', 'Đăng ký tài khoản thành công!');
             } else {
                 USER_ADDRESS::create($data);
-                return redirect('account/address')->with('success_message', 'Đăng ký tài khoản thành công!');
+                return back()->with('success_message', 'Đăng ký tài khoản thành công!');
             }
         }
     }

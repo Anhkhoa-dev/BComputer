@@ -2440,11 +2440,11 @@ section .title i {
   padding-top: 25px;
   padding-left: 0;
   padding-right: 0;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 .khoa-login .login_nen .box_login .form_login .form_group {
   position: relative;
-  padding-bottom: 30px;
+  padding-bottom: 20px;
 }
 .khoa-login .login_nen .box_login .form_login .form_group .input_control {
   width: 400px;
@@ -2491,10 +2491,11 @@ section .title i {
 .khoa-login .login_nen .box_login .form_login .form_group .errorMsg {
   position: absolute;
   left: 10px;
-  bottom: 5px;
+  bottom: 0px;
   font-size: 14px;
   font-style: italic;
   color: red;
+  visibility: inherit;
 }
 .khoa-login .login_nen .box_login .form_login .check_box {
   display: flex;
