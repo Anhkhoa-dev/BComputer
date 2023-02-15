@@ -60,7 +60,7 @@ class ProductController extends Controller
     public function create()
     {
         //
-        $category = Category::all();
+        $category = Category::where('status', 1)->get();
         $brands = BRAND::all();
         $supplier = SUPPLIER::all();
         $array = [
@@ -180,14 +180,26 @@ class ProductController extends Controller
     public function edit($id)
         {
             //trả về view
-            $category = Category::all();
-            $brands = BRAND::all();
-            $supplier = SUPPLIER::all();
+            $category = Category::where('status', 1)->get();
+            $brands = BRAND::where('status', 1)->get();
+            $supplier = SUPPLIER::where('status', 1)->get();
             $prod = Products::where('id', $id)->first();
+            $productImg = ProductImage::where('id_pro', $prod->id)->get();
             if ($prod->id_ca) {
                 $prod->category = Category::find($prod->id_ca);
+                
             } else {
                 $prod->category = '';
+            }
+            if ($prod->sup_id) {
+                $prod->supplier = SUPPLIER::find($prod->sup_id);
+            } else {
+                $prod->supplier = '';
+            }
+            if ($prod->id_brand) {
+                $prod->brand = BRAND::find($prod->id_brand);
+            } else {
+                $prod->brand = '';
             }
             $array = [
                 'proShow' => $prod,
@@ -196,6 +208,7 @@ class ProductController extends Controller
                 'supplier' => $supplier,
                 'prod' => $prod,
                 'message' => 'Bạn đã đăng nhập thành công',
+                'proImage' => $productImg,
             ];
             // dd($array);
             return view('admin.pages.products.edit')->with($array);
