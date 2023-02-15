@@ -71,7 +71,7 @@
                             </a>
                         </li> --}}
                         <li class="nav-item">
-                            <a href="{{ route('admin/acount') }}" class="nav-link">
+                            <a href="{{ route('admin/account') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Acounts</p>
                             </a>
