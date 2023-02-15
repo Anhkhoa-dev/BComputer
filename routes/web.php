@@ -79,7 +79,11 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Phần dashboard - Phúc
     Route::get("/admin", [AdminsController::class, "getHome"])->name("admin/dashboard");
 
+<<<<<<< HEAD
 
+=======
+    // Phần account - Phúc
+>>>>>>> 525150b9b78bccedc5ffb6eea9e340179b642e72
     Route::get('admin/account', [AcountConroller::class, 'index'])->name('admin/account');
     // Create
     Route::get('admin/account/create', [AcountConroller::class, 'create'])->name('admin/account/create');
