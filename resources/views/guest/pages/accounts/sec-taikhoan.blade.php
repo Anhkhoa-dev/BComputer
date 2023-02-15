@@ -27,10 +27,10 @@
                                                 <i class="fa-solid fa-user-pen"></i>
                                             </a>
                                             <div class="dropdown-menu border-0 mt-2">
-                                            <form action="#" method="POST" class="d-inline ">
-                                                <input type="text" class="change-name" name="tk-user" placeholder="Enter your full name" />
-                                                <button class="btn-change">Update</button>
-                                            </form>
+                                                <div class="d-inline ">
+                                                    <input type="text" class="change-name" name="tk-user" placeholder="Enter your full name" />
+                                                    <div class="btn-change" id="btn-tk-name-update">Update</div>
+                                                </div>
                                             </div>
                                         </div> 
                                     </div>
