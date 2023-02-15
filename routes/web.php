@@ -75,15 +75,15 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Phần dashboard - Phúc
     Route::get("/admin", [AdminsController::class, "getHome"])->name("admin/dashboard");
 
-    // Phần account - Phúc
-    Route::get('admin/acount', [AcountConroller::class, 'index'])->name('admin/acount');
-    Route::get('admin/acount/create', [AcountConroller::class, 'create'])->name('admin/acount/create');
-    Route::post('admin/acount/postAcount', [AcountConroller::class, 'store'])->name('admin/acount/store');
-
-    Route::get('admin/acount/edit/{slug}', [AcountConroller::class, 'edit'])->name('admin/acount/edit');
-    Route::post('admin/acount/update', [AcountConroller::class, 'update'])->name('admin/acount/update');
-    Route::get('admin/acount/view', [AcountConroller::class, 'show'])->name('admin/acount/view');
-
+    Route::get('admin/account', [AcountConroller::class, 'index'])->name('admin/account');
+    // Create
+    Route::get('admin/account/create', [AcountConroller::class, 'create'])->name('admin/account/create');
+    Route::post('admin/account/store', [AcountConroller::class, 'store'])->name('admin/account/store');
+    // Update
+    Route::get('admin/account/edit/{slug}', [AcountConroller::class, 'edit'])->name('admin/account/edit');
+    Route::post('admin/account/update', [AcountConroller::class, 'update'])->name('admin/account/update');
+    // View
+    Route::get('admin/account/view', [AcountConroller::class, 'show'])->name('admin/account/view');
 
 
     // Phần Brand- Phúc
@@ -131,6 +131,9 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::post('admin/product/store', [ProductController::class, 'store'])->name('admin/product/store');
     Route::get('admin/product/show/{slug}', [ProductController::class, 'show'])->name('admin/product/show');
     Route::get('admin/product/destroy/{id}', [ProductController::class, 'destroy'])->name('admin/product/destroy');
+    //UPDATE PRODUCT - MAN
+    Route::get('admin/product/edit/{slug}', [ProductController::class, 'edit'])->name('admin/product/edit');
+    Route::post('admin/product/update/{id}', [ProductController::class, 'update'])->name('admin/product/update');
 
     // Phần danh cho supplier - Man
     Route::get('admin/supplier', [SupplierController::class, 'index'])->name('admin/supplier');
