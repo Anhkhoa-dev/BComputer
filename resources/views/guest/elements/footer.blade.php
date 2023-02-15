@@ -51,6 +51,7 @@
                             <div class="footer-nav">
                                 <ul>
                                     <li><a href="#" class="footer-link">About us</a></li>
+                                    <li><a href="#" class="footer-link">Conttact</a></li>
                                     <li><a href="#" class="footer-link">Shopping Advice</a></li>
                                     <li><a href="#" class="footer-link">Personnel recruitment</a></li>
                                 </ul>
