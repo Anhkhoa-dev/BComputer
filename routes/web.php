@@ -79,7 +79,7 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Phần dashboard - Phúc
     Route::get("/admin", [AdminsController::class, "getHome"])->name("admin/dashboard");
 
-    // Phần Account - Phúc
+
     Route::get('admin/account', [AcountConroller::class, 'index'])->name('admin/account');
     // Create
     Route::get('admin/account/create', [AcountConroller::class, 'create'])->name('admin/account/create');
@@ -89,8 +89,10 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::post('admin/account/update', [AcountConroller::class, 'update'])->name('admin/account/update');
     // View
     Route::get('admin/account/view', [AcountConroller::class, 'show'])->name('admin/account/view');
+
     // Delete
     Route::get('admin/account/destroy/{id}', [AcountConroller::class, 'destroy'])->name('admin/account/destroy');
+
 
     // Phần Brand- Phúc
     Route::get('admin/brand', [BrandController::class, 'index'])->name('admin/brand');

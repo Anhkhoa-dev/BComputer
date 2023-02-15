@@ -21,12 +21,7 @@ use App\Models\Comment;
 
 class IndexController extends Controller
 {
-    // public function __construct()
-    // {
 
-    //     $this->user='guest/pages/';
-    // }
-    //
     public function getHome()
     {
         $lts_Catagory = $this->getCatagory();
@@ -75,7 +70,8 @@ class IndexController extends Controller
         return view('guest.pages.paymentpolicy');
     }
 
-    public function getBanner(){
+    public function getBanner()
+    {
         $bannerList = BANNER::where('status', 1)->get();
         return $bannerList;
     }
