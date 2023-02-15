@@ -15,7 +15,6 @@ class Order extends Model
         'id_tk',
         'date_order',
         'address',
-        'ship',
         'cod',
         'payment',
         'id_voucher',

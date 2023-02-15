@@ -242,17 +242,16 @@ class CartConntroller extends Controller
                 'id_tk' => Auth::user()->id,
                 'date_order' => date_format(Carbon::now(), 'Y-m-d H:i'),
                 'address' => $userAddressDefautl != null ? $userAddressDefautl->address . ', ' . $userAddressDefautl->wards . ', ' . $userAddressDefautl->district . ', ' . $userAddressDefautl->province : '590, CMT8, District 3, HCMC',
-                'ship' => null,
                 'cod' => $userAddressDefautl != null ? 'Giao hàng tận nơi' : 'Nhận tại cửa hàng',
                 'payment' => $payment[0] == 'pay_delivery' ? 0 : 1,
                 'id_voucher' => $voucher != null ? VOUCHER::where('code', $voucher['code'])->first()->id : null,
                 'total' => floatval($request->total),
                 'statusOrder' => $trangthai,
             ];
-            if (!$voucher) {
-                $qtyVoucher = VOUCHER::where('code', $voucher['code'])->first()->quanity;
-                VOUCHER::where('code', $voucher['code'])->update(['quanity' => --$qtyVoucher]);
-            }
+            // if (!$voucher) {
+            //     $qtyVoucher = VOUCHER::where('code', $voucher['code'])->first();
+            //     VOUCHER::where('code', $voucher['code'])->update(['quanity' => --$qtyVoucher]);
+            // }
 
             $Orderlist  = Order::create($Order);
             session()->put('codeOrder', $Orderlist->id);
@@ -266,7 +265,7 @@ class CartConntroller extends Controller
                     'discount'  => $product->discount,
                     'totalItem'  => ($product->price * ((100 - $product->discount) / 100)) * $prod[2],
                 ];
-                VOUCHER::where('id', $voucher['code'])->update(['quanity' => --$voucher->quanity]);
+                // VOUCHER::where('id', $voucher['code'])->update(['quanity' => --$voucher->quanity]);
                 OrderDetails::create($OrderDetail);
                 Cart::where('id_tk', Auth::user()->id)->where('id_pro', $prod[0])->delete();
             }
