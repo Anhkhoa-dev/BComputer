@@ -242,7 +242,6 @@ $(function () {
                         showAlertTop(
                             "Vui lòng đăng nhập để thực hiện chức năng này"
                         );
-                    // window.location.href = "http://127.0.0.1:8000/login";
                 }
             })
             .catch(() => showAlertTop(errorMessage));
@@ -389,6 +388,11 @@ $(function () {
                 var fullname = $('.change-name').val();
                 ajaxChangeFullname(idUser, fullname)
             });
+            $('#change-avt-inp').click(function () {
+                var imageUser = $("input[name=change-avt-inp]").val();
+                alert(imageUser);
+            });
+            break;
         }
         case "cart-items": {
             // alert(page);
@@ -525,6 +529,51 @@ $(function () {
             $('#choose-address-orther').click(function () {
                 showAlertTop('Chưa làm tới');
             });
+            var totalPayPal = document.getElementById('totalUsd').value;
+            paypal.Button.render({
+                // Configure environment
+                env: 'sandbox',
+                client: {
+                    sandbox: 'AUY1Drlc9SYoTBz_ZVmZuwL9tL-0YQ61ogdpHb5XfA0B6g4Ks09QKQ58tUdXSmlIBDv-DCXTNHoODAhQ',
+                    production: 'demo_production_client_id'
+                },
+                // Customize button (optional)
+                locale: 'en_US',
+                style: {
+                    size: 'medium',
+                    color: 'gold',
+                    shape: 'pill',
+                },
+
+                // Enable Pay Now checkout flow (optional)
+                commit: true,
+
+                // Set up a payment
+                payment: function (data, actions) {
+                    return actions.payment.create({
+                        transactions: [{
+                            amount: {
+                                total: `${totalPayPal}`,
+                                currency: 'USD'
+                            }
+                        }]
+                    });
+                },
+                // Execute the payment
+                onAuthorize: function (data, actions) {
+                    return actions.payment.execute().then(function () {
+                        // Show a confirmation message to the buyer
+                        // window.alert('Thank you for your purchase!');
+                        // swal(
+                        //     "Thanh toán đơn hàng thàng công!",
+                        //     "Để hàng tất đơn hàng vui lòng bấm nút Procced to Payment!",
+                        //     "success", {
+                        //     button: "Ok!",
+                        // });
+                        showAlertTop('Please click proceed to payment to complete the order');
+                    });
+                }
+            }, '#paypal-button');
 
 
             $('#process-to-payment').click(function () {

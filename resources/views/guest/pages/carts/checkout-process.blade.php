@@ -138,7 +138,11 @@
                         </div>
                         <p class="mt-1">Connect to Account PayPal</p>
                     </div>
+                    @php
+                    $total01 = ltrim($total, '$');
+                    @endphp
                     <div id="paypal-button" class="d-none"></div>
+                    <input type="hidden" id="totalUsd" value="{{$total01}}">
 
                 </div>
                 @php
@@ -185,7 +189,7 @@
     </div>
 </div>
 @endsection
-@section('myjs')
+{{-- @section('myjs')
 <script>
     paypal.Button.render({
         // Configure environment
@@ -225,4 +229,4 @@
         }
     }, '#paypal-button');
 </script>
-@endsection
+@endsection --}}

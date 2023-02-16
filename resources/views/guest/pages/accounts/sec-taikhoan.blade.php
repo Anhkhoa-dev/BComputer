@@ -14,13 +14,16 @@
                             <div class="col-md-3">
                                 <div class="col-12 align-items-center">
                                     <div class="tk-image">
+                                        
                                         <img src="{{ asset('image/user/' . $user->image) }}" alt="{{ $user->fullname }}"
                                             width="200" class="image-img">
-                                        <div class="image-hover">
-                                            <input type="file" class="input-change" id="change-avt-inp"
-                                                name="change-avt-inp" data-modal='avt' accept="image/*">
-                                            <div class="change-image" id="btn-change-avt">Change image</div>
-                                        </div>
+                                        <form enctype="multipart/form-data">
+                                            <div class="image-hover">
+                                                <input type="file" id="change-avt-inp" class="d-none"
+                                                    name="change-avt-inp" data-id="{{$user->id}}" accept="image/*">
+                                                <div class="change-image" for="change-avt-inp">Change image</div>
+                                            </div>
+                                        </form>
                                     </div>
                                     <div class="tk-information">
                                         <div class="dropdown">
@@ -47,7 +50,7 @@
                                     <div class="box-address">
                                         @if ($addressDefault == null)
                                             <p class="title">You don't have a shipping address yet? <a href="#"
-                                                    class="add">Add address</a></p>
+                                                    class="add-new-address">Add address</a></p>
                                         @else
                                             <div class="address-info-active">
                                                 <div class="user-info">
@@ -103,18 +106,18 @@
             </div>
             <div class="modal-body">
                 <form action="#" method="post">
-                    <div class="mb-3">
+                    {{-- <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Password old</label>
                         <input type="password" class="form-control" name="pass_old" id="exampleFormControlInput1"
                             placeholder="Enter password old">
-                    </div>
+                    </div> --}}
                     <div class="mb-3">
                         <label for="exampleFormControlInput1" class="form-label">Password new</label>
-                        <input type="password" class="form-control" name="pass_new" id="exampleFormControlInput1"
+                        <input type="password" class="form-control" name="pass_new" id="newpass"
                             placeholder="Password form 6-16 character">
                     </div>
                     <div class="mb-3">
-                        <input type="password" class="form-control" name="cpass_new" id="exampleFormControlInput1"
+                        <input type="password" class="form-control" name="cpass_new" id="cpnewpass"
                             placeholder="Enter password confirm new">
                     </div>
                     <div>
