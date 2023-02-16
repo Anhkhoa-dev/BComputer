@@ -105,7 +105,7 @@
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     @else
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                        <button type="button" class="btn btn-danger btn-mg" data-bs-toggle="modal"
                                             data-bs-target="#delete_account{{ $item->id }}"
                                             {{ $item->level == 2 ? '' : 'hidden' }}>
                                             <i class="fas fa-trash"></i>
