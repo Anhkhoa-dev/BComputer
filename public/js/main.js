@@ -644,7 +644,7 @@ $(function () {
                 key: key,
             },
             success: function (data) {
-                console.log(data)
+                console.log(data.output);
             }
         });
     });
@@ -1077,6 +1077,7 @@ $(function () {
     var wards = document.getElementById("address-ward");
     var Parameter = {
         url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        // url: "https://raw.githubusercontent.com/kcjpop/vietnam-topojson/master/adm2/adm2.json",
         method: "GET",
         responseType: "application/json",
     };

@@ -74,15 +74,22 @@ class IndexController extends Controller
     public function getSearch(Request $request)
     {
         if ($request->ajax()) {
-            $output = [];
-            $products = DB::table('product')->where('name', 'LIKE', '%' . $request->search . '%')->where('name', 'LIKE', '%' . $request->search . '%')->get();
+            $output = '';
+            $products = DB::table('product')->where('name', 'LIKE', '%' . $request->search . '%')->where('description', 'LIKE', '%' . $request->search . '%')->get();
             if ($products) {
                 foreach ($products as $key => $product) {
-                    print_r($product);
+                    if ($product->id) {
+                        $image = ProductImage::where('id_pro', $product->id)->get();
+                        // $out
+                    } else {
+                        $product[$key]->image = '';
+                    }
+                    // print_r($product);
+                    // array_push($output, $product);
                 }
             }
 
-            // return Response($output);
+            return $output;
         }
     }
 
