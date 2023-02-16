@@ -236,56 +236,83 @@
             color: #fb6e2e;
         }
 
-        .review-info {
+        // .review-info {
 
-            .col-review {
+        //     .col-review {
 
 
-                display: flex;
-                margin-bottom: 10px;
+        //         display: flex;
+        //         margin-bottom: 10px;
 
-                justify-content: space-around;
+        //         justify-content: space-around;
 
-                .form-image-review {
-                    display: flex;
-                    margin: 5px;
+        //         .form-image-review {
+        //             display: flex;
+        //             margin: 5px;
 
-                    .image-review {
-                        width: 100%;
-                        max-width: 100px;
+        //             .image-review {
+        //                 width: 100%;
+        //                 max-width: 100px;
 
-                        border-radius: 5px;
-                        border: 0.5px solid $bg_first;
+        //                 border-radius: 5px;
+        //                 border: 0.5px solid $bg_first;
 
-                    }
+        //             }
 
-                    .form-image {
-                        display: flex;
-                        margin: 5px;
-                    }
+        //             .form-image {
+        //                 display: flex;
+        //                 margin: 5px;
+        //             }
+        //         }
+        //     }
+
+        //     .mySlides1 {
+        //         width: 100%;
+        //         height: auto;
+        //         max-width: 300px;
+        //         max-height: 300px;
+        //     }
+
+        //     .review-name {
+        //         font-weight: 600;
+        //     }
+
+        //     .icon-bought {
+        //         color: #2ba832;
+        //     }
+
+        //     .bought-info {
+        //         color: #2ba832;
+        //         font-size: small;
+        //         font-weight: 400;
+        //     }
+
+        // }
+
+        .review-frame {
+            .write-comment {
+                width: 80%;
+                height: 120px;
+            }
+
+            .review-frame-second {
+                padding: 20px;
+
+                .img-user-review {
+                    width: 100%;
+                    height: auto;
+                    max-width: 60px;
+                }
+
+                .info-text-user {
+                    margin-top: -10px;
+                }
+
+                .anser-comment {
+                    padding: 10px;
                 }
             }
 
-            .mySlides1 {
-                width: 100%;
-                height: auto;
-                max-width: 300px;
-                max-height: 300px;
-            }
-
-            .review-name {
-                font-weight: 600;
-            }
-
-            .icon-bought {
-                color: #2ba832;
-            }
-
-            .bought-info {
-                color: #2ba832;
-                font-size: small;
-                font-weight: 400;
-            }
 
         }
 
