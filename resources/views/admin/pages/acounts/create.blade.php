@@ -82,7 +82,7 @@
                                 <div class="mb-3 form-select" multiple aria-label="">
                                     <label for="address" class="form-label">Address</label>
                                     <textarea type="text" class="form-control bg-light text-dark" style="margin-bottom: 5px" rows="5"
-                                        id="address" name="acc_address">{{ old('address') }}</textarea>
+                                        id="address" name="address">{{ old('address') }}</textarea>
                                     @error('address')
                                         <span class="errorMsg">{{ $message }}</span>
                                     @enderror

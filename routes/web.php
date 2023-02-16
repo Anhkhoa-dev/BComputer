@@ -16,6 +16,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Guest\CartConntroller;
 use App\Http\Controllers\Guest\IndexController;
 use App\Http\Controllers\Guest\AccountController;
+use App\Models\Order;
 
 //Login and register
 Route::controller(LoginController::class)->group(function () {
@@ -88,8 +89,9 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::get('admin/account/create', [AcountConroller::class, 'create'])->name('admin/account/create');
     Route::post('admin/account/store', [AcountConroller::class, 'store'])->name('admin/account/store');
     // Update
-    Route::get('admin/account/edit/{slug}', [AcountConroller::class, 'edit'])->name('admin/account/edit');
-    Route::post('admin/account/update', [AcountConroller::class, 'update'])->name('admin/account/update');
+    Route::get('admin/account/edit/{id}', [AcountConroller::class, 'edit'])->name('admin/account/edit');
+    Route::post('admin/account/update/{id}', [AcountConroller::class, 'update'])->name('admin/account/update');
+    Route::post('admin/account/updateUser/{id}', [AcountConroller::class, 'updateUser'])->name('admin/account/updateUser');
     // View
     Route::get('admin/account/view', [AcountConroller::class, 'show'])->name('admin/account/view');
 
@@ -133,6 +135,8 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
 
     // Phần Order - Phúc
     Route::get('admin/order', [OrderController::class, 'index'])->name('admin/order');
+    Route::get('admin/order/update/{id}', [OrderController::class, 'update'])->name('admin/order/update');
+    Route::get('admin/order/destroy/{id}', [OrderController::class, 'destroy'])->name('admin/order/destroy');
 
     // Phần UserAddress - Phúc
     Route::get('admin/userAddress', [UserAddressController::class, 'index'])->name('admin/userAddress');

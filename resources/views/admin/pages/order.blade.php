@@ -26,13 +26,6 @@
         <!-- Default box -->
         <div class="card">
             <div class="card-header">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#order_detail">
-                    <i class="fa fa-user-plus" aria-hidden="true"></i>
-                </button>
-                {{-- <a class="btn btn-primary" href="{{ route('admin/acount/create') }}">
-                    <i class="fa fa-user-plus" aria-hidden="true"></i>
-                </a>
-                {{-- Create --}}
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
                         <i class="fas fa-minus"></i>
@@ -47,13 +40,11 @@
                     <thead>
                         <tr>
                             <th style="width: 1%">ID</th>
-                            <th style="width: 15%">User name</th>
-                            <th style="width: ">Date Order </th>
-                            <th style="width: ">Address</th>
-                            <th style="width: ">Ship</th>
+                            <th style="width: 18%%">User name</th>
+                            <th style="width: 10%">Date Order </th>
+                            <th style="width: 25%">Address</th>
                             <th style="width:">Cod</th>
                             <th style="width: ">Payment</th>
-                            {{-- <th style="width: ">Code voucher</th> --}}
                             <th style="text-align: center"> Status Order </th>
                         </tr>
                     </thead>
@@ -68,53 +59,72 @@
                                 <td>{{ $item->date_order }}</td>
                                 <td>{{ $item->address }}</td>
                                 <td>{{ $item->cod }}</td>
-                                <td>{{ $item->payment }}</td>
-                                {{-- <td>{{ $item['voucher']->code }}</td> --}}
-                                <td style="text-align: center"><a
-                                        class="btn {{ $item->statusOrder == 1 ? 'btn-success' : 'btn-secondary' }} btn-mg">{{ $item->status == 1 ? 'Confirmed' : 'Unconfimred' }}</a>
-                                </td>
+                                <td>{{ $item->payment == 0 ? 'Payment on delivery' : 'Transfer payments' }}</td>
                                 <td class="project-actions text-center">
-                                    {{-- View --}}
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                        data-bs-target="#show_account{{ $item->id }}"><i class="fa fa-user"
-                                            aria-hidden="true"></i></button>
-                                    {{-- Edit --}}
-                                    <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                        data-bs-target="#edit_account{{ $item->id }}">
-                                        <i class="fas fa-pencil-alt"></i>
+                                    {{ $item->statusOrder }}
+                                </td>
+                                <td>
+                                    {{-- Status --}}
+
+                                    @if ($item->statusOrder == 'Đã tiếp nhận')
+                                        <a href="{{ route('admin/order/update', $item->id) }}"
+                                            class="btn btn-primary btn-mg">
+                                            <i class="fa-solid fa-file-circle-check"></i>
+                                        </a>
+                                    @elseif($item->statusOrder == 'Confirmed')
+                                        <a href="{{ route('admin/order/update', $item->id) }}"
+                                            class="btn btn-success btn-mg">
+                                            <i class="fa-solid fa-box"></i>
+                                        </a>
+                                    @elseif($item->statusOrder == 'Complete')
+                                        <button type="button" hidden></button>
+                                    @else
+                                        <button type="button" disabled class="btn btn-danger btn-mg">
+                                            <i class="fa-solid fa-xmark fa-lg"></i>
+                                        </button>
+                                    @endif
+                                    {{-- Info --}}
+                                    <button type="button" class="btn btn-info btn-mg" data-bs-toggle="modal"
+                                        data-bs-target="#order_detail{{ $item->id }}">
+                                        <i class="fa-solid fa-info"></i>
                                     </button>
                                     {{-- Delete --}}
-                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal"
-                                        data-bs-target="#delete_account{{ $item->id }}"
-                                        {{ $item->level == 2 ? '' : 'hidden' }}>
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+                                    @if ($item->statusOrder == 'Cancelled'|| $item->statusOrder == 'Complete')
+                                        <button type="button" hidden></button>
+                                    @else
+                                        <button type="button" class="btn btn-danger btn-mg" data-bs-toggle="modal"
+                                            data-bs-target="#delete_order{{ $item->id }}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-                {{-- @if (count() > 0) --}}
-                <div class="col-md-12 mt-3">
-                    <nav aria-label="Page navigation example pagination-lg">
-                        <ul class="pagination justify-content-end">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                {{-- @endif --}}
+                @if ($ilo = count($order) > 7)
+                    <div class="col-md-12 mt-3">
+                        <nav aria-label="Page navigation example pagination-lg">
+                            <ul class="pagination justify-content-end">
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Previous">
+                                        <span aria-hidden="true">&laquo;</span>
+                                    </a>
+                                </li>
+                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                                <li class="page-item"><a class="page-link" href="#">5</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Next">
+                                        <span aria-hidden="true">&raquo;</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                @endif
             </div>
             <!-- /.card-body -->
         </div>
@@ -122,147 +132,218 @@
 
 
 
-
-
-
         <!-- Modal show OrderDetails-->
-        {{-- @foreach ($order as $item) --}}
-        <div class="modal fade" id="order_detail" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header bg-info text-white">
-                        {{-- <div class="phuc-text-ban">&nbsp;Account: &nbsp;{{ $item->id }} --}}
-                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#edit_account">
-                            <i class="fas fa-pencil-alt"></i>
-                        </button>
-                        {{-- </div> --}}
-                        <button type="button" class="btn-close btn-lg" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-
-                        {{-- // cột bên trai --}}
-                        <div class="row">
-                            <div class="col-7">
-                                <div class="card">
-                                    <div class="card-header">
-                                        <div class="phuc-text-ban">&nbsp;Shipment Details</div>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="row container">
-                                            <div class="col-4">
-                                                <div class="phuc-acount">
-                                                    <img id="image" width="15%" {{-- src="{{ $item->image != null ? asset('image/user/' . $item->image) : asset('image/user/avatar-default.png') }}" --}}
-                                                        src="{{ asset('image/user/avatar-default.png') }}" alt=""
-                                                        class="img_create" />
-                                                </div>
-                                                <p class="phuc-text-ban">Card title</p>
-                                            </div>
-                                            <div class="col-8">
-                                                <div class="card-body" style="margin:auto">
-                                                    <b class="card-title">Card title</b>
-                                                    <p class="card-text">Some quick example text to build on the card title
-                                                        and
-                                                        make up the bulk of the card's content.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-5">
-                                <div class="row ">
-                                    <div class="card" style="width: 48%">
-                                        <div class="card-header">
-                                            <div class="card-title">&nbsp;<b>Status Order</b></div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="card-title">&nbsp;Da xac nhan</div>
-                                        </div>
-                                    </div>
-                                    <div class="card" style="width: 48%">
-                                        <div class="card-header">
-                                            <div class="card-title">&nbsp;<b>Date Order</b></div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="card-title">&nbsp;20/02/2023</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <div class="card-title">&nbsp;<b>Payment</b></div>
-                                        </div>
-                                        <div class="card-body">
-                                            <div class="card-title">&nbsp;Online</div>
-                                        </div>
-                                    </div>
-
-                            </div>
+        @foreach ($order as $item)
+            <div class="modal fade" id="order_detail{{ $item->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bg-info text-white">
+                            <div class="phuc-text-ban">&emsp;Order Detail: #&nbsp;{{ $item->id }}</div>
+                            <button type="button" class="btn-close btn-lg" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
                         </div>
-                    </div>
-                    {{-- // cột bên phai --}}
-                    <div style="width: 48%">
-                        {{-- <div class="card w-100" style="margin:auto">
-
-                                </div> --}}
-                    </div>
-
-                    <div class="card">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th scope="col" width="40%">Product</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Discount</th>
-                                    <th scope="col">Total</th>
-                                </tr>
-                            </thead>
-                            <tbody class="table-group-divider">
-                                <tr>
-                                    <th scope="row">
-                                        <div class="card" style="width: 25rem;">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-7">
+                                    <div class="card" style="width: 96%">
+                                        <div class="card-header">
+                                            <div class="phuc-text-ban" style="text-align: left">&nbsp;Shipment Details
+                                            </div>
+                                        </div>
+                                        <div class="card-body">
                                             <div class="row container">
+                                                {{-- Shippperment Details --}}
                                                 <div class="col-5">
-                                                    <img src="{{ asset('image/user/avatar-default.png') }}"
-                                                        class="img-thumbnail" style="margin:20px" alt="">
+                                                    <div class="phuc-acount">
+                                                        <img id="image" width="15%"
+                                                            src="{{ $item['username']->image != null ? asset('image/user/' . $item['username']->image) : asset('image/user/avatar-default.png') }}"
+                                                            alt="" class="img_create" />
+                                                    </div>
+                                                    <br>
+                                                    <div style="text-align: center">
+                                                        <button class="btn btn-tool text bg-light" type="button"
+                                                            data-bs-toggle="collapse" data-bs-target="#collapseExample"
+                                                            aria-expanded="false" aria-controls="collapseExample">
+                                                            <b class="phuc-text-ban">{{ $item['username']->fullname }}</b>
+                                                        </button>
+                                                    </div>
+                                                    <div class="collapse" id="collapseExample">
+                                                        <div class="card card-body">
+                                                            <b>Email</b>
+                                                            <p>{{ $item['username']->email }}</p>
+                                                        </div>
+                                                    </div>
                                                 </div>
+                                                     {{-- Phone,Date Order,  --}}
                                                 <div class="col-7">
-                                                    <div class="card-body" style="margin:auto">
-                                                        <h5 class="card-title">Card title</h5>
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="card-title" style="text-align: left">
+                                                                &nbsp;<b>Cod:</b>&nbsp;
+                                                                {{ $item->cod }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="card-title" style="text-align: left">
+                                                                &nbsp;<b>Payment:</b>
+                                                                &nbsp;{{ $item->payment == 0 ? 'Payment on delivery' : 'Transfer payments' }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <div class="card-title" style="text-align: left">
+                                                                &nbsp;<b>Phone:</b>
+                                                                &nbsp;{{ $item['useraddress']->phone }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div class="row container">
+                                                <div class="card" style="width: 99%">
+                                                    <div class="card-header">
+                                                        <div class="card-title">&nbsp;<b>Address</b></div>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="card-title">&nbsp;{{ $item->address }}</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </th>
-                                    <td style="margin:auto">Price</td>
-                                    <td>Otto</td>
-                                    <td>@mdo</td>
-                                    <td>@mdo</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td>Jacob</td>
-                                    <td>Thornton</td>
-                                    <td>@fat</td>
-                                    <td>@fat</td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="row ">
+                                        <div class="card" style="width: 97%">
+                                            <div class="card-header">
+                                                <div class="card-title" style="text-align: left">
+                                                    &nbsp;<b>Date Order:</b>&nbsp;
+                                                    {{ $item->date_order }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card" style="width: 97%">
+                                            <div class="card-header">
+                                                <div class="card-title">&nbsp;<b>Status Order</b></div>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    {{-- &nbsp;{{ $item->statusOrder }} --}}
+                                                    @if ($item->statusOrder == 'Đã tiếp nhận')
+                                                        <input type="text"class="form-control btn btn-primary"
+                                                            value="{{ $item->statusOrder }}">
+                                                    @elseif($item->statusOrder == 'Confirmed')
+                                                        <input type="text"class="form-control btn btn-success"
+                                                            value="{{ $item->statusOrder }}">
+                                                    @elseif($item->statusOrder == 'Complete')
+                                                        <input type="text"class="form-control btn btn-info"
+                                                            value="{{ $item->statusOrder }}">
+                                                    @else
+                                                        <input type="text"class="form-control btn btn-danger"
+                                                            value="{{ $item->statusOrder }}">
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="card" style="width: 97%">
+                                            <div class="card-body">
+                                                <table class="table table-borderless">
+                                                    {{-- @foreach ($orderDetails as $item) --}}
+                                                        <tr>
+                                                            <td><b>Total:</b></td>
+                                                            <td>
+                                                                {{-- {{ $orderDetails->sum($item->totalItem) }} --}}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Discount:</b></td>
+                                                            <td>-
+                                                                {{-- {{ floatval(($item->discount / 100) * $orderDetails > sum($item->totalItem)) }} --}}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td><b>Total amount</b></td>
+                                                            {{-- <td> {{ floatval($orderDetails->sum($item->totalItem) - ($item->discount / 100) * $orderDetails->sum($item->totalItem)) }} --}}
+                                                            </td>
+                                                        </tr>
+                                                    {{-- @endforeach --}}
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="card" style="width: 98%; margin:auto">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width:5%;text-align: center">ID</th>
+                                                <th style="width:50%; padding-left:30px">Product</th>
+                                                <th></th>
+                                                <th style="width:15%;text-align: center ">Price</th>
+                                                <th style="width:15%;text-align: center">Quantity</th>
+                                                <th style="width:15%;text-align: center">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-group-divider">
+                                            @foreach ($orderDetails as $item)
+                                                <tr class="align-items-center">
+                                                    <td style="padding-top:50px">
+                                                        {{ $item->id_pro }}
+                                                    </td>
+                                                    <th scope="row">
+                                                        <div class="row">
+                                                            <div class="col-3">
+                                                                <img src="{{ asset('image/product/Asus_VivoBook_14_M413IA_EK481T_01.PNG') }}"
+                                                                    alt="" class="img-account-order"
+                                                                    width="100px">
+                                                            </div>
+                                                            <div class="col-9">
+                                                                <div style="text-align: center;padding-top:40px">
+                                                                    {{ $item['product']->name }}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                    <td></td>
+                                                    <td style="text-align: center;padding-top:50px">
+                                                        {{ $item->price }}</td>
+                                                    <td>
+                                                        <div style="text-align: center;padding-top:40px">
+                                                            {{ $item->qty }}
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div style="text-align: center;padding-top:40px">
+                                                            {{ $item->totalItem }}
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
-        {{-- @endforeach --}}
+        @endforeach
 
 
 
         <!-- Modal delete -->
 
         @foreach ($order as $item)
-            <div class="modal fade" id="delete_account{{ $item->id }}" tabindex="-1"
+            <div class="modal fade" id="delete_order{{ $item->id }}" tabindex="-1"
                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centere">
                     <div class="modal-content">
@@ -275,13 +356,14 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Are you sure you want to delete Account "<b>{{ $item->fullname }}</b>" with Email
-                            "<b>{{ $item->email }}</b>" ? This action cannot be
+                            Are you sure you want to delete Order "<b>{{ $item->id }}</b>" of the user
+                            "<b>{{ $item['username']->fullname }}</b>" with Email
+                            "<b>{{ $item['username']->email }}</b>" ? This action cannot be
                             undone!
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <a href="{{ route('admin/voucher/destroy', $item->id) }}" class="btn btn-primary">
+                            <a href="{{ route('admin/order/destroy', $item->id) }}" class="btn btn-primary">
                                 Delete
                             </a>
                         </div>
