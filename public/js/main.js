@@ -388,9 +388,24 @@ $(function () {
                 var fullname = $('.change-name').val();
                 ajaxChangeFullname(idUser, fullname)
             });
-            $('#change-avt-inp').click(function () {
-                var imageUser = $("input[name=change-avt-inp]").val();
-                alert(imageUser);
+            // 
+            $('#change-password').click(function () {
+                var id = $(this).attr('data-id');
+                $("#chang-pass-content").text("Change password");
+                $("#update-password").attr("data-id", $(this).data("id")); // Thêm data-id vào nút button
+                $("#change-pass").modal("show");
+            });
+            $('#update-password').click(function () {
+
+                var id = $(this).attr('data-id');
+                var pass = $('#newpass').val();
+                var cpass = $('#cpnewpass').val();
+                if (pass === cpass) {
+                    ajaxChangePass(id, pass);
+                } else {
+                    showAlertTop('Password conform error');
+                }
+
             });
             break;
         }
@@ -617,6 +632,85 @@ $(function () {
         }
     }
 
+    $('#search-input').on('keyup', function () {
+        var key = $(this).val();
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": X_CSRF_TOKEN,
+            },
+            url: "/search",
+            type: "GET",
+            data: {
+                key: key,
+            },
+            success: function (data) {
+                console.log(data)
+            }
+        });
+    });
+
+
+
+
+
+    function ajaxChangePass(id, password) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                },
+                url: "/ajax-change-pass-user",
+                type: "POST",
+                data: {
+                    id: id,
+                    password: password,
+                },
+                success: function (data) {
+                    resolve(data);
+                    switch (data.status) {
+                        case "success": {
+                            window.location.href = "/logout";
+                            break;
+                        }
+                        default:
+                            showAlertTop('Change password error');
+                            break;
+                    }
+
+                },
+                error: function () {
+                    reject();
+                },
+            });
+        });
+    }
+
+
+
+
+    // function ajaxChangeImage(id, files) {
+    //     return new Promise((resolve, reject) => {
+    //         $.ajax({
+    //             headers: {
+    //                 "X-CSRF-TOKEN": X_CSRF_TOKEN,
+    //             },
+    //             url: "/ajax-change-image-user",
+    //             type: "POST",
+    //             data: {
+    //                 id: id,
+    //                 files: files,
+    //             },
+    //             success: function (data) {
+    //                 resolve(data);
+    //                 console.log(data);
+    //             },
+    //             error: function () {
+    //                 reject();
+    //             },
+    //         });
+    //     });
+    // }
+
 
     function ajaxChangeFullname(id, name) {
         return new Promise((resolve, reject) => {
@@ -633,15 +727,14 @@ $(function () {
                 success: function (data) {
                     resolve(data);
                     switch (data.status) {
-                        case 'success': {
-                            showAlertTop('Update full name success')
+                        case "success": {
                             location.reload();
+                            showAlertTop('Update name user success');
                             break;
                         }
                         default:
-                            showAlertTop('Có lỗi khi change name');
+                            showAlertTop('Change name user error');
                     }
-
                 },
                 error: function () {
                     reject();

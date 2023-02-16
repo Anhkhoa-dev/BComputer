@@ -37,12 +37,13 @@
                 </div>
                 <div class="navbar__search">
                     <form class="form__search">
-                        <input type="text" name="search" id="" class="search_input"
+                        <input type="text" name="search" id="search-input" class="search_input"
                             placeholder="Search...">
                         <label for="search" class="search_label"><i class="fas fa-search"></i></label>
                         <button class="btnSearch">All Search</button>
                         <div class="search-info">
                             <div class="search-preview">
+
                                 <div class="search-item">
                                     <img src="{{ asset('image/product/Asus_VivoBook_14_M413IA_EK481T_03.PNG') }}"
                                         alt="" width="30">

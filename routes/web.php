@@ -36,6 +36,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
     Route::get('collections/{name}', [IndexController::class, 'getProducts'])->name('user/products');
     Route::get('product/{name}', [IndexController::class, 'getDetail'])->name('user/detail');
+    Route::get('search', [IndexController::class, 'getSearch']);
     Route::get('aboutus', [IndexController::class, 'aboutus'])->name('user/aboutus');
     Route::get('contact', [IndexController::class, 'contact'])->name('user/contact');
     Route::get('deliverypolicy', [IndexController::class, 'deliverypolicy'])->name('user/deliverypolicy');
@@ -68,7 +69,9 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
             Route::get('account/address', [AccountController::class, 'getAddress'])->name('user/address');
             Route::post('account/postAddress', [AccountController::class, 'postAddress'])->name('user/add-address');
-            Route::post('ajax-change-fullname-user', [AccountController::class, 'ajaxChangeName'])->name('user/add-address');
+            Route::post('ajax-change-fullname-user', [AccountController::class, 'ajaxChangeName']);
+            Route::post('ajax-change-pass-user', [AccountController::class, 'ajaxChangePass']);
+            Route::post('ajax-change-image-user', [AccountController::class, 'ajaxChangeImage']);
             Route::get('account/set-default/{slug}', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
             Route::get('account/my-order', [AccountController::class, 'getOrder'])->name('user/order');
         }
