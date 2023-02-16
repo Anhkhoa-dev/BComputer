@@ -15,6 +15,7 @@ use App\Models\Products;
 use App\Models\ProductImage;
 use App\Models\Comment;
 // use App\Models\Brands;
+use Illuminate\Support\Facades\DB;
 
 // kết thúc Khai báo use Model
 
@@ -40,6 +41,7 @@ class IndexController extends Controller
             'list_Catagory' => $lts_Catagory,
             'list_Featured' => $featuredProducts,
             'bigDiscount' => $bigDiscount,
+            // 'newproduct' => $newProducts,
             'banner' => $banner,
         ];
         return view('guest.pages.home')->with($array);
@@ -69,6 +71,20 @@ class IndexController extends Controller
     {
         return view('guest.pages.paymentpolicy');
     }
+    public function getSearch(Request $request)
+    {
+        if ($request->ajax()) {
+            $output = [];
+            $products = DB::table('product')->where('name', 'LIKE', '%' . $request->search . '%')->where('name', 'LIKE', '%' . $request->search . '%')->get();
+            if ($products) {
+                foreach ($products as $key => $product) {
+                    print_r($product);
+                }
+            }
+
+            // return Response($output);
+        }
+    }
 
     public function getBanner()
     {
@@ -89,6 +105,19 @@ class IndexController extends Controller
 
         return $bigDiscount;
     }
+    // public function getNewProducts($max = 15)
+    // {
+    //     $bigDiscount = Products::where('create_date', '>=', 15)->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
+    //     foreach ($bigDiscount as $i => $key) {
+    //         if ($key->id) {
+    //             $bigDiscount[$i]->image = ProductImage::where('id_pro', $key->id)->get();
+    //         } else {
+    //             $bigDiscount[$i]->image = '';
+    //         }
+    //     }
+
+    //     return $bigDiscount;
+    // }
     public function getCatagory()
     {
         $fillCatagoryAll = Category::where('status', 1)->get();
@@ -177,8 +206,8 @@ class IndexController extends Controller
     }
 
 
-    public function getAddressDefault($id_tk)
-    {
-        return USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first() == null ? null : USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first();
-    }
+    // public function getAddressDefault($id_tk)
+    // {
+    //     return USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first() == null ? null : USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first();
+    // }
 }
