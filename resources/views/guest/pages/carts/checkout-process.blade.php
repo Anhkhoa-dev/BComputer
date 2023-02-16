@@ -118,7 +118,7 @@
                 <div class="select-method mb-5">
                     <div class="pay-method">
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center" for="check_delivery">
                                 <i class="fa-solid fa-money-bill-wave me-2 text-blue"></i>
                                 Cash On Delivery
                             </div>
@@ -138,6 +138,11 @@
                         </div>
                         <p class="mt-1">Connect to Account PayPal</p>
                     </div>
+                    @php
+                    $total01 = ltrim($total, '$');
+                    @endphp
+                    <div id="paypal-button" class="d-none"></div>
+                    <input type="hidden" id="totalUsd" value="{{$total01}}">
 
                 </div>
                 @php
@@ -184,3 +189,44 @@
     </div>
 </div>
 @endsection
+{{-- @section('myjs')
+<script>
+    paypal.Button.render({
+        // Configure environment
+        env: 'sandbox',
+        client: {
+            sandbox: 'AUY1Drlc9SYoTBz_ZVmZuwL9tL-0YQ61ogdpHb5XfA0B6g4Ks09QKQ58tUdXSmlIBDv-DCXTNHoODAhQ',
+            production: 'demo_production_client_id'
+        },
+        // Customize button (optional)
+        locale: 'en_US',
+        style: {
+            size: 'medium',
+            color: 'gold',
+            shape: 'pill',
+        },
+
+        // Enable Pay Now checkout flow (optional)
+        commit: true,
+
+        // Set up a payment
+        payment: function(data, actions) {
+            return actions.payment.create({
+                transactions: [{
+                    amount: {
+                        total: '0.01',
+                        currency: 'USD'
+                    }
+                }]
+            });
+        },
+        // Execute the payment
+        onAuthorize: function(data, actions) {
+            return actions.payment.execute().then(function() {
+                // Show a confirmation message to the buyer
+                window.alert('Thank you for your purchase!');
+            });
+        }
+    }, '#paypal-button');
+</script>
+@endsection --}}

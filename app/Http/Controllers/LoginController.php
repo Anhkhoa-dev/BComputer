@@ -13,16 +13,7 @@ use Illuminate\Support\Str;
 class LoginController extends Controller
 {
 
-    public function __construct()
-    {
-        // $this->user='guest/pages/';
-        // $this->IndexController = new IndexController;
-        // chưa có thư mục lưu hình
-        // if(!is_dir('image/user')){
-        //     // tạo thư mục lưu hình
-        //     mkdir('images/user', 0777, true);
-        // }
-    }
+
     public function getLogin()
     {
 

@@ -40,7 +40,7 @@
             @section('title')
                 {{ $user->fullname }} | BComputer
             @endsection
-            <a href="#" class="bc-item active">Account information</a>
+            <a href="#" class="bc-item active text-decoration-none pl-2"> Account information</a>
     @endswitch
 @endsection
 

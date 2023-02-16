@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Guest;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\USER_ADDRESS;
+use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetails;
 
@@ -14,13 +15,13 @@ use Illuminate\Support\Facades\Auth;
 class AccountController extends Controller
 {
     //
-    public function __construct()
-    {
-        $this->IndexController = new IndexController;
-    }
+    // public function __construct()
+    // {
+    //     $this->IndexController = new IndexController;
+    // }
     public function getAccount()
     {
-        $addressDefault = $this->IndexController->getAddressDefault(Auth::user()->id);
+        $addressDefault = $this->getAddressDefault(Auth::user()->id);
         $array = [
             'page' => 'sec-taikhoan',
             'addressDefault' => $addressDefault,
@@ -30,6 +31,30 @@ class AccountController extends Controller
         return view('guest.pages.accounts.taikhoan')->with($array);
     }
 
+    public function ajaxChangeName(Request $request)
+    {
+        if ($request->ajax()) {
+            User::where('id', intval($request->id))->update(['fullname' => $request->name]);
+            return [
+                'status' => 'success',
+            ];
+        }
+    }
+    public function ajaxChangeImage(Request $request)
+    {
+        if ($request->ajax()) {
+            print_r($request->all());
+        }
+    }
+    public function ajaxChangePass(Request $request)
+    {
+        if ($request->ajax()) {
+            User::where('id', intval($request->id))->update(['password' => bcrypt($request->password)]);
+            return [
+                'status' => 'success',
+            ];
+        }
+    }
 
     // Phần xử lý add Địa chỉ giao hàng của 1 user
     public function postAddress(Request $request)
@@ -72,15 +97,15 @@ class AccountController extends Controller
             // set tất cả các tài khoản về 0,
             USER_ADDRESS::where('id_tk', Auth::user()->id)->update(['status' => 0]);
             USER_ADDRESS::create($data);
-            return redirect('account/address')->with('success_message', 'Đăng ký tài khoản thành công!');
+            return back()->with('success_message', 'Đăng ký tài khoản thành công!');
         } else {
             if ($kiemtra == null) {
                 $data['status'] = 1; // kiểm tra người dùng chưa đặt địa chỉ mặc định thì set tài khoản mới nhập là mặc định
                 USER_ADDRESS::create($data);
-                return redirect('account/address')->with('success_message', 'Đăng ký tài khoản thành công!');
+                return back()->with('success_message', 'Đăng ký tài khoản thành công!');
             } else {
                 USER_ADDRESS::create($data);
-                return redirect('account/address')->with('success_message', 'Đăng ký tài khoản thành công!');
+                return back()->with('success_message', 'Đăng ký tài khoản thành công!');
             }
         }
     }
@@ -128,5 +153,10 @@ class AccountController extends Controller
         // dd($array);
         session()->put('orderList', $orderList);
         return view('guest.pages.accounts.taikhoan')->with($array);
+    }
+
+    public function getAddressDefault($id_tk)
+    {
+        return USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first() == null ? null : USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first();
     }
 }

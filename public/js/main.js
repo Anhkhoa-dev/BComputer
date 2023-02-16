@@ -242,7 +242,6 @@ $(function () {
                         showAlertTop(
                             "Vui lòng đăng nhập để thực hiện chức năng này"
                         );
-                    // window.location.href = "http://127.0.0.1:8000/login";
                 }
             })
             .catch(() => showAlertTop(errorMessage));
@@ -276,7 +275,7 @@ $(function () {
     })
 
     // Nút Mua ngay
-    $('#buy-now').click(function(){
+    $('#buy-now').click(function () {
         var id = $(this).attr('data-id');
         var qty1 = $('.input-qty').val();
         addCart(id, qty1)
@@ -290,7 +289,7 @@ $(function () {
                         $(".cart__number").text(++qtyHeadCart);
                         // thông báo thêm giỏ hàng thành công
                         // renderUpdateCartSuccessfully(data.pro_name);
-                        window.location.href ="/cart-items";
+                        window.location.href = "/cart-items";
                         break;
                     case "new one":
                         if ($(".cart__number").hasClass("d-none")) {
@@ -300,7 +299,7 @@ $(function () {
                         $(".cart__number").text(++qtyHeadCart);
                         // thông báo thêm giỏ hàng thành công
                         // renderAddCartSuccessfully();
-                        window.location.href ="/cart-items";
+                        window.location.href = "/cart-items";
                         break;
                     case "already have":
                         const qtyInstock = data.qtyInStock;
@@ -323,14 +322,14 @@ $(function () {
                 }
             })
             .catch(() => showAlertTop(errorMessage));
-         
+
     });
 
     //nut them vao gio hang
-     $('.add-to-cart').click(function(){
+    $('.add-to-cart').click(function () {
         var id = $(this).attr('data-id');
         var qty1 = $('.input-qty').val();
-         addCart(id, qty1)
+        addCart(id, qty1)
             .then((data) => {
                 switch (data.status) {
                     case "update":
@@ -371,26 +370,50 @@ $(function () {
                     // window.location.href = "http://127.0.0.1:8000/login";
                 }
             })
-            .catch(() => showAlertTop(errorMessage));    
+            .catch(() => showAlertTop(errorMessage));
     });
 
     //nut gui comment
-    $('.send-comment').click(function(){
-            var idp = $(this).attr('data-id');
-            var qty1 = $('.input-qty').val();
-    Sendcomment(idp, qty1)
+    $('.send-comment').click(function () {
+        var idp = $(this).attr('data-id');
+        var qty1 = $('.input-qty').val();
+        Sendcomment(idp, qty1)
 
-
+    });
     switch (page) {
 
-        case "acount": {
-            // $('#change-avt-inp').click(function(){
-            //     var avt_inp = $('#change-avt-inp').val();
-            //     alert(avt_inp)
-            // });
+        case "account": {
+            $('#btn-tk-name-update').click(function () {
+                var idUser = $('.change-name').attr('data-id');
+                var fullname = $('.change-name').val();
+                ajaxChangeFullname(idUser, fullname)
+            });
+            // 
+            $('#change-password').click(function () {
+                var id = $(this).attr('data-id');
+                $("#chang-pass-content").text("Change password");
+                $("#update-password").attr("data-id", $(this).data("id")); // Thêm data-id vào nút button
+                $("#change-pass").modal("show");
+            });
+            $('#update-password').click(function () {
+
+                var id = $(this).attr('data-id');
+                var pass = $('#newpass').val();
+                var cpass = $('#cpnewpass').val();
+                if (pass === cpass) {
+                    ajaxChangePass(id, pass);
+                } else {
+                    showAlertTop('Password conform error');
+                }
+
+            });
+            break;
         }
         case "cart-items": {
             // alert(page);
+            $('.add-new-address').click(function () {
+                $("#add-address").modal("show");
+            })
             const totalItem = $("#list-cart-item").children().length;
             const totalChecked = $(".cus-checkbox-checked").length;
             provisionalAndTotalOrder();
@@ -510,16 +533,62 @@ $(function () {
             $('#check_delivery').click(function () {
                 $(this).addClass('check_payment');
                 $('#check_paypal').removeClass('check_payment');
-
+                $('#paypal-button').addClass('d-none');
             })
             $('#check_paypal').click(function () {
                 $(this).addClass('check_payment');
                 $('#check_delivery').removeClass('check_payment');
+                $('#paypal-button').removeClass('d-none');
             })
 
             $('#choose-address-orther').click(function () {
                 showAlertTop('Chưa làm tới');
             });
+            var totalPayPal = document.getElementById('totalUsd').value;
+            paypal.Button.render({
+                // Configure environment
+                env: 'sandbox',
+                client: {
+                    sandbox: 'AUY1Drlc9SYoTBz_ZVmZuwL9tL-0YQ61ogdpHb5XfA0B6g4Ks09QKQ58tUdXSmlIBDv-DCXTNHoODAhQ',
+                    production: 'demo_production_client_id'
+                },
+                // Customize button (optional)
+                locale: 'en_US',
+                style: {
+                    size: 'medium',
+                    color: 'gold',
+                    shape: 'pill',
+                },
+
+                // Enable Pay Now checkout flow (optional)
+                commit: true,
+
+                // Set up a payment
+                payment: function (data, actions) {
+                    return actions.payment.create({
+                        transactions: [{
+                            amount: {
+                                total: `${totalPayPal}`,
+                                currency: 'USD'
+                            }
+                        }]
+                    });
+                },
+                // Execute the payment
+                onAuthorize: function (data, actions) {
+                    return actions.payment.execute().then(function () {
+                        // Show a confirmation message to the buyer
+                        // window.alert('Thank you for your purchase!');
+                        // swal(
+                        //     "Thanh toán đơn hàng thàng công!",
+                        //     "Để hàng tất đơn hàng vui lòng bấm nút Procced to Payment!",
+                        //     "success", {
+                        //     button: "Ok!",
+                        // });
+                        showAlertTop('Please click proceed to payment to complete the order');
+                    });
+                }
+            }, '#paypal-button');
 
 
             $('#process-to-payment').click(function () {
@@ -563,7 +632,116 @@ $(function () {
         }
     }
 
-    $('.search')
+    $('#search-input').on('keyup', function () {
+        var key = $(this).val();
+        $.ajax({
+            headers: {
+                "X-CSRF-TOKEN": X_CSRF_TOKEN,
+            },
+            url: "/search",
+            type: "GET",
+            data: {
+                key: key,
+            },
+            success: function (data) {
+                console.log(data)
+            }
+        });
+    });
+
+
+
+
+
+    function ajaxChangePass(id, password) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                },
+                url: "/ajax-change-pass-user",
+                type: "POST",
+                data: {
+                    id: id,
+                    password: password,
+                },
+                success: function (data) {
+                    resolve(data);
+                    switch (data.status) {
+                        case "success": {
+                            window.location.href = "/logout";
+                            break;
+                        }
+                        default:
+                            showAlertTop('Change password error');
+                            break;
+                    }
+
+                },
+                error: function () {
+                    reject();
+                },
+            });
+        });
+    }
+
+
+
+
+    // function ajaxChangeImage(id, files) {
+    //     return new Promise((resolve, reject) => {
+    //         $.ajax({
+    //             headers: {
+    //                 "X-CSRF-TOKEN": X_CSRF_TOKEN,
+    //             },
+    //             url: "/ajax-change-image-user",
+    //             type: "POST",
+    //             data: {
+    //                 id: id,
+    //                 files: files,
+    //             },
+    //             success: function (data) {
+    //                 resolve(data);
+    //                 console.log(data);
+    //             },
+    //             error: function () {
+    //                 reject();
+    //             },
+    //         });
+    //     });
+    // }
+
+
+    function ajaxChangeFullname(id, name) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                },
+                url: "/ajax-change-fullname-user",
+                type: "POST",
+                data: {
+                    id: id,
+                    name: name,
+                },
+                success: function (data) {
+                    resolve(data);
+                    switch (data.status) {
+                        case "success": {
+                            location.reload();
+                            showAlertTop('Update name user success');
+                            break;
+                        }
+                        default:
+                            showAlertTop('Change name user error');
+                    }
+                },
+                error: function () {
+                    reject();
+                },
+            });
+        });
+    }
 
     function makePayment(idList, idAddress, idPayment, total) {
         return new Promise((resolve, reject) => {
@@ -934,12 +1112,5 @@ $(function () {
             }
         };
     }
-
-
-
-
-
-
-
-
 });
+

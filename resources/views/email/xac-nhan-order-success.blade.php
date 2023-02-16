@@ -2,7 +2,7 @@
     <h3 style="font-weight: 600; text-align: left;">Hi! {{ $user->fullname }} </h3>
     <p style="text-align: left; text-align: justify;">BComputer has received your order and is processing it. You will
         receive a follow-up notification when your order is ready to be shipped.</p>
-    <a href="#"
+    <a href="{{ route('user/order') }}"
         style="padding: 10px 30px; text-align: center; background: #E94560; color: #fff; text-decoration: none; margin: 70px 0;">Order
         status</a>
     <div style="text-align-last: left; font-weight: 600; margin-top: 30px;">

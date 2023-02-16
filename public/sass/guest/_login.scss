@@ -31,11 +31,11 @@
                 padding-top: 25px;
                 padding-left: 0;
                 padding-right: 0;
-                padding-bottom: 20px;
+                padding-bottom: 10px;
                 // border: 1px solid $Color__0F3460;
                 .form_group{
                     position: relative;
-                    padding-bottom: 30px;
+                    padding-bottom: 20px;
                     .input_control{
                         width: 400px;
                         padding: 8px 0;
@@ -81,18 +81,16 @@
                     }
                     .error_check{
                         color: red;
-                        visibility: hidden;
-                        
+                        visibility: hidden;   
                     }
                     .errorMsg{
                         position: absolute;
                         left: 10px;
-                        bottom: 5px;
+                        bottom: 0px;
                         font-size: 14px;
                         font-style: italic;
                         color: red;
-                        // visibility: hidden;
-
+                        visibility: inherit;
                     }    
                 }
                 .check_box{

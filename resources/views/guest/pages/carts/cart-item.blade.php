@@ -154,7 +154,7 @@
                     <div class="row">
                         <div class="col-12 bg-white p-4 mb-1">
                             <p class="col-12 font-bold">Location</p>
-                            @if ($cart['address'] != null)
+                            @if (count($cart['address']) >= 1)
                                 @foreach ($cart['address'] as $item)
                                     @if ($item->status == 1)
                                         <div class="d-flex align-items-center">
@@ -165,10 +165,11 @@
                                     @endif
                                 @endforeach
                             @else
-                                <p>No address</p>
+                                <div class="add-new-address">Add new Address</div>
                             @endif
 
                         </div>
+                        @include('guest.pages.modal.add-diachi-modal')
                         <div class="cart-total bg-white col-12 p-4">
                             <h5>Order Summary</h5>
                             <hr>
@@ -179,7 +180,8 @@
                             <div class="d-inline mb-5">
                                 <label for="">Voucher</label>
                                 <div class="d-flex mt-2">
-                                    <input type="text" name="voucher-inp" id="voucher-inp" class="form-control me-1">
+                                    <input type="text" name="voucher-inp" id="voucher-inp"
+                                        class="form-control me-1">
                                     <button class="btn btn-success" id="check-voucher-btn">Apply</button>
                                 </div>
 

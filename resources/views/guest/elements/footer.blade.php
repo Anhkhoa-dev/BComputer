@@ -134,5 +134,5 @@
     </div>
 </footer>
 <div class="footer-copyright">
-    <div>The website is written by group 3, Class T1.2203.E1. 2023 @ copyright</div>
+    <div>The website is written by group 2, Class T1.2203.E1. 2023 @ copyright</div>
 </div>

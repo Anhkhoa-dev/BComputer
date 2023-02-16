@@ -14,13 +14,17 @@
                             <div class="col-md-3">
                                 <div class="col-12 align-items-center">
                                     <div class="tk-image">
+                                        
                                         <img src="{{ asset('image/user/' . $user->image) }}" alt="{{ $user->fullname }}"
                                             width="200" class="image-img">
-                                        <div class="image-hover">
-                                            <input type="file" class="input-change" id="change-avt-inp"
-                                                name="change-avt-inp" data-modal='avt' accept="image/*">
-                                            <div class="change-image" id="btn-change-avt">Change image</div>
-                                        </div>
+
+                                            <div class="image-hover d-grid">
+                                                <form>
+                                                    <input type="file" id="change-avt-inp"
+                                                        name="change-avt-inp" class="d-none" data-id="{{$user->id}}" accept="image/*">
+                                                    <label class="change-image" for="change-avt-inp">Change image</label>
+                                            </form>
+                                            </div>
                                     </div>
                                     <div class="tk-information">
                                         <div class="dropdown">
@@ -30,11 +34,12 @@
                                                 <i class="fa-solid fa-user-pen"></i>
                                             </a>
                                             <div class="dropdown-menu border-0 mt-2">
-                                                <form action="#" method="POST" class="d-inline ">
+                                                <div class="d-inline ">
                                                     <input type="text" class="change-name" name="tk-user"
-                                                        placeholder="Enter your full name" />
-                                                    <button class="btn-change">Update</button>
-                                                </form>
+                                                        placeholder="Enter your full name"
+                                                        data-id="{{ $user->id }}" />
+                                                    <div class="btn-change" id="btn-tk-name-update">Update</div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -46,7 +51,7 @@
                                     <div class="box-address">
                                         @if ($addressDefault == null)
                                             <p class="title">You don't have a shipping address yet? <a href="#"
-                                                    class="add">Add address</a></p>
+                                                    class="add-new-address">Add address</a></p>
                                         @else
                                             <div class="address-info-active">
                                                 <div class="user-info">
@@ -75,7 +80,7 @@
                                     </div>
                                     <div class="change-password">
                                         <i class="fa-solid fa-key"></i>
-                                        <a href="#" data-bs-toggle="modal" data-bs-target="#change-pass">Thay đổi
+                                        <a href="#" id="change-password" data-id="{{ $user->id }}">Thay đổi
                                             password</a>
                                     </div>
                                 </div>
@@ -87,7 +92,7 @@
         </div>
     </div>
 </div>
-
+@include('guest.pages.modal.add-diachi-modal')
 {{-- @include('guest.pages.modal.diachi-modal') --}}
 
 {{-- modal thay đổi password --}}
@@ -97,30 +102,23 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content px-4 py-3">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Change password</h1>
+                <h1 class="modal-title fs-5" id="chang-pass-content"></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="#" method="post">
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Password old</label>
-                        <input type="password" class="form-control" name="pass_old" id="exampleFormControlInput1"
-                            placeholder="Enter password old">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Password new</label>
-                        <input type="password" class="form-control" name="pass_new" id="exampleFormControlInput1"
-                            placeholder="Password form 6-16 character">
-                    </div>
-                    <div class="mb-3">
-                        <input type="password" class="form-control" name="cpass_new" id="exampleFormControlInput1"
-                            placeholder="Enter password confirm new">
-                    </div>
-                    <div>
-                        <button class="btn btn-primary form-control">Update</button>
-                    </div>
-                </form>
-            </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Password new</label>
+                    <input type="password" class="form-control" name="pass_new" id="newpass"
+                        placeholder="Password form 6-16 character" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" class="form-control" name="cpass_new" id="cpnewpass"
+                        placeholder="Enter password confirm new" required>
+                </div>
+                <div>
+                    <button class="btn btn-primary form-control" id="update-password">Update</button>
+                </div>
+        </div>
         </div>
     </div>
 </div>
