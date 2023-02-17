@@ -49,7 +49,13 @@
                                         alt="" width="30">
                                     <div class="search-info-group">
                                         <a href="#" class="search-name">Laptop Asus VivoBook 14 X1402ZA EK084W</a>
-                                        <div class="search-price"><i class="fa-solid fa-dollar-sign"></i> 560.50</div>
+                                        <div class="search-price">
+                                            <div class="price">
+                                                <i class="fa-solid fa-dollar-sign"></i>
+                                                520.36
+                                            </div>
+                                            <div class="quanity">Qty: <span>30</span></div>
+                                        </div>
                                     </div>
                                 </div>
 

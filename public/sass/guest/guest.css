@@ -644,7 +644,6 @@ section .title i {
   border: 1px solid #8e8e8e;
   border-radius: 5px;
   box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
-  visibility: hidden;
 }
 .khoa-navbar .navbar .navbar__search .form__search .search-info .btn-xemthem {
   width: 100%;
@@ -678,7 +677,20 @@ section .title i {
   color: #0F3460;
 }
 .khoa-navbar .navbar .navbar__search .form__search .search-info .search-preview .search-item .search-info-group .search-price {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  align-items: center;
+}
+.khoa-navbar .navbar .navbar__search .form__search .search-info .search-preview .search-item .search-info-group .search-price .price {
   color: red;
+  font-size: 14px;
+}
+.khoa-navbar .navbar .navbar__search .form__search .search-info .search-preview .search-item .search-info-group .search-price .quanity {
+  font-size: 14px;
+}
+.khoa-navbar .navbar .navbar__search .form__search .search-info .search-preview .search-item .search-info-group .search-price .quanity span {
+  font-size: 14px;
 }
 .khoa-navbar .navbar .navbar__icon {
   display: flex;

@@ -305,18 +305,18 @@ $(function () {
                         const qtyInstock = data.qtyInStock;
                         if (qtyInstock > 5) {
                             showAlertTop(
-                                `Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5`
+                                `This product is already in the cart and the maximum purchase quantity is 5`
                             );
                         } else {
                             showAlertTop(
-                                `Sản phẩm hết hàng hoặc đang ngừng kinh doanh`
+                                `Products are out of stock or out of business`
                             );
                         }
                         break;
                     default:
                         // thông báo thêm giỏ hàng thành công
                         showAlertTop(
-                            "Vui lòng đăng nhập để thực hiện chức năng này"
+                            "Please login to perform this function"
                         );
                     // window.location.href = "http://127.0.0.1:8000/login";
                 }
@@ -354,18 +354,18 @@ $(function () {
                         const qtyInstock = data.qtyInStock;
                         if (qtyInstock > 5) {
                             showAlertTop(
-                                `Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5`
+                                `This product is already in the cart and the maximum purchase quantity is 5`
                             );
                         } else {
                             showAlertTop(
-                                `Sản phẩm hết hàng hoặc đang ngừng kinh doanh`
+                                `Products are out of stock or out of business`
                             );
                         }
                         break;
                     default:
                         // thông báo thêm giỏ hàng thành công
                         showAlertTop(
-                            "Vui lòng đăng nhập để thực hiện chức năng này"
+                            "Please login to perform this function"
                         );
                     // window.location.href = "http://127.0.0.1:8000/login";
                 }
