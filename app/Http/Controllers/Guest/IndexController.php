@@ -14,8 +14,7 @@ use App\Models\Category;
 use App\Models\Products;
 use App\Models\ProductImage;
 use App\Models\Comment;
-// use App\Models\Brands;
-use Illuminate\Support\Facades\DB;
+// use Illuminate\Support\Facades\DB;
 
 // kết thúc Khai báo use Model
 
@@ -32,6 +31,7 @@ class IndexController extends Controller
         $banner = $this->getBanner();
         session()->forget('voucherKH');
         session()->forget('codeOrder');
+        session()->forget('dataLisTraCuu');
         if (Auth::user()) {
             $qtyCart = Cart::where('id_tk', Auth::user()->id)->sum('quanity');
             session()->put('qtyCart', intval($qtyCart));
@@ -71,27 +71,27 @@ class IndexController extends Controller
     {
         return view('guest.pages.paymentpolicy');
     }
-    public function getSearch(Request $request)
-    {
-        if ($request->ajax()) {
-            $output = '';
-            $products = DB::table('product')->where('name', 'LIKE', '%' . $request->search . '%')->where('description', 'LIKE', '%' . $request->search . '%')->get();
-            if ($products) {
-                foreach ($products as $key => $product) {
-                    if ($product->id) {
-                        $image = ProductImage::where('id_pro', $product->id)->get();
-                        // $out
-                    } else {
-                        $product[$key]->image = '';
-                    }
-                    // print_r($product);
-                    // array_push($output, $product);
-                }
-            }
+    // public function getSearch(Request $request)
+    // {
+    //     if ($request->ajax()) {
+    //         $output = '';
+    //         $products = DB::table('product')->where('name', 'LIKE', '%' . $request->search . '%')->where('description', 'LIKE', '%' . $request->search . '%')->get();
+    //         if ($products) {
+    //             foreach ($products as $key => $product) {
+    //                 if ($product->id) {
+    //                     $image = ProductImage::where('id_pro', $product->id)->get();
+    //                     // $out
+    //                 } else {
+    //                     $product[$key]->image = '';
+    //                 }
+    //                 // print_r($product);
+    //                 // array_push($output, $product);
+    //             }
+    //         }
 
-            return $output;
-        }
-    }
+    //         return $output;
+    //     }
+    // }
 
     public function getBanner()
     {
@@ -112,19 +112,19 @@ class IndexController extends Controller
 
         return $bigDiscount;
     }
-    // public function getNewProducts($max = 15)
-    // {
-    //     $bigDiscount = Products::where('create_date', '>=', 15)->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
-    //     foreach ($bigDiscount as $i => $key) {
-    //         if ($key->id) {
-    //             $bigDiscount[$i]->image = ProductImage::where('id_pro', $key->id)->get();
-    //         } else {
-    //             $bigDiscount[$i]->image = '';
-    //         }
-    //     }
+    public function getNewProducts($max = 15)
+    {
+        $bigDiscount = Products::where('create_date', '>=', 15)->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
+        foreach ($bigDiscount as $i => $key) {
+            if ($key->id) {
+                $bigDiscount[$i]->image = ProductImage::where('id_pro', $key->id)->get();
+            } else {
+                $bigDiscount[$i]->image = '';
+            }
+        }
 
-    //     return $bigDiscount;
-    // }
+        return $bigDiscount;
+    }
     public function getCatagory()
     {
         $fillCatagoryAll = Category::where('status', 1)->get();
@@ -144,6 +144,35 @@ class IndexController extends Controller
         }
 
         return $lst_featured;
+    }
+
+    public function ajaxTraCuuList()
+    {
+        $data = Products::search()->get();
+        foreach ($data as $key => $item) {
+            if ($item->id) {
+                $data[$key]->image = ProductImage::where('id_pro', $item->id)->first()->image;
+            } else {
+                $data[$key]->image = '';
+            }
+        }
+
+
+        return view('guest.pages.search-product', compact('data'));
+    }
+
+    public function ajaxTraCuu(Request $request)
+    {
+        $data = Products::search()->get();
+        foreach ($data as $key => $item) {
+            if ($item->id) {
+                $data[$key]->image = ProductImage::where('id_pro', $item->id)->first()->image;
+            } else {
+                $data[$key]->image = '';
+            }
+        }
+
+        return view('guest.pages.search.ajax-search', compact('data',));
     }
 
 
@@ -175,7 +204,7 @@ class IndexController extends Controller
         $collections = Category::where('id', $prod->id_ca)->first();
         $prodImage = ProductImage::where('id_pro', $prod->id)->get();
         $comment = Comment::where('id_pro', $prod->id)->get();
-        $related = Products::where('id_ca', '=', $prod->id_ca)->limit(10)->get();
+        $related = Products::where('id_ca', $prod->id_ca)->limit(10)->get();
         foreach ($related as $i => $key) {
             if ($key->id) {
                 $related[$i]->image = ProductImage::where('id_pro', $key->id)->get();

@@ -633,17 +633,22 @@ section .title i {
   font-weight: 500;
   color: #fff;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .khoa-navbar .navbar .navbar__search .form__search .search-info {
   position: absolute;
   top: 50px;
   left: 0;
   width: 100%;
+  min-height: 200px;
   max-height: 400px;
   background: #fff;
   border: 1px solid #8e8e8e;
   border-radius: 5px;
   box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
+  z-index: 100;
 }
 .khoa-navbar .navbar .navbar__search .form__search .search-info .btn-xemthem {
   width: 100%;
@@ -653,6 +658,7 @@ section .title i {
   color: #0F3460;
 }
 .khoa-navbar .navbar .navbar__search .form__search .search-info .search-preview {
+  min-height: 160px;
   max-height: 360px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -820,6 +826,29 @@ section .title i {
 .khoa-sidebar .sidebar {
   padding: 15px 25px;
   cursor: pointer;
+  position: relative;
+}
+.khoa-sidebar .sidebar .card_side {
+  position: absolute;
+  padding: 15px 0;
+  border-radius: 10px;
+  box-shadow: #C9C9C9 -2px 1px 13px 7px;
+  z-index: 10;
+}
+.khoa-sidebar .sidebar .card_side .side-box {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 25px;
+  text-decoration: none;
+  color: rgba(17, 17, 17, 0.8);
+  transition: all 0.3s ease-in;
+}
+.khoa-sidebar .sidebar .card_side .side-box:hover {
+  background-color: #E94560;
+  color: #fff;
+  transition: all 0.5s ease-in;
 }
 .khoa-sidebar .sidebar .category {
   display: flex;
@@ -2465,9 +2494,6 @@ section .title i {
   outline: none;
   border-radius: 5px;
   padding-left: 45px;
-  font-size: 1rem;
-}
-.khoa-login .login_nen .box_login .form_login .form_group .input_control::-moz-placeholder {
   font-size: 1rem;
 }
 .khoa-login .login_nen .box_login .form_login .form_group .input_control::placeholder {

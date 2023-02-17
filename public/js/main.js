@@ -382,6 +382,10 @@ $(function () {
     });
     switch (page) {
 
+        case "": {
+
+        }
+
         case "account": {
             $('#btn-tk-name-update').click(function () {
                 var idUser = $('.change-name').attr('data-id');
@@ -631,20 +635,39 @@ $(function () {
             break;
         }
     }
+    // $('.btnSearch').click(function () {
+
+    //     var keySearch = $('#search-input').val()
+    //     alert(keySearch)
+
+    // });
+
+
+    $('.search-info').hide();
+    $('#search-input').on('keyup', function () {
+        var key = $(this).val();
+        if (key != '') {
+            $.ajax({
+                url: '/ajax-tracuu-product?key=' + key,
+                type: "GET",
+                success: function (res) {
+                    $('.search-preview').html(res);
+                    $('.search-info').show();
+                }
+            });
+        } else {
+            $('.search-preview').html('');
+            $('.search-info').hide();
+        }
+    });
 
     $('#search-input').on('keyup', function () {
         var key = $(this).val();
         $.ajax({
-            headers: {
-                "X-CSRF-TOKEN": X_CSRF_TOKEN,
-            },
-            url: "/search",
+            url: '/ajax-tracuu-product-list?key' + key,
             type: "GET",
-            data: {
-                key: key,
-            },
             success: function (data) {
-                console.log(data.output);
+                // location.reload();
             }
         });
     });
@@ -652,7 +675,7 @@ $(function () {
 
 
 
-
+    // Thay đổi password
     function ajaxChangePass(id, password) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -810,11 +833,6 @@ $(function () {
         });
     }
 
-    function ajaxSearch(Key) {
-
-    }
-
-
 
     function ajaxVoucher(voucher, total) {
         return new Promise((resolve, reject) => {
@@ -885,7 +903,7 @@ $(function () {
             });
         });
     }
-
+    // hàm xóa cart
     function ajaxDeleteCart(id) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -920,6 +938,8 @@ $(function () {
         });
     }
 
+
+    // xử lý update cart
     let isClicked = false // ngăn người dùng nhấn liên tục
     $('.update-qty').off('click').click(function () {
         var id = $(this).attr('data-id');
@@ -1007,6 +1027,7 @@ $(function () {
         });
     }
 
+    // cập nhật tạm tính và tổng tiền 
     function provisionalAndTotalOrder() {
         let idList = [];
         // danh sách id_sp thanh toán

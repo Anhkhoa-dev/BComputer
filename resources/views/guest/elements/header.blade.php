@@ -40,28 +40,12 @@
                         <input type="text" name="search" id="search-input" class="search_input"
                             placeholder="Search...">
                         <label for="search" class="search_label"><i class="fas fa-search"></i></label>
-                        <button class="btnSearch">All Search</button>
+                        <a href="{{ route('ajax-tracuu-info-list') }}" class="btnSearch text-decoration-none"><span>Search</span></a>
                         <div class="search-info">
                             <div class="search-preview">
-
-                                <div class="search-item">
-                                    <img src="{{ asset('image/product/Asus_VivoBook_14_M413IA_EK481T_03.PNG') }}"
-                                        alt="" width="30">
-                                    <div class="search-info-group">
-                                        <a href="#" class="search-name">Laptop Asus VivoBook 14 X1402ZA EK084W</a>
-                                        <div class="search-price">
-                                            <div class="price">
-                                                <i class="fa-solid fa-dollar-sign"></i>
-                                                520.36
-                                            </div>
-                                            <div class="quanity">Qty: <span>30</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
-                            <div class="text-center py-2 border-top">
-                                <a href="#" class="text-decoration-none text-black">View more 432 products</a>
+                            <div class="view-more-search text-center py-2 border-top">
+                                <a href="{{ route('ajax-tracuu-info-list') }}" class="text-decoration-none text-black">View more <span id="count-qty-search"></span> products</a>
                             </div>
 
                         </div>

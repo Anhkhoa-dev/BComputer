@@ -56,7 +56,7 @@
                                     <td>{{ $item->id }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>$ {{ $item->price }}</td>
-                                    <td>{{ $item->quantity }}</td>
+                                    <td>{{ $item->quantity > 0 ? $item->quantity : 'Out of stock' }}</td>
                                     <td>{{ $item->discount }} %</td>
                                     <td>{{ $item->featured == 1 ? 'Nổi bật' : 'Bình thường' }}</td>
                                     <td>{{ $item->status == 1 ? 'Đang kinh doanh' : 'Ngừng kinh doanh' }}</td>
