@@ -1475,6 +1475,7 @@ section .title i {
   padding: 10px;
 }
 .han-product-detail .form-product-detail .price .quantity .buttons_added .input-qty {
+  border-radius: 3px;
   text-align: center;
   width: 30px;
   font-weight: 600;
@@ -1483,9 +1484,12 @@ section .title i {
   background-color: #2f80ed;
   color: #fff;
   border-radius: 3px;
-  width: 40px;
+  width: 25px;
   border: none;
   font-weight: 600;
+}
+.han-product-detail .form-product-detail .price .not-available {
+  margin: auto;
 }
 .han-product-detail .form-product-detail .price .button-product {
   display: flex;
@@ -1513,6 +1517,7 @@ section .title i {
   width: 100%;
 }
 .han-product-detail .form-product-detail .price .contact {
+  margin-top: 30px;
   text-align: center;
   color: black;
   font-size: small;
@@ -1612,7 +1617,15 @@ section .title i {
   margin-top: -10px;
 }
 .description .review .review-frame .review-frame-second .anser-comment {
+  width: 80%;
   padding: 10px;
+  border-bottom: 1px solid #0F3460;
+  margin: 2px;
+}
+.description .review .review-frame .review-frame-second .write-comment1 {
+  margin: 5px;
+  width: 80%;
+  height: 30px;
 }
 .description .review .like-icon {
   color: #2f80ed;
@@ -2179,6 +2192,50 @@ section .title i {
   text-decoration: underline;
   font-weight: 500;
   padding: 20px;
+}
+
+.han-error-page .col-image-error {
+  margin-top: 130px;
+}
+.han-error-page .col-image-error .error-img {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+  z-index: 1;
+}
+.han-error-page .col-image-error .error-info {
+  margin-top: 80px;
+  text-align: center;
+}
+.han-error-page .col-image-error .button-error {
+  text-decoration: none;
+}
+.han-error-page .col-image-error .button-error .goback {
+  position: relative;
+  padding: 10px;
+  border-radius: 30px;
+  border: 2px solid #00ccff;
+  left: 34%;
+  color: #00ccff;
+  width: 150px;
+  text-align: center;
+  font-size: larger;
+  font-weight: 600;
+  z-index: 1;
+  margin-bottom: 50px;
+}
+.han-error-page .col-image-error .button-error .goback:hover {
+  color: #00ccff;
+  cursor: pointer;
+}
+.han-error-page .col-image-error .justify-content-sm-center {
+  margin: auto;
+}
+.han-error-page .error-img1 {
+  margin-top: -130px;
+  width: 100%;
+  height: auto;
 }
 
 #khoa-view-cart .cart-title {
