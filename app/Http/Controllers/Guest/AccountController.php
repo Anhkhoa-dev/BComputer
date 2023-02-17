@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 
 use App\Http\Controllers\Guest\IndexController;
+use App\Models\ACOUNT;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
@@ -44,7 +45,17 @@ class AccountController extends Controller
     public function ajaxChangeImage(Request $request)
     {
         if ($request->ajax()) {
-            print_r($request->all());
+            // print_r($request->all());
+            $user = Auth::user();
+            if ($request->hasfile('change-avt-inp')) {
+                $file = $request->file('change-avt-inp');
+                $fileName = $file->getClientOriginalName();
+                $file->move("image/user", $fileName);
+            }
+            ACOUNT::where('id', $user->id)->update(['image' => $fileName]);
+            return [
+                'status' => 'success',
+            ];
         }
     }
     public function ajaxChangePass(Request $request)

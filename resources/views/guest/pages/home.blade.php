@@ -53,8 +53,6 @@
                 <div class="col-md-12 mt-1 py-3">
                     @include('guest.pages.flashDelas')
                 </div>
-
-
             </div>
         </div>
     </section>
@@ -93,18 +91,7 @@
         </div>
 
     </section>
-
-
-    {{-- <div class="col-md-12 d-flex justify-content-between align-itmes-center">
-        <div class="title">
-            <img src="{{ asset('image/icon/002-new.png') }}" alt="" width="30">
-            Products Featured
-        </div>
-        <div class="view_all">
-            <a href="#">View all</a>
-        </div>
-    </div> --}}
-    {{-- New Arrivals --}}
+    {{-- New Product --}}
     <section>
         <div class="container-md">
             <div class="row">
@@ -143,7 +130,6 @@
         </div>
 
     </section>
-
     {{-- Big Discount --}}
     <section>
         <div class="container-md">
@@ -202,6 +188,33 @@
         </div>
 
 
+    </section>
+
+    <section class="mb-3">
+        <div class="container-md">
+            <div class="row">
+                <div class="col-md-12 d-flex justify-content-between align-itmes-center">
+                    <div class="title">
+                        <img src="{{ asset('image/icon/002-new.png') }}" alt="" width="30">
+                        Brands
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <div class="row">
+                        <div class="logo-brands">
+                            @foreach ($logoBrand as $item)
+                            <a href="" class="text-decoration-none">
+                                <div class="brand-img">
+                                    <img src="{{ asset('image/logo/'.$item->image) }}" alt="{{$item->name}}" />
+                                </div>
+                            </a>
+                            @endforeach
+                           
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
     </section>
 @endsection
 

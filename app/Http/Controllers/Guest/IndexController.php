@@ -46,6 +46,7 @@ class IndexController extends Controller
             'bigDiscount' => $bigDiscount,
             'newproduct' => $newProduct,
             'banner' => $banner,
+            'logoBrand' => BRAND::where('status', 1)->get(),
         ];
         return view('guest.pages.home')->with($array);
     }

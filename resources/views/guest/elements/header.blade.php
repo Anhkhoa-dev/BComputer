@@ -45,9 +45,9 @@
                             <div class="search-preview">
                             </div>
                             <div class="view-more-search text-center py-2 border-top">
-                                <a href="{{ route('ajax-tracuu-info-list') }}" class="text-decoration-none text-black">View more <span id="count-qty-search"></span> products</a>
+                                <a href="{{ route('ajax-tracuu-info-list') }}" class="text-decoration-none text-black">View more all products</a>
                             </div>
-
+                            {{-- <span id="count-qty-search"></span> --}}
                         </div>
                     </form>
                 </div>

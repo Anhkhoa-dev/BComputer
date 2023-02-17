@@ -34,3 +34,17 @@
         }
     }
 }
+
+.logo-brands{
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 20px;
+    .brand-img{
+        width: 100%;
+            img{
+                width: 100%;
+                height: auto;
+            }
+        
+    }
+}

@@ -42,6 +42,11 @@ class ProductController extends Controller
             } else {
                 $list_product[$i]->brand = '';
             }
+            // if ($key->id) {
+            //     $list_product[$i]->image = ProductImage::where('id_pro', $key->id)->first()->image;
+            // } else {
+            //     $list_product[$i]->image = '';
+            // }
         }
 
 

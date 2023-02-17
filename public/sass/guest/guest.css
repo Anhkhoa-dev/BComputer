@@ -1056,6 +1056,19 @@ section .title i {
   font-weight: 400;
 }
 
+.logo-brands {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 20px;
+}
+.logo-brands .brand-img {
+  width: 100%;
+}
+.logo-brands .brand-img img {
+  width: 100%;
+  height: auto;
+}
+
 .khoa-tk-sidebar {
   width: 100%;
 }
@@ -1125,12 +1138,27 @@ section .title i {
   align-items: center;
   visibility: hidden;
 }
-.account-box .tk-image .image-hover .input-change {
-  display: none;
+.account-box .tk-image .image-hover form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
-.account-box .tk-image .image-hover .change-image {
+.account-box .tk-image .image-hover form .choose {
+  color: #E94560;
+  font-weight: 600;
+  border: 1px solid #fff;
+  padding: 5px;
+  background: #fff;
+  cursor: pointer;
+}
+.account-box .tk-image .image-hover form .change-image {
+  border: none;
+  outline: none;
   text-decoration: none;
   color: #fff;
+  background: none;
   cursor: pointer;
 }
 .account-box .tk-image:hover .image-hover {

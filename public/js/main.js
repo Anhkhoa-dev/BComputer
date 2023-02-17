@@ -171,10 +171,6 @@ $(function () {
                                         Thông tin tài khỏan
                ================================================================================ */
 
-    // $("#btn-change-avt").click(function () {
-    //     $("#change-avt-inp").trigger("click");
-    // });
-
     function addCart(id_sp, qty) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -244,27 +240,27 @@ $(function () {
             .catch(() => showAlertTop(errorMessage));
     });
 
-    function getProductIdListToCheckout() {
-        return new Promise((resolve) => {
-            let checkoutList = [];
-            let outOfStockList = [];
-            $.each($(".out-of-stock"), (i, element) => {
-                outOfStockList.push($(element).attr("data-id"));
-            });
-            $.each($(".cus-checkbox-checked"), (i, element) => {
-                const id = $(element).attr("data-id");
-                if (id != 'all') {
-                    checkoutList.push(id);
-                }
+    // function getProductIdListToCheckout() {
+    //     return new Promise((resolve) => {
+    //         let checkoutList = [];
+    //         let outOfStockList = [];
+    //         $.each($(".out-of-stock"), (i, element) => {
+    //             outOfStockList.push($(element).attr("data-id"));
+    //         });
+    //         $.each($(".cus-checkbox-checked"), (i, element) => {
+    //             const id = $(element).attr("data-id");
+    //             if (id != 'all') {
+    //                 checkoutList.push(id);
+    //             }
 
-            });
-            const response = {
-                checkoutList, outOfStockList,
-            };
-            resolve(response)
-        })
+    //         });
+    //         const response = {
+    //             checkoutList, outOfStockList,
+    //         };
+    //         resolve(response)
+    //     })
 
-    }
+    // }
 
     //
     $('.add-new-address').click(function () {
@@ -379,10 +375,6 @@ $(function () {
     });
     switch (page) {
 
-        case "": {
-
-        }
-
         case "account": {
             $('#btn-tk-name-update').click(function () {
                 var idUser = $('.change-name').attr('data-id');
@@ -408,6 +400,74 @@ $(function () {
                 }
 
             });
+
+            $('#change-avt-inp').change(function (e) {
+                let reader = new FileReader();
+                // reader.onload = (e) => {
+                //     $('#image-user').attr('src', e.target.result);
+                // }
+                reader.readAsDataURL(this.files[0]);
+            });
+            $("#image_update").submit(function (e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                    },
+                    url: '/ajax-change-image-user',
+                    type: "POST",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        console.log(data);
+                        location.reload();
+                    }
+                });
+            });
+            // $('#change-avt-inp').change(function (e) {
+            //     var img = e.target.files;
+            //     $.ajax({
+            //         headers: {
+            //             "X-CSRF-TOKEN": X_CSRF_TOKEN,
+            //         },
+            //         url: '/ajax-change-image-user',
+            //         type: "POST",
+            //         data: {
+            //             image: img,
+            //         },
+            //         success: function (data) {
+            //             console.log(data);
+            //             if (data.status == "success") {
+            //                 location.reload();
+            //             }
+            //         }
+            //     });
+            // })
+
+
+            // $.ajax({
+            //     headers: {
+            //         "X-CSRF-TOKEN": X_CSRF_TOKEN,
+            //     },
+            //     url: '/ajax-change-image-user',
+            //     type: "POST",
+            //     data: {
+            //         files: files,
+            //     },
+            //     cache: false,
+            //     contentType: false,
+            //     processData: false,
+            //     success: function (data) {
+            //         console.log(data);
+            //         // if (data.status == "success") {
+            //         //     location.reload();
+            //         // }
+            //     }
+            // });
+
             break;
         }
         case "cart-items": {

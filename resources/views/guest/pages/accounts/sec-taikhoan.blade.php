@@ -13,17 +13,16 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="col-12 align-items-center">
-                                    <div class="tk-image">
-                                        
+                                    <div class="tk-image">  
                                         <img src="{{ asset('image/user/' . $user->image) }}" alt="{{ $user->fullname }}"
-                                            width="200" class="image-img">
-
+                                            width="200" class="image-img" id="image-user">
                                             <div class="image-hover d-grid">
-                                                <form>
-                                                    <input type="file" id="change-avt-inp"
-                                                        name="change-avt-inp" class="d-none" data-id="{{$user->id}}" accept="image/*">
-                                                    <label class="change-image" for="change-avt-inp">Change image</label>
-                                            </form>
+                                                <form enctype="multipart/form-data" id="image_update">
+                                                    <input type="file" id="change-avt-inp" class="d-none"
+                                                        name="change-avt-inp" data-id="{{$user->id}}" accept="image/*">
+                                                        <label class="choose" for="change-avt-inp">Choose</label>
+                                                    <button class="change-image" type="submit" for="btn-update-imge">Update</button>
+                                                </form>
                                             </div>
                                     </div>
                                     <div class="tk-information">
