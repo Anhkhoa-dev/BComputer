@@ -39,8 +39,8 @@
                 <table class="table table-striped projects">
                     <thead>
                         <tr>
-                            <th style="width: 1%"> ID</th>
-                            <th style="width: 1%">ID_Pro</th>
+                            <th style="width: 5%; text-align: center">ID product</th>
+                            <th style="width: 50%">Name</th>
                             {{-- <th style="width: 1%">Product</th> --}}
                             <th style="text-align: center, width: 15%">Image</th>
                             <th style="text-align: center"> Actions </th>
@@ -50,9 +50,9 @@
                         @foreach ($prodImg as $item)
                             <tr>
                                 <td style="text-align: center">{{ $item->id }}</td>
-                                <td style="text-align: center">{{ $item->id_pro }}</td>
+                                <td style="text-align: center">{{ $item->name }}</td>
                                 {{-- <td>{{ $prodName->name }}</td> --}}
-                                <td>{{ $item->image }}</td>
+                                <td>{{ $item->image }} image</td>
                                 <td class="project-actions text-center">
                                     {{-- View --}}
                                     <button type="button" class="btn btn-info btn-mg" data-bs-toggle="modal"
