@@ -61,131 +61,140 @@
                         </div>
                     </div>
 
-                    <div class="price">{{ $prod->price }}<span>₫</span>
+                    <div class="price"><span>$</span>{{ $prod->price }}
                         <span class="discount-percent">-20%</span>
                         <div class="discountprice">
                             {{ number_format($prod->price * ((100 - $prod->discount) / 100), 2) }}</div>
-                        <div class="quantity">
-                            Quantity :
-                            <span class="buttons_added">
-                                <input class="minus is-form" type="button" value="-">
-                                <input aria-label="quantity" class="input-qty" max="50" min="1"
-                                    name="product-quatity" type="number" value="1" pattern="[0-9]*">
-                                <input class="plus is-form" type="button" value="+">
-                            </span>
+                        @if ($prod->quantity > 0)
+                            <div class="quantity">
+                                Quantity :
+                                <span class="buttons_added">
+                                    <input class="minus is-form" type="button" value="-">
+                                    <input aria-label="quantity" class="input-qty" max="50" min="1"
+                                        name="product-quatity" type="text" value="1" pattern="[0-9]*">
+                                    <input class="plus is-form" type="button" value="+">
+                                </span>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="button-product">
+                                    <div class="col-md-6 button-product-frame">
+                                        <a class="btn buynow" id="buy-now" data-id="{{ $prod->id }}"
+                                            href="#"><b>BUY NOW</b></a>
+                                    </div>
+                                    <div class="col-md-6 button-product-frame">
+                                        <a class="btn addtocart add-to-cart" href="#"
+                                            data-id="{{ $prod->id }}"><b>ADD TO CART</b></a>
+                                    </div>
+                                </div>
+                            @else
+                                <div class=""><a href=""
+                                        class="btn btn-primary btn-lg not-available col-md-8 d-flex justify-content-center">Contact
+                                        to order</a>
+                                </div>
+                        @endif
+                        <div class="contact">
+                            Contact to buy now <span class="number-hotline"> 0865 677 010 </span> (07:30-22:00)
+
+                            <div class="col-md-12">
+                                <div class="icon">
+                                    <div><i class="fa-solid fa-truck-fast icon-contact"></i></div>
+                                    <div><i class="fa-solid fa-gift icon-contact"></i></div>
+                                    <div><i class="fa-solid fa-arrow-rotate-left icon-contact"></i></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="details">
+                                    <div class="col-md-4">
+                                        <div class="service-title">FREE SHIPPING</div>
+                                        <div class="service-info">On Order Over $99
+                                            Lorem Ipsum is simply dummy Text
+                                            of the printing
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="service-title">SPECAIL OFFER</div>
+                                        <div class="service-info">Get a gift! Lorem Ipsum is simply dummy
+                                            Text of
+                                            the printing</div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="service-title">ORDER RETURN</div>
+                                        <div class="service-info">Return within 7 days Lorem Ipsum is simply
+                                            dummy
+                                            Text of the printing
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr class="line">
+                            </div>
                         </div>
-                        <div class="col-md-12">
-                            <div class="button-product">
-                                <div class="col-md-6 button-product-frame">
-                                    <a class="btn buynow" id="buy-now" data-id="{{ $prod->id }}"
-                                        href="#"><b>BUY NOW</b></a>
-                                </div>
-                                <div class="col-md-6 button-product-frame">
-                                    <a class="btn addtocart add-to-cart" href="#"
-                                        data-id="{{ $prod->id }}"><b>ADD TO CART</b></a>
-                                </div>
-                            </div>
-                            <div class="contact">
-                                Contact to buy now <span class="number-hotline"> 0865 677 010 </span> (07:30-22:00)
-                                <div class="col-md-12">
-                                    <div class="icon">
-                                        <div><i class="fa-solid fa-truck-fast icon-contact"></i></div>
-                                        <div><i class="fa-solid fa-gift icon-contact"></i></div>
-                                        <div><i class="fa-solid fa-arrow-rotate-left icon-contact"></i></div>
-                                    </div>
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="details">
-                                        <div class="col-md-4">
-                                            <div class="service-title">FREE SHIPPING</div>
-                                            <div class="service-info">On Order Over $99
-                                                Lorem Ipsum is simply dummy Text
-                                                of the printing
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="service-title">SPECAIL OFFER</div>
-                                            <div class="service-info">Get a gift! Lorem Ipsum is simply dummy
-                                                Text of
-                                                the printing</div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="service-title">ORDER RETURN</div>
-                                            <div class="service-info">Return within 7 days Lorem Ipsum is simply
-                                                dummy
-                                                Text of the printing
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <hr class="line">
-                                </div>
-                            </div>
-                            <div class="accordion" id="accordionExample">
-                                <div class="accordion-item">
-                                    <h2 class="accordion-header" id="headingTwo">
-                                        <button class="accordion-button collapsed" type="button"
-                                            data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                            aria-expanded="false" aria-controls="collapseTwo">
-                                            <b> Configuration {{ $prod->name }}</b>
-                                        </button>
-                                    </h2>
-                                    <div id="collapseTwo" class="accordion-collapse collapse"
-                                        aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                        <div class="accordion-body">
-                                            <div class="accordion" id="accordionExample">
-                                                <table class="table table-striped">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>Product</td>
-                                                            <td>Processor CPU</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Manufacturer</td>
-                                                            <td>Intel</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Model</td>
-                                                            <td>Intel Core™ i5-13400f</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Socket</td>
-                                                            <td>FCLGA1700</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Base speed</td>
-                                                            <td>3.3 GHz</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Cache</td>
-                                                            <td>20 MB</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>CPU</td>
-                                                            <td>10 Core</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Thread CPU</td>
-                                                            <td>16 Thread</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Graphics processor</td>
-                                                            <td>Not supported</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Memory support</td>
-                                                            <td>Maximum 128 GB</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Maximum voltage consumption</td>
-                                                            <td>65W</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Maximum temperature</td>
-                                                            <td>100 degrees Celsius</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                        <div class="accordion" id="accordionExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="headingTwo">
+                                    <button class="accordion-button collapsed" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                                        aria-controls="collapseTwo">
+                                        <b> Configuration {{ $prod->name }}</b>
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse"
+                                    aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                                    <div class="accordion-body">
+                                        <div class="accordion" id="accordionExample">
+                                            <table class="table table-striped">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Product</td>
+                                                        <td>Processor CPU</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Manufacturer</td>
+                                                        <td>Intel</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Model</td>
+                                                        <td>Intel Core™ i5-13400f</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Socket</td>
+                                                        <td>FCLGA1700</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Base speed</td>
+                                                        <td>3.3 GHz</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Cache</td>
+                                                        <td>20 MB</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>CPU</td>
+                                                        <td>10 Core</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Thread CPU</td>
+                                                        <td>16 Thread</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Graphics processor</td>
+                                                        <td>Not supported</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Memory support</td>
+                                                        <td>Maximum 128 GB</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Maximum voltage consumption</td>
+                                                        <td>65W</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Maximum temperature</td>
+                                                        <td>100 degrees Celsius</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -195,39 +204,39 @@
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-md-12">
-            <div class="row">
-                <div class="description col-md-9">
-                    <div class="name-doc">
-                        <button class="w3-bar-item w3-button button-color-decor" style="border:none"
-                            onclick="openTab('description')">Description</button>
-                        <button class="w3-bar-item w3-button button-color-decor" style="border:none"
-                            onclick="openTab('review')">Review</button>
-                    </div>
-                    <div id="description" class="w3-container city">
-                        <div class="col-md-12">
-                            <div class="row">
-                                <div class="col-md-12 info-product">
-                                    <p>{{ $prod->description }}</p>
-                                </div>
+    <div class="col-md-12">
+        <div class="row">
+            <div class="description col-md-9">
+                <div class="name-doc">
+                    <button class="w3-bar-item w3-button button-color-decor" style="border:none"
+                        onclick="openTab('description')">Description</button>
+                    <button class="w3-bar-item w3-button button-color-decor" style="border:none"
+                        onclick="openTab('review')">Review</button>
+                </div>
+                <div id="description" class="w3-container city">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12 info-product">
+                                <p>{{ $prod->description }}</p>
                             </div>
                         </div>
                     </div>
-                    <div id="review" class="w3-container city review">
-                        <div class="first-form">
-                            <h3>Review {{ $prod->name }}</h3>
-                            <span class="iconstar">4,5</span>
-                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                            5 review
-                        </div>
-                        <hr class="line-review">
-                        <div class="col-md-12 review-frame">
-                            {{-- <div class="review-info">
+                </div>
+                <div id="review" class="w3-container city review">
+                    <div class="first-form">
+                        <h3>Review {{ $prod->name }}</h3>
+                        <span class="iconstar">4,5</span>
+                        <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                        <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                        <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                        <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                        <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                        5 review
+                    </div>
+                    <hr class="line-review">
+                    {{-- <div class="review-info">
                                 <div class="col-md-12 row col-review">
                                     <div class="col-md-12">
                                         <span class="review-name">Le Van A</span>
@@ -297,7 +306,9 @@
                                     </div>
                                 </div>
                             </div> --}}
-                            <textarea class="write-comment" name="" id="" placeholder="write a review(*)" rows="5"></textarea><br>
+
+                    {{-- note --}}
+                    {{-- <textarea class="write-comment" name="" id="" placeholder="write a review(*)" rows="5"></textarea><br>
                             <button class="btn btn-primary">Send comment</button>
                             <div class="review-frame-second">
                                 <h3>Comments(10)</h3>
@@ -308,182 +319,233 @@
                                                 src="{{ asset('image/user/avatar-default.png') }}">
                                         </div>
                                         <div class="col-xl-11 info-text-user">
-                                            <h4>Nguyen van A</h4>
-                                            <h6>vừa mua được 1 tháng, dùng tốt</h6>
+                                            @foreach ($comment as $item)
+                                                <h6>{{ $item->content }}</h6>
+                                            @endforeach
                                             <span data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
                                                 aria-expanded="false" aria-controls="flush-collapseOne">
-                                                <button class="badge bg-primary text-wrap"
-                                                    data-id="{{ $prod->id }}">Answer</button>
+                                                <button class="badge bg-primary text-wrap">Answer</button>
                                             </span>
+
                                             <form action="">
                                                 <div id="flush-collapseOne" class="accordion-collapse collapse"
                                                     aria-labelledby="flush-headingOne"
                                                     data-bs-parent="#accordionFlushExample">
                                                     <div class="mb-4">
-                                                        <div class="row anser-comment">
-                                                            <div class="col-xl-1">
-                                                                <img class="img-user-review"
-                                                                    src="{{ asset('image/user/avatar-default.png') }}">
+                                                        @foreach ($comment as $item)
+                                                            <div class="row anser-comment">
+                                                                <div class="col-xl-1">
+                                                                    <img class="img-user-review"
+                                                                        src="{{ asset('image/user/avatar-default.png') }}">
+                                                                </div>
+                                                                <div class="col-xl-11 info-text-user">
+                                                                    <h6>{{ $item->content }}</h6>
+                                                                </div>
                                                             </div>
-                                                            <div class="col-xl-11 info-text-user">
-                                                                <h4>Nguyen van B</h4>
-                                                                <h6>sản phẩm, có hay bị lỗi vặt không ạ</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row anser-comment">
-                                                            <div class="col-xl-1">
-                                                                <img class="img-user-review"
-                                                                    src="{{ asset('image/user/avatar-default.png') }}">
-                                                            </div>
-                                                            <div class="col-xl-11 info-text-user">
-                                                                <h4>Nguyen van C</h4>
-                                                                <h6>máy dùng khá nóng</h6>
-                                                            </div>
-                                                        </div>
-                                                        <div class="input-group">
-                                                            <textarea class="form-control" id="form4Example3" rows="1"></textarea>
-                                                            <span>
-                                                                <a class="input-group-text btn btn-primary text-light"
-                                                                    href="">Send</a>
-                                                            </span>
-                                                        </div>
+                                                        @endforeach
+                                                        <textarea class="write-comment1" name="" id="" placeholder="write a review(*)" rows="5"></textarea><br>
+                                                        <button class="btn btn-primary">Send comment</button>
                                                     </div>
                                                 </div>
                                             </form>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <hr>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <h1>Cot 3 nam day</h1>
-                </div>
-            </div>
+                            </div> --}}
 
+
+
+
+                </div>
+
+                <div class="container">
+                    <h3>binh luan blog nay</h3>
+                    <form action="" method="POST" role="form">
+                        <legend>Form title</legend>
+                        <div class="form-group">
+                            <label for="">noi dung binh luan</label>
+                            <input type="hidden" value="" name="blog_id">
+                            <textarea name="content" class="form-control" row="3" required="required" placeholder="nhap noi dung (*)"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">gui binh luan</button>
+                        <br>
+                        <h3>cac binh luan (10)</h3>
+                        <div class="comment">
+                            <div class="media">
+                                <a class="pull-lef mr-2" href="">
+                                    <img class="media-object" src="" alt="Image" width="60">
+                                </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading">nguyen huy hoang</h4>
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modeltitleId"
+                    aria-hidden="true">
+                    <div class="modal-dialog odal-sm" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"> Dang nhap ngay</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="" method="POST" role="form">
+                                    <div class="form-group">
+                                        <label for="">Email</label>
+                                        <input type="email" class="form-control" name="email"
+                                            placeholder="input email">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="">Password</label>
+                                        <input type="password" class="form-control" name="email"
+                                            placeholder="input password">
+                                    </div>
+                                    <button type="button" class="btn btn-primary btn-block">dang nhap</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+
+            </div>
         </div>
-        {{-- Sản phẩm cùng giá --}}
-        <section>
-            <div class="row">
-                <div class="col-md-12 d-flex justify-content-between align-itmes-center">
-                    @if (count($listSamePrice) >= 1)
-                        <div class="title">
-                            <img src="{{ asset('image/icon/002-new.png') }}" alt="" width="30">
-                            Same Price Product
-                        </div>
-                        <div class="view_all">
-                            <a href="#">View all</a>
-                        </div>
-                    @endif
-                </div>
-                <div class="col-md-12">
-                    <div id="same-price" class="owl-carousel owl-theme">
-                        @foreach ($listSamePrice as $item)
-                            <div class="item">
-                                <div class="home-card">
-                                    <div class="card_image">
-                                        <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
-                                            <img src="{{ asset('image/product/' . $item->image[0]->image) }}"
-                                                class="img-fluid" alt="{{ $item->name }}">
-                                        </a>
-                                        <div class="sale_off">
-                                            <p>{{ $item->discount }}% Off</p>
-                                        </div>
-                                        <div class="p_like">
-                                            <a href="#" class="p_like_sosanh" title="product comparison">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </a>
-                                            <a href="#" class="p_like_heart">
-                                                <i class="fa-regular fa-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="card_info">
-                                        <a href="{{ route('user/detail', ['name' => $item['slug']]) }}"
-                                            class="product_name" title="{{ $item->name }}">{{ $item->name }}</a>
-                                        <div class="product_rate">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star-half-stroke"></i>
-                                        </div>
-                                        <div class="product_price">
-                                            $ {{ $item->price }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </section>
-        {{-- Sản phẩm liên quan --}}
-        <section>
-            <div class="row">
-                <div class="col-md-12 d-flex justify-content-between align-itmes-center">
-                    @if (count($listRelated) > 1)
-                        <div class="title">
-                            <img src="{{ asset('image/icon/002-new.png') }}" alt="" width="30">
-                            Related product
-                        </div>
-                        <div class="view_all">
-                            <a href="#">View all</a>
-                        </div>
-                    @endif
-                </div>
-                <div class="col-md-12">
-                    <div id="related-product" class="owl-carousel owl-theme">
-                        @foreach ($listRelated as $item)
-                            <div class="item">
-                                <div class="home-card">
-                                    <div class="card_image">
-                                        <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
-                                            <img src="{{ asset('image/product/' . $item->image[0]->image) }}"
-                                                class="img-fluid" alt="{{ $item->name }}">
-                                        </a>
-                                        <div class="sale_off">
-                                            <p>{{ $item->discount }}% Off</p>
-                                        </div>
-                                        <div class="p_like">
-                                            <a href="#" class="p_like_sosanh" title="product comparison">
-                                                <i class="fa-solid fa-plus"></i>
-                                            </a>
-                                            <a href="#" class="p_like_heart">
-                                                <i class="fa-regular fa-heart"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="card_info">
-                                        <a href="{{ route('user/detail', ['name' => $item['slug']]) }}"
-                                            class="product_name" title="{{ $item->name }}">{{ $item->name }}</a>
-                                        <div class="product_rate">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star-half-stroke"></i>
-                                        </div>
-                                        <div class="product_price">
-                                            $ {{ $item->price }}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </section>
+
     </div>
+    {{-- Sản phẩm cùng giá --}}
+    <section>
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-between align-itmes-center">
+                @if (count($listSamePrice) >= 1)
+                    <div class="title">
+                        <img src="{{ asset('image/icon/002-new.png') }}" alt="" width="30">
+                        Same Price Product
+                    </div>
+                    <div class="view_all">
+                        <a href="#">View all</a>
+                    </div>
+                @endif
+            </div>
+            <div class="col-md-12">
+                <div id="same-price" class="owl-carousel owl-theme">
+                    @foreach ($listSamePrice as $item)
+                        <div class="item">
+                            <div class="home-card">
+                                <div class="card_image">
+                                    <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
+                                        <img src="{{ asset('image/product/' . $item->image[0]->image) }}"
+                                            class="img-fluid" alt="{{ $item->name }}">
+                                    </a>
+                                    <div class="sale_off">
+                                        <p>{{ $item->discount }}% Off</p>
+                                    </div>
+                                    <div class="p_like">
+                                        <a href="#" class="p_like_sosanh" title="product comparison">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </a>
+                                        <a href="#" class="p_like_heart">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card_info">
+                                    <a href="{{ route('user/detail', ['name' => $item['slug']]) }}"
+                                        class="product_name" title="{{ $item->name }}">{{ $item->name }}</a>
+                                    <div class="product_rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                    </div>
+                                    <div class="product_price">
+                                        $ {{ $item->price }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    {{-- Sản phẩm liên quan --}}
+    <section>
+        <div class="row">
+            <div class="col-md-12 d-flex justify-content-between align-itmes-center">
+                @if (count($listRelated) > 1)
+                    <div class="title">
+                        <img src="{{ asset('image/icon/002-new.png') }}" alt="" width="30">
+                        Related product
+                    </div>
+                    <div class="view_all">
+                        <a href="#">View all</a>
+                    </div>
+                @endif
+            </div>
+            <div class="col-md-12">
+                <div id="related-product" class="owl-carousel owl-theme">
+                    @foreach ($listRelated as $item)
+                        <div class="item">
+                            <div class="home-card">
+                                <div class="card_image">
+                                    <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
+                                        <img src="{{ asset('image/product/' . $item->image[0]->image) }}"
+                                            class="img-fluid" alt="{{ $item->name }}">
+                                    </a>
+                                    <div class="sale_off">
+                                        <p>{{ $item->discount }}% Off</p>
+                                    </div>
+                                    <div class="p_like">
+                                        <a href="#" class="p_like_sosanh" title="product comparison">
+                                            <i class="fa-solid fa-plus"></i>
+                                        </a>
+                                        <a href="#" class="p_like_heart">
+                                            <i class="fa-regular fa-heart"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="card_info">
+                                    <a href="{{ route('user/detail', ['name' => $item['slug']]) }}"
+                                        class="product_name" title="{{ $item->name }}">{{ $item->name }}</a>
+                                    <div class="product_rate">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star-half-stroke"></i>
+                                    </div>
+                                    <div class="product_price">
+                                        $ {{ $item->price }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
 </div>
 @endsection
 
 @section('myjs')
 <script>
+    $('#exampleModal').on('show.bs.modal', event => {
+        var button = $(event.relatedTarget);
+        var modal = $(this);
+    });
+
     $('input.input-qty').each(function() {
         var $this = $(this),
             qty = $this.parent().find('.is-form'),
