@@ -1057,7 +1057,9 @@ $(function () {
                 }
             }
             updateQtyCart(id, type);
-        });
+        }
+
+    });
 
     // hàm update Cart
     function updateQtyCart(id, type) {
