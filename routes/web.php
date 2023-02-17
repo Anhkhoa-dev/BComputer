@@ -12,11 +12,13 @@ use App\Http\Controllers\Admin\UserAddressController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductimageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Guest\CartConntroller;
 use App\Http\Controllers\Guest\IndexController;
 use App\Http\Controllers\Guest\AccountController;
 use App\Models\Order;
+use App\Models\ProductImage;
 
 //Login and register
 Route::controller(LoginController::class)->group(function () {
@@ -95,6 +97,7 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::get('admin/account/edit/{id}', [AcountConroller::class, 'edit'])->name('admin/account/edit');
     Route::post('admin/account/update/{id}', [AcountConroller::class, 'update'])->name('admin/account/update');
     Route::post('admin/account/updateUser/{id}', [AcountConroller::class, 'updateUser'])->name('admin/account/updateUser');
+    Route::post('admin/account/updateAccount/{id}', [AcountConroller::class, 'updateAccount'])->name('admin/account/updateAccount');
     // View
     Route::get('admin/account/view', [AcountConroller::class, 'show'])->name('admin/account/view');
 
@@ -113,6 +116,8 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Delete
     Route::get('admin/brand/destroy/{id}', [BrandController::class, 'destroy'])->name('admin/brand/destroy');
 
+    // Phần ProductImage - Phúc
+    Route::get('admin/proImage', [ProductimageController::class, 'index'])->name('admin/proImage');
 
     // Phần Banner - Phúc
     Route::get('admin/banner', [BannerController::class, 'index'])->name('admin/banner');

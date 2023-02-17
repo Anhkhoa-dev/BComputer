@@ -22,8 +22,8 @@ class AcountConroller extends Controller
 
     public function index()
     {
-        //
-        $prods = ACOUNT::all();
+        //$prods = ACOUNT::all();
+        $prods = ACOUNT::paginate(6);
         return view('admin.pages.acounts.index', compact('prods'));
     }
 
@@ -148,6 +148,8 @@ class AcountConroller extends Controller
             [
                 'email' => 'bail|required|email|regex:/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+\.[A-Za-z]{2,3}$/i',
                 'fullname' => 'bail|required|min:2',
+                //'password' => 'bail|required|between:6,16',
+                //'cpassword' => 'bail|required|same:password'
             ],
             [
                 'email.required' => 'Please input Email of Account!',
@@ -155,6 +157,10 @@ class AcountConroller extends Controller
                 'email.regex' => 'Email without special characters!',
                 'fullname.required' => 'Please input Fullname of Account!',
                 'fullname.min' => 'Fullname with at least 2 characters!',
+                //'password.required' => 'Password cannot be left blank!',
+                //'password.between' => 'Password must have at least 6 characters and maximum 16 characters!',
+                //'cpassword.required' => 'Password confirm cannot be left blank!',
+                //'cpassword.same' => 'Confirm password does not match. Please re-enter!',
             ]
         );
 
@@ -167,7 +173,6 @@ class AcountConroller extends Controller
         } else {
             $acc['image'] = $oldImage->image;
         }
-
         $data = [
             'fullname' => $request->fullname,
             'birthday' => $request->birthday,
@@ -177,6 +182,7 @@ class AcountConroller extends Controller
             'image' => $acc['image'],
             'status' => intval($acc['status']),
         ];
+        //dd($data);
         ACOUNT::where('id', $id)->update($data);
         return redirect()->route('admin/account')->with('Success', 'Update Account success!');
     }
@@ -191,6 +197,27 @@ class AcountConroller extends Controller
         return redirect()->route('admin/account')->with('Success', 'Update Account success!');
     }
 
+    public function updateAccount(Request $request, $id)
+    {
+        $acc = $request->all();
+        $request->validate(
+            [
+                'password' => 'bail|required|between:6,16',
+                'cpassword' => 'bail|required|same:password'
+            ],
+            [
+                'password.required' => 'Password cannot be left blank!',
+                'password.between' => 'Password must have at least 6 characters and maximum 16 characters!',
+                'cpassword.required' => 'Password confirm cannot be left blank!',
+                'cpassword.same' => 'Confirm password does not match. Please re-enter!',
+            ]
+        );
+        $data = [
+            'password' => bcrypt($acc['password']),
+        ];
+        ACOUNT::where('id', $id)->update($data);
+        return back()->with('Success', 'Update password success!');
+    }
     /**
      * Remove the specified resource from storage.
      *

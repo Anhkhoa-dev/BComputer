@@ -16,7 +16,7 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brand = BRAND::all();
+        $brand = BRAND::paginate(4);
         $array = [
             'brand' => $brand,
         ];

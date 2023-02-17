@@ -2,7 +2,7 @@
 
 @section('title')
     Product Image | Admin BComputer
-@endsecProduct Imagetion
+@endsection
 
 @section('admin-main')
     <div class="content-header">
@@ -68,6 +68,7 @@
 
                     </tbody>
                 </table>
+                {{ $prodImg->links("vendor.pagination.bootstrap-5") }}
             </div>
             <!-- /.card-body -->
         </div>

@@ -86,7 +86,7 @@
                                 </td>
                                 <td>{{ $item->level == 2 ? 'Admin' : 'User' }}</td>
                                 <td style="text-align: center"><a
-                                        class="btn {{ $item->status == 1 ? 'btn-success' : 'btn-secondary' }} btn-mg">{{ $item->status == 1 ? 'Actived' : 'Clocked' }}</a>
+                                        class="btn {{ $item->status == 1 ? 'btn-success' : 'btn-secondary' }} btn-mg">{{ $item->status == 1 ? 'Actived' : 'Closed' }}</a>
                                 </td>
                                 <td class="project-actions text-left">
                                     {{-- View --}}
@@ -101,7 +101,7 @@
                                             aria-hidden="true"></i></button> --}}
                                     {{-- Delete --}}
                                     @if ($item->status == 0)
-                                        <button type="button" class="btn btn-danger btn-mg" disabled>
+                                        <button type="button" class="btn btn-danger btn-mg" hidden>
                                             <i class="fas fa-trash"></i>
                                         </button>
                                     @else
@@ -117,6 +117,9 @@
 
                     </tbody>
                 </table>
+
+                {{ $prods->links("vendor.pagination.bootstrap-5") }}
+
             </div>
             <!-- /.card-body -->
         </div>
