@@ -20,7 +20,7 @@ class BannerController extends Controller
     public function index()
     {
         $list_Catagory = Category::all();
-        $prods = BANNER::all();
+        $prods = BANNER::paginate(3);
         $array = [
             'prods' => $prods,
             'list_Catagory' => $list_Catagory,

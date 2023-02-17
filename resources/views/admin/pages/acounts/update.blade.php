@@ -36,16 +36,30 @@
                         </a>
                     </div>
                 </div>
+                @if (\Session::get('Success'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <i class="fa-solid fa-circle-check fa-lg"></i>&nbsp;
+                        <strong>Success!</strong>&nbsp;{{ \Session::get('Success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
                 <form
                     action="{{ $account->level == 2 ? route('admin/account/update', $account->id) : route('admin/account/updateUser', $account->id) }}"
                     method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
+                        @if ($account->id == Auth::user()->id)
+                            <button type="button" class="btn btn-danger btn-mg" data-bs-toggle="modal"
+                                data-bs-target="#password">
+                                <i class="fa-solid fa-key"></i>&nbsp;Change Password&nbsp;
+                            </button>
+                        @endif
                         <input id='id' hidden>
                         <div class="">
                             <div class="form-group">
                                 <div class="phuc-acount">
-                                    <img class="img_create" id="img-accu" src="{{ $account->image != null ? asset('image/user/' . $account->image) : asset('image/user/avatar-default.png') }}" />
+                                    <img class="img_create" id="img-accu"
+                                        src="{{ $account->image != null ? asset('image/user/' . $account->image) : asset('image/user/avatar-default.png') }}" />
                                 </div>
                             </div>
                             <div style="text-align:center; margin:auto">
@@ -104,7 +118,6 @@
                                         <span class="errorMsg">{{ $message }}</span>
                                     @enderror
                                 </div>
-
                             </div>
                             {{-- // cột bên phai --}}
                             <div style="width: 48%">
@@ -138,17 +151,57 @@
                                         name="level" value="{{ $account->level == 2 ? 'Admin' : 'User' }}" disabled>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="modal-footer" style="margin-top:-10px">
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
+
             </div>
             <br>
         </div>
     </section>
+
+    <!-- Modal password -->
+
+    <div class="modal fade" id="password" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centere">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i style="color: #00CC66" class="fa-solid fa-key fa-2x" aria-hidden="true"></i>
+                    &emsp;<h1 style="color: red" class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('admin/account/updateAccount', $account->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    {{-- // password --}}
+                    <div class="mb-3 form-select" multiple aria-label="description">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control bg-light text-dark" id="password" name="password"
+                            value="{{ $account->password }}">
+                        @error('password')
+                            <span class="errorMsg">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    {{-- // Confirm password --}}
+                    <div class="mb-3 form-select" multiple aria-label="description">
+                        <label for="cpassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control bg-light text-dark" id="cpassword" name="cpassword"
+                            value="{{ $account->password }}">
+                        @error('cpassword')
+                            <span class="errorMsg">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('myjs-admin')

@@ -66,7 +66,7 @@
                                 <td>
                                     {{-- Status --}}
 
-                                    @if ($item->statusOrder == 'Đã tiếp nhận')
+                                    @if ($item->statusOrder == 'Received')
                                         <a href="{{ route('admin/order/update', $item->id) }}"
                                             class="btn btn-primary btn-mg">
                                             <i class="fa-solid fa-file-circle-check"></i>
@@ -102,29 +102,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                @if ($ilo = count($order) > 7)
-                    <div class="col-md-12 mt-3">
-                        <nav aria-label="Page navigation example pagination-lg">
-                            <ul class="pagination justify-content-end">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                @endif
+                {{ $order->links("vendor.pagination.bootstrap-5") }}
             </div>
             <!-- /.card-body -->
         </div>
@@ -175,8 +153,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                     {{-- Phone,Date Order,  --}}
+                                                     {{-- Ben phai --}}
                                                 <div class="col-7">
+                                                    {{-- Cod --}}
                                                     <div class="card">
                                                         <div class="card-header">
                                                             <div class="card-title" style="text-align: left">
@@ -185,6 +164,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    {{-- Payment --}}
                                                     <div class="card">
                                                         <div class="card-header">
                                                             <div class="card-title" style="text-align: left">
@@ -193,6 +173,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    {{-- Phone --}}
                                                     <div class="card">
                                                         <div class="card-header">
                                                             <div class="card-title" style="text-align: left">
@@ -204,6 +185,7 @@
                                                 </div>
                                             </div>
                                             <br>
+                                            {{-- Address --}}
                                             <div class="row container">
                                                 <div class="card" style="width: 99%">
                                                     <div class="card-header">
@@ -219,6 +201,7 @@
                                 </div>
                                 <div class="col-5">
                                     <div class="row ">
+                                        {{-- Date order --}}
                                         <div class="card" style="width: 97%">
                                             <div class="card-header">
                                                 <div class="card-title" style="text-align: left">
@@ -227,6 +210,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                          {{-- Status order --}}
                                         <div class="card" style="width: 97%">
                                             <div class="card-header">
                                                 <div class="card-title">&nbsp;<b>Status Order</b></div>
@@ -234,7 +218,7 @@
                                             <div class="card-body">
                                                 <div class="card-title">
                                                     {{-- &nbsp;{{ $item->statusOrder }} --}}
-                                                    @if ($item->statusOrder == 'Đã tiếp nhận')
+                                                    @if ($item->statusOrder == 'Received')
                                                         <input type="text"class="form-control btn btn-primary"
                                                             value="{{ $item->statusOrder }}">
                                                     @elseif($item->statusOrder == 'Confirmed')
@@ -251,8 +235,12 @@
                                             </div>
                                         </div>
                                     </div>
+                                      {{-- Total --}}
                                     <div class="row ">
                                         <div class="card" style="width: 97%">
+                                            <div class="card-header">
+                                                <div class="card-title">&nbsp;<b>Invoice</b></div>
+                                            </div>
                                             <div class="card-body">
                                                 <table class="table table-borderless">
                                                     {{-- @foreach ($orderDetails as $item) --}}
@@ -268,6 +256,7 @@
                                                                 {{-- {{ floatval(($item->discount / 100) * $orderDetails > sum($item->totalItem)) }} --}}
                                                             </td>
                                                         </tr>
+
                                                         <tr>
                                                             <td><b>Total amount</b></td>
                                                             {{-- <td> {{ floatval($orderDetails->sum($item->totalItem) - ($item->discount / 100) * $orderDetails->sum($item->totalItem)) }} --}}
@@ -280,6 +269,7 @@
                                     </div>
                                 </div>
                             </div>
+                              {{-- bang order --}}
                             <div class="row">
                                 <div class="card" style="width: 98%; margin:auto">
                                     <table class="table">

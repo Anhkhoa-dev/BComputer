@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\USER_ADDRESS;
+use App\Models\ProductImage;
+use App\Models\Products;
 
-class UserAddressController extends Controller
+class ProductimageController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +16,35 @@ class UserAddressController extends Controller
      */
     public function index()
     {
-        $userAddress = USER_ADDRESS::paginate(5);
+        $prodImg = ProductImage::paginate(6);
+        //dd($list_product);
+        // foreach ($list_product as $i => $key) {
+        //     if ($key->id_ca) {
+        //         $list_product[$i]->category = Category::find($key->id_ca)->name;
+        //     } else {
+        //         $list_product[$i]->category = '';
+        //     }
+        //     if ($key->sup_id) {
+        //         $list_product[$i]->supplier = SUPPLIER::find($key->sup_id)->name;
+        //     } else {
+        //         $list_product[$i]->supplier = '';
+        //     }
+
+        //     if ($key->id_brand) {
+        //         $list_product[$i]->brand = BRAND::find($key->id_brand)->name;
+        //     } else {
+        //         $list_product[$i]->brand = '';
+        //     }
+        //     if ($key->id) {
+        //         $list_product[$i]->image = ProductImage::where('id_pro', $key->id)->first()->image;
+        //     } else {
+        //         $list_product[$i]->image = '';
+        //     }
+        // }
         $array = [
-            'userAddress' => $userAddress,
+            'prodImg' => $prodImg,
         ];
-        return view('admin.pages.userAddress')->with($array);
+        return view('admin.pages.productImage')->with($array);
     }
 
     /**

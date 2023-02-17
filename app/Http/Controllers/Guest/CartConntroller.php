@@ -235,7 +235,7 @@ class CartConntroller extends Controller
             $userAddressDefautl = USER_ADDRESS::where('id', $request->idAddress)->where('status', 1)->first();
             $voucher = session('voucherKH');
 
-            $trangthai = 'Đã tiếp nhận';
+            $trangthai = 'Received';
 
             $payment = $request->idPayment;
             // print_r($payment);
@@ -243,7 +243,7 @@ class CartConntroller extends Controller
                 'id_tk' => Auth::user()->id,
                 'date_order' => date_format(Carbon::now(), 'Y-m-d H:i'),
                 'address' => $userAddressDefautl != null ? $userAddressDefautl->address . ', ' . $userAddressDefautl->wards . ', ' . $userAddressDefautl->district . ', ' . $userAddressDefautl->province : '590, CMT8, District 3, HCMC',
-                'cod' => $userAddressDefautl != null ? 'Giao hàng tận nơi' : 'Nhận tại cửa hàng',
+                'cod' => $userAddressDefautl != null ? 'Delivery' : 'Pick up at the store',
                 'payment' => $payment[0] == 'pay_delivery' ? 0 : 1,
                 'id_voucher' => $voucher != null ? VOUCHER::where('code', $voucher['code'])->first()->id : null,
                 'total' => floatval($request->total),
@@ -286,7 +286,7 @@ class CartConntroller extends Controller
             $userAdd = USER_ADDRESS::where('id_tk', $user->id)->where('status', 1)->first();
             $discount = $Orderlist->id_voucher != null ? VOUCHER::where('id', $Orderlist->id_voucher)->first()->discount : 0;
             Mail::send('email.xac-nhan-order-success', compact('user', 'userAdd', 'Orderlist', 'OrderProductList', 'discount'), function ($email) use ($user, $Orderlist) {
-                $email->subject('Xác nhận đặt hàng thàng công. Mã đơn hàng: #' . $Orderlist->id);
+                $email->subject('Order confirmation successful. Code orders: #' . $Orderlist->id);
                 $email->to($user->email, $user->fullname);
             });
             return [
