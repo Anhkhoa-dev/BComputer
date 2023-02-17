@@ -82,6 +82,7 @@
 
                     </tbody>
                 </table>
+                {{ $userAddress->links("vendor.pagination.bootstrap-5") }}
             </div>
             <!-- /.card-body -->
         </div>

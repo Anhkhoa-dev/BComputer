@@ -26,25 +26,10 @@
         <!-- Default box -->
         <div class="card">
             @if (\Session::get('Success'))
-                {{-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
                     <i class="fa-solid fa-circle-check fa-lg"></i>&nbsp;
                     <strong>Success!</strong>&nbsp;{{ \Session::get('Success') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div> --}}
-                <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-                    <div id="liveToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
-                        {{-- d-flex justify-content-center align-items-center w-100 --}}
-                        <div class="toast-header">
-                            <img src="..." class="rounded me-2" alt="...">
-                            <strong class="me-auto">BComputer</strong>
-                            {{-- <small>11 mins ago</small> --}}
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body">
-                            <i class="fa-solid fa-circle-check fa-lg"></i>&nbsp;
-                            <strong>Success!</strong>&nbsp;{{ \Session::get('Success') }}
-                        </div>
-                    </div>
                 </div>
             @endif
             <div class="card-header">
@@ -99,9 +84,7 @@
                                 <td class="project-actions text-center">
                                     {{-- Edit --}}
                                     @if ($item->condition == 0 || strtotime($item->endStart) < strtotime(date('Y-m-d')))
-                                        <button type="button" class="btn btn-info btn-mg"" data-bs-toggle="modal" disabled>
-                                            <i class="fas fa-pencil-alt"></i>
-                                        </button>
+                                        <button type="button" hidden></button>
                                     @else
                                         <a class="btn btn-info btn-mg" href="{{ route('admin/voucher/edit', $item->id) }}">
                                             <i class="fas fa-pencil-alt"></i>
@@ -115,9 +98,9 @@
                                 </td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
+                {{ $voucher->links("vendor.pagination.bootstrap-5") }}
             </div>
             <!-- /.card-body -->
         </div>
@@ -156,12 +139,6 @@
 @endsection
 
 @section('myjs-admin')
-    <script>
-        var myToastEl = document.getElementById('myToast')
-        myToastEl.addEventListener('hidden.bs.toast', function() {
-            // do something...
-        })
-    </script>
 @endsection
 
 

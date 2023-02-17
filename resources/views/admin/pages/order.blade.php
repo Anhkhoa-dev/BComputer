@@ -66,7 +66,7 @@
                                 <td>
                                     {{-- Status --}}
 
-                                    @if ($item->statusOrder == 'Đã tiếp nhận')
+                                    @if ($item->statusOrder == 'Received')
                                         <a href="{{ route('admin/order/update', $item->id) }}"
                                             class="btn btn-primary btn-mg">
                                             <i class="fa-solid fa-file-circle-check"></i>
@@ -102,29 +102,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                @if (count($order) > 7)
-                    <div class="col-md-12 mt-3">
-                        <nav aria-label="Page navigation example pagination-lg">
-                            <ul class="pagination justify-content-end">
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">4</a></li>
-                                <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
-                @endif
+                {{ $order->links("vendor.pagination.bootstrap-5") }}
             </div>
             <!-- /.card-body -->
         </div>
@@ -240,7 +218,7 @@
                                             <div class="card-body">
                                                 <div class="card-title">
                                                     {{-- &nbsp;{{ $item->statusOrder }} --}}
-                                                    @if ($item->statusOrder == 'Đã tiếp nhận')
+                                                    @if ($item->statusOrder == 'Received')
                                                         <input type="text"class="form-control btn btn-primary"
                                                             value="{{ $item->statusOrder }}">
                                                     @elseif($item->statusOrder == 'Confirmed')

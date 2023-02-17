@@ -20,9 +20,15 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $order = Order::all();
+        $order = Order::paginate(6);
         foreach ($order as $i => $key) {
             //dd($key->id_tk);
+            if ($key->id) {
+                $order[$i]->OrderDetialList = OrderDetails::where('id_order', $key->id)->get();
+                //dd($order[$i]->username);
+            } else {
+                $order[$i]->OrderDetialList = '';
+            }
             if ($key->id_tk) {
                 $order[$i]->username = User::where('id', $key->id_tk)->first();
                 //dd($order[$i]->username);
@@ -41,6 +47,7 @@ class OrderController extends Controller
                 $order[$i]->voucher = '';
             }
         }
+
         //$orderList = Order::where('id', $id)->get();
         //$orderList = OrderDetails::all();
         $orderDetails = OrderDetails::all();

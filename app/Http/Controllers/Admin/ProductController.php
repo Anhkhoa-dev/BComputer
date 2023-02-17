@@ -23,7 +23,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $list_product = Products::all();
+        $list_product = Products::paginate(5);
         //dd($list_product);
         foreach ($list_product as $i => $key) {
             if ($key->id_ca) {
@@ -41,6 +41,11 @@ class ProductController extends Controller
                 $list_product[$i]->brand = BRAND::find($key->id_brand)->name;
             } else {
                 $list_product[$i]->brand = '';
+            }
+            if ($key->id) {
+                $list_product[$i]->image = ProductImage::where('id_pro', $key->id)->first()->image;
+            } else {
+                $list_product[$i]->image = '';
             }
         }
 
@@ -187,7 +192,7 @@ class ProductController extends Controller
             $productImg = ProductImage::where('id_pro', $prod->id)->get();
             if ($prod->id_ca) {
                 $prod->category = Category::find($prod->id_ca);
-                
+
             } else {
                 $prod->category = '';
             }
@@ -239,7 +244,7 @@ class ProductController extends Controller
         }else{
             $prods['pro_image'] = $oldImage->image;
         }
-       
+
         $data = [
             'name' => $prods['pro_name'],
             'slug' => Str::slug($prods['pro_name']),

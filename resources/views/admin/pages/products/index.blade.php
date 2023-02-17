@@ -39,13 +39,14 @@
                 <table class="table table-striped projects">
                     <thead>
                         <tr>
-                            <th> ID</th>
-                            <th> Name</th>
+                            <th style="width: 1%"> ID</th>
+                            <th style="text-align: center"> Image</th>
+                            <th style="width: 30%"> Name</th>
                             <th> Price ($) </th>
-                            <th> Quanity </th>
+                            <th style="width: 10%; text-align: center"> Quanity </th>
                             <th> Discount</th>
-                            <th> Featured</th>
-                            <th> Status </th>
+                            <th style="text-align: center"> Featured</th>
+                            <th style="text-align: center"> Status </th>
                             <th> Action </th>
                         </tr>
                     </thead>
@@ -54,19 +55,34 @@
                             @foreach ($productAll as $item)
                                 <tr>
                                     <td>{{ $item->id }}</td>
+                                    <td>
+                                        <div class="phuc-product">
+                                            <div class="product-image">
+                                                <img src="{{ asset('image/product/' . $item->image) }}" class="img_product"
+                                                    alt="User Image">
+                                            </div>
+                                        </div>
+                                    </td>
                                     <td>{{ $item->name }}</td>
                                     <td>$ {{ $item->price }}</td>
-                                    <td>{{ $item->quantity }}</td>
-                                    <td>{{ $item->discount }} %</td>
-                                    <td>{{ $item->featured == 1 ? 'Nổi bật' : 'Bình thường' }}</td>
-                                    <td>{{ $item->status == 1 ? 'Đang kinh doanh' : 'Ngừng kinh doanh' }}</td>
+                                    <td style="text-align: center">{{ $item->quantity }}</td>
+                                    <td style="text-align: center">{{ $item->discount }} %</td>
+                                    <td style="text-align: center">
+                                        <a class="btn {{ $item->featured == 1 ? 'btn-warning' : 'btn-secondary' }} btn-mg">
+                                            {{ $item->featured == 1 ? 'Outstanding' : 'Normal' }}</a>
+                                    </td>
+                                    <td style="text-align: center">
+                                        <a class="btn {{ $item->status == 1 ? 'btn-success' : 'btn-danger' }} btn-mg">
+                                            {{ $item->status == 1 ? 'On sale' : 'Stop selling' }}</a>
+                                    </td>
                                     <td>
                                         <a class="btn btn-primary btn-sm"
                                             href="{{ route('admin/product/show', $item->slug) }}" title="Detail product">
                                             <i class="fas fa-folder">
                                             </i>
                                         </a>
-                                        <a class="btn btn-info btn-sm" href="{{ route('admin/product/edit', $item->id) }}" title="Edit product">
+                                        <a class="btn btn-info btn-sm" href="{{ route('admin/product/edit', $item->id) }}"
+                                            title="Edit product">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                         </a>
@@ -79,11 +95,12 @@
                                 </tr>
                             @endforeach
                         @else
-                            <p>Không có sản phẩm nào. <a href="#">Thêm mới sản phẩm</a></p>
+                            <p>No products.<a href="#">Add new products</a></p>
                         @endif
 
                     </tbody>
                 </table>
+                {{ $productAll->links('vendor.pagination.bootstrap-5') }}
             </div>
         </div>
     </section>

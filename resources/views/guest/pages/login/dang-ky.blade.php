@@ -10,7 +10,7 @@
                 <div class="box_login">
                     <h1 class="text-center mb-4">Register Acount</h1>
                     {{-- @error('errorMsg')
-                            <span class="errorMsg">{{$message}}</span> 
+                            <span class="errorMsg">{{$message}}</span>
                         @enderror --}}
                     <form action="{{ url('postRegister') }}" method="post" class="form_login">
                         @csrf
@@ -56,11 +56,11 @@
                             @enderror
                         </div>
                         <div class="mb-2">
-                            <button class="btnLogin">Đăng ký</button>
+                            <button class="btnLogin">Register</button>
                         </div>
                     </form>
                     <div class="text-center">
-                        <p>Đã có tài khoản. <a href="{{ route('user/login') }}">Đăng nhập</a></p>
+                        <p>Already have an account.<a href="{{ route('user/login') }}">Login</a></p>
                     </div>
 
                     {{-- @include('guest.pages.login.hinh-thuc-dang-nhap-khac') --}}

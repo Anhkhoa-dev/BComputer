@@ -104,6 +104,7 @@
 
                     </tbody>
                 </table>
+                {{ $brand->links("vendor.pagination.bootstrap-5") }}
             </div>
             <!-- /.card-body -->
         </div>
