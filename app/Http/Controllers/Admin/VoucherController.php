@@ -96,7 +96,7 @@ class VoucherController extends Controller
         );
 
         $data = [
-            'code' => $request->vou_code,
+            'code' => strtoupper($request->vou_code),
             'content' => $request->vou_content,
             'discount' => doubleval($request->vou_discount),
             'quanity' => intval($request->vou_quanity),
@@ -153,7 +153,7 @@ class VoucherController extends Controller
                 'vou_discount' => 'required|numeric|min:1|max:100',
                 'vou_quanity' => 'required|numeric|min:1',
                 'vou_condition' => 'required|numeric|min:1',
-                'vou_dateStart' => 'after_or_equal:today',
+                //'vou_dateStart' => 'after_or_equal:today',
                 'vou_endStart' => 'after_or_equal:vou_dateStart',
             ],
             [
@@ -164,7 +164,7 @@ class VoucherController extends Controller
                 'vou_quanity.min' => 'Please input Quantity more than 1!',
                 'vou_condition.required' => 'Please input Condition of Voucher!',
                 'vou_condition.min' => 'Please input Condition more than 0!',
-                'vou_dateStart.after_or_equal' => 'Please input Date Start after or equal Today!',
+                //'vou_dateStart.after_or_equal' => 'Please input Date Start after or equal Today!',
                 'vou_endStart.after_or_equal' => 'Please input End Start after or equal Date Start!',
             ]
         );

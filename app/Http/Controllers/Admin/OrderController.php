@@ -36,7 +36,7 @@ class OrderController extends Controller
                 $order[$i]->username = '';
             }
             if ($key->id_tk) {
-                $order[$i]->useraddress = USER_ADDRESS::where('id_tk', $key->id_tk)->first();
+                $order[$i]->useraddress = USER_ADDRESS::where('id_tk', $key->id_tk)->where('status', 1)->first();
                 //dd($order[$i]->username);
             } else {
                 $order[$i]->username = '';
@@ -61,31 +61,14 @@ class OrderController extends Controller
                 $orderDetails[$i]->product = '';
             }
         }
-        //$orderList = OrderDetails::where('id_order', $order->id)->get();
-        // $OrderProductList = OrderDetails::where('id_order', $Orderlist->id)->get();
-        // foreach ($OrderProductList as $i => $key) {
-        //     if ($key->id_pro) {
-        //         $OrderProductList[$i]->name = Products::find($key->id_pro)->name;
-        //     } else {
-        //         $OrderProductList[$i]->name = '';
-        //     }
-        // }
 
-        // $orderDetails = OrderDetails::where('id_order', $order->id)->get();
-        // foreach ($orderDetails as $i => $key) {
-        //     if ($key->id_pro) {
-        //         $orderDetails[$i]->name = Products::find($key->id_pro)->name;
-        //     dd($orderDetails[$i]->name );
-        //     } else {
-        //         $orderDetails[$i]->name = '';
-        //     }
-        // }
 
         //dd($order);
         $array = [
             'order' => $order,
             'orderDetails' => $orderDetails,
         ];
+        //dd($array);
         return view('admin.pages.order')->with($array);
     }
 
@@ -142,7 +125,7 @@ class OrderController extends Controller
     public function update($id)
     {
         $order = Order::where('id', $id)->first();
-        if ($order->statusOrder == 'Confirmed' ) {
+        if ($order->statusOrder == 'Confirmed') {
             Order::where('id', $id)->update(['statusOrder' => 'Complete']);
             return back()->with('Success', 'Order has been Complete!');
         } else {

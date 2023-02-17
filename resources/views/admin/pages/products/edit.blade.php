@@ -208,8 +208,7 @@
                                     <div class="mb-3">
                                         <label for="">Hoạt động</label>
                                         <select name="pro_active" id="" class="form-select">
-                                            <option value="0">Ngừng kinh doanh</option> --}}
-
+                                
                                             @if ($prod->status == '1')
                                                 <option selected value="1">Đang kinh doanh</option>
                                                 <option value="0">Ngừng kinh doanh</option>
