@@ -46,7 +46,7 @@
                                 <td>
                                     <!-- kiểm tra trong db có image thì mới hiển thị -->
                                     @if ($item->imageIcon != null && $item->imageIcon != '')
-                                        <img src="{{ asset('image/category/' . $item->imageIcon) }}" alt=""
+                                        <img src="{{ asset('image/icon/' . $item->imageIcon) }}" alt=""
                                             style="width:70px; height:auto;">
                                     @endif
                                 </td>

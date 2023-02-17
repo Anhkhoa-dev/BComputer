@@ -127,6 +127,11 @@ class OrderController extends Controller
         $order = Order::where('id', $id)->first();
         if ($order->statusOrder == 'Confirmed') {
             Order::where('id', $id)->update(['statusOrder' => 'Complete']);
+            $OrderDetail = OrderDetails::where('id_order', $order->id)->get();
+            foreach ($OrderDetail as $key) {
+                $qtyOsStock = Products::where('id', $key->id_pro)->first()->quantity;
+                Products::where('id', $key->id_pro)->update(['quantity' => ($qtyOsStock - $key->qty)]);
+            }
             return back()->with('Success', 'Order has been Complete!');
         } else {
             Order::where('id', $id)->update(['statusOrder' => 'Confirmed']);

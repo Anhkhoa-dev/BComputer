@@ -16,8 +16,17 @@ class ProductimageController extends Controller
      */
     public function index()
     {
-        $prodImg = ProductImage::paginate(6);
-        //dd($list_product);
+        // $prodImg = ProductImage::paginate(6);
+        $product = Products::paginate(6);;
+        foreach ($product as $i => $key) {
+            if ($key->id) {
+                $product[$i]->image = ProductImage::where('id_pro', $key->id)->count('id');
+            } else {
+                $product[$i]->image = '';
+            }
+        }
+
+        //dd($product);
         // foreach ($list_product as $i => $key) {
         //     if ($key->id_ca) {
         //         $list_product[$i]->category = Category::find($key->id_ca)->name;
@@ -42,7 +51,7 @@ class ProductimageController extends Controller
         //     }
         // }
         $array = [
-            'prodImg' => $prodImg,
+            'prodImg' => $product,
         ];
         return view('admin.pages.productImage')->with($array);
     }

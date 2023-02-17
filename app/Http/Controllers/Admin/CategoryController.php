@@ -59,8 +59,7 @@ class CategoryController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        {
+    { {
             //trả về view
             $prod = Category::where('id', $id)->first();
             $array = [
@@ -84,12 +83,11 @@ class CategoryController extends Controller
         $prods = $request->all();
         // dd( $prods);
         $oldImage = Category::where('id', $id)->first();
-        if ($file = $request->file('photo'))
-        {
+        if ($file = $request->file('photo')) {
             $fileName = $file->getClientOriginalName();
-            $file->move('image/category/', $fileName);
+            $file->move('image/icon/', $fileName);
             $prods['imageIcon'] = "$fileName";
-        }else{
+        } else {
 
             $prods['imageIcon'] = $oldImage->image;
         }
@@ -97,14 +95,13 @@ class CategoryController extends Controller
             'name' => $prods['cate_name'],
             'slug' => $prods['cate_slug'],
             'imageIcon' => $prods['imageIcon'],
-            'description'=> $prods['cate_description'],
-            'status'=> intval($prods['loai_tk']),
+            'description' => $prods['cate_description'],
+            'status' => intval($prods['loai_tk']),
         ];
         // dd($data);
         Category::where('id', intval($prods['cate_id']))->update($data);
         return redirect()->route('admin/category');
-
-}
+    }
 
     /**
      * Remove the specified resource from storage.
