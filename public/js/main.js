@@ -2,7 +2,7 @@ $(function () {
     let timer = null;
     const page = window.location.pathname.split("/")[1];
     const X_CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
-    const errorMessage = "Đã có lỗi xảy ra. Vui lòng thử lại";
+    const errorMessage = "An error has occurred. Please try again";
 
     $(window).scroll(function () {
         if ($(window).scrollTop() > 300) {
@@ -171,12 +171,9 @@ $(function () {
                                         Thông tin tài khỏan
                ================================================================================ */
 
-    $("#btn-change-avt").click(function () {
-        $("#change-avt-inp").trigger("click");
-    });
-
-
-
+    // $("#btn-change-avt").click(function () {
+    //     $("#change-avt-inp").trigger("click");
+    // });
 
     function addCart(id_sp, qty) {
         return new Promise((resolve, reject) => {
@@ -305,18 +302,18 @@ $(function () {
                         const qtyInstock = data.qtyInStock;
                         if (qtyInstock > 5) {
                             showAlertTop(
-                                `Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5`
+                                `This product is already in the cart and the maximum purchase quantity is 5`
                             );
                         } else {
                             showAlertTop(
-                                `Sản phẩm hết hàng hoặc đang ngừng kinh doanh`
+                                `Products are out of stock or out of business`
                             );
                         }
                         break;
                     default:
                         // thông báo thêm giỏ hàng thành công
                         showAlertTop(
-                            "Vui lòng đăng nhập để thực hiện chức năng này"
+                            "Please login to perform this function"
                         );
                     // window.location.href = "http://127.0.0.1:8000/login";
                 }
@@ -354,18 +351,18 @@ $(function () {
                         const qtyInstock = data.qtyInStock;
                         if (qtyInstock > 5) {
                             showAlertTop(
-                                `Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5`
+                                `This product is already in the cart and the maximum purchase quantity is 5`
                             );
                         } else {
                             showAlertTop(
-                                `Sản phẩm hết hàng hoặc đang ngừng kinh doanh`
+                                `Products are out of stock or out of business`
                             );
                         }
                         break;
                     default:
                         // thông báo thêm giỏ hàng thành công
                         showAlertTop(
-                            "Vui lòng đăng nhập để thực hiện chức năng này"
+                            "Please login to perform this function"
                         );
                     // window.location.href = "http://127.0.0.1:8000/login";
                 }
@@ -381,6 +378,10 @@ $(function () {
 
     });
     switch (page) {
+
+        case "": {
+
+        }
 
         case "account": {
             $('#btn-tk-name-update').click(function () {
@@ -631,20 +632,31 @@ $(function () {
             break;
         }
     }
+    $('.search-info').hide();
+    $('#search-input').on('keyup', function () {
+        var key = $(this).val();
+        if (key != '') {
+            $.ajax({
+                url: '/ajax-tracuu-product?key=' + key,
+                type: "GET",
+                success: function (res) {
+                    $('.search-preview').html(res);
+                    $('.search-info').show();
+                }
+            });
+        } else {
+            $('.search-preview').html('');
+            $('.search-info').hide();
+        }
+    });
 
     $('#search-input').on('keyup', function () {
         var key = $(this).val();
         $.ajax({
-            headers: {
-                "X-CSRF-TOKEN": X_CSRF_TOKEN,
-            },
-            url: "/search",
+            url: '/ajax-tracuu-product-list?key' + key,
             type: "GET",
-            data: {
-                key: key,
-            },
             success: function (data) {
-                console.log(data)
+                // location.reload();
             }
         });
     });
@@ -652,7 +664,7 @@ $(function () {
 
 
 
-
+    // Thay đổi password
     function ajaxChangePass(id, password) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -810,11 +822,6 @@ $(function () {
         });
     }
 
-    function ajaxSearch(Key) {
-
-    }
-
-
 
     function ajaxVoucher(voucher, total) {
         return new Promise((resolve, reject) => {
@@ -885,7 +892,7 @@ $(function () {
             });
         });
     }
-
+    // hàm xóa cart
     function ajaxDeleteCart(id) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -920,6 +927,8 @@ $(function () {
         });
     }
 
+
+    // xử lý update cart
     let isClicked = false // ngăn người dùng nhấn liên tục
     $('.update-qty').off('click').click(function () {
         var id = $(this).attr('data-id');
@@ -1007,6 +1016,7 @@ $(function () {
         });
     }
 
+    // cập nhật tạm tính và tổng tiền 
     function provisionalAndTotalOrder() {
         let idList = [];
         // danh sách id_sp thanh toán
@@ -1071,12 +1081,13 @@ $(function () {
         });
     }
 
-
+    // code xử lý Phường quận, tỉnh trong bàng modal địa chỉ
     var citis = document.getElementById("address-city");
     var districts = document.getElementById("address-district");
     var wards = document.getElementById("address-ward");
     var Parameter = {
         url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        // url: "https://raw.githubusercontent.com/kcjpop/vietnam-topojson/master/adm2/adm2.json",
         method: "GET",
         responseType: "application/json",
     };

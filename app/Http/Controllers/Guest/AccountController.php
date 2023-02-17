@@ -21,6 +21,7 @@ class AccountController extends Controller
     // }
     public function getAccount()
     {
+        session()->forget('dataLisTraCuu');
         $addressDefault = $this->getAddressDefault(Auth::user()->id);
         $array = [
             'page' => 'sec-taikhoan',

@@ -183,6 +183,7 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
+
         {
             //trả về view
             $category = Category::where('status', 1)->get();
@@ -217,7 +218,20 @@ class ProductController extends Controller
             ];
             // dd($array);
             return view('admin.pages.products.edit')->with($array);
+
         }
+        $array = [
+            'proShow' => $prod,
+            'category' => $category,
+            'brands' => $brands,
+            'supplier' => $supplier,
+            'prod' => $prod,
+            'message' => 'Bạn đã đăng nhập thành công',
+            'proImage' => $productImg,
+        ];
+        // dd($array);
+        return view('admin.pages.products.edit')->with($array);
+    }
 
     /**
      * Update the specified resource in storage.
@@ -231,8 +245,7 @@ class ProductController extends Controller
         $prods = $request->all();
         $product_img = Products::where('id', $id)->first();
         $oldImage = Products::where('id', $id)->first();
-        if ($request->hasfile('pro_image'))
-        {
+        if ($request->hasfile('pro_image')) {
             foreach ($request->file('pro_image') as $file) {
                 $fileName = $file->getClientOriginalName();
                 $file->move("image/product", $fileName);
@@ -241,7 +254,7 @@ class ProductController extends Controller
                     'image' => $fileName,
                 ]);
             }
-        }else{
+        } else {
             $prods['pro_image'] = $oldImage->image;
         }
 
@@ -262,7 +275,7 @@ class ProductController extends Controller
         //dd($data);
         Products::where('id', $id)->update($data);
         return redirect('admin/product');
-}
+    }
 
     /**
      * Remove the specified resource from storage.

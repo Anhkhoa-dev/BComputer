@@ -34,7 +34,7 @@
                             $ {{ $item->price }}
                         </div>
                         <div class="price-discount">
-                            $ {{ $item->price * ((100 - $item->discount) / 100) }}
+                            $ {{ number_format($item->price * ((100 - $item->discount) / 100), 2) }}
                         </div>
                     </div>
                 </div>

@@ -65,6 +65,7 @@
                                     </td>
                                     <td>{{ $item->name }}</td>
                                     <td>$ {{ $item->price }}</td>
+
                                     <td style="text-align: center">{{ $item->quantity }}</td>
                                     <td style="text-align: center">{{ $item->discount }} %</td>
                                     <td style="text-align: center">
@@ -75,6 +76,7 @@
                                         <a class="btn {{ $item->status == 1 ? 'btn-success' : 'btn-danger' }} btn-mg">
                                             {{ $item->status == 1 ? 'On sale' : 'Stop selling' }}</a>
                                     </td>
+
                                     <td>
                                         <a class="btn btn-primary btn-sm"
                                             href="{{ route('admin/product/show', $item->slug) }}" title="Detail product">

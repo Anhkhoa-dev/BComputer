@@ -27,6 +27,7 @@ class CartConntroller extends Controller
     public function getViewcart()
     {
 
+        session()->forget('dataLisTraCuu');
         if (!Auth::check()) {
             return back()->with('toast-message', 'Vui lòng đăng nhập để thực hiện chức năng này');
         } else {

@@ -39,12 +39,15 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
     Route::get('collections/{name}', [IndexController::class, 'getProducts'])->name('user/products');
     Route::get('product/{name}', [IndexController::class, 'getDetail'])->name('user/detail');
+    // Route::get('tracuu', [IndexController::class, 'getTraCuu'])->name('user/tracuu');
     Route::get('search', [IndexController::class, 'getSearch']);
     Route::get('aboutus', [IndexController::class, 'aboutus'])->name('user/aboutus');
     Route::get('contact', [IndexController::class, 'contact'])->name('user/contact');
     Route::get('deliverypolicy', [IndexController::class, 'deliverypolicy'])->name('user/deliverypolicy');
     Route::get('paymentpolicy', [IndexController::class, 'paymentpolicy'])->name('user/paymentpolicy');
     Route::get('warrantypolicy', [IndexController::class, 'warrantypolicy'])->name('user/warrantypolicy');
+    Route::get('ajax-tracuu-product', [IndexController::class, 'ajaxTraCuu'])->name('ajax-tracuu-info');
+    Route::get('ajax-tracuu-product-list', [IndexController::class, 'ajaxTraCuuList'])->name('ajax-tracuu-info-list');
 
     // phần dành cho user
     Route::group(
