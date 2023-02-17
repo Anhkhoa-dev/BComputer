@@ -1025,8 +1025,6 @@ section .title i {
 
 .new_arrivals {
   background-color: #fff;
-  display: flex;
-  justify-content: space-between;
 }
 .new_arrivals .card {
   border: none;
@@ -1037,10 +1035,16 @@ section .title i {
   border: 1px solid #E94560;
 }
 .new_arrivals .card .card_info .name {
-  font-size: 1.25rem;
+  font-size: 1.025rem;
   font-weight: 600;
   color: #0F3460;
   text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 .new_arrivals .card .card_info .name:hover {
   color: #E94560;

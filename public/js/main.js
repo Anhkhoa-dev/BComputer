@@ -2,7 +2,7 @@ $(function () {
     let timer = null;
     const page = window.location.pathname.split("/")[1];
     const X_CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
-    const errorMessage = "Đã có lỗi xảy ra. Vui lòng thử lại";
+    const errorMessage = "An error has occurred. Please try again";
 
     $(window).scroll(function () {
         if ($(window).scrollTop() > 300) {
@@ -171,12 +171,9 @@ $(function () {
                                         Thông tin tài khỏan
                ================================================================================ */
 
-    $("#btn-change-avt").click(function () {
-        $("#change-avt-inp").trigger("click");
-    });
-
-
-
+    // $("#btn-change-avt").click(function () {
+    //     $("#change-avt-inp").trigger("click");
+    // });
 
     function addCart(id_sp, qty) {
         return new Promise((resolve, reject) => {
@@ -635,14 +632,6 @@ $(function () {
             break;
         }
     }
-    // $('.btnSearch').click(function () {
-
-    //     var keySearch = $('#search-input').val()
-    //     alert(keySearch)
-
-    // });
-
-
     $('.search-info').hide();
     $('#search-input').on('keyup', function () {
         var key = $(this).val();
@@ -1092,7 +1081,7 @@ $(function () {
         });
     }
 
-
+    // code xử lý Phường quận, tỉnh trong bàng modal địa chỉ
     var citis = document.getElementById("address-city");
     var districts = document.getElementById("address-district");
     var wards = document.getElementById("address-ward");

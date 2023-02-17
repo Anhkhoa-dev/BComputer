@@ -14,6 +14,8 @@ use App\Models\Category;
 use App\Models\Products;
 use App\Models\ProductImage;
 use App\Models\Comment;
+use Carbon\Carbon;
+
 // use Illuminate\Support\Facades\DB;
 
 // kết thúc Khai báo use Model
@@ -29,6 +31,7 @@ class IndexController extends Controller
         // get sản phẩm có giảm giá >= 15% ra trang home
         $bigDiscount = $this->getDiscount();
         $banner = $this->getBanner();
+        $newProduct = $this->getNewProducts();
         session()->forget('voucherKH');
         session()->forget('codeOrder');
         session()->forget('dataLisTraCuu');
@@ -41,7 +44,7 @@ class IndexController extends Controller
             'list_Catagory' => $lts_Catagory,
             'list_Featured' => $featuredProducts,
             'bigDiscount' => $bigDiscount,
-            // 'newproduct' => $newProducts,
+            'newproduct' => $newProduct,
             'banner' => $banner,
         ];
         return view('guest.pages.home')->with($array);
@@ -71,27 +74,6 @@ class IndexController extends Controller
     {
         return view('guest.pages.paymentpolicy');
     }
-    // public function getSearch(Request $request)
-    // {
-    //     if ($request->ajax()) {
-    //         $output = '';
-    //         $products = DB::table('product')->where('name', 'LIKE', '%' . $request->search . '%')->where('description', 'LIKE', '%' . $request->search . '%')->get();
-    //         if ($products) {
-    //             foreach ($products as $key => $product) {
-    //                 if ($product->id) {
-    //                     $image = ProductImage::where('id_pro', $product->id)->get();
-    //                     // $out
-    //                 } else {
-    //                     $product[$key]->image = '';
-    //                 }
-    //                 // print_r($product);
-    //                 // array_push($output, $product);
-    //             }
-    //         }
-
-    //         return $output;
-    //     }
-    // }
 
     public function getBanner()
     {
@@ -112,18 +94,23 @@ class IndexController extends Controller
 
         return $bigDiscount;
     }
+    // hàm get lay61 những sản phẩm trong vòng 1 tháng mới ra mắt
+
     public function getNewProducts($max = 15)
     {
-        $bigDiscount = Products::where('create_date', '>=', 15)->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
-        foreach ($bigDiscount as $i => $key) {
+
+        $date_current = Carbon::now()->subDays(10);
+        //dd($date_current);
+        $newProducts = Products::where('create_date', '>=', date_format($date_current, 'Y-m-d H:s'))->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
+        foreach ($newProducts as $i => $key) {
             if ($key->id) {
-                $bigDiscount[$i]->image = ProductImage::where('id_pro', $key->id)->get();
+                $newProducts[$i]->image = ProductImage::where('id_pro', $key->id)->first()->image;
             } else {
-                $bigDiscount[$i]->image = '';
+                $newProducts[$i]->image = '';
             }
         }
-
-        return $bigDiscount;
+        //dd($newProducts);
+        return $newProducts;
     }
     public function getCatagory()
     {
@@ -137,7 +124,7 @@ class IndexController extends Controller
         $lst_featured = Products::where('featured', 1)->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
         foreach ($lst_featured as $i => $key) {
             if ($key->id) {
-                $lst_featured[$i]->image = ProductImage::where('id_pro', $key->id)->get();
+                $lst_featured[$i]->image = ProductImage::where('id_pro', $key->id)->first()->image;
             } else {
                 $lst_featured[$i]->image = '';
             }
