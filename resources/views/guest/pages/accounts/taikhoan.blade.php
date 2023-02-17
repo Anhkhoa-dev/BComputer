@@ -13,27 +13,27 @@
     @switch($page)
         @case('sec-thongbao')
             @section('title')Notify | BComputer @stop
-            <a href="#" class="bc-item active">Notify</a>
+            <a href="#" class="bc-item active text-decoration-none">Notify</a>
         @break
 
         @case('sec-chitietdonhang')
             @section('title')Order | BComputer @stop
-            <a href="#" class="bc-item active">Order</a>
+            <a href="#" class="bc-item active text-decoration-none">Order</a>
         @break
 
         @case('sec-diachi')
             @section('title')Address | BComputer @stop
-            <a href="{{ route('user/address') }}" class="bc-item active">Address</a>
+            <a href="{{ route('user/address') }}" class="bc-item active text-decoration-none">Address</a>
         @break
 
         @case('sec-yeuthich')
             @section('title')Like | BComputer @stop
-            <a href="#" class="bc-item active">Product like</a>
+            <a href="#" class="bc-item active text-decoration-none">Product like</a>
         @break
 
         @case('sec-voucher')
             @section('title')Voucher | BComputer @stop
-            <a href="#" class="bc-item active">Voucher</a>
+            <a href="#" class="bc-item active text-decoration-none">Voucher</a>
         @break
 
         @default

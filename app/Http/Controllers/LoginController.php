@@ -19,7 +19,7 @@ class LoginController extends Controller
 
         if (Auth::check() || session('user')) {
 
-            return back()->with('toast_message', 'Bạn đã đăng nhập');
+            return back()->with('toast_message', 'You are logged in!');
         }
 
 
@@ -35,8 +35,8 @@ class LoginController extends Controller
                 'password' => 'required',
             ],
             [
-                'email.required' => 'Vui lòng nhập vào email',
-                'password.required' => 'Vui lòng nhập vào password',
+                'email.required' => 'Please enter your email!',
+                'password.required' => 'Please enter password!',
             ]
         );
 
@@ -60,7 +60,7 @@ class LoginController extends Controller
             }
         }
         return back()->withErrors([
-            'errorMsg' => 'Email or password không đúng!'
+            'errorMsg' => 'Email or password is incorrect!'
         ])->onlyInput('email');
     }
 
@@ -91,16 +91,16 @@ class LoginController extends Controller
 
             ],
             [
-                'email.required' => 'Email không được bỏ trống',
-                'email.email' => 'Email phải là 1 email họp lệ',
-                'email.regex' => 'Email không có ký tự đặc biệt!',
-                'fullname.required' => 'Fullname không được bỏ trống',
-                'fullname.min' => 'Fullnam có ít nhất 2 ký tự',
+                'email.required' => 'Please input Email of Account!',
+                'email.email' => 'Invalid email!',
+                'email.regex' => 'Email without special characters!',
+                'fullname.required' => 'Please input Fullname of Account!',
+                'fullname.min' => 'Fullname with at least 2 characters!',
                 'password.required' => 'Password không được bỏ trống',
                 'password.between' => 'Password có ít nhất 6 ký tự và lớn nhất 16 ký tự',
-                'cpassword.required' => 'Password confirm không được bỏ trống',
-                'cpassword.same' => 'Password confirm không trùng khớp. Vui lòng nhập lại',
-                'cpassword.between' => 'Password có ít nhất 6 ký tự và lớn nhất 16 ký tự',
+                'cpassword.required' => 'Password confirm cannot be left blank!',
+                'cpassword.same' => 'Confirm password does not match. Please re-enter!',
+                'cpassword.between' => 'Password must have at least 6 characters and maximum 16 characters!',
             ]
         );
         $token = strtoupper(Str::random(10));
@@ -120,20 +120,20 @@ class LoginController extends Controller
 
         if ($kiemtra != null) {
             return back()->withErrors([
-                'email' => 'Email đã được sử dụng!'
+                'email' => 'Email exist!'
             ])->onlyInput('email');
-                
+
         }
     if($user = ACOUNT::create($data)){
         Mail::send('email.send-mail-active', compact('user'), function($email) use($user)   {
-            $email->subject('Email kích hoạt tài khoản từ BComputer shop');
+            $email->subject('Account activation email from BComputer shop');
              $email->to($user->email, $user->fullname);
         });
         return view('guest.pages.login.active-account', compact('user'));
         }
     }
 
-        
+
 
     public function actived($id, $token){
         $data = [
@@ -148,7 +148,7 @@ class LoginController extends Controller
             return redirect('/login');
         }else{
             return redirect('login')->withErrors([
-                'errorMsg' => 'Mã xác nhận sai. vui lòng xác nhận lại!'
+                'errorMsg' => 'The verification code is wrong. Please reconfirm!'
             ])->onlyInput('email');
         }
     }
@@ -161,7 +161,7 @@ class LoginController extends Controller
 
     public function getSenMail(){
         Mail::send('email.test', ['name'=> 'Test mail'], function($email){
-            $email->subject('Kích hoạt tài khoản');
+            $email->subject('Active account');
             $email->to('nguyenkhoa.demolaravel@gmail.com', 'BComputer');
         });
     }

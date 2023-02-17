@@ -31,8 +31,8 @@
                             <th style="width: 19%"> Name </th>
                             <th style="width: 20%"> Slug </th>
                             <th style="width: 20%"> Description </th>
-                            <th style="width: 20%" > Image </th>
-                            <th style="width: 10%"> Status </th>
+                            <th style="width: 20%"> Image </th>
+                            <th style="width: 10%; text-align: center"> Status </th>
                             <th style="width: 10%"> Action </th>
                         </tr>
                     </thead>
@@ -50,10 +50,8 @@
                                             style="width:70px; height:auto;">
                                     @endif
                                 </td>
-                                <td>
-                                    <p class="btn {{ $item->status == 1 ? 'btn-success' : 'btn-secondary' }} btn-sm">
-                                        {{ $item->status == 1 ? 'Actived' : 'Clocked' }}
-                                    </p>
+                                <td style="text-align: center"><a
+                                        class="btn {{ $item->status == 1 ? 'btn-success' : 'btn-secondary' }} btn-mg">{{ $item->status == 1 ? 'Actived' : 'Closed' }}</a>
                                 </td>
                                 <td class="project-actions text-left">
                                     <a class="btn btn-info" href="{{ route('category/edit', $item->id) }}">
@@ -61,7 +59,7 @@
                                         </i>
 
                                     </a>
-                                    {{-- @if($item->status == 1)
+                                    {{-- @if ($item->status == 1)
                                     <a class="btn btn-danger" href="{{ route('category/destroy', $item->id) }}">
                                         <i class="fa fa-trash">
                                         </i>

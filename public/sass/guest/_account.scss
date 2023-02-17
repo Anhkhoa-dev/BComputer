@@ -65,13 +65,32 @@
             justify-content: center;
             align-items: center;
             visibility: hidden;
-            .input-change{
-                display: none;
-            }
-            .change-image{
-                text-decoration: none;
-                color: #fff;
-                cursor: pointer;
+            form{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+                
+                // .input-change{
+                //     display: none;
+                // }
+                .choose{
+                    color: $Color__E94560;
+                    font-weight: 600;
+                    border: 1px solid #fff;
+                    padding: 5px;
+                    background: #fff;
+                    cursor: pointer;
+                }
+                .change-image{
+                    border: none;
+                    outline: none;
+                    text-decoration: none;
+                    color: #fff;
+                    background: none;
+                    cursor: pointer;
+                }
             }
         }
         &:hover .image-hover{

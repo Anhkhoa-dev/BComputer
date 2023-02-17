@@ -14,7 +14,9 @@ use App\Models\Category;
 use App\Models\Products;
 use App\Models\ProductImage;
 use App\Models\Comment;
-// use App\Models\Brands;
+use Carbon\Carbon;
+
+// use Illuminate\Support\Facades\DB;
 
 // kết thúc Khai báo use Model
 
@@ -29,8 +31,10 @@ class IndexController extends Controller
         // get sản phẩm có giảm giá >= 15% ra trang home
         $bigDiscount = $this->getDiscount();
         $banner = $this->getBanner();
+        $newProduct = $this->getNewProducts();
         session()->forget('voucherKH');
         session()->forget('codeOrder');
+        session()->forget('dataLisTraCuu');
         if (Auth::user()) {
             $qtyCart = Cart::where('id_tk', Auth::user()->id)->sum('quanity');
             session()->put('qtyCart', intval($qtyCart));
@@ -40,7 +44,9 @@ class IndexController extends Controller
             'list_Catagory' => $lts_Catagory,
             'list_Featured' => $featuredProducts,
             'bigDiscount' => $bigDiscount,
+            'newproduct' => $newProduct,
             'banner' => $banner,
+            'logoBrand' => BRAND::where('status', 1)->get(),
         ];
         return view('guest.pages.home')->with($array);
     }
@@ -95,6 +101,24 @@ class IndexController extends Controller
 
         return $bigDiscount;
     }
+    // hàm get lay61 những sản phẩm trong vòng 1 tháng mới ra mắt
+
+    public function getNewProducts($max = 15)
+    {
+
+        $date_current = Carbon::now()->subDays(10);
+        //dd($date_current);
+        $newProducts = Products::where('create_date', '>=', date_format($date_current, 'Y-m-d H:s'))->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
+        foreach ($newProducts as $i => $key) {
+            if ($key->id) {
+                $newProducts[$i]->image = ProductImage::where('id_pro', $key->id)->first()->image;
+            } else {
+                $newProducts[$i]->image = '';
+            }
+        }
+        //dd($newProducts);
+        return $newProducts;
+    }
     public function getCatagory()
     {
         $fillCatagoryAll = Category::where('status', 1)->get();
@@ -107,13 +131,42 @@ class IndexController extends Controller
         $lst_featured = Products::where('featured', 1)->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
         foreach ($lst_featured as $i => $key) {
             if ($key->id) {
-                $lst_featured[$i]->image = ProductImage::where('id_pro', $key->id)->get();
+                $lst_featured[$i]->image = ProductImage::where('id_pro', $key->id)->first()->image;
             } else {
                 $lst_featured[$i]->image = '';
             }
         }
 
         return $lst_featured;
+    }
+
+    public function ajaxTraCuuList()
+    {
+        $data = Products::search()->get();
+        foreach ($data as $key => $item) {
+            if ($item->id) {
+                $data[$key]->image = ProductImage::where('id_pro', $item->id)->first()->image;
+            } else {
+                $data[$key]->image = '';
+            }
+        }
+
+
+        return view('guest.pages.search-product', compact('data'));
+    }
+
+    public function ajaxTraCuu(Request $request)
+    {
+        $data = Products::search()->get();
+        foreach ($data as $key => $item) {
+            if ($item->id) {
+                $data[$key]->image = ProductImage::where('id_pro', $item->id)->first()->image;
+            } else {
+                $data[$key]->image = '';
+            }
+        }
+
+        return view('guest.pages.search.ajax-search', compact('data',));
     }
 
 
@@ -145,7 +198,7 @@ class IndexController extends Controller
         $collections = Category::where('id', $prod->id_ca)->first();
         $prodImage = ProductImage::where('id_pro', $prod->id)->get();
         $comment = Comment::where('id_pro', $prod->id)->get();
-        $related = Products::where('id_ca', '=', $prod->id_ca)->limit(10)->get();
+        $related = Products::where('id_ca', $prod->id_ca)->limit(10)->get();
         foreach ($related as $i => $key) {
             if ($key->id) {
                 $related[$i]->image = ProductImage::where('id_pro', $key->id)->get();
@@ -183,8 +236,8 @@ class IndexController extends Controller
     }
 
 
-    public function getAddressDefault($id_tk)
-    {
-        return USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first() == null ? null : USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first();
-    }
+    // public function getAddressDefault($id_tk)
+    // {
+    //     return USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first() == null ? null : USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first();
+    // }
 }

@@ -36,26 +36,43 @@
                         </a>
                     </div>
                 </div>
-                <form action="{{ route('admin/account/update', $account->id) }}" method="POST"
-                    enctype="multipart/form-data">
+                @if (\Session::get('Success'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <i class="fa-solid fa-circle-check fa-lg"></i>&nbsp;
+                        <strong>Success!</strong>&nbsp;{{ \Session::get('Success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                <form
+                    action="{{ $account->level == 2 ? route('admin/account/update', $account->id) : route('admin/account/updateUser', $account->id) }}"
+                    method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
+                        @if ($account->id == Auth::user()->id)
+                            <button type="button" class="btn btn-danger btn-mg" data-bs-toggle="modal"
+                                data-bs-target="#password">
+                                <i class="fa-solid fa-key"></i>&nbsp;Change Password&nbsp;
+                            </button>
+                        @endif
                         <input id='id' hidden>
                         <div class="">
                             <div class="form-group">
                                 <div class="phuc-acount">
-                                    <img class="img_create" id="img-acc"
+                                    <img class="img_create" id="img-accu"
                                         src="{{ $account->image != null ? asset('image/user/' . $account->image) : asset('image/user/avatar-default.png') }}" />
                                 </div>
                             </div>
                             <div style="text-align:center; margin:auto">
-                                <input type="file" multiple class="d-none" accept="image/*" name="image"
-                                    id="file-acc" />
-                                <label for="file-acc" id="file-name">
-                                    <span class="file-button">
-                                        <i class="fa fa-upload"></i>
-                                    </span>&nbsp;
-                                    Upload image</label>
+                                @if ($account->level == 2)
+                                    <input type="file" multiple class="d-none" accept="image/*" name="image"
+                                        id="file-accu" />
+                                    <label for="file-accu" id="file-name" {{ $account->level == 2 ? '' : 'disabled' }}>
+                                        <span class="file-button">
+                                            <i class="fa fa-upload"></i>
+                                        </span>&nbsp;
+                                        Upload image</label>
+                                @else
+                                @endif
                             </div>
                         </div>
                         <div class="card-body d-flex justify-content-between">
@@ -65,20 +82,19 @@
                                 <div class="mb-3 form-select" multiple aria-label="description">
                                     <label for="fullname" class="form-label">Full name</label>
                                     <input type="text" class="form-control bg-light text-dark" id="fullname"
-                                        name="acc_fullname" value="{{ $account->fullname }}"
+                                        name="fullname" value="{{ $account->fullname }}"
                                         {{ $account->level == 2 ? '' : 'disabled' }}>
-                                    @error('acc_fullname')
+                                    @error('fullname')
                                         <span class="errorMsg">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 {{-- // Birthday --}}
                                 <div class="mb-3 form-select" multiple aria-label="description">
                                     <label for="birthday" class="form-label">Birthday</label>
-                                    <input type="text" class="form-control bg-light text-dark" id="birthday"
-                                        name="acc_birthday"
-                                        value="{{ $account->birthday != null ? date('d-m-Y', strtotime($account->birthday)) : '' }}"
+                                    <input type="date" class="form-control bg-light text-dark" id="birthday"
+                                        name="birthday" value="{{ $account->birthday }}"
                                         {{ $account->level == 2 ? '' : 'disabled' }}>
-                                    @error('acc_birthday')
+                                    @error('birthday')
                                         <span class="errorMsg">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -86,9 +102,9 @@
                                 <div class="mb-3 form-select" multiple aria-label="description">
                                     <label for="phone" class="form-label">Phone</label>
                                     <input type="text" class="form-control bg-light text-dark" id="phone"
-                                        name="acc_phone" value="{{ $account->phone }}"
+                                        name="phone" value="{{ $account->phone }}"
                                         {{ $account->level == 2 ? '' : 'disabled' }}>
-                                    @error('acc_phone')
+                                    @error('phone')
                                         <span class="errorMsg">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -96,13 +112,12 @@
                                 <div class="mb-3 form-select" multiple aria-label="description">
                                     <label for="email" class="form-label">Email</label>
                                     <input type="text" class="form-control bg-light text-dark" id="email"
-                                        name="acc_email" value="{{ $account->email }}"
+                                        name="email" value="{{ $account->email }}"
                                         {{ $account->level == 2 ? '' : 'disabled' }}>
-                                    @error('acc_email')
+                                    @error('email')
                                         <span class="errorMsg">{{ $message }}</span>
                                     @enderror
                                 </div>
-
                             </div>
                             {{-- // cột bên phai --}}
                             <div style="width: 48%">
@@ -110,15 +125,15 @@
                                 <div class="mb-3 form-select" multiple aria-label="">
                                     <label for="address" class="form-label">Address</label>
                                     <textarea type="text" class="form-control bg-light text-dark" style="margin-bottom: 5px" rows="5"
-                                        id="address" {{ $account->level == 2 ? '' : 'disabled' }}>{{ $account->address }}</textarea>
-                                    @error('acc_address')
+                                        id="address" name="address" {{ $account->level == 2 ? '' : 'disabled' }}>{{ $account->address }}</textarea>
+                                    @error('address')
                                         <span class="errorMsg">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 {{-- // Status --}}
                                 <div class="mb-3 form-select" multiple aria-label="status">
                                     <label for="statusAccu" class="form-label">Status</label>
-                                    <select id='statusAccu' name="acc_status" aria-label="Default select example"
+                                    <select id='statusAccu' name="status" aria-label="Default select example"
                                         class="form-control btn {{ $account->status == 1 ? 'btn-success' : 'btn-secondary' }} btn-mg">
                                         @if ($account->status == '1')
                                             <option class="btn btn-light" selected value="1">Active</option>
@@ -133,27 +148,67 @@
                                 <div class="mb-3 form-select" multiple aria-label="">
                                     <label for="level" class="form-label">Role Acount</label>
                                     <input type="text" class="form-control bg-light text-dark" id="level"
-                                        name="" value="{{ $account->level == 2 ? 'Admin' : 'User' }}" disabled>
+                                        name="level" value="{{ $account->level == 2 ? 'Admin' : 'User' }}" disabled>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="modal-footer" style="margin-top:-10px">
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>
+
             </div>
             <br>
         </div>
     </section>
+
+    <!-- Modal password -->
+
+    <div class="modal fade" id="password" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centere">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <i style="color: #00CC66" class="fa-solid fa-key fa-2x" aria-hidden="true"></i>
+                    &emsp;<h1 style="color: red" class="modal-title fs-5" id="exampleModalLabel">Change Password</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('admin/account/updateAccount', $account->id) }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    {{-- // password --}}
+                    <div class="mb-3 form-select" multiple aria-label="description">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control bg-light text-dark" id="password" name="password"
+                            value="{{ $account->password }}">
+                        @error('password')
+                            <span class="errorMsg">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    {{-- // Confirm password --}}
+                    <div class="mb-3 form-select" multiple aria-label="description">
+                        <label for="cpassword" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control bg-light text-dark" id="cpassword" name="cpassword"
+                            value="{{ $account->password }}">
+                        @error('cpassword')
+                            <span class="errorMsg">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('myjs-admin')
     <script>
         //Phuc-Image-ACCOUNT
-        const input = document.getElementById("file-acc");
-        const image = document.getElementById("img-acc");
+        const input = document.getElementById("file-accu");
+        const image = document.getElementById("img-accu");
 
         input.addEventListener("change", (e) => {
             if (e.target.files.length) {

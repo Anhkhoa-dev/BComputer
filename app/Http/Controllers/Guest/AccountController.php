@@ -10,18 +10,20 @@ use App\Models\Order;
 use App\Models\OrderDetails;
 
 use App\Http\Controllers\Guest\IndexController;
+use App\Models\ACOUNT;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
     //
-    public function __construct()
-    {
-        $this->IndexController = new IndexController;
-    }
+    // public function __construct()
+    // {
+    //     $this->IndexController = new IndexController;
+    // }
     public function getAccount()
     {
-        $addressDefault = $this->IndexController->getAddressDefault(Auth::user()->id);
+        session()->forget('dataLisTraCuu');
+        $addressDefault = $this->getAddressDefault(Auth::user()->id);
         $array = [
             'page' => 'sec-taikhoan',
             'addressDefault' => $addressDefault,
@@ -31,9 +33,35 @@ class AccountController extends Controller
         return view('guest.pages.accounts.taikhoan')->with($array);
     }
 
-    public function ajaxChangeName(Request $request){
-        if($request->ajax()){
-            User::where('id', intval($request->id))->update(['fullname'=> $request->name]);
+    public function ajaxChangeName(Request $request)
+    {
+        if ($request->ajax()) {
+            User::where('id', intval($request->id))->update(['fullname' => $request->name]);
+            return [
+                'status' => 'success',
+            ];
+        }
+    }
+    public function ajaxChangeImage(Request $request)
+    {
+        if ($request->ajax()) {
+            // print_r($request->all());
+            $user = Auth::user();
+            if ($request->hasfile('change-avt-inp')) {
+                $file = $request->file('change-avt-inp');
+                $fileName = $file->getClientOriginalName();
+                $file->move("image/user", $fileName);
+            }
+            ACOUNT::where('id', $user->id)->update(['image' => $fileName]);
+            return [
+                'status' => 'success',
+            ];
+        }
+    }
+    public function ajaxChangePass(Request $request)
+    {
+        if ($request->ajax()) {
+            User::where('id', intval($request->id))->update(['password' => bcrypt($request->password)]);
             return [
                 'status' => 'success',
             ];
@@ -137,5 +165,10 @@ class AccountController extends Controller
         // dd($array);
         session()->put('orderList', $orderList);
         return view('guest.pages.accounts.taikhoan')->with($array);
+    }
+
+    public function getAddressDefault($id_tk)
+    {
+        return USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first() == null ? null : USER_ADDRESS::where('id_tk', $id_tk)->where('status', 1)->first();
     }
 }

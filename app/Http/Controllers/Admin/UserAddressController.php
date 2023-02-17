@@ -15,7 +15,7 @@ class UserAddressController extends Controller
      */
     public function index()
     {
-        $userAddress = USER_ADDRESS::all();
+        $userAddress = USER_ADDRESS::paginate(5);
         $array = [
             'userAddress' => $userAddress,
         ];

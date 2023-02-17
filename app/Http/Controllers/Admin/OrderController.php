@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\User;
+use App\Models\USER_ADDRESS;
 use App\Models\VOUCHER;
+use App\Models\Products;
 
 class OrderController extends Controller
 {
@@ -18,11 +20,23 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $order = Order::all();
+        $order = Order::paginate(6);
         foreach ($order as $i => $key) {
             //dd($key->id_tk);
+            if ($key->id) {
+                $order[$i]->OrderDetialList = OrderDetails::where('id_order', $key->id)->get();
+                //dd($order[$i]->username);
+            } else {
+                $order[$i]->OrderDetialList = '';
+            }
             if ($key->id_tk) {
                 $order[$i]->username = User::where('id', $key->id_tk)->first();
+                //dd($order[$i]->username);
+            } else {
+                $order[$i]->username = '';
+            }
+            if ($key->id_tk) {
+                $order[$i]->useraddress = USER_ADDRESS::where('id_tk', $key->id_tk)->first();
                 //dd($order[$i]->username);
             } else {
                 $order[$i]->username = '';
@@ -34,10 +48,43 @@ class OrderController extends Controller
             }
         }
 
+        //$orderList = Order::where('id', $id)->get();
+        //$orderList = OrderDetails::all();
+        $orderDetails = OrderDetails::all();
+        //$orderDetails = OrderDetails::where('id_order', $orderList->id)->get();
+        foreach ($orderDetails as $i => $key) {
+            //dd($key->id_tk);
+            if ($key->id_pro) {
+                $orderDetails[$i]->product = Products::where('id', $key->id_pro)->first();
+                //dd($order[$i]->username);
+            } else {
+                $orderDetails[$i]->product = '';
+            }
+        }
+        //$orderList = OrderDetails::where('id_order', $order->id)->get();
+        // $OrderProductList = OrderDetails::where('id_order', $Orderlist->id)->get();
+        // foreach ($OrderProductList as $i => $key) {
+        //     if ($key->id_pro) {
+        //         $OrderProductList[$i]->name = Products::find($key->id_pro)->name;
+        //     } else {
+        //         $OrderProductList[$i]->name = '';
+        //     }
+        // }
+
+        // $orderDetails = OrderDetails::where('id_order', $order->id)->get();
+        // foreach ($orderDetails as $i => $key) {
+        //     if ($key->id_pro) {
+        //         $orderDetails[$i]->name = Products::find($key->id_pro)->name;
+        //     dd($orderDetails[$i]->name );
+        //     } else {
+        //         $orderDetails[$i]->name = '';
+        //     }
+        // }
+
         //dd($order);
         $array = [
             'order' => $order,
-            // 'orderDetails' => $orderDetails,
+            'orderDetails' => $orderDetails,
         ];
         return view('admin.pages.order')->with($array);
     }
@@ -92,9 +139,16 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        $order = Order::where('id', $id)->first();
+        if ($order->statusOrder == 'Confirmed' ) {
+            Order::where('id', $id)->update(['statusOrder' => 'Complete']);
+            return back()->with('Success', 'Order has been Complete!');
+        } else {
+            Order::where('id', $id)->update(['statusOrder' => 'Confirmed']);
+            return back()->with('Success', 'Order has been Confirmed!');
+        }
     }
 
     /**
@@ -105,6 +159,7 @@ class OrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Order::where('id', $id)->update(['statusOrder' => 'Cancelled']);
+        return back()->with('Success', 'Order has been cancelled!');
     }
 }

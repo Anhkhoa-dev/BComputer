@@ -2,7 +2,7 @@ $(function () {
     let timer = null;
     const page = window.location.pathname.split("/")[1];
     const X_CSRF_TOKEN = $('meta[name="csrf-token"]').attr("content");
-    const errorMessage = "Đã có lỗi xảy ra. Vui lòng thử lại";
+    const errorMessage = "An error has occurred. Please try again";
 
     $(window).scroll(function () {
         if ($(window).scrollTop() > 300) {
@@ -166,9 +166,6 @@ $(function () {
                                         Thông tin tài khỏan
                ================================================================================ */
 
-    $("#btn-change-avt").click(function () {
-        $("#change-avt-inp").trigger("click");
-    });
 
     function addCart(id_sp, qty) {
         return new Promise((resolve, reject) => {
@@ -239,28 +236,28 @@ $(function () {
             .catch(() => showAlertTop(errorMessage));
     });
 
-    function getProductIdListToCheckout() {
-        return new Promise((resolve) => {
-            let checkoutList = [];
-            let outOfStockList = [];
-            $.each($(".out-of-stock"), (i, element) => {
-                outOfStockList.push($(element).attr("data-id"));
-            });
-            $.each($(".cus-checkbox-checked"), (i, element) => {
-                const id = $(element).attr("data-id");
-                if (id != "all") {
-                    checkoutList.push(id);
-                }
-            });
-            const response = {
-                checkoutList,
-                outOfStockList,
-            };
-            resolve(response);
-        });
-    }
+    // function getProductIdListToCheckout() {
+    //     return new Promise((resolve) => {
+    //         let checkoutList = [];
+    //         let outOfStockList = [];
+    //         $.each($(".out-of-stock"), (i, element) => {
+    //             outOfStockList.push($(element).attr("data-id"));
+    //         });
+    //         $.each($(".cus-checkbox-checked"), (i, element) => {
+    //             const id = $(element).attr("data-id");
+    //             if (id != 'all') {
+    //                 checkoutList.push(id);
+    //             }
 
-    //
+    //         });
+    //         const response = {
+    //             checkoutList, outOfStockList,
+    //         };
+    //         resolve(response)
+    //     })
+
+    // }
+
     $(".add-new-address").click(function () {
         $("#add-address").modal("show");
     });
@@ -296,18 +293,18 @@ $(function () {
                         const qtyInstock = data.qtyInStock;
                         if (qtyInstock > 5) {
                             showAlertTop(
-                                `Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5`
+                                `This product is already in the cart and the maximum purchase quantity is 5`
                             );
                         } else {
                             showAlertTop(
-                                `Sản phẩm hết hàng hoặc đang ngừng kinh doanh`
+                                `Products are out of stock or out of business`
                             );
                         }
                         break;
                     default:
                         // thông báo thêm giỏ hàng thành công
                         showAlertTop(
-                            "Vui lòng đăng nhập để thực hiện chức năng này"
+                            "Please login to perform this function"
                         );
                     // window.location.href = "http://127.0.0.1:8000/login";
                 }
@@ -344,18 +341,18 @@ $(function () {
                         const qtyInstock = data.qtyInStock;
                         if (qtyInstock > 5) {
                             showAlertTop(
-                                `Đã có sản phẩm này trong giỏ hàng và số lượng mua tối đa là 5`
+                                `This product is already in the cart and the maximum purchase quantity is 5`
                             );
                         } else {
                             showAlertTop(
-                                `Sản phẩm hết hàng hoặc đang ngừng kinh doanh`
+                                `Products are out of stock or out of business`
                             );
                         }
                         break;
                     default:
                         // thông báo thêm giỏ hàng thành công
                         showAlertTop(
-                            "Vui lòng đăng nhập để thực hiện chức năng này"
+                            "Please login to perform this function"
                         );
                     // window.location.href = "http://127.0.0.1:8000/login";
                 }
@@ -377,10 +374,94 @@ $(function () {
                 var fullname = $(".change-name").val();
                 ajaxChangeFullname(idUser, fullname);
             });
-            $("#change-avt-inp").click(function () {
-                var imageUser = $("input[name=change-avt-inp]").val();
-                alert(imageUser);
+
+            // 
+            $('#change-password').click(function () {
+                var id = $(this).attr('data-id');
+                $("#chang-pass-content").text("Change password");
+                $("#update-password").attr("data-id", $(this).data("id")); // Thêm data-id vào nút button
+                $("#change-pass").modal("show");
             });
+            $('#update-password').click(function () {
+
+                var id = $(this).attr('data-id');
+                var pass = $('#newpass').val();
+                var cpass = $('#cpnewpass').val();
+                if (pass === cpass) {
+                    ajaxChangePass(id, pass);
+                } else {
+                    showAlertTop('Password conform error');
+                }
+
+            });
+
+            $('#change-avt-inp').change(function (e) {
+                let reader = new FileReader();
+                // reader.onload = (e) => {
+                //     $('#image-user').attr('src', e.target.result);
+                // }
+                reader.readAsDataURL(this.files[0]);
+            });
+            $("#image_update").submit(function (e) {
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    headers: {
+                        "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                    },
+                    url: '/ajax-change-image-user',
+                    type: "POST",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+                        console.log(data);
+                        location.reload();
+                    }
+                });
+            });
+            // $('#change-avt-inp').change(function (e) {
+            //     var img = e.target.files;
+            //     $.ajax({
+            //         headers: {
+            //             "X-CSRF-TOKEN": X_CSRF_TOKEN,
+            //         },
+            //         url: '/ajax-change-image-user',
+            //         type: "POST",
+            //         data: {
+            //             image: img,
+            //         },
+            //         success: function (data) {
+            //             console.log(data);
+            //             if (data.status == "success") {
+            //                 location.reload();
+            //             }
+            //         }
+            //     });
+            // })
+
+
+            // $.ajax({
+            //     headers: {
+            //         "X-CSRF-TOKEN": X_CSRF_TOKEN,
+            //     },
+            //     url: '/ajax-change-image-user',
+            //     type: "POST",
+            //     data: {
+            //         files: files,
+            //     },
+            //     cache: false,
+            //     contentType: false,
+            //     processData: false,
+            //     success: function (data) {
+            //         console.log(data);
+            //         // if (data.status == "success") {
+            //         //     location.reload();
+            //         // }
+            //     }
+            // });
+
             break;
         }
         case "cart-items": {
@@ -626,6 +707,96 @@ $(function () {
             break;
         }
     }
+    $('.search-info').hide();
+    $('#search-input').on('keyup', function () {
+        var key = $(this).val();
+        if (key != '') {
+            $.ajax({
+                url: '/ajax-tracuu-product?key=' + key,
+                type: "GET",
+                success: function (res) {
+                    $('.search-preview').html(res);
+                    $('.search-info').show();
+                }
+            });
+        } else {
+            $('.search-preview').html('');
+            $('.search-info').hide();
+        }
+    });
+
+    $('#search-input').on('keyup', function () {
+        var key = $(this).val();
+        $.ajax({
+            url: '/ajax-tracuu-product-list?key' + key,
+            type: "GET",
+            success: function (data) {
+                // location.reload();
+            }
+        });
+    });
+
+
+
+
+    // Thay đổi password
+    function ajaxChangePass(id, password) {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                headers: {
+                    "X-CSRF-TOKEN": X_CSRF_TOKEN,
+                },
+                url: "/ajax-change-pass-user",
+                type: "POST",
+                data: {
+                    id: id,
+                    password: password,
+                },
+                success: function (data) {
+                    resolve(data);
+                    switch (data.status) {
+                        case "success": {
+                            window.location.href = "/logout";
+                            break;
+                        }
+                        default:
+                            showAlertTop('Change password error');
+                            break;
+                    }
+
+                },
+                error: function () {
+                    reject();
+                },
+            });
+        });
+    }
+
+
+
+
+    // function ajaxChangeImage(id, files) {
+    //     return new Promise((resolve, reject) => {
+    //         $.ajax({
+    //             headers: {
+    //                 "X-CSRF-TOKEN": X_CSRF_TOKEN,
+    //             },
+    //             url: "/ajax-change-image-user",
+    //             type: "POST",
+    //             data: {
+    //                 id: id,
+    //                 files: files,
+    //             },
+    //             success: function (data) {
+    //                 resolve(data);
+    //                 console.log(data);
+    //             },
+    //             error: function () {
+    //                 reject();
+    //             },
+    //         });
+    //     });
+    // }
 
     function ajaxChangeFullname(id, name) {
         return new Promise((resolve, reject) => {
@@ -643,12 +814,13 @@ $(function () {
                     resolve(data);
                     switch (data.status) {
                         case "success": {
-                            showAlertTop("Update full name success");
                             location.reload();
+                            showAlertTop('Update name user success');
                             break;
                         }
                         default:
-                            showAlertTop("Có lỗi khi change name");
+
+                            showAlertTop('Change name user error');
                     }
                 },
                 error: function () {
@@ -726,8 +898,6 @@ $(function () {
         });
     }
 
-    function ajaxSearch(Key) {}
-
     function ajaxVoucher(voucher, total) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -803,7 +973,7 @@ $(function () {
             });
         });
     }
-
+    // hàm xóa cart
     function ajaxDeleteCart(id) {
         return new Promise((resolve, reject) => {
             $.ajax({
@@ -840,31 +1010,24 @@ $(function () {
         });
     }
 
-    let isClicked = false; // ngăn người dùng nhấn liên tục
-    $(".update-qty")
-        .off("click")
-        .click(function () {
-            var id = $(this).attr("data-id");
-            var qty = parseInt($(".qty-item_" + id).text());
-            var numCart = parseInt($(".cart__number").text());
-            var qty_id = $(".qty-item_" + id).attr("data-id");
-            var type = "";
-            if ($(this).hasClass("plus")) {
-                type = "plus";
-                // alert('nút này là nút tăng ' + type);
-                if (id == qty_id) {
-                    if (qty >= 5) {
-                        showAlertTop("You have purchased up to 5 products");
-                        isClicked = true;
-                        return;
-                    }
-                    if (qty === 5) {
-                        showAlertTop("You have purchased up to 5 products");
-                        isClicked = true;
-                        return;
-                    }
-                    $(".qty-item_" + id).text(++qty);
-                    $(".cart__number").text(++numCart);
+
+
+    // xử lý update cart
+    let isClicked = false // ngăn người dùng nhấn liên tục
+    $('.update-qty').off('click').click(function () {
+        var id = $(this).attr('data-id');
+        var qty = parseInt($('.qty-item_' + id).text());
+        var numCart = parseInt($('.cart__number').text());
+        var qty_id = $('.qty-item_' + id).attr('data-id');
+        var type = '';
+        if ($(this).hasClass('plus')) {
+            type = 'plus';
+            // alert('nút này là nút tăng ' + type);
+            if (id == qty_id) {
+                if (qty >= 5) {
+                    showAlertTop('You have purchased up to 5 products');
+                    isClicked = true;
+                    return;
                 }
                 if (isClicked) {
                     $(".minus").addClass("disabled");
@@ -928,6 +1091,7 @@ $(function () {
         });
     }
 
+    // cập nhật tạm tính và tổng tiền 
     function provisionalAndTotalOrder() {
         let idList = [];
         // danh sách id_sp thanh toán
@@ -993,11 +1157,14 @@ $(function () {
         });
     }
 
+
+    // code xử lý Phường quận, tỉnh trong bàng modal địa chỉ
     var citis = document.getElementById("address-city");
     var districts = document.getElementById("address-district");
     var wards = document.getElementById("address-ward");
     var Parameter = {
         url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+        // url: "https://raw.githubusercontent.com/kcjpop/vietnam-topojson/master/adm2/adm2.json",
         method: "GET",
         responseType: "application/json",
     };

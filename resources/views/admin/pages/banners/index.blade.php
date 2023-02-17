@@ -109,6 +109,7 @@
 
                     </tbody>
                 </table>
+                {{ $prods->links("vendor.pagination.bootstrap-5") }}
             </div>
             <!-- /.card-body -->
         </div>
@@ -133,9 +134,9 @@
                             <div class="phuc-show">
                                 <div class="container-md">
                                     <div class="row">
-                                        <div class="col-md-2">
+                                        <div class="col-md-1">
                                         </div>
-                                        <div class="col-md-9 pt-4 pb-0">
+                                        <div class="col-md-10 pt-4 pb-0">
                                             <div class="col-md-12">
                                                 <div class="row">
                                                     <div id="bannerShow" class="">

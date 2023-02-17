@@ -15,6 +15,7 @@ class VOUCHER extends Model
         'code',
         'content',
         'discount',
+        'quanity',
         'condition',
         'dateStart',
         'endStart',

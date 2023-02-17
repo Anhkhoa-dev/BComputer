@@ -17,7 +17,7 @@ class VoucherController extends Controller
      */
     public function index()
     {
-        $voucher = VOUCHER::all();
+        $voucher = VOUCHER::paginate(6);
         $array = [
             'voucher' => $voucher,
         ];

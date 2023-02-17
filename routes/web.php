@@ -12,10 +12,13 @@ use App\Http\Controllers\Admin\UserAddressController;
 use App\Http\Controllers\Admin\VoucherController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\Admin\ProductimageController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Guest\CartConntroller;
 use App\Http\Controllers\Guest\IndexController;
 use App\Http\Controllers\Guest\AccountController;
+use App\Models\Order;
+use App\Models\ProductImage;
 
 //Login and register
 Route::controller(LoginController::class)->group(function () {
@@ -36,6 +39,8 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::get('/', [IndexController::class, 'getHome'])->name('user/index');
     Route::get('collections/{name}', [IndexController::class, 'getProducts'])->name('user/products');
     Route::get('product/{name}', [IndexController::class, 'getDetail'])->name('user/detail');
+    // Route::get('tracuu', [IndexController::class, 'getTraCuu'])->name('user/tracuu');
+    Route::get('search', [IndexController::class, 'getSearch']);
     Route::get('aboutus', [IndexController::class, 'aboutus'])->name('user/aboutus');
     Route::get('contact', [IndexController::class, 'contact'])->name('user/contact');
     Route::get('errorpage', [IndexController::class, 'errorpage'])->name('user/errorpage');
@@ -43,6 +48,8 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::get('deliverypolicy', [IndexController::class, 'deliverypolicy'])->name('user/deliverypolicy');
     Route::get('paymentpolicy', [IndexController::class, 'paymentpolicy'])->name('user/paymentpolicy');
     Route::get('warrantypolicy', [IndexController::class, 'warrantypolicy'])->name('user/warrantypolicy');
+    Route::get('ajax-tracuu-product', [IndexController::class, 'ajaxTraCuu'])->name('ajax-tracuu-info');
+    Route::get('ajax-tracuu-product-list', [IndexController::class, 'ajaxTraCuuList'])->name('ajax-tracuu-info-list');
 
     // phần dành cho user
     Route::group(
@@ -70,7 +77,9 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::get('/account', [AccountController::class, 'getAccount'])->name('user/taikhoan');
             Route::get('account/address', [AccountController::class, 'getAddress'])->name('user/address');
             Route::post('account/postAddress', [AccountController::class, 'postAddress'])->name('user/add-address');
-            Route::post('ajax-change-fullname-user', [AccountController::class, 'ajaxChangeName'])->name('user/add-address');
+            Route::post('ajax-change-fullname-user', [AccountController::class, 'ajaxChangeName']);
+            Route::post('ajax-change-pass-user', [AccountController::class, 'ajaxChangePass']);
+            Route::post('ajax-change-image-user', [AccountController::class, 'ajaxChangeImage']);
             Route::get('account/set-default/{slug}', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
             Route::get('account/my-order', [AccountController::class, 'getOrder'])->name('user/order');
         }
@@ -87,8 +96,10 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::get('admin/account/create', [AcountConroller::class, 'create'])->name('admin/account/create');
     Route::post('admin/account/store', [AcountConroller::class, 'store'])->name('admin/account/store');
     // Update
-    Route::get('admin/account/edit/{slug}', [AcountConroller::class, 'edit'])->name('admin/account/edit');
-    Route::post('admin/account/update', [AcountConroller::class, 'update'])->name('admin/account/update');
+    Route::get('admin/account/edit/{id}', [AcountConroller::class, 'edit'])->name('admin/account/edit');
+    Route::post('admin/account/update/{id}', [AcountConroller::class, 'update'])->name('admin/account/update');
+    Route::post('admin/account/updateUser/{id}', [AcountConroller::class, 'updateUser'])->name('admin/account/updateUser');
+    Route::post('admin/account/updateAccount/{id}', [AcountConroller::class, 'updateAccount'])->name('admin/account/updateAccount');
     // View
     Route::get('admin/account/view', [AcountConroller::class, 'show'])->name('admin/account/view');
 
@@ -107,6 +118,8 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Delete
     Route::get('admin/brand/destroy/{id}', [BrandController::class, 'destroy'])->name('admin/brand/destroy');
 
+    // Phần ProductImage - Phúc
+    Route::get('admin/proImage', [ProductimageController::class, 'index'])->name('admin/proImage');
 
     // Phần Banner - Phúc
     Route::get('admin/banner', [BannerController::class, 'index'])->name('admin/banner');
@@ -132,6 +145,8 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
 
     // Phần Order - Phúc
     Route::get('admin/order', [OrderController::class, 'index'])->name('admin/order');
+    Route::get('admin/order/update/{id}', [OrderController::class, 'update'])->name('admin/order/update');
+    Route::get('admin/order/destroy/{id}', [OrderController::class, 'destroy'])->name('admin/order/destroy');
 
     // Phần UserAddress - Phúc
     Route::get('admin/userAddress', [UserAddressController::class, 'index'])->name('admin/userAddress');

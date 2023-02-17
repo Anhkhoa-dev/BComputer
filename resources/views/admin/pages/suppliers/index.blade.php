@@ -44,12 +44,12 @@
                         <tr>
                             <th style="width: 1%"> ID</th>
                             <th style="width: 13%"> Full name </th>
-                            <th style=auto> Image </th>
-                            <th> Address </th>
+                            <th style="text-align:center"> Image </th>
+                            <th style="width: 20%"> Address </th>
                             <th> Phone</th>
                             <th> Email</th>
-                            <th> Status </th>
-                            <th> Action </th>
+                            <th style="text-align:center"> Status</th>
+                            <th style="text-align:center"> Action </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,7 +57,7 @@
                             <tr class="align-items-center">
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->name }}</td>
-                                <td>
+                                <td style="text-align:center">
                                     <!-- kiểm tra trong db có image thì mới hiển thị -->
                                     @if ($item->image != null && $item->image != '')
                                         <img src="{{ asset('image/supplier/' . $item->image) }}" alt=""
@@ -67,20 +67,13 @@
                                 <td>{{ $item->address ?? 'null' }}</td>
                                 <td>{{ $item->phone ?? 'null' }}</td>
                                 <td>{{ $item->email }}</td>
-                                <td>
-                                    <p class="btn {{ $item->status == 1 ? 'btn-success' : 'btn-secondary' }} btn-sm">
-                                        {{ $item->status == 1 ? 'Actived' : 'Clocked' }}
-                                    </p>
+                                <td style="text-align:center">
+                                    <a class="btn {{ $item->status == 1 ? 'btn-success' : 'btn-secondary' }} btn-mg">{{ $item->status == 1 ? 'Actived' : 'Closed' }}</a>
                                 </td>
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-primary" href="#">
-                                        <i class="fas fa-folder">
-                                        </i>
-                                    </a>
                                     <a class="btn btn-info" href="{{ route('supplier/edit', $item->id) }}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
-
                                     </a>
                                     @if($item->status == 1)
                                     <a class="btn btn-danger" href="{{ route('supplier/destroy', $item->id) }}">
@@ -96,9 +89,9 @@
                                 </td>
                             </tr>
                         @endforeach
-
                     </tbody>
                 </table>
+                {{ $prods->links("vendor.pagination.bootstrap-5") }}
             </div>
         </div>
     </section>

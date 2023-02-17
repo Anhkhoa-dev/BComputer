@@ -633,18 +633,22 @@ section .title i {
   font-weight: 500;
   color: #fff;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .khoa-navbar .navbar .navbar__search .form__search .search-info {
   position: absolute;
   top: 50px;
   left: 0;
   width: 100%;
+  min-height: 200px;
   max-height: 400px;
   background: #fff;
   border: 1px solid #8e8e8e;
   border-radius: 5px;
   box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
-  visibility: hidden;
+  z-index: 100;
 }
 .khoa-navbar .navbar .navbar__search .form__search .search-info .btn-xemthem {
   width: 100%;
@@ -654,6 +658,7 @@ section .title i {
   color: #0F3460;
 }
 .khoa-navbar .navbar .navbar__search .form__search .search-info .search-preview {
+  min-height: 160px;
   max-height: 360px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -678,7 +683,20 @@ section .title i {
   color: #0F3460;
 }
 .khoa-navbar .navbar .navbar__search .form__search .search-info .search-preview .search-item .search-info-group .search-price {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  align-items: center;
+}
+.khoa-navbar .navbar .navbar__search .form__search .search-info .search-preview .search-item .search-info-group .search-price .price {
   color: red;
+  font-size: 14px;
+}
+.khoa-navbar .navbar .navbar__search .form__search .search-info .search-preview .search-item .search-info-group .search-price .quanity {
+  font-size: 14px;
+}
+.khoa-navbar .navbar .navbar__search .form__search .search-info .search-preview .search-item .search-info-group .search-price .quanity span {
+  font-size: 14px;
 }
 .khoa-navbar .navbar .navbar__icon {
   display: flex;
@@ -808,6 +826,29 @@ section .title i {
 .khoa-sidebar .sidebar {
   padding: 15px 25px;
   cursor: pointer;
+  position: relative;
+}
+.khoa-sidebar .sidebar .card_side {
+  position: absolute;
+  padding: 15px 0;
+  border-radius: 10px;
+  box-shadow: #C9C9C9 -2px 1px 13px 7px;
+  z-index: 10;
+}
+.khoa-sidebar .sidebar .card_side .side-box {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  padding: 10px 25px;
+  text-decoration: none;
+  color: rgba(17, 17, 17, 0.8);
+  transition: all 0.3s ease-in;
+}
+.khoa-sidebar .sidebar .card_side .side-box:hover {
+  background-color: #E94560;
+  color: #fff;
+  transition: all 0.5s ease-in;
 }
 .khoa-sidebar .sidebar .category {
   display: flex;
@@ -984,8 +1025,6 @@ section .title i {
 
 .new_arrivals {
   background-color: #fff;
-  display: flex;
-  justify-content: space-between;
 }
 .new_arrivals .card {
   border: none;
@@ -996,10 +1035,16 @@ section .title i {
   border: 1px solid #E94560;
 }
 .new_arrivals .card .card_info .name {
-  font-size: 1.25rem;
+  font-size: 1.025rem;
   font-weight: 600;
   color: #0F3460;
   text-decoration: none;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-word;
 }
 .new_arrivals .card .card_info .name:hover {
   color: #E94560;
@@ -1009,6 +1054,19 @@ section .title i {
   font-size: 1.125rem;
   color: #E94560;
   font-weight: 400;
+}
+
+.logo-brands {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 20px;
+}
+.logo-brands .brand-img {
+  width: 100%;
+}
+.logo-brands .brand-img img {
+  width: 100%;
+  height: auto;
 }
 
 .khoa-tk-sidebar {
@@ -1080,12 +1138,27 @@ section .title i {
   align-items: center;
   visibility: hidden;
 }
-.account-box .tk-image .image-hover .input-change {
-  display: none;
+.account-box .tk-image .image-hover form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
-.account-box .tk-image .image-hover .change-image {
+.account-box .tk-image .image-hover form .choose {
+  color: #E94560;
+  font-weight: 600;
+  border: 1px solid #fff;
+  padding: 5px;
+  background: #fff;
+  cursor: pointer;
+}
+.account-box .tk-image .image-hover form .change-image {
+  border: none;
+  outline: none;
   text-decoration: none;
   color: #fff;
+  background: none;
   cursor: pointer;
 }
 .account-box .tk-image:hover .image-hover {
@@ -2510,9 +2583,6 @@ section .title i {
   outline: none;
   border-radius: 5px;
   padding-left: 45px;
-  font-size: 1rem;
-}
-.khoa-login .login_nen .box_login .form_login .form_group .input_control::-moz-placeholder {
   font-size: 1rem;
 }
 .khoa-login .login_nen .box_login .form_login .form_group .input_control::placeholder {

@@ -36,7 +36,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../../index3.html" class="nav-link">
+                            <a href="{{ route('admin/proImage') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Product Image</p>
                             </a>
