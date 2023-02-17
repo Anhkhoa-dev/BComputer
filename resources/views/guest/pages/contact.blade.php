@@ -1,6 +1,10 @@
 {{-- /kế thừa gia diện master trong elements --}}
 @extends('guest.elements.master')
 
+@section('title')
+    Contact | BComputer
+@endsection
+
 @section('breadcrumb')
     <a href="#" class="bc-items">Contact</a>
 @endsection

@@ -70,6 +70,12 @@ class IndexController extends Controller
         return view('guest.pages.paymentpolicy');
     }
 
+    public function errorpage()
+    {
+        return view('guest.pages.error-page');
+    }
+
+
     public function getBanner()
     {
         $bannerList = BANNER::where('status', 1)->get();

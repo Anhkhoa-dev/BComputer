@@ -5,7 +5,9 @@
 @section('title')
     Abouts | BComputer
 @endsection
-
+@section('breadcrumb')
+    <a href="#" class="bc-items">Abouts</a>
+@endsection
 
 @section('user-contents')
     {{-- @section('breadcrumb')
@@ -28,7 +30,8 @@
                             through a big data platform, the ability to proactively deploy activities. retail support is
                             built in-house and continuously innovates technology to create a superior and consistent
                             customer experience across all channels and enhance consumer engagement with BCP's brands.
-                        <p class="layout-col-about-us-text"> The company specializes in providing after-sales - maintenance -
+                        <p class="layout-col-about-us-text"> The company specializes in providing after-sales - maintenance
+                            -
                             installation services,
                             last-mile delivery services, logistics management services in foreign markets with sales chains
                             in Cambodia and joint ventures in Indonesia.</p>

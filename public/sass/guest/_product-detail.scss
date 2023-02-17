@@ -80,8 +80,10 @@
                 font-weight: 400;
                 padding: 10px;
 
+
                 .buttons_added {
                     .input-qty {
+                        border-radius: 3px;
                         text-align: center;
                         width: 30px;
                         font-weight: 600;
@@ -91,7 +93,7 @@
                         background-color: #2f80ed;
                         color: $bg_second;
                         border-radius: 3px;
-                        width: 40px;
+                        width: 25px;
                         border: none;
                         font-weight: 600;
                     }
@@ -99,7 +101,10 @@
                 }
             }
 
+            .not-available {
 
+                margin: auto;
+            }
 
             .button-product {
                 display: flex;
@@ -134,6 +139,7 @@
             }
 
             .contact {
+                margin-top: 30px;
                 text-align: center;
                 color: black;
                 font-size: small;
@@ -295,6 +301,8 @@
                 height: 120px;
             }
 
+
+
             .review-frame-second {
                 padding: 20px;
 
@@ -309,10 +317,18 @@
                 }
 
                 .anser-comment {
+                    width: 80%;
                     padding: 10px;
+                    border-bottom: 1px solid $bg_first;
+                    margin: 2px;
+                }
+
+                .write-comment1 {
+                    margin: 5px;
+                    width: 80%;
+                    height: 30px;
                 }
             }
-
 
         }
 

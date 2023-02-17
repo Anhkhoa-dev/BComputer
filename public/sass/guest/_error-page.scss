@@ -1,0 +1,54 @@
+.han-error-page {
+
+    .col-image-error {
+        margin-top: 130px;
+
+        .error-img {
+            position: relative;
+            width: 100%;
+            height: auto;
+            max-width: 500px;
+            z-index: 1;
+        }
+
+        .error-info {
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .button-error {
+            text-decoration: none;
+
+            .goback {
+                position: relative;
+                padding: 10px;
+                border-radius: 30px;
+                border: 2px solid #00ccff;
+                left: 34%;
+                color: #00ccff;
+                width: 150px;
+                text-align: center;
+                font-size: larger;
+                font-weight: 600;
+                z-index: 1;
+                margin-bottom: 50px;
+            }
+
+            .goback:hover {
+                color: #00ccff;
+                cursor: pointer;
+            }
+        }
+
+        .justify-content-sm-center {
+            margin: auto;
+        }
+    }
+
+    .error-img1 {
+        margin-top: -130px;
+        width: 100%;
+        height: auto;
+    }
+
+}
