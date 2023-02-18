@@ -24,7 +24,8 @@ class AcountConroller extends Controller
     public function index()
     {
         //$prods = ACOUNT::all();
-        $prods = ACOUNT::paginate(6);
+        //$prods = ACOUNT::get()->sortByDesc('author.name')->paginate(6);
+       $prods = ACOUNT::paginate(6);
         return view('admin.pages.acounts.index', compact('prods'));
     }
 
@@ -45,7 +46,7 @@ class AcountConroller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {   $format= 'Y/m/d';
+    {
         //dd(Carbon::today()->addYear(18)->format('Y/m/d'));
         $acc = $request->all();
         $request->validate(

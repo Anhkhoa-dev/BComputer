@@ -30,7 +30,7 @@ class ProductimageController extends Controller
                 $product[$i]->nameImg = '';
             }
         }
-        dd(ProductImage::where('id_pro', $key->id)->get());
+        //dd(ProductImage::where('id_pro', $key->id)->get());
         //$productImg = ProductImage::where('id_pro', $key->id)->get();
         $array = [
             'prodImg' => $product,

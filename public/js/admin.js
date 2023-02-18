@@ -212,50 +212,39 @@ $(function () {
     });
 
     // Xử lý ajax create voucher
-    $('#create-btn').click(function (e) {
-        $("#voucher_create").modal("show");
+    $('#details-btn').click(function (e) {
+        var id_order = $(this).attr('data-id');
+        $("#oderDetails").modal("show");
     });
 
-    $('#create-submit').click(function (e) {
-        e.preventDefault();
-        var code = $("#code").val();
-        var content = $("#content").val();
-        var discount = $("#Discount").val();
-        var condition = $("#condition").val();
-        var dateStart = $("#dateStart").val();
-        var endStart = $("#endStart").val();
-        // alert(code);
-        $.ajax({
-            headers: {
-                "X-CSRF-TOKEN": X_CSRF_TOKEN,
-            },
-            url: "/admin/voucher/store",
-            type: 'POST',
-            data: {
-                code: code,
-                content: content,
-                discount: discount,
-                condition: condition,
-                dateStart: dateStart,
-                endStart: endStart,
-            },
-            success: function (data) {
-                alert(data.status);
-                location.reload()
+    // $('#create-submit').click(function (e) {
+    //     e.preventDefault();
+    //     var code = $("#code").val();
+    //     var content = $("#content").val();
+    //     var discount = $("#Discount").val();
+    //     var condition = $("#condition").val();
+    //     var dateStart = $("#dateStart").val();
+    //     var endStart = $("#endStart").val();
+    //     // alert(code);
+    //     $.ajax({
+    //         headers: {
+    //             "X-CSRF-TOKEN": X_CSRF_TOKEN,
+    //         },
+    //         url: "/admin/voucher/store",
+    //         type: 'POST',
+    //         data: {
+    //             code: code,
+    //             content: content,
+    //             discount: discount,
+    //             condition: condition,
+    //             dateStart: dateStart,
+    //             endStart: endStart,
+    //         },
+    //         success: function (data) {
+    //             alert(data.status);
+    //             location.reload()
 
-            }
+    //         }
 
-        });
-
-    });
-
-
-    // $('#btn-create-cauhinh').click(function () {
-    //     $("#create-cauhinh").modal("show");
-    //     $('#create-cauhinh-header').html('<h3><b>Create product configuration</b></h3>');
-    // });
-
-    // $('#btn-submit').click(function () {
-
-    // })
 });
+
