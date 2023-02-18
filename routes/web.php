@@ -44,7 +44,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::get('aboutus', [IndexController::class, 'aboutus'])->name('user/aboutus');
     Route::get('contact', [IndexController::class, 'contact'])->name('user/contact');
     Route::get('errorpage', [IndexController::class, 'errorpage'])->name('user/errorpage');
-    Route::get('errorpage', [IndexController::class, 'errorpage'])->name('user/errorpage');
+    // Route::get('errorpage', [IndexController::class, 'errorpage'])->name('user/errorpage');
     Route::get('deliverypolicy', [IndexController::class, 'deliverypolicy'])->name('user/deliverypolicy');
     Route::get('paymentpolicy', [IndexController::class, 'paymentpolicy'])->name('user/paymentpolicy');
     Route::get('warrantypolicy', [IndexController::class, 'warrantypolicy'])->name('user/warrantypolicy');
@@ -83,6 +83,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::get('account/set-default/{slug}', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
             Route::get('account/my-order', [AccountController::class, 'getOrder'])->name('user/order');
             Route::get('account/my-order/{id}', [AccountController::class, 'getOrderDetail'])->name('user/order-detail');
+            Route::post('account/cancel-order/{id}', [AccountController::class, 'HuyDonHang'])->name('user/cancel-order');
         }
     );
 });
@@ -147,9 +148,10 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
 
     // Phần Order - Phúc
     Route::get('admin/order', [OrderController::class, 'index'])->name('admin/order');
+    Route::get('admin/order/show/{id}', [OrderController::class, 'show'])->name('admin/order/show');
     Route::get('admin/order/update/{id}', [OrderController::class, 'update'])->name('admin/order/update');
     Route::get('admin/order/destroy/{id}', [OrderController::class, 'destroy'])->name('admin/order/destroy');
-    Route::get('admin/orderDetails/{id}', [OrderController::class, 'show'])->name('admin/orderDetails');
+    // Route::get('admin/orderDetails/{id}', [OrderController::class, 'show'])->name('admin/orderDetails');
     // Phần UserAddress - Phúc
     Route::get('admin/userAddress', [UserAddressController::class, 'index'])->name('admin/userAddress');
     Route::post('admin/userAddress/update/{id}', [UserAddressController::class, 'update'])->name('admin/userAddress/update');

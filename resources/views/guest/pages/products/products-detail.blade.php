@@ -241,79 +241,7 @@
                         5 review
                     </div>
                     <hr class="line-review">
-                    {{-- <div class="review-info">
-                                <div class="col-md-12 row col-review">
-                                    <div class="col-md-12">
-                                        <span class="review-name">Le Van A</span>
-                                        <i class="fa fa-check-circle icon-bought" aria-hidden="true"></i><span
-                                            class="bought-info">
-                                            bought at Bcomputer</span>
-                                        <div class="review-first-form">
-                                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                                            <p>Dùng tốt ạ máy rất nhạy đẹp sang tính năng nhiều</p>
-                                            <div class="col-md-12 form-image-review">
-                                                <div class="form-image">
-                                                    <?php $index = 0; ?>
-                                                    @foreach ($image as $item)
-                                                        <div class="col-md-1">
-                                                            <img id="accordion"
-                                                                class="image-review"src="{{ asset('image/product/' . $item->image) }}"
-                                                                onclick="currentDiv1({{ $index }}) ">
-                                                            <?php $index++; ?>
-                                                        </div>
-                                                    @endforeach
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        @foreach ($image as $item)
-                                            <img class="mySlides1" style="display:none"
-                                                src="{{ asset('image/product/' . $item->image) }}">
-                                        @endforeach
-                                    </div>
-                                </div>
-                                <div class="like-icon col-md-8">
-                                    <div class="form-likeicon">
-                                        <span id="like" onclick="myFunctionlike()">
-                                            <i class="fa fa-thumbs-up like-icon-review" aria-hidden="true"></i>
-                                            <span>Like</span>
-                                        </span>
-                                        <span data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
-                                            aria-expanded="false" aria-controls="flush-collapseOne">
-                                            <i class="fa fa-comment like-icon-review" aria-hidden="true"></i>
-                                            <span class="send-comment" data-id="{{ $prod->id }}">Comment</span>
-                                        </span>
-                                        <form action="">
-                                            <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                                aria-labelledby="flush-headingOne"
-                                                data-bs-parent="#accordionFlushExample">
-                                                <div class="mb-4">
-                                                    <div class="comment-text">
-                                                        <i class="fa fa-user comment-text-icon"
-                                                            aria-hidden="true">Seller
-                                                            Response</i>
-                                                        <div>cảm ơn quý khách đã ủng hộ shop</div>
-                                                    </div>
-                                                    <div class="input-group">
-                                                        <textarea class="form-control" id="form4Example3" rows="1"></textarea>
-                                                        <span>
-                                                            <a class="input-group-text btn btn-primary text-light"
-                                                                href="">Send</a>
-                                                        </span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-                    {{-- note --}}
-                    {{-- <textarea class="write-comment" name="" id="" placeholder="write a review(*)" rows="5"></textarea><br>
+                   
                             <button class="btn btn-primary">Send comment</button>
                             <div class="review-frame-second">
                                 <h3>Comments(10)</h3>
@@ -364,24 +292,24 @@
                 </div>
 
                 <div class="container"></div>
-                    <h3>binh luan blog nay</h3>
+                    <h3>Comment product</h3>
                     <form action="" method="POST" role="form">
                         <legend>Form title</legend>
                         <div class="form-group">
-                            <label for="">noi dung binh luan</label>
+                            <label for="">Comment content</label>
                             <input type="hidden" value="" name="blog_id">
                             <textarea name="content" class="form-control" row="3" required="required" placeholder="nhap noi dung (*)"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-primary">gui binh luan</button>
+                        <button type="submit" class="btn btn-primary">Send comment</button>
                         <br>
-                        <h3>cac binh luan (10)</h3>
+                        <h3>All comment (10)</h3>
                         <div class="comment">
                             <div class="media">
                                 <a class="pull-lef mr-2" href="">
                                     <img class="media-object" src="" alt="Image" width="60">
                                 </a>
                                 <div class="media-body">
-                                    <h4 class="media-heading">nguyen huy hoang</h4>
+                                    <h4 class="media-heading">Nguyen Khoa</h4>
                                     <p></p>
                                 </div>
                             </div>

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\USER_ADDRESS;
 use App\Models\VOUCHER;
 use App\Models\Products;
+use App\Models\ProductImage;
 
 class OrderController extends Controller
 {
@@ -61,25 +62,7 @@ class OrderController extends Controller
                 $orderDetails[$i]->product = '';
             }
         }
-        //$orderList = OrderDetails::where('id_order', $order->id)->get();
-        // $OrderProductList = OrderDetails::where('id_order', $Orderlist->id)->get();
-        // foreach ($OrderProductList as $i => $key) {
-        //     if ($key->id_pro) {
-        //         $OrderProductList[$i]->name = Products::find($key->id_pro)->name;
-        //     } else {
-        //         $OrderProductList[$i]->name = '';
-        //     }
-        // }
 
-        // $orderDetails = OrderDetails::where('id_order', $order->id)->get();
-        // foreach ($orderDetails as $i => $key) {
-        //     if ($key->id_pro) {
-        //         $orderDetails[$i]->name = Products::find($key->id_pro)->name;
-        //     dd($orderDetails[$i]->name );
-        //     } else {
-        //         $orderDetails[$i]->name = '';
-        //     }
-        // }
 
         //dd($order);
         $array = [
@@ -118,7 +101,28 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        //
+
+        // dd($id);
+        $orderList = Order::where('id', intval($id))->first();
+        $orderList->Detail = OrderDetails::where('id_order', $orderList->id)->get();
+        $orderList->Acount_Add = USER_ADDRESS::where('id_tk', $orderList->id_tk)->where('status', 1)->first();
+        $orderList->User = USER::where('id', $orderList->id_tk)->where('status', 1)->first();
+        $orderList->TotalSum = floatval(OrderDetails::where('id_order', $orderList->id)->sum('totalItem'));
+        foreach ($orderList->Detail as $i => $key) {
+            if ($key->id_pro) {
+                $orderList->Detail[$i]->image = ProductImage::where('id_pro', $key->id_pro)->first()->image;
+                //dd($orderList[$i]->OrderDetail[$s]->image);
+                $orderList->Detail[$i]->namePro = Products::where('id', $key->id_pro)->first()->name;
+            } else {
+                $orderList->Detail[$i]->image = '';
+                $orderList->Detail[$i]->namePro  = '';
+            }
+        }
+        $array = [
+            'orderList' => $orderList,
+        ];
+        //dd($array);
+        return view('admin.pages.oderDetails')->with($array);
     }
 
     /**
@@ -142,7 +146,7 @@ class OrderController extends Controller
     public function update($id)
     {
         $order = Order::where('id', $id)->first();
-        if ($order->statusOrder == 'Confirmed' ) {
+        if ($order->statusOrder == 'Confirmed') {
             Order::where('id', $id)->update(['statusOrder' => 'Complete']);
             return back()->with('Success', 'Order has been Complete!');
         } else {
