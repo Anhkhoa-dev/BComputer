@@ -49,7 +49,7 @@
                         </div>
                     </form>
                     <div class="text-center">
-                        <p>Chưa có tài khoản. <a href="{{ route('user/dang-ky') }}">Đăng ký</a></p>
+                        <p>No account!  <a href="{{ route('user/dang-ky') }}">Register</a></p>
                     </div>
                     @include('guest.pages.login.hinh-thuc-dang-nhap-khac')
                     <a href="{{ route('user/index') }}" class=" text-decoration-none text-dark"><i

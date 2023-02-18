@@ -50,6 +50,7 @@
                     <div class="small-box bg-success">
                         <div class="inner">
                             <h3>
+
                                 @if($total == 0)
                                 No Oder
                                 @else

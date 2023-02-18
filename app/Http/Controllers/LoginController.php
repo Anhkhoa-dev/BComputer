@@ -97,7 +97,7 @@ class LoginController extends Controller
                 'fullname.required' => 'Please input Fullname of Account!',
                 'fullname.min' => 'Fullname with at least 2 characters!',
                 'password.required' => 'Password không được bỏ trống',
-                'password.between' => 'Password có ít nhất 6 ký tự và lớn nhất 16 ký tự',
+                'password.between' => 'Password must have at least 6 characters and maximum 16 characters!',
                 'cpassword.required' => 'Password confirm cannot be left blank!',
                 'cpassword.same' => 'Confirm password does not match. Please re-enter!',
                 'cpassword.between' => 'Password must have at least 6 characters and maximum 16 characters!',
