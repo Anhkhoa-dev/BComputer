@@ -27,7 +27,7 @@
         <div class="card">
 
             <div class="modal-header bg-info text-white">
-                <div class="phuc-text-ban">&nbsp;Order manager</div>
+                <div class="phuc-text-ban">&nbsp;Order manager # {{$orderList->id}}</div>
                 <div style="text-align: right">
                     <a class="btn-close btn-lg" href="{{ route('admin/order') }}">
                         <i class="fas fa-times fa-lg"></i>
@@ -51,22 +51,22 @@
                                         {{-- Shippperment Details --}}
                                         <div class="col-5">
                                             <div class="phuc-acount">
-                                                {{-- <img id="image" width="15%"
-                                                    src="{{ $item['username']->image != null ? asset('image/user/' . $item['username']->image) : asset('image/user/avatar-default.png') }}"
+                                                <img id="image" width="15%"
+                                                    src="{{ asset('image/user/'.($orderList->User['image'] != null ? $orderList->User['image'] : 'avatar-default.png') ) }}"
                                                     alt="" class="img_create" />
-                                            </div> --}}
+                                            </div>
                                             <br>
                                             <div style="text-align: center">
                                                 <button class="btn btn-tool text bg-light" type="button"
                                                     data-bs-toggle="collapse" data-bs-target="#collapseExample"
                                                     aria-expanded="false" aria-controls="collapseExample">
-                                                    <b class="phuc-text-ban">{{ $orderList['username']->fullname }}</b>
+                                                    <b class="phuc-text-ban">{{ $orderList['Acount_Add']->fullname }}</b>
                                                 </button>
                                             </div>
                                             <div class="collapse" id="collapseExample">
                                                 <div class="card card-body">
                                                     <b>Email</b>
-                                                    <p>{{ $orderList['username']->email }}</p>
+                                                    <p>{{ $orderList->User['email'] }}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -95,7 +95,7 @@
                                                 <div class="card-header">
                                                     <div class="card-title" style="text-align: left">
                                                         &nbsp;<b>Phone:</b>
-                                                        &nbsp;{{ $orderList['useraddress']->phone }}
+                                                        &nbsp;{{ $orderList->Acount_Add['phone'] }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -164,19 +164,17 @@
                                                 <tr>
                                                     <td><b>Total:</b></td>
                                                     <td>
-                                                        {{-- {{ $orderDetails->sum($item->totalItem) }} --}}
+                                                        {{ $orderList->TotalSum }}
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td><b>Discount:</b></td>
-                                                    <td>-
-                                                        {{-- {{ floatval(($item->discount / 100) * $orderDetails > sum($item->totalItem)) }} --}}
-                                                    </td>
+                                                    <td>0</td>
                                                 </tr>
 
                                                 <tr>
                                                     <td><b>Total amount</b></td>
-                                                    {{-- <td> {{ floatval($orderDetails->sum($item->totalItem) - ($item->discount / 100) * $orderDetails->sum($item->totalItem)) }} --}}
+                                                    <td> {{ $orderList->TotalSum  }}
                                                     </td>
                                                 </tr>
                                             {{-- @endforeach --}}
@@ -201,7 +199,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="table-group-divider">
-                                    {{-- @foreach ($orderList->OrderDetail as $pro)
+                                    @foreach ($orderList->Detail as $pro)
                                         <tr class="align-items-center">
                                             <td style="padding-top:50px">
                                                 {{ $pro->id_pro }}
@@ -209,20 +207,20 @@
                                             <th scope="row">
                                                 <div class="row">
                                                     <div class="col-3">
-                                                        <img src="{{ asset('image/product/Asus_VivoBook_14_M413IA_EK481T_01.PNG') }}"
+                                                        <img src="{{ asset('image/product/'.$pro->image) }}"
                                                             alt="" class="img-account-order"
                                                             width="100px">
                                                     </div>
                                                     <div class="col-9">
                                                         <div style="text-align: center;padding-top:40px">
-                                                            {{ $pro->name }}
+                                                            {{ $pro->namePro }}
                                                         </div>
                                                     </div>
                                                 </div>
                                             </th>
                                             <td></td>
                                             <td style="text-align: center;padding-top:50px">
-                                                {{ $pro->price }}</td>
+                                                {{ number_format($pro->price*((100-$pro->discount)/100),2) }}</td>
                                             <td>
                                                 <div style="text-align: center;padding-top:40px">
                                                     {{ $pro->qty }}
@@ -230,20 +228,20 @@
                                             </td>
                                             <td>
                                                 <div style="text-align: center;padding-top:40px">
-                                                    {{ $pro->qty }}
+                                                    {{number_format( $pro->qty*$pro->price*((100-$pro->discount)/100),2)  }}
                                                 </div>
                                             </td>
                                         </tr>
-                                    @endforeach --}}
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
-                <div class="card-footer" style="text-align: right">
+                {{-- <div class="card-footer" style="text-align: right">
                     <button type="reset" class="btn btn-danger">Reset</button>
                     <button type="submit" class="btn btn-primary">Create</button>
-                </div>
+                </div> --}}
             </form>
         </div>
     </section>

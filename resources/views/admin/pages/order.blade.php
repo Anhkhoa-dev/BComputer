@@ -84,10 +84,9 @@
                                         </button>
                                     @endif
                                     {{-- Info --}}
-                                    <button type="button" class="btn btn-info btn-mg" data-bs-toggle="modal"
-                                        data-bs-target="#order_detail{{ $item->id }}">
+                                    <a href="{{ route('admin/order/show', ['id'=> $item->id]) }}" class="btn btn-info btn-mg">
                                         <i class="fa-solid fa-info"></i>
-                                    </button>
+                                    </a>
                                     {{-- Delete --}}
                                     @if ($item->statusOrder == 'Cancelled'|| $item->statusOrder == 'Complete')
                                         <button type="button" hidden></button>

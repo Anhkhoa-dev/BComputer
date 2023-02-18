@@ -16,11 +16,15 @@
                         <div class="btn btn-success">{{$orderList->statusOrder}}</div>
                     </div>
                   </div>
-                  <div class="col-12 mb-3 d-flex justify-content-end align-items-center">
-                    <div>Date Order: <span class="date-order"></span></div>
+                  <div class="col-12 mb-3 d-flex justify-content-end align-items-center" style="padding: 0 65px">
+                    <div><b>Date Order</b>: <span class="date-order">{{$orderList->date_order}}</span></div>
                   </div>
                   <div class="col-12 mb-3 d-flex justify-content-center align-items-center">
-                    <a href="#" class="btn btn-danger">Cancel Order</a>
+                     @if ($orderList->statusOrder == "Complete" || $orderList->statusOrder == "Cancelled" )
+                        <div class="btn btn-danger d-none">Cancel Order</div>
+                     @else
+                       <a href="#" class="btn btn-danger">Cancel Order</a>
+                     @endif
                   </div>
                   <div class="col-12 mb-3">
                     <div class="row">
@@ -43,7 +47,7 @@
                                 <b style="font-size: 20px">Phương thức thanh toán</b>
                               </div>
                               <div class="col-12" style="padding: 20px 30px;">
-                                <div class="payment">{{$orderList->payment == 1 ? 'Thanh toán chuyển khoản': 'Thanh toán tiền mặt'}}</div>
+                                <div class="payment">{{$orderList->payment == 1 ? 'Transfer payments': 'Cash payment'}}</div>
                               </div>
                             </div>
                         </div>
@@ -75,16 +79,14 @@
                             <td style="text-align: right">{{number_format($item->qty*$item->price*((100-$item->discount)/100),2)}}</td>
                           </tr>
                         @endforeach
-                        
-                        
                         <tr>
-                          <td colspan="5">Tạm tính: $<span id="subtotal">2000.00</span></td>
+                          <td colspan="5">Tạm tính: $<span id="subtotal">{{$orderList->TotalSum}}</span></td>
                         </tr>
                         <tr>
-                          <td colspan="5">Giảm giá: -$<span id="discount">300</span></td>
+                          <td colspan="5">Giảm giá: -$<span id="discount">{{$orderList->id_voucher == null ? 0 : 200}}</span></td>
                         </tr>
                         <tr>
-                          <td colspan="5">Tổng tiền: $<span id="Total">1700.00</span></td>
+                          <td colspan="5">Tổng tiền: $<span id="Total">{{$orderList->TotalSum - ($orderList->id_voucher == null ? 0 : 200)}}</span></td>
                         </tr>
                       </tbody>
                     </table>

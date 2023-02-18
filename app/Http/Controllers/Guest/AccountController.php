@@ -185,7 +185,7 @@ class AccountController extends Controller
         $orderList = Order::where('id', intval($id))->first();
         $orderList->User = USER_ADDRESS::where('id_tk', $orderList->id_tk)->where('status', 1)->first();
         $orderList->Detail = OrderDetails::where('id_order', $orderList->id)->get();
-        $orderList->TotalSum = OrderDetails::where('id_order', $orderList->id)->sum('totalItem');
+        $orderList->TotalSum = floatval(OrderDetails::where('id_order', $orderList->id)->sum('totalItem'));
         // dd($orderList);
 
         foreach ($orderList->Detail as $i =>  $item) {
@@ -206,6 +206,12 @@ class AccountController extends Controller
             'orderList' => $orderList,
         ];
         return view('guest.pages.accounts.taikhoan')->with($array);
+    }
+
+    public function HuyDonHang(Request $request, $id)
+    {
+        Order::where('id', $id)->update(['statusOrder' => 'Cancelled']);
+        return back();
     }
 
     public function getAddressDefault($id_tk)
