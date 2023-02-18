@@ -149,11 +149,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="modal-footer" style="margin-top:-10px">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                </form>
             </div>
-            <div class="modal-footer" style="margin-top:-10px">
-                <button type="submit" class="btn btn-primary">Update</button>
-            </div>
-            </form>
+
         </div>
         <br>
         </div>
