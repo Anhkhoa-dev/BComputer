@@ -107,6 +107,27 @@ class ProductController extends Controller
                 'pro_image.required' => 'Please choose image!',
             ]
         );
+        $cauhinh = [
+            'cauhinh_cpu' => $prods['cauhinh_cpu'],
+            'cauhinh_ram' => $prods['cauhinh_ram'],
+            'cauhinh_Storage' => $prods['cauhinh_Storage'],
+            'cauhinh_graphic_card' => $prods['cauhinh_graphic_card'],
+            'cauhinh_screen' => $prods['cauhinh_screen'],
+            'cauhinh_keyboard' => $prods['cauhinh_keyboard'],
+            'cauhinh_Audio' => $prods['cauhinh_Audio'],
+            'cauhinh_wireless' => $prods['cauhinh_wireless'],
+            'cauhinh_webcam' => $prods['cauhinh_webcam'],
+            'cauhinh_usb' => $prods['cauhinh_usb'],
+            'cauhinh_window' => $prods['cauhinh_window'],
+            'cauhinh_power' => $prods['cauhinh_power'],
+        ];
+
+        $url = 'json/' . Str::slug($prods['pro_name']) . '.json';
+        $json = json_encode($cauhinh);
+        file_put_contents($url, $json);
+
+        //dd($cauhinh);
+
 
         $data = [
             'name' => $prods['pro_name'],
@@ -115,9 +136,9 @@ class ProductController extends Controller
             'discount' => intval($prods['pro_discount']),
             'sup_id' => intval($prods['pro_supplier']),
             'description' => $prods['pro_desc'],
-            'price' => floatval($prods['pro_price']),
+            'price' => number_format(intval($prods['pro_price']) / 23000, 2),
             'quantity' => intval($prods['pro_quantity']),
-            'cauhinh' => null,
+            'cauhinh' => Str::slug($prods['pro_name']) . '.json',
             'id_brand' => intval($prods['pro_brand']),
             'featured' => intval($prods['pro_featured']),
             'create_date' => date_format(Carbon::now(), 'Y-m-d H:i'),

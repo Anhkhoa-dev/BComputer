@@ -199,6 +199,9 @@ class IndexController extends Controller
         $prodImage = ProductImage::where('id_pro', $prod->id)->get();
         $comment = Comment::where('id_pro', $prod->id)->get();
         $related = Products::where('id_ca', $prod->id_ca)->limit(10)->get();
+        // $cauhinh = ;
+        $cauhinh = json_decode(file_get_contents('json/' . Products::where('id', $prod->id)->first()->cauhinh), true);
+        //dd($cauhinh);
         foreach ($related as $i => $key) {
             if ($key->id) {
                 $related[$i]->image = ProductImage::where('id_pro', $key->id)->get();
@@ -224,6 +227,7 @@ class IndexController extends Controller
             'listRelated' => $related,
             'listSamePrice' => $same_price,
             'listBrands' => $listBrands,
+            'cauhinh' => $cauhinh,
         ];
         //  dd($array);
         return view('guest.pages.products.products-detail')->with($array);
