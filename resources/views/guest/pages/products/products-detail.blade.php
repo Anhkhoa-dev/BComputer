@@ -152,51 +152,51 @@
                                                     </tr>
                                                     <tr>
                                                         <td>CPU</td>
-                                                        <td>{{$cauhinh['cauhinh_cpu']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_cpu']: ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>RAM</td>
-                                                        <td>{{$cauhinh['cauhinh_ram']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_ram']: ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Storage drive</td>
-                                                        <td>{{$cauhinh['cauhinh_Storage']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_Storage']: ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Graphics card</td>
-                                                        <td>{{$cauhinh['cauhinh_graphic_card']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_graphic_card']: ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Screen display</td>
-                                                        <td>{{$cauhinh['cauhinh_screen']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_screen']: ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Keyboard</td>
-                                                        <td>{{$cauhinh['cauhinh_keyboard']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_keyboard']: ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Audio</td>
-                                                        <td>{{$cauhinh['cauhinh_Audio']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_Audio']: ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Wireless Connectivity & bluetooth</td>
-                                                        <td>{{$cauhinh['cauhinh_wireless']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_wireless']: ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>USB Connect</td>
-                                                        <td>{{$cauhinh['cauhinh_webcam']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_webcam']: ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Maximum voltage consumption</td>
-                                                        <td>{{$cauhinh['cauhinh_usb']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_usb']: ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Operating system</td>
-                                                        <td>{{$cauhinh['cauhinh_window']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_window']: ''}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Power</td>
-                                                        <td>{{$cauhinh['cauhinh_power']}}</td>
+                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_power']: ''}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>

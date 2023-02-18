@@ -8,9 +8,10 @@ use App\Models\USER_ADDRESS;
 use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetails;
-
+use App\Models\Products;
 use App\Http\Controllers\Guest\IndexController;
 use App\Models\ACOUNT;
+use App\Models\ProductImage;
 use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
@@ -154,16 +155,56 @@ class AccountController extends Controller
         foreach ($orderList as $i => $key) {
             if ($key->id) {
                 $orderList[$i]->OrderDetail = OrderDetails::where('id_order', $key->id)->get();
+                $orderList[$i]->TotalSum = OrderDetails::where('id_order', $key->id)->sum('totalItem');
+                foreach ($orderList[$i]->OrderDetail as $s =>  $item) {
+                    if ($item->id_pro) {
+                        $orderList[$i]->OrderDetail[$s]->image = ProductImage::where('id_pro', $item->id_pro)->first()->image;
+                        $orderList[$i]->OrderDetail[$s]->name = Products::where('id', $item->id_pro)->first()->name;
+                    } else {
+                        $orderList[$i]->OrderDetail[$s]->image = '';
+                        $orderList[$i]->OrderDetail[$s]->name = '';
+                    }
+                }
             } else {
                 $orderList[$i]->OrderDetail = '';
             }
         }
+
         $array = [
             'page' => 'sec-donhang',
             'orderList' => $orderList,
         ];
-        // dd($array);
-        session()->put('orderList', $orderList);
+
+        // session()->put('orderList', $orderList);
+        return view('guest.pages.accounts.taikhoan')->with($array);
+    }
+
+    public function getOrderDetail($id)
+    {
+        //dd($id);
+        $orderList = Order::where('id', intval($id))->first();
+        $orderList->User = USER_ADDRESS::where('id_tk', $orderList->id_tk)->where('status', 1)->first();
+        $orderList->Detail = OrderDetails::where('id_order', $orderList->id)->get();
+        $orderList->TotalSum = OrderDetails::where('id_order', $orderList->id)->sum('totalItem');
+        // dd($orderList);
+
+        foreach ($orderList->Detail as $i =>  $item) {
+            if ($item->id_pro) {
+                $orderList->Detail[$i]->image = ProductImage::where('id_pro', $item->id_pro)->first()->image;
+                //dd($orderList[$i]->OrderDetail[$s]->image);
+                $orderList->Detail[$i]->namePro = Products::where('id', $item->id_pro)->first()->name;
+            } else {
+                $orderList->Detail[$i]->image = '';
+                $orderList->Detail[$i]->namePro  = '';
+            }
+        }
+        //dd($item);
+
+        //dd($orderList);
+        $array = [
+            'page' => 'sec-orderdetail',
+            'orderList' => $orderList,
+        ];
         return view('guest.pages.accounts.taikhoan')->with($array);
     }
 

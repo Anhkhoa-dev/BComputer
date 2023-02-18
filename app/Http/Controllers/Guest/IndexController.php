@@ -166,7 +166,7 @@ class IndexController extends Controller
             }
         }
 
-        return view('guest.pages.search.ajax-search', compact('data',));
+        return view('guest.pages.search.ajax-search', compact('data'));
     }
 
 
@@ -199,8 +199,14 @@ class IndexController extends Controller
         $prodImage = ProductImage::where('id_pro', $prod->id)->get();
         $comment = Comment::where('id_pro', $prod->id)->get();
         $related = Products::where('id_ca', $prod->id_ca)->limit(10)->get();
+        $nameCauHinh = Products::where('id', $prod->id)->first()->cauhinh;
+        if ($nameCauHinh != null) {
+            $cauhinh = json_decode(file_get_contents('json/' . Products::where('id', $prod->id)->first()->cauhinh), true);
+        } else {
+            $cauhinh = '';
+        }
         // $cauhinh = ;
-        $cauhinh = json_decode(file_get_contents('json/' . Products::where('id', $prod->id)->first()->cauhinh), true);
+
         //dd($cauhinh);
         foreach ($related as $i => $key) {
             if ($key->id) {

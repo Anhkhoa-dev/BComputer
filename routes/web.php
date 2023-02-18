@@ -82,6 +82,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::post('ajax-change-image-user', [AccountController::class, 'ajaxChangeImage']);
             Route::get('account/set-default/{slug}', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
             Route::get('account/my-order', [AccountController::class, 'getOrder'])->name('user/order');
+            Route::get('account/my-order/{id}', [AccountController::class, 'getOrderDetail'])->name('user/order-detail');
         }
     );
 });
@@ -122,7 +123,7 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Phần ProductImage - Phúc
     Route::get('admin/proImage', [ProductimageController::class, 'index'])->name('admin/proImage');
 
-     // Phần Banner - Phúc
+    // Phần Banner - Phúc
     Route::get('admin/banner', [BannerController::class, 'index'])->name('admin/banner');
     // Create
     Route::get('admin/banner/create', [BannerController::class, 'create'])->name('admin/banner/create');

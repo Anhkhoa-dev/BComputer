@@ -421,46 +421,28 @@ $(function () {
                     }
                 });
             });
-            // $('#change-avt-inp').change(function (e) {
-            //     var img = e.target.files;
+
+            // $('#show-chitietdonhang-btn').click(function () {
+            //     var id = $(this).attr('data-id');
             //     $.ajax({
             //         headers: {
             //             "X-CSRF-TOKEN": X_CSRF_TOKEN,
             //         },
-            //         url: '/ajax-change-image-user',
-            //         type: "POST",
+            //         url: '/ajax-get-orderdetail-by-user',
+            //         type: "GET",
             //         data: {
-            //             image: img,
+            //             id: id,
             //         },
             //         success: function (data) {
-            //             console.log(data);
-            //             if (data.status == "success") {
-            //                 location.reload();
-            //             }
+            //             // $('#modal-chitiet-content').html(data)
+            //             $('#show-chitietonhang').modal('show');
+
             //         }
+
             //     });
-            // })
 
-
-            // $.ajax({
-            //     headers: {
-            //         "X-CSRF-TOKEN": X_CSRF_TOKEN,
-            //     },
-            //     url: '/ajax-change-image-user',
-            //     type: "POST",
-            //     data: {
-            //         files: files,
-            //     },
-            //     cache: false,
-            //     contentType: false,
-            //     processData: false,
-            //     success: function (data) {
-            //         console.log(data);
-            //         // if (data.status == "success") {
-            //         //     location.reload();
-            //         // }
-            //     }
             // });
+
 
             break;
         }
