@@ -44,7 +44,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::get('aboutus', [IndexController::class, 'aboutus'])->name('user/aboutus');
     Route::get('contact', [IndexController::class, 'contact'])->name('user/contact');
     Route::get('errorpage', [IndexController::class, 'errorpage'])->name('user/errorpage');
-    // Route::get('errorpage', [IndexController::class, 'errorpage'])->name('user/errorpage');
+    Route::get('commingsoon', [IndexController::class, 'commingsoon'])->name('user/commingsoon');
     Route::get('deliverypolicy', [IndexController::class, 'deliverypolicy'])->name('user/deliverypolicy');
     Route::get('paymentpolicy', [IndexController::class, 'paymentpolicy'])->name('user/paymentpolicy');
     Route::get('warrantypolicy', [IndexController::class, 'warrantypolicy'])->name('user/warrantypolicy');

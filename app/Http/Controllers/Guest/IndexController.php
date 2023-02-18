@@ -80,7 +80,10 @@ class IndexController extends Controller
     {
         return view('guest.pages.error-page');
     }
-
+    public function commingsoon()
+    {
+        return view('guest.pages.commingsoon');
+    }
 
     public function getBanner()
     {

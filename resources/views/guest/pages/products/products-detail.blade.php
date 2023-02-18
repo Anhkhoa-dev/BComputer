@@ -152,51 +152,55 @@
                                                     </tr>
                                                     <tr>
                                                         <td>CPU</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_cpu']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_cpu'] : '' }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>RAM</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_ram']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_ram'] : '' }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Storage drive</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_Storage']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_Storage'] : '' }}
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Graphics card</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_graphic_card']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_graphic_card'] : '' }}
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Screen display</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_screen']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_screen'] : '' }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Keyboard</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_keyboard']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_keyboard'] : '' }}
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>Audio</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_Audio']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_Audio'] : '' }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Wireless Connectivity & bluetooth</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_wireless']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_wireless'] : '' }}
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <td>USB Connect</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_webcam']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_webcam'] : '' }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Maximum voltage consumption</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_usb']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_usb'] : '' }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Operating system</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_window']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_window'] : '' }}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Power</td>
-                                                        <td>{{$cauhinh != '' ? $cauhinh['cauhinh_power']: ''}}</td>
+                                                        <td>{{ $cauhinh != '' ? $cauhinh['cauhinh_power'] : '' }}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
@@ -241,115 +245,7 @@
                         5 review
                     </div>
                     <hr class="line-review">
-                   
-                            <button class="btn btn-primary">Send comment</button>
-                            <div class="review-frame-second">
-                                <h3>Comments(10)</h3>
-                                <div class="col-md-12">
-                                    <div class="row">
-                                        <div class="col-xl-1">
-                                            <img class="img-user-review"
-                                                src="{{ asset('image/user/avatar-default.png') }}">
-                                        </div>
-                                        <div class="col-xl-11 info-text-user">
-                                            @foreach ($comment as $item)
-                                                <h6>{{ $item->content }}</h6>
-                                            @endforeach
-                                            <span data-bs-toggle="collapse" data-bs-target="#flush-collapseOne"
-                                                aria-expanded="false" aria-controls="flush-collapseOne">
-                                                <button class="badge bg-primary text-wrap">Answer</button>
-                                            </span>
-
-                                            <form action="">
-                                                <div id="flush-collapseOne" class="accordion-collapse collapse"
-                                                    aria-labelledby="flush-headingOne"
-                                                    data-bs-parent="#accordionFlushExample">
-                                                    <div class="mb-4">
-                                                        @foreach ($comment as $item)
-                                                            <div class="row anser-comment">
-                                                                <div class="col-xl-1">
-                                                                    <img class="img-user-review"
-                                                                        src="{{ asset('image/user/avatar-default.png') }}">
-                                                                </div>
-                                                                <div class="col-xl-11 info-text-user">
-                                                                    <h6>{{ $item->content }}</h6>
-                                                                </div>
-                                                            </div>
-                                                        @endforeach
-                                                        <textarea class="write-comment1" name="" id="" placeholder="write a review(*)" rows="5"></textarea><br>
-                                                        <button class="btn btn-primary">Send comment</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
-
-
-
-
                 </div>
-
-                <div class="container"></div>
-                    <h3>Comment product</h3>
-                    <form action="" method="POST" role="form">
-                        <legend>Form title</legend>
-                        <div class="form-group">
-                            <label for="">Comment content</label>
-                            <input type="hidden" value="" name="blog_id">
-                            <textarea name="content" class="form-control" row="3" required="required" placeholder="nhap noi dung (*)"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Send comment</button>
-                        <br>
-                        <h3>All comment (10)</h3>
-                        <div class="comment">
-                            <div class="media">
-                                <a class="pull-lef mr-2" href="">
-                                    <img class="media-object" src="" alt="Image" width="60">
-                                </a>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Nguyen Khoa</h4>
-                                    <p></p>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modeltitleId"
-                    aria-hidden="true">
-                    <div class="modal-dialog odal-sm" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title"> Dang nhap ngay</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <form action="" method="POST" role="form">
-                                    <div class="form-group">
-                                        <label for="">Email</label>
-                                        <input type="email" class="form-control" name="email"
-                                            placeholder="input email">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="">Password</label>
-                                        <input type="password" class="form-control" name="email"
-                                            placeholder="input password">
-                                    </div>
-                                    <button type="button" class="btn btn-primary btn-block">dang nhap</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="col-md-3">
-
             </div>
         </div>
 
