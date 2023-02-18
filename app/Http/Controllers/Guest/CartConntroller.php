@@ -241,7 +241,7 @@ class CartConntroller extends Controller
             // print_r($payment);
             $Order = [
                 'id_tk' => Auth::user()->id,
-                'date_order' => date_format(Carbon::now(), 'Y-m-d H:i'),
+                'date_order' => date_format(Carbon::now(), 'Y-m-d H:i:s'),
                 'address' => $userAddressDefautl != null ? $userAddressDefautl->address . ', ' . $userAddressDefautl->wards . ', ' . $userAddressDefautl->district . ', ' . $userAddressDefautl->province : '590, CMT8, District 3, HCMC',
                 'cod' => $userAddressDefautl != null ? 'Delivery' : 'Pick up at the store',
                 'payment' => $payment[0] == 'pay_delivery' ? 0 : 1,
@@ -249,11 +249,6 @@ class CartConntroller extends Controller
                 'total' => floatval($request->total),
                 'statusOrder' => $trangthai,
             ];
-            // if (!$voucher) {
-            //     $qtyVoucher = VOUCHER::where('code', $voucher['code'])->first();
-            //     VOUCHER::where('code', $voucher['code'])->update(['quanity' => --$qtyVoucher]);
-            // }
-
             $Orderlist  = Order::create($Order);
             session()->put('codeOrder', $Orderlist->id);
             foreach ($request->idList as $prod) {
