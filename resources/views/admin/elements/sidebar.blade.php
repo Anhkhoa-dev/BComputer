@@ -21,6 +21,15 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('admin/order') }}" class="nav-link">
+                        {{-- <i class="far fa-circle nav-icon"></i> --}}
+                        &nbsp;&nbsp;<i class="fa-solid fa-file-circle-check"></i>
+                        <p>
+                            &nbsp;&nbsp;Order
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa-solid fa-box"></i>
                         <p>
@@ -31,14 +40,16 @@
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="{{ route('admin/product') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Product</p>
+                                {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                &nbsp;<i class="fa-solid fa-box-open"></i>
+                                <p>&nbsp;&nbsp;Product</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin/proImage') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Product Image</p>
+                                {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                &nbsp;<i class="fa-regular fa-images"></i>
+                                <p>&nbsp;&nbsp;Product Image</p>
                             </a>
                         </li>
                         {{-- <li class="nav-item">
@@ -58,12 +69,7 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('admin/order') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Order</p>
-                            </a>
-                        </li>
+
                         {{-- <li class="nav-item">
                             <a href="{{ route('admin/supplier') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
@@ -72,33 +78,40 @@
                         </li> --}}
                         <li class="nav-item">
                             <a href="{{ route('admin/account') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Account</p>
+                                &nbsp;
+                                {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                <i class="fa-solid fa-user"></i>
+                                &nbsp;&nbsp;<p>Account</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin/supplier') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Supplier</p>
+                                &nbsp;<i class="fa-solid fa-warehouse"></i>
+                                {{-- <i class="fa-solid fa-building-columns"></i> --}}
+                                {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                &nbsp;&nbsp;<p>Supplier</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
                             <a href="{{ route('admin/category') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Categories</p>
+                                &nbsp;<i class="fa-solid fa-list"></i>
+                                {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                &nbsp;&nbsp;<p>Categories</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin/banner') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Banner</p>
+                                &nbsp;<i class="fa-solid fa-display"></i>
+                                {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                &nbsp;&nbsp;<p>Banner</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin/brand') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Brands</p>
+                                &nbsp; <i class="fa-solid fa-tag"></i>
+                                {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                &nbsp;&nbsp;<p>Brands</p>
                             </a>
                         </li>
                         {{-- <li class="nav-item">
@@ -109,14 +122,16 @@
                         </li> --}}
                         <li class="nav-item">
                             <a href="{{ route('admin/userAddress') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Address Account</p>
+                                &nbsp;<i class="fa-solid fa-location-dot"></i>
+                                {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                &nbsp;&nbsp;<p>Address Account</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('admin/voucher') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Voucher</p>
+                                &nbsp;<i class="fa-solid fa-ticket"></i>
+                                {{-- <i class="far fa-circle nav-icon"></i> --}}
+                                &nbsp;&nbsp;<p>Voucher</p>
                             </a>
                         </li>
                     </ul>

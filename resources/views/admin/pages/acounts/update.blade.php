@@ -28,7 +28,7 @@
             <div class="card w-75" style="margin:auto">
                 <div class="modal-header bg-info text-white">
                     <div class="phuc-text-ban">&nbsp;
-                        &nbsp;Update Account: #{{ $account->id }}
+                        &nbsp;Update Account: {{ $account->fullname }}
                     </div>
                     <div style="text-align: right">
                         <a class="btn-close btn-lg" href="{{ route('admin/account') }}">
@@ -43,6 +43,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
+
                 <form
                     action="{{ $account->level == 2 ? route('admin/account/update', $account->id) : route('admin/account/updateUser', $account->id) }}"
                     method="POST" enctype="multipart/form-data">
@@ -56,7 +57,7 @@
                         @endif
                         <input id='id' hidden>
                         <div class="">
-                            <div class="form-group">
+                            <div class="form-group"></div>
                                 <div class="phuc-acount">
                                     <img class="img_create" id="img-accu"
                                         src="{{ $account->image != null ? asset('image/user/' . $account->image) : asset('image/user/avatar-default.png') }}" />

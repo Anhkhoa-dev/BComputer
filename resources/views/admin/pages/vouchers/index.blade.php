@@ -83,7 +83,7 @@
                                 <td>{{ $item->endStart }}</td>
                                 <td class="project-actions text-center">
                                     {{-- Edit --}}
-                                    @if ($item->condition == 0 || strtotime($item->endStart) < strtotime(date('Y-m-d')))
+                                    @if ($item->quanity == 0 || strtotime($item->endStart) < strtotime(date('Y-m-d')))
                                         <button type="button" hidden></button>
                                     @else
                                         <a class="btn btn-info btn-mg" href="{{ route('admin/voucher/edit', $item->id) }}">
