@@ -149,7 +149,7 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::get('admin/order', [OrderController::class, 'index'])->name('admin/order');
     Route::get('admin/order/update/{id}', [OrderController::class, 'update'])->name('admin/order/update');
     Route::get('admin/order/destroy/{id}', [OrderController::class, 'destroy'])->name('admin/order/destroy');
-
+    Route::get('admin/orderDetails/{id}', [OrderController::class, 'show'])->name('admin/orderDetails');
     // Phần UserAddress - Phúc
     Route::get('admin/userAddress', [UserAddressController::class, 'index'])->name('admin/userAddress');
     Route::post('admin/userAddress/update/{id}', [UserAddressController::class, 'update'])->name('admin/userAddress/update');
@@ -174,7 +174,6 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     Route::post('admin/supplier/update/{id}', [SupplierController::class, 'update'])->name('supplier/update');
     //Delete
     Route::get('admin/supplier/destroy/{id}', [SupplierController::class, 'destroy'])->name('supplier/destroy');
-
 
 
     // Phần danh cho Catelory - Man
