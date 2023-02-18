@@ -139,6 +139,7 @@
                                         <b> Configuration {{ $prod->name }}</b>
                                     </button>
                                 </h2>
+
                                 <div id="collapseTwo" class="accordion-collapse collapse"
                                     aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
@@ -150,48 +151,52 @@
                                                         <td>Processor CPU</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Manufacturer</td>
-                                                        <td>Intel</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Model</td>
-                                                        <td>Intel Core™ i5-13400f</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Socket</td>
-                                                        <td>FCLGA1700</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Base speed</td>
-                                                        <td>3.3 GHz</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Cache</td>
-                                                        <td>20 MB</td>
-                                                    </tr>
-                                                    <tr>
                                                         <td>CPU</td>
-                                                        <td>10 Core</td>
+                                                        <td>{{$cauhinh['cauhinh_cpu']}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Thread CPU</td>
-                                                        <td>16 Thread</td>
+                                                        <td>RAM</td>
+                                                        <td>{{$cauhinh['cauhinh_ram']}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Graphics processor</td>
-                                                        <td>Not supported</td>
+                                                        <td>Storage drive</td>
+                                                        <td>{{$cauhinh['cauhinh_Storage']}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Memory support</td>
-                                                        <td>Maximum 128 GB</td>
+                                                        <td>Graphics card</td>
+                                                        <td>{{$cauhinh['cauhinh_graphic_card']}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Screen display</td>
+                                                        <td>{{$cauhinh['cauhinh_screen']}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Keyboard</td>
+                                                        <td>{{$cauhinh['cauhinh_keyboard']}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Audio</td>
+                                                        <td>{{$cauhinh['cauhinh_Audio']}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Wireless Connectivity & bluetooth</td>
+                                                        <td>{{$cauhinh['cauhinh_wireless']}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>USB Connect</td>
+                                                        <td>{{$cauhinh['cauhinh_webcam']}}</td>
                                                     </tr>
                                                     <tr>
                                                         <td>Maximum voltage consumption</td>
-                                                        <td>65W</td>
+                                                        <td>{{$cauhinh['cauhinh_usb']}}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td>Maximum temperature</td>
-                                                        <td>100 degrees Celsius</td>
+                                                        <td>Operating system</td>
+                                                        <td>{{$cauhinh['cauhinh_window']}}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Power</td>
+                                                        <td>{{$cauhinh['cauhinh_power']}}</td>
                                                     </tr>
                                                 </tbody>
                                             </table>
