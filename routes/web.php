@@ -174,8 +174,7 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     //Delete
     Route::get('admin/supplier/destroy/{id}', [SupplierController::class, 'destroy'])->name('supplier/destroy');
 
-
-
+    
     // Phần danh cho Catelory - Man
     Route::get('admin/category', [CategoryController::class, 'index'])->name('admin/category');
     //Create
