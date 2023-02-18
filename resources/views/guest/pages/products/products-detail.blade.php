@@ -363,7 +363,7 @@
 
                 </div>
 
-                <div class="container">
+                <div class="container"></div>
                     <h3>binh luan blog nay</h3>
                     <form action="" method="POST" role="form">
                         <legend>Form title</legend>
