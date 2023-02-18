@@ -89,7 +89,8 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
 Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogin'], function () {
 
     // Phần dashboard - Phúc
-    Route::get("/admin", [AdminsController::class, "getHome"])->name("admin/dashboard");
+    Route::get("/admin", [AdminsController::class, "gethome"])->name("admin/dashboard");
+    //Route::get("/admin", [AdminsController::class, "show"])->name("admin/dashboard");
     // Phần account - Phúc
     Route::get('admin/account', [AcountConroller::class, 'index'])->name('admin/account');
     // Create
@@ -121,7 +122,7 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
     // Phần ProductImage - Phúc
     Route::get('admin/proImage', [ProductimageController::class, 'index'])->name('admin/proImage');
 
-    // Phần Banner - Phúc
+     // Phần Banner - Phúc
     Route::get('admin/banner', [BannerController::class, 'index'])->name('admin/banner');
     // Create
     Route::get('admin/banner/create', [BannerController::class, 'create'])->name('admin/banner/create');

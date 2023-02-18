@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ACOUNT;
+use Carbon\Carbon;
 
 class AcountConroller extends Controller
 {
@@ -44,12 +45,16 @@ class AcountConroller extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   $format= 'Y/m/d';
+        //dd(Carbon::today()->addYear(18)->format('Y/m/d'));
         $acc = $request->all();
         $request->validate(
             [
+
                 'email' => 'bail|required|email|regex:/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+\.[A-Za-z]{2,3}$/i',
                 'fullname' => 'bail|required|min:2',
+                'birthday' => 'bail|required',
+                //|before_or_equal:Carbon::today()->subYear(18)->toDateString()',
                 'password' => 'bail|required|between:6,16',
                 'cpassword' => 'bail|required|same:password|between:6,16'
 
@@ -61,6 +66,8 @@ class AcountConroller extends Controller
                 //'email.unique' => 'Email exist!',
                 'fullname.required' => 'Please input Fullname of Account!',
                 'fullname.min' => 'Fullname with at least 2 characters!',
+                'birthday.required'=> 'Please input Birthday of Account!',
+                'birthday.before_or_equal' => 'Date of birth must be over 18 years old!',
                 'password.required' => 'Password cannot be left blank!',
                 'password.between' => 'Password must have at least 6 characters and maximum 16 characters!',
                 'cpassword.required' => 'Password confirm cannot be left blank!',
@@ -90,13 +97,15 @@ class AcountConroller extends Controller
             'level' => 2,
             'status' => intval($acc['status']),
         ];
+        //dd(Carbon::today()->addYear(18)->toDateString());
         $isCheck = ACOUNT::where('email', $request->email)->first();
-        if ($isCheck == null) {
+        if ($isCheck == null ||  $acc['birthday'] < Carbon::today()->subYear(18)->toDateString()) {
             ACOUNT::create($data);
             return redirect()->route('admin/account')->with('Success', 'Create Account success!');
         } else {
             return back()->withErrors([
-                'email' => 'Email exist!'
+                'email' => 'Email exist!',
+                'birthday' => 'Date of birth must be over 18 years old!'
             ])->onlyInput('email');
         }
         // ACOUNT::create($data);
@@ -182,9 +191,17 @@ class AcountConroller extends Controller
             'image' => $acc['image'],
             'status' => intval($acc['status']),
         ];
+        //$isCheck = ACOUNT::where('email', $request->email)->first();
+        if ($acc['birthday'] < Carbon::today()->subYear(18)->toDateString()) {
+            ACOUNT::where('id', $id)->update($data);
+            return redirect()->route('admin/account')->with('Success', 'Update Account success!');
+        } else {
+            return back()->withErrors([
+                //'email' => 'Email exist!',
+                'birthday' => 'Date of birth must be over 18 years old!'
+            ])->onlyInput('birthday');
+        }
         //dd($data);
-        ACOUNT::where('id', $id)->update($data);
-        return redirect()->route('admin/account')->with('Success', 'Update Account success!');
     }
 
     public function updateUser(Request $request, $id)

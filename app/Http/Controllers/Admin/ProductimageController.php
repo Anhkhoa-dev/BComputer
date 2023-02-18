@@ -17,41 +17,24 @@ class ProductimageController extends Controller
     public function index()
     {
         // $prodImg = ProductImage::paginate(6);
-        $product = Products::paginate(6);;
+        $product = Products::paginate(8);
         foreach ($product as $i => $key) {
             if ($key->id) {
                 $product[$i]->image = ProductImage::where('id_pro', $key->id)->count('id');
             } else {
                 $product[$i]->image = '';
             }
+            if ($key->id) {
+                $product[$i]->nameImg = ProductImage::where('id_pro', $key->id)->get();
+            } else {
+                $product[$i]->nameImg = '';
+            }
         }
-
-        //dd($product);
-        // foreach ($list_product as $i => $key) {
-        //     if ($key->id_ca) {
-        //         $list_product[$i]->category = Category::find($key->id_ca)->name;
-        //     } else {
-        //         $list_product[$i]->category = '';
-        //     }
-        //     if ($key->sup_id) {
-        //         $list_product[$i]->supplier = SUPPLIER::find($key->sup_id)->name;
-        //     } else {
-        //         $list_product[$i]->supplier = '';
-        //     }
-
-        //     if ($key->id_brand) {
-        //         $list_product[$i]->brand = BRAND::find($key->id_brand)->name;
-        //     } else {
-        //         $list_product[$i]->brand = '';
-        //     }
-        //     if ($key->id) {
-        //         $list_product[$i]->image = ProductImage::where('id_pro', $key->id)->first()->image;
-        //     } else {
-        //         $list_product[$i]->image = '';
-        //     }
-        // }
+        dd(ProductImage::where('id_pro', $key->id)->get());
+        //$productImg = ProductImage::where('id_pro', $key->id)->get();
         $array = [
             'prodImg' => $product,
+            //'productImg' => $productImg
         ];
         return view('admin.pages.productImage')->with($array);
     }
