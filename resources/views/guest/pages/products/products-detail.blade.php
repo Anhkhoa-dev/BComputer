@@ -217,35 +217,41 @@
 
     <div class="col-md-12">
         <div class="row">
-            <div class="description col-md-9">
-                <div class="name-doc">
-                    <button class="w3-bar-item w3-button button-color-decor" style="border:none"
-                        onclick="openTab('description')">Description</button>
-                    <button class="w3-bar-item w3-button button-color-decor" style="border:none"
-                        onclick="openTab('review')">Review</button>
-                </div>
-                <div id="description" class="w3-container city">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12 info-product">
-                                <p>{{ $prod->description }}</p>
+            <div class="col-md-9">
+                <div class="description col-12">
+                    <div class="name-doc">
+                        <button class="w3-bar-item w3-button button-color-decor" style="border:none"
+                            onclick="openTab('description')">Description</button>
+                        <button class="w3-bar-item w3-button button-color-decor" style="border:none"
+                            onclick="openTab('review')">Review</button>
+                    </div>
+                    <div id="description" class="w3-container city">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12 info-product">
+                                    <p>{{ $prod->description }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div id="review" class="w3-container city review">
-                    <div class="first-form">
-                        <h3>Review {{ $prod->name }}</h3>
-                        <span class="iconstar">4,5</span>
-                        <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                        <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                        <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                        <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                        <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
-                        5 review
+                    <div id="review" class="w3-container city review">
+                        <div class="first-form">
+                            <h3>Review {{ $prod->name }}</h3>
+                            <span class="iconstar">4,5</span>
+                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                            <i class="fa fa-1x fa-star iconstar" aria-hidden="true"></i>
+                            5 review
+                        </div>
+                        <hr class="line-review">
                     </div>
-                    <hr class="line-review">
                 </div>
+
+            </div>
+            <div class="col-md-3">
+                <img src="{{ asset('image/banner/banner_doc03.png') }}" alt="">
             </div>
         </div>
 

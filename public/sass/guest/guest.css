@@ -48,6 +48,14 @@ section .title i {
   font-size: 18px;
 }
 
+.h-100 {
+  height: 100px;
+}
+
+.w-100 {
+  width: 100%;
+}
+
 .logo {
   text-decoration: none;
   font-size: 2.5rem;
@@ -99,12 +107,9 @@ section .title i {
 }
 
 .home-card {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
-  padding-bottom: 25px;
+  padding: 20px;
   display: grid;
-  grid-template-rows: 1fr 0.5fr;
+  grid-template-rows: 1fr 0.6fr;
   gap: 20px;
   background: #fff;
   border-radius: 5px;
@@ -171,7 +176,7 @@ section .title i {
   justify-content: space-between;
 }
 .home-card .card_info .product_name {
-  font-size: 1.125rem;
+  font-size: 1rem;
   color: #0F3460;
   font-weight: 600;
   text-decoration: none;
@@ -182,30 +187,34 @@ section .title i {
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+  flex-shrink: 0;
 }
 .home-card .card_info .product_name:hover {
   color: #E94560;
 }
-.home-card .card_info .product_rate {
+.home-card .card_info .card_info-price-rate {
+  flex: 1;
+}
+.home-card .card_info .card_info-price-rate .product_rate {
   margin-top: 15px;
   margin-bottom: 10px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
-.home-card .card_info .product_rate i {
+.home-card .card_info .card_info-price-rate .product_rate i {
   margin-right: 5px;
   color: darkorange;
   font-size: 1rem;
 }
-.home-card .card_info .product_price {
+.home-card .card_info .card_info-price-rate .product_price {
   color: #E94560;
   font-size: 1.125rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.home-card .card_info .product_price .price-old {
+.home-card .card_info .card_info-price-rate .product_price .price-old {
   color: #565656;
   text-decoration: line-through;
 }
@@ -1026,16 +1035,16 @@ section .title i {
 .new_arrivals {
   background-color: #fff;
 }
-.new_arrivals .card {
+.new_arrivals .home-card {
   border: none;
   border-radius: 0;
   padding: 10px;
 }
-.new_arrivals .card:hover {
+.new_arrivals .home-card:hover {
   border: 1px solid #E94560;
 }
-.new_arrivals .card .card_info .name {
-  font-size: 1.025rem;
+.new_arrivals .home-card .card_info .card_info-name {
+  font-size: 1rem;
   font-weight: 600;
   color: #0F3460;
   text-decoration: none;
@@ -1045,13 +1054,14 @@ section .title i {
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+  text-align: center;
 }
-.new_arrivals .card .card_info .name:hover {
+.new_arrivals .home-card .card_info .card_info-name:hover {
   color: #E94560;
-  text-decoration: underline;
 }
-.new_arrivals .card .card_info .price {
-  font-size: 1.125rem;
+.new_arrivals .home-card .card_info .card_info-price {
+  text-align: center;
+  font-size: 1rem;
   color: #E94560;
   font-weight: 400;
 }

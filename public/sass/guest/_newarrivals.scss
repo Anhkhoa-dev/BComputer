@@ -1,8 +1,6 @@
 .new_arrivals{
     background-color: $bg_second;
-    // display: flex;
-    // justify-content: space-between;
-    .card{
+    .home-card{
         border: none;
         border-radius: 0;
         padding: 10px;
@@ -10,8 +8,8 @@
             border: 1px solid $Color__E94560;
         }
         .card_info{
-            .name{
-                font-size: 1.025rem;
+            .card_info-name{
+                font-size: 1rem;
                 font-weight: 600;
                 color: $Color__0F3460;
                 text-decoration: none;
@@ -21,13 +19,14 @@
                 overflow: hidden;
                 text-overflow: ellipsis;
                 word-break: break-word;
+                text-align: center;
                 &:hover{
                     color: $Color__E94560;
-                    text-decoration: underline;
                 }
             }
-            .price{
-                font-size: 1.125rem;
+            .card_info-price{
+                text-align: center;
+                font-size: 1rem;
                 color: $Color__E94560;
                 font-weight: 400;
             }

@@ -37,13 +37,6 @@
                             <i class="fa-solid fa-bolt"></i>
                             Flash Delas
                         </div>
-                        {{-- <div class="time_sale">
-                            <div class="box_time">
-                                <span id="h">02</span> :
-                                <span id="m">30</span> :
-                                <span id="s">30</span>
-                            </div>
-                        </div> --}}
                     </div>
                     <div class="view_all">
                         <a href="#">View all</a>
@@ -70,19 +63,27 @@
                 <div class="col-md-12 mt-4">
                     <div class="row">
                         <div class="col-md-4">
-                            <a href="#">
-                                <img src="{{ asset('image/top/category-1.png') }}" alt="" class="img__full">
-                            </a>
+                            <div class="row">
+                                <a href="#">
+                                    <img src="{{ asset('image/banner/banner_chay_1.jpg') }}" alt=""
+                                        class="w-100 h-100">
+                                </a>
+                            </div>
                         </div>
                         <div class="col-md-4">
-                            <a href="#">
-                                <img src="{{ asset('image/top/category-2.png') }}" alt="" class="img__full">
-                            </a>
+                            <div class="row">
+                                <a href="#">
+                                    <img src="{{ asset('image/banner/banner_chay_4.png') }}" alt=""
+                                        class="w-100 h-100">
+                                </a>
+                            </div>
                         </div>
                         <div class="col-md-4">
-                            <a href="#">
-                                <img src="{{ asset('image/top/category-3.png') }}" alt="" class="img__full">
-                            </a>
+                            <div class="row">
+                                <a href="#">
+                                    <img src="{{ asset('image/banner/banner_chay_6.png') }}" alt=""
+                                        class="w-100 h-100"></a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -107,23 +108,25 @@
                 <div class="col-md-12 mt-3">
                     <div id="new-product" class="new_arrivals owl-carousel owl-theme">
                         @foreach ($newproduct as $item)
-                        <div class="item">
-                            <div class="card">
-                                <div class="card_img">
-                                    <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
-                                        <img src="{{ asset('image/product/'. $item->image) }}" alt="{{$item->name}}"
-                                            class="img__full cursor-pointer">
-                                    </a>
-                                </div>
-                                <div class="card_info">
-                                    <a href="{{ route('user/detail', ['name' => $item['slug']]) }}" class="name" title="{{$item->name}}">{{$item->name}}</a>
-                                    <div class="price">$ {{$item->price*((100-$item->discount)/100)}}</div>
+                            <div class="item">
+                                <div class="home-card">
+                                    <div class="card_img">
+                                        <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
+                                            <img src="{{ asset('image/product/' . $item->image) }}"
+                                                alt="{{ $item->name }}" class="img__full cursor-pointer">
+                                        </a>
+                                    </div>
+                                    <div class="card_info">
+                                        <a href="{{ route('user/detail', ['name' => $item['slug']]) }}"
+                                            class="card_info-name" title="{{ $item->name }}">{{ $item->name }}</a>
+                                        <div class="card_info-price">$ {{ $item->price * ((100 - $item->discount) / 100) }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
-                        
-                        
+
+
                     </div>
                 </div>
             </div>
@@ -150,8 +153,8 @@
                                 <div class="home-card">
                                     <div class="card_image">
                                         <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
-                                            <img src="{{ asset('image/product/' . $item->image) }}"
-                                                class="img-fluid" alt="{{ $item->name }}">
+                                            <img src="{{ asset('image/product/' . $item->image) }}" class="img-fluid"
+                                                alt="{{ $item->name }}">
                                         </a>
                                         <div class="sale_off">
                                             <p>{{ $item->discount }}% Off</p>
@@ -168,15 +171,17 @@
                                     <div class="card_info">
                                         <a href="{{ route('user/detail', ['name' => $item['slug']]) }}"
                                             class="product_name" title="{{ $item->name }}">{{ $item->name }}</a>
-                                        <div class="product_rate">
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star"></i>
-                                            <i class="fa-solid fa-star-half-stroke"></i>
-                                        </div>
-                                        <div class="product_price">
-                                            $ {{ number_format($item->price , 2)}}
+                                        <div class="card_info-price-rate">
+                                            <div class="product_rate">
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star"></i>
+                                                <i class="fa-solid fa-star-half-stroke"></i>
+                                            </div>
+                                            <div class="product_price">
+                                                $ {{ number_format($item->price, 2) }}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -203,16 +208,17 @@
                     <div class="row">
                         <div class="logo-brands">
                             @foreach ($logoBrand as $item)
-                            <a href="" class="text-decoration-none">
-                                <div class="brand-img">
-                                    <img src="{{ asset('image/logo/'.$item->image) }}" alt="{{$item->name}}" />
-                                </div>
-                            </a>
+                                <a href="" class="text-decoration-none">
+                                    <div class="brand-img">
+                                        <img src="{{ asset('image/logo/' . $item->image) }}"
+                                            alt="{{ $item->name }}" />
+                                    </div>
+                                </a>
                             @endforeach
-                           
+
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </section>
@@ -264,7 +270,7 @@
             }
         });
 
-         $('#new-product').owlCarousel({
+        $('#new-product').owlCarousel({
             loop: true,
             margin: 10,
             autoplay: true,
@@ -279,7 +285,7 @@
                     items: 3
                 },
                 1000: {
-                    items: 6               
+                    items: 6
                 }
             }
         });
