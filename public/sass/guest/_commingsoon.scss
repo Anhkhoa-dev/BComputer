@@ -1,0 +1,75 @@
+  .han-commingsoon {
+
+
+      .background-back {
+          position: absolute;
+          display: flex;
+          width: 100%;
+          height: auto;
+          background-color: $bg_fourth;
+          z-index: -1;
+          top: 0px;
+
+
+      }
+
+      .commingsoon-img {
+          width: 100%;
+          height: auto;
+          max-width: 500px;
+          display: flex;
+          margin: auto;
+          border-radius: 15px;
+          padding: 20px;
+      }
+
+      .time-colum {
+          display: flex;
+          width: 40%;
+          text-align: center;
+          color: white;
+          margin: auto;
+          border-radius: 5px;
+
+          span {
+              font-size: 25px;
+              font-weight: 500;
+          }
+      }
+
+      .frame-col {
+          margin-top: 20px;
+      }
+
+      .button-backhome {
+          display: flex;
+          padding: 10px;
+          margin-top: 10px;
+
+          a {
+              color: black;
+              margin: auto;
+              text-decoration: none;
+              padding: 15px;
+              font-weight: 700;
+              border-radius: 30px;
+              border: 2px solid #0d6efd;
+          }
+
+          a:hover {
+              background-color: #0d6efd;
+              color: white;
+          }
+      }
+
+
+
+      .text-time {
+          font-family: 'Roboto';
+          font-weight: 100;
+          color: #034688;
+          text-align: center;
+          font-size: 40px;
+          margin: auto;
+      }
+  }
