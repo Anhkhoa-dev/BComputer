@@ -150,6 +150,7 @@ class IndexController extends Controller
                 $data[$key]->image = '';
             }
         }
+        print_r(count($data));
 
 
         return view('guest.pages.search-product', compact('data'));

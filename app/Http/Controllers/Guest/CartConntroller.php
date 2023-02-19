@@ -241,7 +241,7 @@ class CartConntroller extends Controller
             // print_r($payment);
             $Order = [
                 'id_tk' => Auth::user()->id,
-                'date_order' => date_format(Carbon::now(), 'Y-m-d H:i:s'),
+                'date_order' => Carbon::now(),
                 'address' => $userAddressDefautl != null ? $userAddressDefautl->address . ', ' . $userAddressDefautl->wards . ', ' . $userAddressDefautl->district . ', ' . $userAddressDefautl->province : '590, CMT8, District 3, HCMC',
                 'cod' => $userAddressDefautl != null ? 'Delivery' : 'Pick up at the store',
                 'payment' => $payment[0] == 'pay_delivery' ? 0 : 1,
@@ -261,8 +261,8 @@ class CartConntroller extends Controller
                     'discount'  => $product->discount,
                     'totalItem'  => ($product->price * ((100 - $product->discount) / 100)) * $prod[2],
                 ];
-                $qtyStock = Products::where('id', $prod[0])->first();
-                Products::where('id', $OrderDetail)->update(['quantity' => (intval($qtyStock->quantity) - intval($prod[2]))]);
+                // $qtyStock = Products::where('id', $prod[0])->first();
+                // Products::where('id', $OrderDetail)->update(['quantity' => (intval($qtyStock->quantity) - intval($prod[2]))]);
                 OrderDetails::create($OrderDetail);
                 Cart::where('id_tk', Auth::user()->id)->where('id_pro', $prod[0])->delete();
             }

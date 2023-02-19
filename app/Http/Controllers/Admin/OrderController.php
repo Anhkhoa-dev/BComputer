@@ -21,7 +21,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $order = Order::paginate(6);
+        $order = Order::paginate(10);
         foreach ($order as $i => $key) {
             //dd($key->id_tk);
             if ($key->id) {
@@ -148,6 +148,12 @@ class OrderController extends Controller
         $order = Order::where('id', $id)->first();
         if ($order->statusOrder == 'Confirmed') {
             Order::where('id', $id)->update(['statusOrder' => 'Complete']);
+            $orderDetail = OrderDetails::where('id_order', $order->id)->get();
+            foreach($orderDetail as $pro){
+                $qtyOfStock = Products::where('id', $pro->id_pro)->first()->quantity;
+                Products::where('id', $pro->id_pro)->update(['quantity' => ($qtyOfStock - $pro->qty)]);
+            }
+            
             return back()->with('Success', 'Order has been Complete!');
         } else {
             Order::where('id', $id)->update(['statusOrder' => 'Confirmed']);

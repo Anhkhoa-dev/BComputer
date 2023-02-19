@@ -23,7 +23,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $list_product = Products::paginate(5);
+        $list_product = Products::paginate(20);
         //dd($list_product);
         foreach ($list_product as $i => $key) {
             if ($key->id_ca) {

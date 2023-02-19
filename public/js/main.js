@@ -653,12 +653,16 @@ $(function () {
 
     $('#search-input').on('keyup', function () {
         var key = $(this).val();
-        $.ajax({
-            url: '/ajax-tracuu-product-list?key' + key,
-            type: "GET",
-            success: function (data) {
-            }
-        });
+        if (key != '') {
+            $.ajax({
+                url: '/ajax-tracuu-product-list?key' + key,
+                type: "GET",
+                success: function (data) {
+                    console.log(data)
+                }
+            });
+        }
+
     });
 
 
