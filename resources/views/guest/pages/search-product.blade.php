@@ -50,8 +50,8 @@
                         <div class="card-product">
                             <div class="card-body">
                                 <div class="card-image">
-                                    <img src="{{ asset('image/product/' . $item->image) }}"
-                                        alt="{{ $item->name }}" class="img-fluid">
+                                    <img src="{{ asset('image/product/' . $item->image) }}" alt="{{ $item->name }}"
+                                        class="img-fluid">
                                     <div class="hover-icons">
                                         <a href="#" class="text-decoration-none text-dark">
                                             <div class="hover-sosanh" title="Product comparison"><i
@@ -103,7 +103,7 @@
                 </div>
 
             </div>
-            @if (count($data)>=10)
+            @if (count($data) >= 10)
                 <div class="col-md-12 mt-3">
                     <nav aria-label="Page navigation example ml-auto">
                         <ul class="pagination">
@@ -127,13 +127,12 @@
                 </div>
             @endif
         @else
-        <div class="col-md-12">
-            <div>Không có sản phầm nào để tra cứu</div>
-        </div>
+            <div class="col-md-12">
+                <div>Không có sản phầm nào để tra cứu</div>
+            </div>
         @endif
-            
+
         {{-- navigation --}}
     </div>
 </div>
 @endsection
-
