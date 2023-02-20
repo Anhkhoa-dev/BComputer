@@ -19,39 +19,48 @@
                         </tr>
                     </thead>
                     <tbody style="text-align: center">
-                        @if ($orderList!= null)
-                        @foreach ($orderList as $item)
-                            @php
-                                $OrderDetail = $item['OrderDetail'];
-                                // echo $OrderDetail
-                            @endphp
-                            <tr>
-                                <td>{{$item->id}}</td>
-                                <td>{{$item->date_order}}</td>
-                                <td style="padding-left: 20px">
-                                    <div class="d-flex justify-content-start align-items-center gap-2">
-                                        <img src="{{ asset('image/product/'.$OrderDetail[0]->image) }}"
-                                            alt="" class="img-account-order" width="100">
-                                        <div>
-                                            <div>{{$OrderDetail[0]->name}}</div>
-                                            <div>Quanity: 1 ... and {{count($OrderDetail) - 1}} product orther</div>
-                                            <a type="button" class="btn btn-info btn-mg" id="show-chitietdonhang-btn" data-id="{{$item->id}}"
-                                                href="{{ route('user/order-detail', ['id'=>$item->id]) }}">Xem chi tiết</a>
+                        @if ($orderList != null)
+                            @foreach ($orderList as $item)
+                                @php
+                                    $OrderDetail = $item['OrderDetail'];
+                                    // echo $OrderDetail
+                                @endphp
+                                <tr>
+                                    <td>{{ $item->id }}</td>
+                                    <td>{{ $item->date_order }}</td>
+                                    <td style="padding-left: 20px">
+                                        <div class="d-flex justify-content-start align-items-center gap-2">
+                                            <img src="{{ asset('image/product/' . $OrderDetail[0]->image) }}"
+                                                alt="" class="img-account-order" width="100">
+                                            <div>
+                                                <div>{{ $OrderDetail[0]->name }}</div>
+                                                <div>Quanity: 1
+                                                    @if (count($OrderDetail) > 1)
+                                                        ... and {{ count($OrderDetail) - 1 }} product orther
+                                                    @endif
+                                                </div>
+                                                <a type="button" class="btn btn-info btn-mg"
+                                                    id="show-chitietdonhang-btn" data-id="{{ $item->id }}"
+                                                    href="{{ route('user/order-detail', ['id' => $item->id]) }}">View
+                                                    detail</a>
+                                            </div>
                                         </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <i class="fa-solid fa-dollar-sign"></i> <span>{{$item->TotalSum}}</span>
-                                </td>
-                                <td>{{$item->statusOrder}}</td>
-                            </tr>
-                        @endforeach
+                                    </td>
+                                    <td>
+                                        <i class="fa-solid fa-dollar-sign"></i> <span>{{ $item->TotalSum }}</span>
+                                    </td>
+                                    <td style="color: red; text-align: left">
+                                        {{ $item->statusOrder }}
+                                    </td>
+                                </tr>
+                            @endforeach
                         @else
                             <p>Bạn chưa có đơn hàng nào</p>
                         @endif
-                        
+
                     </tbody>
                 </table>
+                {{ $orderList->links('vendor.pagination.bootstrap-5') }}
             </div>
         </div>
     </div>

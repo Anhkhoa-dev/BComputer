@@ -21,7 +21,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $order = Order::paginate(10);
+        $order = Order::paginate(15);
         foreach ($order as $i => $key) {
             //dd($key->id_tk);
             if ($key->id) {
@@ -49,15 +49,10 @@ class OrderController extends Controller
             }
         }
 
-        //$orderList = Order::where('id', $id)->get();
-        //$orderList = OrderDetails::all();
         $orderDetails = OrderDetails::all();
-        //$orderDetails = OrderDetails::where('id_order', $orderList->id)->get();
         foreach ($orderDetails as $i => $key) {
-            //dd($key->id_tk);
             if ($key->id_pro) {
                 $orderDetails[$i]->product = Products::where('id', $key->id_pro)->first();
-                //dd($order[$i]->username);
             } else {
                 $orderDetails[$i]->product = '';
             }
@@ -108,6 +103,11 @@ class OrderController extends Controller
         $orderList->Acount_Add = USER_ADDRESS::where('id_tk', $orderList->id_tk)->where('status', 1)->first();
         $orderList->User = USER::where('id', $orderList->id_tk)->where('status', 1)->first();
         $orderList->TotalSum = floatval(OrderDetails::where('id_order', $orderList->id)->sum('totalItem'));
+        if($orderList->id_voucher != null){
+            $orderList->DiscountVoucher = VOUCHER::where('id', $orderList->id_voucher)->discount;
+        }else{
+            $orderList->DiscountVoucher  = 0; 
+        }
         foreach ($orderList->Detail as $i => $key) {
             if ($key->id_pro) {
                 $orderList->Detail[$i]->image = ProductImage::where('id_pro', $key->id_pro)->first()->image;

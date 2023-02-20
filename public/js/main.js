@@ -344,6 +344,9 @@ $(function () {
     // });
 
     switch (page) {
+        case "": {
+            $(".sidebar").children('.card_side').hide();
+        }
         case "account": {
             $("#btn-tk-name-update").click(function () {
                 var idUser = $(".change-name").attr("data-id");
@@ -373,9 +376,6 @@ $(function () {
 
             $('#change-avt-inp').change(function (e) {
                 let reader = new FileReader();
-                // reader.onload = (e) => {
-                //     $('#image-user').attr('src', e.target.result);
-                // }
                 reader.readAsDataURL(this.files[0]);
             });
             $("#image_update").submit(function (e) {
@@ -538,9 +538,9 @@ $(function () {
                 $("#paypal-button").removeClass("d-none");
             });
 
-            $("#choose-address-orther").click(function () {
-                showAlertTop("Chưa làm tới");
-            });
+            // $("#choose-address-orther").click(function () {
+            //     showAlertTop("Chưa làm tới");
+            // });
             var totalPayPal = document.getElementById("totalUsd").value;
             paypal.Button.render(
                 {
@@ -591,7 +591,6 @@ $(function () {
                 let idList = [];
                 let idAddress = [];
                 let idPayment = [];
-                // danh sách id_sp thanh toán
                 $.each($(".checkout-select"), (i, element) => {
                     const id = $(element).attr("data-id");
                     const price_discount = $(element)
@@ -610,7 +609,6 @@ $(function () {
                         ]);
                     }
                 });
-                // console.log(idList);
                 $.each($(".select_checked"), (i, element) => {
                     const id = $(element).attr("data-id");
                     if (id !== "") {
@@ -628,6 +626,7 @@ $(function () {
 
                 var total = $(".total-checkout").text();
                 makePayment(idList, idAddress, idPayment, total);
+
             });
 
             break;
@@ -651,19 +650,20 @@ $(function () {
         }
     });
 
-    $('#search-input').on('keyup', function () {
-        var key = $(this).val();
-        if (key != '') {
-            $.ajax({
-                url: '/ajax-tracuu-product-list?key' + key,
-                type: "GET",
-                success: function (data) {
-                    console.log(data)
-                }
-            });
-        }
+    // $('#search-input').on('keyup', function () {
+    //     var key = $(this).val();
+    //     if (key != '') {
+    //         $.ajax({
+    //             url: '/ajax-tracuu-product-list?key=' + key,
+    //             type: "GET",
+    //             success: function (res) {
+    //                 $('#resutl-product').append(res);
+    //                 // console.table(res);
+    //             }
+    //         });
+    //     }
 
-    });
+    // });
 
 
 

@@ -106,7 +106,7 @@
         </div>
 
         @if (count($listProductByCategory) > 0)
-            <div class="col-md-12 mt-3">
+            {{-- <div class="col-md-12 mt-3">
                 <nav aria-label="Page navigation example ml-auto">
                     <ul class="pagination">
                         <li class="page-item">
@@ -126,7 +126,8 @@
                         </li>
                     </ul>
                 </nav>
-            </div>
+            </div> --}}
+            {{ $listProductByCategory->links('vendor.pagination.bootstrap-5') }}
         @endif
         {{-- navigation --}}
     </div>

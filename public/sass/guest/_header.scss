@@ -87,7 +87,7 @@
                     }
                     .search-preview{
                         min-height: 160px;
-                        max-height: 360px;
+                        max-height: 400px;
                         overflow-y: auto;
                         overflow-x: hidden;
                         .search-item{
@@ -292,14 +292,21 @@
         padding: 15px 25px;
         cursor: pointer;
         position: relative;
+        &:hover{
+            .card_side{
+                visibility: inherit;
+            }
+        }
         .card_side {
             position: absolute;
+            top: 65px;
             padding: 15px 0;
             border-radius: 10px;
             box-shadow: #C9C9C9 -2px 1px 13px 7px;
+            background: #fff;
             z-index: 10;
+            visibility: hidden;
             .side-box {
-                
                 display: flex;
                 justify-content: start;
                 align-items: center;

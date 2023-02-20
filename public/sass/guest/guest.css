@@ -668,7 +668,7 @@ section .title i {
 }
 .khoa-navbar .navbar .navbar__search .form__search .search-info .search-preview {
   min-height: 160px;
-  max-height: 360px;
+  max-height: 400px;
   overflow-y: auto;
   overflow-x: hidden;
 }
@@ -837,12 +837,18 @@ section .title i {
   cursor: pointer;
   position: relative;
 }
+.khoa-sidebar .sidebar:hover .card_side {
+  visibility: inherit;
+}
 .khoa-sidebar .sidebar .card_side {
   position: absolute;
+  top: 65px;
   padding: 15px 0;
   border-radius: 10px;
   box-shadow: #C9C9C9 -2px 1px 13px 7px;
+  background: #fff;
   z-index: 10;
+  visibility: hidden;
 }
 .khoa-sidebar .sidebar .card_side .side-box {
   display: flex;
@@ -1035,15 +1041,23 @@ section .title i {
 .new_arrivals {
   background-color: #fff;
 }
-.new_arrivals .home-card {
+.new_arrivals .home_card {
   border: none;
   border-radius: 0;
   padding: 10px;
+  display: grid;
+  grid-template-rows: 1fr 0.5fr;
+  gap: 20px;
 }
-.new_arrivals .home-card:hover {
+.new_arrivals .home_card:hover {
   border: 1px solid #E94560;
 }
-.new_arrivals .home-card .card_info .card_info-name {
+.new_arrivals .home_card .card_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.new_arrivals .home_card .card_info .card_info-name {
   font-size: 1rem;
   font-weight: 600;
   color: #0F3460;
@@ -1056,10 +1070,10 @@ section .title i {
   word-break: break-word;
   text-align: center;
 }
-.new_arrivals .home-card .card_info .card_info-name:hover {
+.new_arrivals .home_card .card_info .card_info-name:hover {
   color: #E94560;
 }
-.new_arrivals .home-card .card_info .card_info-price {
+.new_arrivals .home_card .card_info .card_info-price {
   text-align: center;
   font-size: 1rem;
   color: #E94560;

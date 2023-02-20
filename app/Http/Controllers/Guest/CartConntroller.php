@@ -249,7 +249,12 @@ class CartConntroller extends Controller
                 'total' => floatval($request->total),
                 'statusOrder' => $trangthai,
             ];
+
             $Orderlist  = Order::create($Order);
+            if($Order['id_voucher'] != null){
+                $qtyVoucher = VOUCHER::where('id', $Order['id_voucher'])->first()->quanity;
+                $voucherUsing = VOUCHER::where('id', $Order['id_voucher'])->update(['quanity', --$qtyVoucher]);
+            }
             session()->put('codeOrder', $Orderlist->id);
             foreach ($request->idList as $prod) {
                 $product = Products::where('id', $prod[0])->first();
@@ -275,6 +280,7 @@ class CartConntroller extends Controller
                     $OrderProductList[$i]->name = '';
                 }
             }
+
             session()->forget('qtyCart');
             session()->put('qtyCart', intval(Cart::where('id_tk', Auth::user()->id)->sum('quanity')));
             $user = Auth::user();

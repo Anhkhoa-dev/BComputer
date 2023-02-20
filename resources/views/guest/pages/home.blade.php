@@ -109,7 +109,7 @@
                     <div id="new-product" class="new_arrivals owl-carousel owl-theme">
                         @foreach ($newproduct as $item)
                             <div class="item">
-                                <div class="home-card">
+                                <div class="home_card">
                                     <div class="card_img">
                                         <a href="{{ route('user/detail', ['name' => $item['slug']]) }}">
                                             <img src="{{ asset('image/product/' . $item->image) }}"
@@ -119,7 +119,8 @@
                                     <div class="card_info">
                                         <a href="{{ route('user/detail', ['name' => $item['slug']]) }}"
                                             class="card_info-name" title="{{ $item->name }}">{{ $item->name }}</a>
-                                        <div class="card_info-price">$ {{ $item->price * ((100 - $item->discount) / 100) }}
+                                        <div class="card_info-price">$
+                                            {{ number_format($item->price * ((100 - $item->discount) / 100), 2) }}
                                         </div>
                                     </div>
                                 </div>

@@ -27,6 +27,7 @@ class IndexController extends Controller
     public function getHome()
     {
         $lts_Catagory = $this->getCatagory();
+        session()->put('list_Catagory', $lts_Catagory);
         $featuredProducts = $this->getFeatured();
         // get sản phẩm có giảm giá >= 15% ra trang home
         $bigDiscount = $this->getDiscount();
@@ -143,21 +144,23 @@ class IndexController extends Controller
         return $lst_featured;
     }
 
-    public function ajaxTraCuuList()
-    {
-        $data = Products::search()->get();
-        foreach ($data as $key => $item) {
-            if ($item->id) {
-                $data[$key]->image = ProductImage::where('id_pro', $item->id)->first()->image;
-            } else {
-                $data[$key]->image = '';
-            }
-        }
-        print_r(count($data));
+    // public function ajaxTraCuuList(Request $request)
+    // {
 
+    //     $data = Products::search()->get();
+        
+    //     foreach ($data as $i => $item) {
+    //         if ($item->id) {
+    //             $data[$i]->image = ProductImage::where('id_pro', $item->id)->first()->image;
+    //         } else {
+    //             $data[$i]->image = '';
+    //         }
+    //     }
+    //     // print_r($data);
+    //     // print_r(count($data))
 
-        return view('guest.pages.search-product', compact('data'));
-    }
+    //     return view('guest.pages.list-search-product', compact('data'));
+    // }
 
     public function ajaxTraCuu(Request $request)
     {
@@ -177,7 +180,7 @@ class IndexController extends Controller
     public function getProducts($slug)
     {
         $cata = Category::where('slug', $slug)->first();
-        $filterProductCategory = Products::where('id_ca', $cata->id)->where('status', 1)->where('quantity', '>', 0)->get();
+        $filterProductCategory = Products::where('id_ca', $cata->id)->where('status', 1)->where('quantity', '>', 0)->paginate(20);
         foreach ($filterProductCategory as $i => $key) {
             if ($key->id) {
                 $filterProductCategory[$i]->image = ProductImage::where('id_pro', $key->id)->get();

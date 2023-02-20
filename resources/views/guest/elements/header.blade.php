@@ -40,13 +40,13 @@
                         <input type="text" name="search" id="search-input" class="search_input"
                             placeholder="Search...">
                         <label for="search" class="search_label"><i class="fas fa-search"></i></label>
-                        <a href="{{ route('ajax-tracuu-info-list') }}" class="btnSearch text-decoration-none"><span>Search</span></a>
+                        <a href="#" class="btnSearch text-decoration-none"><span>Search</span></a>
                         <div class="search-info">
                             <div class="search-preview">
                             </div>
-                            <div class="view-more-search text-center py-2 border-top">
-                                <a href="{{ route('ajax-tracuu-info-list') }}" class="text-decoration-none text-black">View more all products</a>
-                            </div>
+                            {{-- <div class="view-more-search text-center py-2 border-top">
+                                <a href="#" class="text-decoration-none text-black">View more all products</a>
+                            </div> --}}
                             {{-- <span id="count-qty-search"></span> --}}
                         </div>
                     </form>
@@ -120,20 +120,24 @@
                             <div>Categories</div>
                             <i class="fa-solid fa-chevron-down"></i>
                         </div>
-                        {{-- <div class="card_side">
+                        <div class="card_side">
+                            @php
+                                $list_Catagory = session()->get('list_Catagory');
+                            @endphp
                             @if ($list_Catagory != null)
                                 @foreach ($list_Catagory as $item)
                                     <a href="{{ route('user/products', ['name' => $item['slug']]) }}" class="side-box"
                                         data-id="{{ $item->slug }}">
-                                        <img src="{{ asset('image/icon/' . $item->imageIcon) }}" width="25" alt="{{ $item->name }}">
+                                        <img src="{{ asset('image/icon/' . $item->imageIcon) }}" width="25"
+                                            alt="{{ $item->name }}">
                                         <div>{{ $item->name }}</div>
-                                        @section('product-title')
+                                        {{-- @section('product-title')
                                             {{ $item->name }}
-                                        @endsection
+                                        @endsection --}}
                                     </a>
                                 @endforeach
                             @endif
-                        </div> --}}
+                        </div>
 
                     </div>
                 </div>

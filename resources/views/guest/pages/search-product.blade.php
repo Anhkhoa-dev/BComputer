@@ -43,8 +43,11 @@
                 </div>
             </div>
         </div>
-        @if (count($data) > 0)
-            <div class="col-md-12">
+        <div class="col-md-12">
+            <div id="resutl-product">
+
+            </div>
+            {{-- @if (count($data) > 0)
                 <div class="products">
                     @foreach ($data as $item)
                         <div class="card-product">
@@ -101,37 +104,11 @@
                         </div>
                     @endforeach
                 </div>
+            @else
+                <p>Không tìm tấy kết quả phù hợp. Vui lòng tìm kiếm với từ khóa khác.</p>
+            @endif --}}
 
-            </div>
-            @if (count($data) >= 10)
-                <div class="col-md-12 mt-3">
-                    <nav aria-label="Page navigation example ml-auto">
-                        <ul class="pagination">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link active" href="#">1</a></li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">5</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            @endif
-        @else
-            <div class="col-md-12">
-                <div>Không có sản phầm nào để tra cứu</div>
-            </div>
-        @endif
-
+        </div>
         {{-- navigation --}}
     </div>
 </div>

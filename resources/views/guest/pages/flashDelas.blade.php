@@ -22,19 +22,21 @@
                 <div class="card_info">
                     <a href="{{ route('user/detail', ['name' => $item['slug']]) }}" class="product_name"
                         title="{{ $item->name }}">{{ $item->name }}</a>
-                    <div class="product_rate">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star-half-stroke"></i>
-                    </div>
-                    <div class="product_price">
-                        <div class="price-old">
-                            $ {{ $item->price }}
+                    <div class="card_info-price-rate">
+                        <div class="product_rate">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
                         </div>
-                        <div class="price-discount">
-                            $ {{ number_format($item->price * ((100 - $item->discount) / 100), 2) }}
+                        <div class="product_price">
+                            <div class="price-old">
+                                $ {{ $item->price }}
+                            </div>
+                            <div class="price-discount">
+                                $ {{ number_format($item->price * ((100 - $item->discount) / 100), 2) }}
+                            </div>
                         </div>
                     </div>
                 </div>

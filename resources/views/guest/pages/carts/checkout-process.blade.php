@@ -41,7 +41,7 @@
                                 </div>
                             </div>
                             @if ($userAddress != null)
-                                <div class="delivery-check">
+                                <div class="delivery-check" data-id="tk-account">
                                     <div class="address">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="receiver-name" data-id="{{ $userAddress->id }}">
@@ -58,9 +58,11 @@
                                     </div>
                                 </div>
                             @else
-                                <div class="delivery-check">
+                                <div class="delivery-check" data-id="no-account">
                                     <div class="address">
-                                        <div class="add-new-address">Add new Address</div>
+                                        You do not have a shipping address. Please add a new address for payment
+                                        <div class="add-new-address text-decoration-underline cursor-pointer">Click to
+                                            Add new Address</div>
                                     </div>
                                 </div>
                             @endif
@@ -139,10 +141,10 @@
                         <p class="mt-1">Connect to Account PayPal</p>
                     </div>
                     @php
-                    $total01 = ltrim($total, '$');
+                        $total01 = ltrim($total, '$');
                     @endphp
                     <div id="paypal-button" class="d-none"></div>
-                    <input type="hidden" id="totalUsd" value="{{$total01}}">
+                    <input type="hidden" id="totalUsd" value="{{ $total01 }}">
 
                 </div>
                 @php

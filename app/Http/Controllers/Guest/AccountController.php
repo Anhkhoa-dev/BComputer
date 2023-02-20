@@ -16,11 +16,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
-    //
-    // public function __construct()
-    // {
-    //     $this->IndexController = new IndexController;
-    // }
     public function getAccount()
     {
         session()->forget('dataLisTraCuu');
@@ -151,7 +146,7 @@ class AccountController extends Controller
 
     public function getOrder()
     {
-        $orderList = Order::where('id_tk', Auth::user()->id)->get();
+        $orderList = Order::where('id_tk', Auth::user()->id)->paginate(5);
         foreach ($orderList as $i => $key) {
             if ($key->id) {
                 $orderList[$i]->OrderDetail = OrderDetails::where('id_order', $key->id)->get();
@@ -181,12 +176,10 @@ class AccountController extends Controller
 
     public function getOrderDetail($id)
     {
-        //dd($id);
         $orderList = Order::where('id', intval($id))->first();
         $orderList->User = USER_ADDRESS::where('id_tk', $orderList->id_tk)->where('status', 1)->first();
         $orderList->Detail = OrderDetails::where('id_order', $orderList->id)->get();
         $orderList->TotalSum = floatval(OrderDetails::where('id_order', $orderList->id)->sum('totalItem'));
-        // dd($orderList);
 
         foreach ($orderList->Detail as $i =>  $item) {
             if ($item->id_pro) {
@@ -198,9 +191,6 @@ class AccountController extends Controller
                 $orderList->Detail[$i]->namePro  = '';
             }
         }
-        //dd($item);
-
-        //dd($orderList);
         $array = [
             'page' => 'sec-orderdetail',
             'orderList' => $orderList,

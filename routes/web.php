@@ -49,7 +49,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
     Route::get('paymentpolicy', [IndexController::class, 'paymentpolicy'])->name('user/paymentpolicy');
     Route::get('warrantypolicy', [IndexController::class, 'warrantypolicy'])->name('user/warrantypolicy');
     Route::get('ajax-tracuu-product', [IndexController::class, 'ajaxTraCuu'])->name('ajax-tracuu-info');
-    Route::get('ajax-tracuu-product-list', [IndexController::class, 'ajaxTraCuuList'])->name('ajax-tracuu-info-list');
+    // Route::get('ajax-tracuu-product-list', [IndexController::class, 'ajaxTraCuuList'])->name('ajax-tracuu-info-list');
 
     // phần dành cho user
     Route::group(
@@ -83,7 +83,7 @@ Route::group(["prefix" => "", "namespace" => "user", 'middleware' => 'IsAdmin'],
             Route::get('account/set-default/{slug}', [AccountController::class, 'setDefaultAddress'])->name('setDefaultAddress');
             Route::get('account/my-order', [AccountController::class, 'getOrder'])->name('user/order');
             Route::get('account/my-order/{id}', [AccountController::class, 'getOrderDetail'])->name('user/order-detail');
-            Route::post('account/cancel-order/{id}', [AccountController::class, 'HuyDonHang'])->name('user/cancel-order');
+            Route::get('account/cancel-order', [AccountController::class, 'HuyDonHang'])->name('user/cancel-order');
         }
     );
 });
