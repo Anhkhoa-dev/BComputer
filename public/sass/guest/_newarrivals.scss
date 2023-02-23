@@ -5,28 +5,33 @@
         border-radius: 0;
         padding: 10px;
         display: grid;
-        grid-template-rows: 1fr 0.5fr;
+        grid-template-rows: 1fr 0.4fr;
         gap: 20px;
         &:hover{
             border: 1px solid $Color__E94560;
+        }
+        img{
+            flex-shrink: 0;
         }
         .card_info{
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            
+            gap: 30px;
+            flex: 1;
             .card_info-name{
                 font-size: 1rem;
                 font-weight: 600;
                 color: $Color__0F3460;
                 text-decoration: none;
                 display:-webkit-box;
-                -webkit-line-clamp:2;
+                -webkit-line-clamp:1;
                 -webkit-box-orient: vertical;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 word-break: break-word;
                 text-align: center;
+                flex-shrink: 0;
                 &:hover{
                     color: $Color__E94560;
                 }
@@ -36,6 +41,7 @@
                 font-size: 1rem;
                 color: $Color__E94560;
                 font-weight: 400;
+                flex: 1;
             }
         }
     }

@@ -19,4 +19,17 @@ class Category extends Model
         'imageIcon',
         'status',
     ];
+    public function product_ca()
+    {
+        return $this->hasMany(Products::class, 'id_ca', 'id');
+    }
+    public function scopeSearch($query)
+    {
+        if ($key = request()->key) {
+            $query = $query->where('name', 'like', '%' . $key . '%');
+        }
+        return $query;
+    }
+    // sope local
+    //scope gloabal
 }

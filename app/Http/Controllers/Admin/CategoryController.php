@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $prods = Category::all();
+        $prods = Category::search()->paginate(10);
         return view('admin.pages.category.index', compact('prods'));
     }
 

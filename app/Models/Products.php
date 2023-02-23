@@ -31,13 +31,18 @@ class Products extends Model
 
     public function scopeSearch($query)
     {
-        if (request('key')) {
-            $key = request('key');
+        if ($key = request()->key) {
+
             $query = $query->where('name', 'like', '%' . $key . '%');
         }
-        if (request('cat_id')) {
-            $query = $query->where('id_ca', 'like', request('cat_id'));
-        }
+        // if (request('cat_id')) {
+        //     $query = $query->where('id_ca', 'like', request('cat_id'));
+        // }
         return $query;
+    }
+
+    public function cata()
+    {
+        return $this->hasOne(Caregory::class, 'id', 'id_ca');
     }
 }

@@ -23,7 +23,7 @@ class ProductController extends Controller
     public function index()
     {
         //
-        $list_product = Products::paginate(20);
+        $list_product = Products::search()->paginate(20);
         //dd($list_product);
         foreach ($list_product as $i => $key) {
             if ($key->id_ca) {
@@ -42,11 +42,9 @@ class ProductController extends Controller
             } else {
                 $list_product[$i]->brand = '';
             }
-            // if ($key->id) {
-            //     $list_product[$i]->image = ProductImage::where('id_pro', $key->id)->first()->image;
-            // } else {
-            //     $list_product[$i]->image = '';
-            // }
+
+
+
             if ($key->id) {
                 $list_product[$i]->image = ProductImage::where('id_pro', $key->id)->first()->image;
             } else {

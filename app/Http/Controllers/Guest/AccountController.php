@@ -9,7 +9,6 @@ use App\Models\User;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Products;
-use App\Http\Controllers\Guest\IndexController;
 use App\Models\ACOUNT;
 use App\Models\ProductImage;
 use Illuminate\Support\Facades\Auth;
@@ -147,6 +146,7 @@ class AccountController extends Controller
     public function getOrder()
     {
         $orderList = Order::where('id_tk', Auth::user()->id)->paginate(5);
+        //dd($orderList);
         foreach ($orderList as $i => $key) {
             if ($key->id) {
                 $orderList[$i]->OrderDetail = OrderDetails::where('id_order', $key->id)->get();

@@ -110,7 +110,7 @@ class IndexController extends Controller
     public function getNewProducts($max = 15)
     {
 
-        $date_current = Carbon::now()->subDays(10);
+        $date_current = Carbon::now()->subDays(15);
         //dd($date_current);
         $newProducts = Products::where('create_date', '>=', date_format($date_current, 'Y-m-d H:s'))->where('status', 1)->where('quantity', '>', 0)->limit($max)->get();
         foreach ($newProducts as $i => $key) {
@@ -148,7 +148,7 @@ class IndexController extends Controller
     // {
 
     //     $data = Products::search()->get();
-        
+
     //     foreach ($data as $i => $item) {
     //         if ($item->id) {
     //             $data[$i]->image = ProductImage::where('id_pro', $item->id)->first()->image;

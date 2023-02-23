@@ -123,6 +123,7 @@ Route::group(["prefix" => "", "namespace" => "admin", 'middleware' => 'AdminLogi
 
     // Phần ProductImage - Phúc
     Route::get('admin/proImage', [ProductimageController::class, 'index'])->name('admin/proImage');
+    Route::get('admin/proImage/show/{id}', [ProductimageController::class, 'show'])->name('admin/proImage/show');
 
     // Phần Banner - Phúc
     Route::get('admin/banner', [BannerController::class, 'index'])->name('admin/banner');

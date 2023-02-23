@@ -55,13 +55,13 @@
                                 <td><b>{{ $item->image }}</b>&nbsp; images</td>
                                 <td class="project-actions text-center">
                                     {{-- View --}}
-                                    <button type="button" class="btn btn-tool btn-mg" data-bs-toggle="modal"
+                                    {{-- <button type="button" class="btn btn-tool btn-mg" data-bs-toggle="modal"
                                         data-bs-target="#imageProduct{{$item->id}}">
                                         <i style="color: #483D8B" class="fa-regular fa-image fa-2x"></i>
-                                    </button>
-                                    {{-- <a class="btn btn-info btn-mg" href="{{ route('admin/banner/edit', $item->id) }}">
-                                        <i class="fas fa-pencil-alt"></i>
-                                    </a> --}}
+                                    </button> --}}
+                                    <a href="{{ route('admin/proImage/show', ['id'=> $item->id]) }}" class="btn btn-tool btn-mg">
+                                        <i style="color: #483D8B" class="fa-regular fa-image fa-2x"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
@@ -93,11 +93,11 @@
                             <div class="container-md">
                                 <div class="image-product-div">
                                     <div class="row">
-                                        @foreach ($prodImg as $item)
+                                        @foreach ($productImg  as $item)
                                             <div class="image-product col-md-4 col-6">
-                                                <img src="{{ asset('image/product/' . $item->nameImg) }}" alt=""
+                                                <img src="{{ asset('image/product/' . $item->image) }}" alt=""
                                                     class="img-product">
-                                                <div class="bg-image-hover">
+                                                    <div class="bg-image-hover">
                                                 </div>
                                             </div>
                                         @endforeach

@@ -96,7 +96,7 @@ class LoginController extends Controller
                 'email.regex' => 'Email without special characters!',
                 'fullname.required' => 'Please input Fullname of Account!',
                 'fullname.min' => 'Fullname with at least 2 characters!',
-                'password.required' => 'Password không được bỏ trống',
+                'password.required' => 'Password cannot be not blank',
                 'password.between' => 'Password must have at least 6 characters and maximum 16 characters!',
                 'cpassword.required' => 'Password confirm cannot be left blank!',
                 'cpassword.same' => 'Confirm password does not match. Please re-enter!',
@@ -122,31 +122,31 @@ class LoginController extends Controller
             return back()->withErrors([
                 'email' => 'Email exist!'
             ])->onlyInput('email');
-
         }
-    if($user = ACOUNT::create($data)){
-        Mail::send('email.send-mail-active', compact('user'), function($email) use($user)   {
-            $email->subject('Account activation email from BComputer shop');
-             $email->to($user->email, $user->fullname);
-        });
-        return view('guest.pages.login.active-account', compact('user'));
+        if ($user = ACOUNT::create($data)) {
+            Mail::send('email.send-mail-active', compact('user'), function ($email) use ($user) {
+                $email->subject('Account activation email from BComputer shop');
+                $email->to($user->email, $user->fullname);
+            });
+            return view('guest.pages.login.active-account', compact('user'));
         }
     }
 
 
 
-    public function actived($id, $token){
+    public function actived($id, $token)
+    {
         $data = [
             'id_tk' => $id,
             'token' => $token,
         ];
         //  dd($data);
-         $user = User::where('id', intval($data['id_tk']))->first();
+        $user = User::where('id', intval($data['id_tk']))->first();
         // dd($user);
-        if($user->active_token === $data['token']){
-            User::where('id', intval($data['id_tk']))->update(['status'=> 1, 'active_token' => null]);
+        if ($user->active_token === $data['token']) {
+            User::where('id', intval($data['id_tk']))->update(['status' => 1, 'active_token' => null]);
             return redirect('/login');
-        }else{
+        } else {
             return redirect('login')->withErrors([
                 'errorMsg' => 'The verification code is wrong. Please reconfirm!'
             ])->onlyInput('email');
@@ -155,12 +155,13 @@ class LoginController extends Controller
 
     public function RecoveryAcount()
     {
-        return view('guest.pages.login.khoi-phuc-tai-khoan');
+        return view('guest.pages.error-page');
     }
 
 
-    public function getSenMail(){
-        Mail::send('email.test', ['name'=> 'Test mail'], function($email){
+    public function getSenMail()
+    {
+        Mail::send('email.test', ['name' => 'Test mail'], function ($email) {
             $email->subject('Active account');
             $email->to('nguyenkhoa.demolaravel@gmail.com', 'BComputer');
         });

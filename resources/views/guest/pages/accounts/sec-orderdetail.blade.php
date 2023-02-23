@@ -64,7 +64,7 @@
                                   <thead>
                                       <tr style="text-align: center">
                                           <th style="width: 50%;">Product</th>
-                                          <th style="width: 15%;">Price ($)</th>
+                                          <th style="width: 15%; text-align: right">Price ($)</th>
                                           <th style="width: 15%;">Quanity</th>
                                           <th style="width: 12%;">Discount (%)</th>
                                           <th style="width: 8%; text-align: center">Total</th>
@@ -83,8 +83,8 @@
                                               <td style="text-align: right">
                                                   {{ number_format($item->price * ((100 - $item->discount) / 100), 2) }}
                                               </td>
-                                              <td>{{ $item->qty }}</td>
-                                              <td>{{ $item->discount }}</td>
+                                              <td style="text-align: center">{{ $item->qty }}</td>
+                                              <td style="text-align: center">{{ $item->discount }}</td>
                                               <td style="text-align: right">
                                                   {{ number_format($item->qty * $item->price * ((100 - $item->discount) / 100), 2) }}
                                               </td>

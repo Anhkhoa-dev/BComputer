@@ -1046,16 +1046,21 @@ section .title i {
   border-radius: 0;
   padding: 10px;
   display: grid;
-  grid-template-rows: 1fr 0.5fr;
+  grid-template-rows: 1fr 0.4fr;
   gap: 20px;
 }
 .new_arrivals .home_card:hover {
   border: 1px solid #E94560;
 }
+.new_arrivals .home_card img {
+  flex-shrink: 0;
+}
 .new_arrivals .home_card .card_info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  gap: 30px;
+  flex: 1;
 }
 .new_arrivals .home_card .card_info .card_info-name {
   font-size: 1rem;
@@ -1063,12 +1068,13 @@ section .title i {
   color: #0F3460;
   text-decoration: none;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
   text-align: center;
+  flex-shrink: 0;
 }
 .new_arrivals .home_card .card_info .card_info-name:hover {
   color: #E94560;
@@ -1078,6 +1084,7 @@ section .title i {
   font-size: 1rem;
   color: #E94560;
   font-weight: 400;
+  flex: 1;
 }
 
 .logo-brands {
@@ -2667,9 +2674,6 @@ section .title i {
   outline: none;
   border-radius: 5px;
   padding-left: 45px;
-  font-size: 1rem;
-}
-.khoa-login .login_nen .box_login .form_login .form_group .input_control::-moz-placeholder {
   font-size: 1rem;
 }
 .khoa-login .login_nen .box_login .form_login .form_group .input_control::placeholder {

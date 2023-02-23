@@ -52,7 +52,7 @@
                                     <div class="col-5">
                                         <div class="phuc-acount">
                                             <img id="image" width="15%"
-                                                src="{{ asset('image/user/' . ($orderList->User['image'] != null ? $orderList->User['image'] : 'avatar-default.png')) }}"
+                                                src="{{ asset('image/user/' . ($orderList['User']->image != null ? $orderList['User']->image : 'avatar-default.png')) }}"
                                                 alt="" class="img_create" />
                                         </div>
                                         <br>

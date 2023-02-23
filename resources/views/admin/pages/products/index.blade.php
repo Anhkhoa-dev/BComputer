@@ -23,16 +23,26 @@
 
         <!-- Default box -->
         <div class="card">
-            <div class="card-header">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                
                 <a href="{{ route('admin/product/create') }}" class="btn btn-primary">Create</a>
-
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
-                        <i class="fas fa-times"></i>
-                    </button>
+                
+                <div class="card-tools d-flex justify-content-between align-items-center ml-auto gap-lg-5">
+                    <form action="#" style="width: 400px">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search by name ..." name="key" aria-describedby="button-addon2">
+                            <button class="btn btn-primary" type="submit" id="button-addon2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
+                    </form>
+                    <div>
+                        <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-tool" data-card-widget="remove" title="Remove">
+                            <i class="fas fa-times"></i>
+                        </button>  
+                    </div>
+                    
                 </div>
             </div>
             <div class="card-body p-0">
@@ -47,7 +57,7 @@
                             <th> Discount</th>
                             <th style="text-align: center"> Featured</th>
                             <th style="text-align: center"> Status </th>
-                            <th> Action </th>
+                            <th style="text-align: center"> Action </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -77,7 +87,7 @@
                                             {{ $item->status == 1 ? 'On sale' : 'Stop selling' }}</a>
                                     </td>
 
-                                    <td>
+                                    <td style="text-align: right">
                                         <a class="btn btn-primary btn-sm"
                                             href="{{ route('admin/product/show', $item->slug) }}" title="Detail product">
                                             <i class="fas fa-folder">
@@ -102,7 +112,8 @@
 
                     </tbody>
                 </table>
-                {{ $productAll->links('vendor.pagination.bootstrap-5') }}
+                {{-- {{ $productAll->links('vendor.pagination.bootstrap-5') }} --}}
+                {{ $productAll->appends(request()->all())->links("vendor.pagination.bootstrap-5") }}
             </div>
         </div>
     </section>

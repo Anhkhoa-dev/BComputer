@@ -251,11 +251,6 @@ class CartConntroller extends Controller
             ];
 
             $Orderlist  = Order::create($Order);
-            if($Order['id_voucher'] != null){
-                $qtyVoucher = VOUCHER::where('id', $Order['id_voucher'])->first()->quanity;
-                $voucherUsing = VOUCHER::where('id', $Order['id_voucher'])->update(['quanity', --$qtyVoucher]);
-            }
-            session()->put('codeOrder', $Orderlist->id);
             foreach ($request->idList as $prod) {
                 $product = Products::where('id', $prod[0])->first();
                 $OrderDetail = [
@@ -266,8 +261,6 @@ class CartConntroller extends Controller
                     'discount'  => $product->discount,
                     'totalItem'  => ($product->price * ((100 - $product->discount) / 100)) * $prod[2],
                 ];
-                // $qtyStock = Products::where('id', $prod[0])->first();
-                // Products::where('id', $OrderDetail)->update(['quantity' => (intval($qtyStock->quantity) - intval($prod[2]))]);
                 OrderDetails::create($OrderDetail);
                 Cart::where('id_tk', Auth::user()->id)->where('id_pro', $prod[0])->delete();
             }

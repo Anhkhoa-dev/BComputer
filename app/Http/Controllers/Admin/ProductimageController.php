@@ -17,7 +17,7 @@ class ProductimageController extends Controller
     public function index()
     {
         // $prodImg = ProductImage::paginate(6);
-        $product = Products::paginate(8);
+        $product = Products::paginate(15);
         foreach ($product as $i => $key) {
             if ($key->id) {
                 $product[$i]->image = ProductImage::where('id_pro', $key->id)->count('id');
@@ -25,16 +25,17 @@ class ProductimageController extends Controller
                 $product[$i]->image = '';
             }
             if ($key->id) {
-                $product[$i]->nameImg = ProductImage::where('id_pro', $key->id)->get();
+                //$product[$i]->nameImg = ProductImage::all();
+                $product[$i]->nameImg = ProductImage::where('id_pro', $key->id)->first();
             } else {
                 $product[$i]->nameImg = '';
             }
         }
-        //dd(ProductImage::where('id_pro', $key->id)->get());
-        //$productImg = ProductImage::where('id_pro', $key->id)->get();
+        //dd($product->nameImg );
+        $productImg = ProductImage::where('id_pro', $key->id)->get();
         $array = [
             'prodImg' => $product,
-            //'productImg' => $productImg
+            'productImg' => $productImg
         ];
         return view('admin.pages.productImage')->with($array);
     }
@@ -68,7 +69,14 @@ class ProductimageController extends Controller
      */
     public function show($id)
     {
-        //
+        $prod = Products::where('id', $id)->first();
+        $productImg = ProductImage::where('id_pro', $prod->id)->get();
+        $array = [
+            'prod' => $prod,
+            'productImg' => $productImg,
+        ];
+        //dd($array);
+        return view('admin.pages.ProductImageShow')->with($array);
     }
 
     /**
